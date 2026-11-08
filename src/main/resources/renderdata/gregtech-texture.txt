@@ -8578,3 +8578,10 @@ moddata:mod=gtmte,type=iconset,name=remediation.drawer_framer_active,output=0:mt
 moddata:mod=gtmte,type=mte,id=32050,baseset=hull.tier.01,iconset=remediation.drawer_framer,activeset=remediation.drawer_framer_active
 moddata:mod=gtmte,type=mte,id=32051,baseset=hull.tier.02,iconset=remediation.drawer_framer,activeset=remediation.drawer_framer_active
 moddata:mod=gtmte,type=mte,id=32052,baseset=hull.tier.03,iconset=remediation.drawer_framer,activeset=remediation.drawer_framer_active
+
+# ModificationTable ignores facing/state/tier and uses bare side/top/bottom, with no paint.
+texture:id=remediation/modification_table/MODIFICATIONTABLE_SIDE,filename=assets/gregtech/textures/blocks/iconsets/MODIFICATIONTABLE_SIDE.png
+texture:id=remediation/modification_table/MODIFICATIONTABLE_TOP,filename=assets/gregtech/textures/blocks/iconsets/MODIFICATIONTABLE_TOP.png
+texture:id=remediation/modification_table/MODIFICATIONTABLE_BOTTOM,filename=assets/gregtech/textures/blocks/iconsets/MODIFICATIONTABLE_BOTTOM.png
+moddata:mod=gtmte,type=iconset,name=remediation.modification_table,side=0:remediation/modification_table/MODIFICATIONTABLE_SIDE,top=0:remediation/modification_table/MODIFICATIONTABLE_TOP,bottom=0:remediation/modification_table/MODIFICATIONTABLE_BOTTOM
+moddata:mod=gtmte,type=mte,id=12071,baseset=remediation.modification_table,paint=false
