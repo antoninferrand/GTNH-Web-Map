@@ -75,3 +75,9 @@ unchanged values, detached snapshots and the complete display dependency radius.
 The production plugin and server adapter also compile against the actual mod
 classpath. A full dedicated-server smoke test still needs to confirm state
 change scheduling and render completion in the integration fixture.
+
+The dedicated fixture exposed model initialization occurring before
+`GWM_Util`'s texture-phase registry initialization. The casing renderer now
+defers its default machine-block lookup until actual rendering; initialization
+requires no texture registry. The JVM fixture explicitly initializes the model
+with a null registry and checks successful rendering after registry setup.

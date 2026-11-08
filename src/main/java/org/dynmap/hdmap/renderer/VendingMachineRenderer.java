@@ -26,13 +26,16 @@ public class VendingMachineRenderer extends CustomRenderer {
     private static final int[] DISPLAY_B = { -1, -1, 0, 1, 1 };
     private static final String[] FIELDS = { "mID", "mFacing", "mActive" };
     private RenderPatch[] mesh;
-    private int casingBlock, machineBlock;
+    private int casingBlock;
+    private volatile int machineBlock;
 
     @Override
     public boolean initializeRenderer(RenderPatchFactory factory, int block, int mask, Map<String, String> parameters) {
         casingBlock = block;
         String machines = parameters.get("machineblock");
-        machineBlock = machines == null ? GWM_Util.blockNameToId("gregtech:gt.blockmachines") : Integer.parseInt(machines);
+        // Models initialize before texture support initializes GWM_Util's registry.
+        // Resolve the optional default only once actual rendering starts.
+        machineBlock = machines == null ? -1 : Integer.parseInt(machines);
         ArrayList<RenderPatch> patches = new ArrayList<>();
         for (int face = 0; face < 6; face++) {
             for (int row = 0; row < 2; row++) {
@@ -70,6 +73,7 @@ public class VendingMachineRenderer extends CustomRenderer {
 
     /** Also decorates an ME uplink placed in any of the five display positions. */
     public CustomRendererData getMachineRenderData(MapDataContext context, CustomTextureMapper machineTextures, CustomColorMultiplier color) {
+        if (machineBlock < 0) machineBlock = GWM_Util.blockNameToId("gregtech:gt.blockmachines");
         return new CustomRendererData(mesh, color, new Textures(context, machineTextures));
     }
 

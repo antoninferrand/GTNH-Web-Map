@@ -77,7 +77,13 @@ public class VendingMachineBehaviorTest {
 
     public static void main(String[] args) throws Exception {
         Path root = Paths.get(args[0]);
+        Field beforeRegistry = GWM_Util.class.getDeclaredField("blockIdMap");
+        beforeRegistry.setAccessible(true);
+        beforeRegistry.set(null, null);
+        VendingMachineRenderer early = new VendingMachineRenderer();
+        check(early.initializeRenderer(FACTORY, CASING, 1, Collections.<String, String>emptyMap()), "model initializes before texture registry exists");
         loadMappings(root);
+        check(early.getRenderData(new Scene(CASING)).getCustomMesh().length == 24, "default machine registry resolves only when rendering begins");
         VendingMachineRenderer casing = new VendingMachineRenderer();
         check(casing.initializeRenderer(FACTORY, CASING, 1, Collections.singletonMap("machineblock", String.valueOf(MACHINES))), "casing initializes");
         Scene empty = new Scene(CASING);
