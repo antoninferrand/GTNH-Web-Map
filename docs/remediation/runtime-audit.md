@@ -1,0 +1,20 @@
+# Effective runtime rendering audit
+
+Run `gwm renderaudit` from an operator console after map initialization. It writes
+`dynmap/render-audit.json` with exact runtime mod versions, registered blocks,
+blank metadata candidates, registered MTEs and their loaded support, and effective
+resource-resolution outcomes for each loaded pack. It never places blocks,
+changes rendering settings, reloads the map or restarts a server.
+
+Blank metadata is a candidate list: many registered blocks intentionally use
+only some metadata values. Explicit invisible texture records count as defined.
+MTE hasBase is a structural check, not proof of correct geometry/state/UVs.
+Required failures, optional absence and successful fallback are separate counts.
+
+The command preserves immutable lookup snapshots from decoded packs before
+closing their loaders; no streams or global decoder state are retained. If no
+pack has loaded yet, resourceCoverage is NOT_LOADED_RENDER_FIRST and zero missing
+resources is not evidence of coverage. Render a small fixture area and repeat.
+
+The production Java build validates linkage. Full-pack fixture execution is the
+integration check for registry order, dynamic resolution and saved-state behavior.

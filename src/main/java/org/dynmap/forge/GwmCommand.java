@@ -22,6 +22,7 @@ public class GwmCommand extends CommandBase {
         this.dynmapPlugin = dynmapPlugin;
 
         registerSubCommand(new BiomeDumpSubCommand());
+        registerSubCommand(new RenderAuditSubCommand(dynmapPlugin));
     }
 
     public static void registerSubCommand(GwmSubCommand subCommand) {

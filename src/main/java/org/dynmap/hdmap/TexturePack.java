@@ -64,6 +64,22 @@ import java.util.zip.ZipFile;
  */
 
 public class TexturePack {
+    private java.util.Collection<TextureResourceResolver.Lookup> resourceLookups = Collections.emptyList();
+
+    /** Effective loaded-pack diagnostics without reloading resources or retaining streams. */
+    public static Map<String, java.util.Collection<TextureResourceResolver.Lookup>> getLoadedResourceLookups() {
+        synchronized (packlock) {
+            Map<String, java.util.Collection<TextureResourceResolver.Lookup>> result = new java.util.TreeMap<>();
+            for (Map.Entry<String, TexturePack> entry : packs.entrySet()) {
+                result.put(entry.getKey(), entry.getValue().resourceLookups);
+            }
+            return Collections.unmodifiableMap(result);
+        }
+    }
+
+    public static boolean isBlankBlockMapping(int block, int metadata) {
+        return HDTextureMap.getMap(block, metadata, 0) == HDTextureMap.blank;
+    }
     /* Loaded texture packs */
     private static HashMap<String, TexturePack> packs = new HashMap<String, TexturePack>();
     private static Object packlock = new Object();
@@ -907,6 +923,7 @@ public class TexturePack {
                 try { is.close(); } catch (IOException iox) {}
                 is = null;
             }
+            resourceLookups = tpl.getResourceLookups();
             tpl.close();
         }
     }
@@ -1181,6 +1198,7 @@ public class TexturePack {
 
     /* Copy texture pack */
     private TexturePack(TexturePack tp) {
+        this.resourceLookups = tp.resourceLookups;
         this.tile_argb = Arrays.copyOf(tp.tile_argb, tp.tile_argb.length);
         this.native_scale = tp.native_scale;
         this.ctm = tp.ctm;

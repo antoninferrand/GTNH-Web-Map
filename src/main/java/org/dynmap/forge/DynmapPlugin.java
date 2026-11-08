@@ -116,6 +116,9 @@ import com.mojang.authlib.properties.Property;
 public class DynmapPlugin
 {
     private DynmapCore core;
+    DynmapCore getAuditCore() {
+        return core;
+    }
     private PermissionProvider permissions;
     private boolean core_enabled;
     public SnapshotCache sscache;
