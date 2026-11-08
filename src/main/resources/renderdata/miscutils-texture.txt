@@ -40,7 +40,6 @@ texture:id=minecraft/grass_side,filename=assets/minecraft/textures/blocks/grass_
 texture:id=minecraft/grass_top,filename=assets/minecraft/textures/blocks/grass_top.png
 texture:id=minecraft/portal,filename=assets/minecraft/textures/blocks/portal.png
 texture:id=minecraft/stone,filename=assets/minecraft/textures/blocks/stone.png
-texture:id=miscutils/blockFrameGt,filename=assets/miscutils/textures/blocks/blockFrameGt.png
 texture:id=miscutils/compressed/glowstone1,filename=assets/miscutils/textures/blocks/compressed/glowstone1.png
 texture:id=miscutils/compressed/glowstone2,filename=assets/miscutils/textures/blocks/compressed/glowstone2.png
 texture:id=miscutils/compressed/glowstone3,filename=assets/miscutils/textures/blocks/compressed/glowstone3.png
@@ -686,7 +685,7 @@ block:id=%blockMiningExplosives,data=*,stdrot=true,face0=0:gregtech/iconsets/IND
 block:id=%blockHellFire,data=*,stdrot=true,transparency=TRANSPARENT,face0-5=0:miscutils/hellfire/blockHellFire_layer_0
 
 # %blockBlackGate:* (blockBlackGate), render=(STANDARD), opaque=false,cls=gtPlusPlus.core.block.general.antigrief.BlockWitherProof
-block:id=%blockBlackGate,data=*,stdrot=true,colorMult=202020,face0-5=17000:miscutils/blockFrameGt
+block:id=%blockBlackGate,data=*,stdrot=true,transparency=SEMITRANSPARENT,colorMult=202020,face0-5=17000:gregtech/iconsets/CONTAINMENT_FRAME
 
 # %blockCircuitProgrammer:* (blockCircuitProgrammer), render=(STANDARD), opaque=false,cls=gtPlusPlus.core.block.machine.BlockCircuitProgrammer
 block:id=%blockCircuitProgrammer,data=*,stdrot=true,face0=12000:gregtech/iconsets/CIRCUIT_PROGRAMMER_SIDE,face1=12000:gregtech/iconsets/CIRCUIT_PROGRAMMER_TOP,face2-5=12000:gregtech/iconsets/CIRCUIT_PROGRAMMER_SIDE

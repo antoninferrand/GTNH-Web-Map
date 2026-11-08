@@ -41,3 +41,9 @@ The shared renderer supports deferred `baseblock`/`basemeta`, with optional
 the effective face map at render time so resource-pack overrides remain in
 effect. Focused production JVM fixtures pass 124 shared/coke assertions and
 6,760 vending assertions, including all six front/back orientations.
+
+The separate BlackGate correction follows `BlockWitherProof.getIcon`, which
+returns `Textures.BlockIcons.CONTAINMENT_FRAME`; the removed `blockFrameGt.png`
+reference was the block's only consumer. Its source tint remains `202020`, and
+its translucent render pass is now represented by `SEMITRANSPARENT`. The current
+containment-frame asset already has an existing declaration in this file.
