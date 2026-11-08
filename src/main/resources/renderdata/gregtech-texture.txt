@@ -8413,3 +8413,16 @@ texture:id=remediation/controller/1033/front_ACTIVE,filename=assets/gregtech/tex
 texture:id=remediation/controller/1033/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/TFFT_ACTIVE_GLOW.png,ycount=4
 moddata:mod=gtmte,type=iconset,name=remediation.controller.1033_active,output=0:remediation/controller/1033/front_ACTIVE,output2=23000:remediation/controller/1033/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=1033,mtetype=controller,baseset=remediation.controller.base.1033,iconset=remediation.controller.1033,activeset=remediation.controller.1033_active
+
+# Exo foundry controller (GT 5.09.54.265).
+texture:id=remediation/controller/14050/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/EXOFOUNDRY_CASING.png
+texture:id=remediation/controller/14050/base_top,filename=assets/gregtech/textures/blocks/iconsets/EXOFOUNDRY_CASING.png
+texture:id=remediation/controller/14050/base_side,filename=assets/gregtech/textures/blocks/iconsets/EXOFOUNDRY_CASING.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.14050,bottom=0:remediation/controller/14050/base_bottom,top=0:remediation/controller/14050/base_top,side=0:remediation/controller/14050/base_side
+texture:id=remediation/controller/14050/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_EXOFOUNDRY.png
+texture:id=remediation/controller/14050/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_EXOFOUNDRY_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.14050,output=0:remediation/controller/14050/front,output2=23000:remediation/controller/14050/glow
+texture:id=remediation/controller/14050/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_EXOFOUNDRY_ACTIVE.png,ycount=16
+texture:id=remediation/controller/14050/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_EXOFOUNDRY_ACTIVE_GLOW.png,ycount=16
+moddata:mod=gtmte,type=iconset,name=remediation.controller.14050_active,output=0:remediation/controller/14050/front_ACTIVE,output2=23000:remediation/controller/14050/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=14050,mtetype=controller,baseset=remediation.controller.base.14050,iconset=remediation.controller.14050,activeset=remediation.controller.14050_active
