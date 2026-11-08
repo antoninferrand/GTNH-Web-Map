@@ -15,6 +15,7 @@ import org.dynmap.renderer.RenderPatchFactory;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Arrays;
 
 public class GregTechMachineRenderer extends PipeRendererBase {
 
@@ -63,8 +64,8 @@ public class GregTechMachineRenderer extends PipeRendererBase {
         int version = 0;
         Object typeIdObj = mapDataCtx.getBlockTileEntityField("mID");
 
-        if(typeIdObj instanceof Integer) {
-            int typeId = ((Integer) typeIdObj).intValue();
+        if(typeIdObj instanceof Number) {
+            int typeId = ((Number) typeIdObj).intValue();
             GregTechSupport.MetaTileEntityEntry entry = GregTechSupport.INSTANCE.getMTEEntre(typeId);
             int mColor = GWM_Util.objectToInt(mapDataCtx.getBlockTileEntityField("mColor"),0);
 
@@ -119,9 +120,9 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                     Object tmpActive = mapDataCtx.getBlockTileEntityField("mActive");
                     Object tmpFacing = mapDataCtx.getBlockTileEntityField("mFacing");
                     Object tmpMainFacing = mapDataCtx.getBlockTileEntityField("mMainFacing");
-                    boolean active = tmpActive != null && ((Byte) tmpActive).byteValue() != 0;
-                    int facing = tmpFacing instanceof Short ? ((Short) tmpFacing).shortValue() : ForgeDirection.NORTH.ordinal();
-                    int mainFacing = tmpMainFacing instanceof Integer ? ((Integer) tmpMainFacing).intValue() : ForgeDirection.EAST.ordinal();
+                    boolean active = tmpActive instanceof Boolean ? (Boolean) tmpActive : number(tmpActive, 0) != 0;
+                    int facing = validFacing(number(tmpFacing, ForgeDirection.NORTH.ordinal()), ForgeDirection.NORTH.ordinal());
+                    int mainFacing = validFacing(number(tmpMainFacing, facing), facing);
 
                     BasicMachineTextureAndColor bmtac = new BasicMachineTextureAndColor(typeId, mapDataCtx, active, facing, mainFacing, mColor);
                     return new CustomRendererData(fullBlock, bmtac, bmtac);
@@ -148,152 +149,83 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                 colorMul = entry.colorMul;
                 int front = mainFacing;
                 baseSet = entry.baseTextureSet;
-                GregTechSupport.IconSet iconSet = entry.icons;
+                int state = entry.stateField == null ? Integer.MIN_VALUE : number(mapDataCtx.getBlockTileEntityField(entry.stateField), Integer.MIN_VALUE);
+                GregTechSupport.IconSet iconSet = entry.getIconSet(active, state);
                 baseTex = entry.baseTexture;
                 baseTex2 = entry.baseTexture2;
-                if(active){
-                    iconSet = entry.activeIcons == null ? entry.icons : entry.activeIcons;
+                Integer stateBase = entry.stateBaseTextures.get(state);
+                if (stateBase != null) {
+                    baseTex = stateBase;
+                    baseSet = null;
                 }
-
-                if(entry.isHatch){
-                    Object machineType = mapDataCtx.getBlockTileEntityField("textureIndex");
-
-                    if(machineType == null)
-                        machineType = mapDataCtx.getBlockTileEntityField("mMachineBlock");
-
-                    boolean success = false;
-                    if(machineType != null){
-                        int page = GWM_Util.objectToInt(mapDataCtx.getBlockTileEntityField("texturePage"),0);
-                        if(page == 0)
-                            page = GWM_Util.objectToInt(mapDataCtx.getBlockTileEntityField("mTexturePage"), 0);
-
-                        int num = GWM_Util.objectToInt(machineType,0);
-
-                        if(num < 0)
-                            num += 128;
-
-                        if(num >= 0 && num < 128 && GregTechSupport.INSTANCE.hatchBaseTextures2[page] != null && GregTechSupport.INSTANCE.hatchBaseTextures2[page][num] != 0){
-                            baseTex = GregTechSupport.INSTANCE.hatchBaseTextures2[page][num];
-                            baseSet = null;
-                            success = true;
-                        }
+                if (entry.casingStateField != null) {
+                    Integer casing = entry.casingStateBaseTextures.get(number(mapDataCtx.getBlockTileEntityField(entry.casingStateField), Integer.MIN_VALUE));
+                    if (casing != null) {
+                        baseTex = casing;
+                        baseSet = null;
                     }
-                    if(!success)
-                        tryStealBaseTexFromNeighbor(mapDataCtx, outputFacing);
                 }
 
-                if(mColor > 0 && mColor <= 16){
+                if (entry.isHatch && entry.inheritCasing) {
+                    int casing = getHatchBaseTexture(mapDataCtx);
+                    if (casing >= 0) {
+                        baseTex = casing;
+                        baseSet = null;
+                    } else {
+                        tryStealBaseTexFromNeighbor(mapDataCtx, outputFacing);
+                    }
+                }
+
+                if(entry.paintable && mColor > 0 && mColor <= 16){
                     colorMul = dyeColors[mColor -1];
                 }
 
                 for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+                    ArrayList<Integer> layers = new ArrayList<>();
                     if (baseSet != null) {
-                        if (iconSet != null) {
-                            switch (dir) {
-                                case DOWN:
-                                    if (outputFacing == dir.ordinal() && iconSet.output != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.bottom, iconSet.output};
-                                    } else if (iconSet.bottom != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.bottom, iconSet.bottom};
-                                    } else {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.bottom};
-                                    }
-                                    break;
-                                case UP:
-                                    if (outputFacing == dir.ordinal() && iconSet.output != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.top, iconSet.output};
-                                    } else if (iconSet.top != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.top, iconSet.top};
-                                    } else {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.top};
-                                    }
-
-                                    break;
-                                case NORTH:
-                                case SOUTH:
-                                case WEST:
-                                case EAST:
-                                    if (outputFacing == dir.ordinal() && iconSet.output != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.side, iconSet.output};
-                                    } else if (front == dir.ordinal() && iconSet.front != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.side, iconSet.front};
-                                    } else if (iconSet.side != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.side, iconSet.side};
-                                    } else {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseSet.side};
-                                    }
-                                    break;
-                                case UNKNOWN:
-                                    break;
-                            }
-                        } else {
-                            switch (dir) {
-                                case DOWN:
-                                    texturesToUse[dir.ordinal()] = new int[]{baseSet.bottom};
-                                    break;
-                                case UP:
-                                    texturesToUse[dir.ordinal()] = new int[]{baseSet.top};
-                                    break;
-                                case NORTH:
-                                case SOUTH:
-                                case WEST:
-                                case EAST:
-                                    texturesToUse[dir.ordinal()] = new int[]{baseSet.side};
-                                    break;
-                                case UNKNOWN:
-                                    break;
-                            }
-                        }
-                    } else if(baseTex != -1) {
-                        if(iconSet != null) {
-                            switch (dir) {
-                                case DOWN:
-                                    if (outputFacing == dir.ordinal() && iconSet.output != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex, iconSet.output};
-                                    } else if (iconSet.bottom != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex, iconSet.bottom};
-                                    } else {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex};
-                                    }
-                                    break;
-                                case UP:
-                                    if (outputFacing == dir.ordinal() && iconSet.output != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex, iconSet.output};
-                                    } else if (iconSet.top != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex, iconSet.top};
-                                    } else {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex};
-                                    }
-                                    break;
-                                case NORTH:
-                                case SOUTH:
-                                case WEST:
-                                case EAST:
-                                    if (outputFacing == dir.ordinal() && iconSet.output != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex, iconSet.output};
-                                    } else if (front == dir.ordinal() && iconSet.front != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex, iconSet.front};
-                                    } else if (iconSet.side != -1) {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex, iconSet.side};
-                                    } else {
-                                        texturesToUse[dir.ordinal()] = new int[]{baseTex};
-                                    }
-                                    break;
-                                case UNKNOWN:
-                                    break;
-                            }
-                        } else {
-                            if(baseTex2 != -1)
-                                texturesToUse[dir.ordinal()] = new int[]{baseTex, baseTex2};
-                            else
-                                texturesToUse[dir.ordinal()] = new int[]{baseTex};
-                        }
+                        if (dir == ForgeDirection.DOWN) addLayers(layers, baseSet.bottomLayers, baseSet.bottom);
+                        else if (dir == ForgeDirection.UP) addLayers(layers, baseSet.topLayers, baseSet.top);
+                        else addLayers(layers, baseSet.sideLayers, baseSet.side);
+                    } else {
+                        if (baseTex >= 0) layers.add(baseTex);
+                        if (baseTex2 >= 0) layers.add(baseTex2);
                     }
+                    if (iconSet != null) {
+                        int paintColor = entry.paintable ? mColor : 0;
+                        int paint = paintColor >= 0 && paintColor <= 16 ? iconSet.outputPaint[paintColor] : -1;
+                        if ((outputFacing == dir.ordinal() || (outputFacing == ForgeDirection.DOWN.ordinal() && iconSet.downFacingExtra == dir.ordinal())) && (iconSet.output >= 0 || iconSet.outputLayers.length > 0 || paint >= 0)) {
+                            addLayers(layers, iconSet.outputLayers, iconSet.output);
+                            if (paint >= 0) layers.add(paint);
+                        } else if (dir == ForgeDirection.DOWN) addLayers(layers, iconSet.bottomLayers, iconSet.bottom);
+                        else if (dir == ForgeDirection.UP) addLayers(layers, iconSet.topLayers, iconSet.top);
+                        else if (front == dir.ordinal() && (iconSet.front >= 0 || iconSet.frontLayers.length > 0)) addLayers(layers, iconSet.frontLayers, iconSet.front);
+                        else addLayers(layers, iconSet.sideLayers, iconSet.side);
+                    }
+                    texturesToUse[dir.ordinal()] = layers.isEmpty() ? new int[] { -1 } : toArray(layers);
                 }
             } else {
                 for (int i = 0; i < 6; i++)
                     texturesToUse[i] = new int[]{ -1 };
             }
+        }
+
+        private int getHatchBaseTexture(MapDataContext context) {
+            Object indexValue = context.getBlockTileEntityField("textureIndex");
+            boolean legacy = indexValue == null;
+            if (legacy) indexValue = context.getBlockTileEntityField("mMachineBlock");
+            if (indexValue == null) return -1;
+            Object pageValue = context.getBlockTileEntityField(legacy ? "mTexturePage" : "texturePage");
+            int page = number(pageValue, 0);
+            int index = number(indexValue, -1);
+            if (legacy && index < 0) index += 128;
+            if (!legacy && pageValue == null && index >= 128) {
+                page = index >>> 7;
+                index &= 127;
+            }
+            int[][] textures = GregTechSupport.INSTANCE.hatchBaseTextures2;
+            if (page < 0 || page >= textures.length || index < 0 || index >= 128) return -1;
+            int[] texturesOnPage = textures[page];
+            return texturesOnPage != null && index < texturesOnPage.length && texturesOnPage[index] > 0 ? texturesOnPage[index] : -1;
         }
 
         private void tryStealBaseTexFromNeighbor(MapDataContext mapDataCtx, int outputFacing) {
@@ -308,7 +240,9 @@ public class GregTechMachineRenderer extends PipeRendererBase {
 
                 if(GregTechSupport.INSTANCE.validHatchBaseBlocks[blockAt] != null){
                     int blockDataAt = mapDataCtx.getBlockDataAt(searchDir.offsetX, searchDir.offsetY, searchDir.offsetZ);
-                    int tex = GregTechSupport.INSTANCE.validHatchBaseBlocks[blockAt][blockDataAt];
+                    int[] baseTextures = GregTechSupport.INSTANCE.validHatchBaseBlocks[blockAt];
+                    if (blockDataAt < 0 || blockDataAt >= baseTextures.length) continue;
+                    int tex = baseTextures[blockDataAt];
                     if(tex > 64) {
                         baseSet = null;
                         baseTex = tex;
@@ -317,8 +251,8 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                 }
                 else if(blockAt == mapDataCtx.getBlockTypeID()){ // Another hatch or GT block
                     Object objId = mapDataCtx.getBlockTileEntityFieldAt("mID",searchDir.offsetX, searchDir.offsetY, searchDir.offsetZ);
-                    if(objId instanceof Integer){
-                        int otherId = ((Integer)objId).intValue();
+                    if(objId instanceof Number){
+                        int otherId = ((Number)objId).intValue();
                         if(otherId >= 0 && otherId < 65536){
                             GregTechSupport.MetaTileEntityEntry otherMtee = GregTechSupport.INSTANCE.getMTEEntre(otherId);
                             if(otherMtee !=null && otherMtee.baseTexture != -1 && otherMtee.type == GregTechSupport.MteType.Controller){
@@ -344,10 +278,42 @@ public class GregTechMachineRenderer extends PipeRendererBase {
     }
 
 
+    private static int number(Object value, int fallback) {
+        return value instanceof Number ? ((Number) value).intValue() : GWM_Util.objectToInt(value, fallback);
+    }
+
+    private static int validFacing(int direction, int fallback) {
+        return direction >= 0 && direction < 6 ? direction : fallback;
+    }
+
+    private static void addLayers(ArrayList<Integer> target, int[] layers, int primary) {
+        if (layers.length == 0) {
+            if (primary >= 0) target.add(primary);
+        } else {
+            for (int texture : layers) if (texture >= 0) target.add(texture);
+        }
+    }
+
+    private static int[] toArray(ArrayList<Integer> values) {
+        int[] result = new int[values.size()];
+        for (int i = 0; i < result.length; i++) result[i] = values.get(i);
+        return result;
+    }
+
     static String[] nbtFieldsNeeded = {"id", "mID", "mColor", "mConnections", "mFacing", "mActive", "mMainFacing", "mMachineBlock", "mTexturePage", "texturePage", "textureIndex"};
+
+    private String[] lastStateFields;
+    private String[] allFields = nbtFieldsNeeded;
 
     @Override
     public String[] getTileEntityFieldsNeeded() {
-        return nbtFieldsNeeded;
+        String[] stateFields = GregTechSupport.INSTANCE.getStateFieldsNeeded();
+        if (stateFields != lastStateFields) {
+            String[] fields = Arrays.copyOf(nbtFieldsNeeded, nbtFieldsNeeded.length + stateFields.length);
+            System.arraycopy(stateFields, 0, fields, nbtFieldsNeeded.length, stateFields.length);
+            allFields = fields;
+            lastStateFields = stateFields;
+        }
+        return allFields;
     }
 }

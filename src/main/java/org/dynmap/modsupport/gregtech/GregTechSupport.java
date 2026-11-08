@@ -29,6 +29,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GregTechSupport {
     public static final GregTechSupport INSTANCE = new GregTechSupport();
@@ -40,6 +44,9 @@ public class GregTechSupport {
     public int[][] validHatchBaseBlocks = new int[65536][];
     public int[][] hatchBaseTextures2 = new int[128][];
     public boolean[] meConnectables;
+    private final LinkedHashSet<String> stateFields = new LinkedHashSet<>();
+    private String[] stateFieldsNeeded = new String[0];
+    private static final Pattern STATE_TEXTURE = Pattern.compile("(state|casingstate)(-?[0-9]+)(basetex|iconset|activeset)");
     private GregTechSupport(){
         GwmCommand.registerSubCommand(new GTDumpCommand());
     }
@@ -56,6 +63,15 @@ public class GregTechSupport {
         is.side = getTexture(data, "side", filetoidx);
         is.top = getTexture(data, "top", filetoidx);
         is.output = getTexture(data, "output", filetoidx);
+        is.downFacingExtra = GWM_Util.objectToInt(data.get("downfacingextra"), -1);
+        is.frontLayers = getTextureLayers(data, "front", filetoidx);
+        is.bottomLayers = getTextureLayers(data, "bottom", filetoidx);
+        is.sideLayers = getTextureLayers(data, "side", filetoidx);
+        is.topLayers = getTextureLayers(data, "top", filetoidx);
+        is.outputLayers = getTextureLayers(data, "output", filetoidx);
+        for (int paint = 0; paint <= 16; paint++) {
+            is.outputPaint[paint] = getTexture(data, "outputpaint" + paint, filetoidx);
+        }
 
         iconSets.put(name, is);
     }
@@ -76,6 +92,26 @@ public class GregTechSupport {
         String colorMulStr = data.get("colormul");
 
         MetaTileEntityEntry ent = new MetaTileEntityEntry();
+        ent.iconsName = iconSet;
+        ent.activeIconsName = activeIconSet;
+        ent.baseTextureSetName = baseSet;
+        ent.inheritCasing = !"false".equals(data.get("inheritcasing"));
+        ent.paintable = !"false".equals(data.get("paint"));
+        ent.stateField = data.get("statefield");
+        ent.casingStateField = data.get("casingstatefield");
+        if (ent.stateField != null && stateFields.add(ent.stateField)) stateFieldsNeeded = stateFields.toArray(new String[0]);
+        if (ent.casingStateField != null && stateFields.add(ent.casingStateField)) stateFieldsNeeded = stateFields.toArray(new String[0]);
+        for (String key : data.keySet()) {
+            Matcher state = STATE_TEXTURE.matcher(key);
+            if (!state.matches()) continue;
+            int value = Integer.parseInt(state.group(2));
+            if (state.group(3).equals("basetex")) {
+                (state.group(1).equals("casingstate") ? ent.casingStateBaseTextures : ent.stateBaseTextures)
+                        .put(value, getTexture(data, key, filetoidx));
+            } else if (state.group(1).equals("state")) {
+                (state.group(3).equals("activeset") ? ent.stateActiveIconNames : ent.stateIconNames).put(value, data.get(key));
+            }
+        }
         if(iconSet != null)
             ent.icons = iconSets.get(iconSet);
 
@@ -128,8 +164,26 @@ public class GregTechSupport {
         if(id < 0 || id >= metaTileEntries.length)
             return null;
 
-        return metaTileEntries[id];
+        MetaTileEntityEntry entry = metaTileEntries[id];
+        if (entry != null) entry.resolveIconSets();
+        return entry;
     }
+
+    public String[] getStateFieldsNeeded() {
+        return stateFieldsNeeded;
+    }
+
+    private int[] getTextureLayers(HashMap<String, String> data, String key, HashMap<String, Integer> filetoidx) {
+        ArrayList<Integer> layers = new ArrayList<>();
+        for (int layer = 1; layer <= 4; layer++) {
+            int texture = getTexture(data, key + (layer == 1 ? "" : layer), filetoidx);
+            if (texture >= 0) layers.add(texture);
+        }
+        int[] result = new int[layers.size()];
+        for (int layer = 0; layer < result.length; layer++) result[layer] = layers.get(layer);
+        return result;
+    }
+
     public MaterialEntry getMaterial(int id){
         if(id < 0 || id >= materialEntries.length)
             return null;
@@ -224,13 +278,41 @@ public class GregTechSupport {
 
     public class IconSet {
         public int front = -1, bottom = -1, side = -1, top = -1, output = -1;
+        public int[] frontLayers = new int[0], bottomLayers = new int[0], sideLayers = new int[0], topLayers = new int[0], outputLayers = new int[0];
+        public int downFacingExtra = -1;
+        public int[] outputPaint = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
     }
     public class MetaTileEntityEntry{
         public int baseTexture = -1;
         public int baseTexture2 = -1;
-        public IconSet baseTextureSet;
-        public IconSet icons;
-        public IconSet activeIcons;
+        public volatile IconSet baseTextureSet;
+        public volatile IconSet icons;
+        public volatile IconSet activeIcons;
+        private String baseTextureSetName, iconsName, activeIconsName;
+        public String stateField, casingStateField;
+        public final HashMap<Integer, Integer> stateBaseTextures = new HashMap<>();
+        public final HashMap<Integer, Integer> casingStateBaseTextures = new HashMap<>();
+        private final HashMap<Integer, String> stateIconNames = new HashMap<>();
+        private final HashMap<Integer, String> stateActiveIconNames = new HashMap<>();
+        public boolean inheritCasing = true;
+        public boolean paintable = true;
+
+        private void resolveIconSets() {
+            // Some mod-scoped support files declare shared iconsets after their MTEs.
+            if (baseTextureSet == null && baseTextureSetName != null) baseTextureSet = iconSets.get(baseTextureSetName);
+            if (icons == null && iconsName != null) icons = iconSets.get(iconsName);
+            if (activeIcons == null && activeIconsName != null) activeIcons = iconSets.get(activeIconsName);
+        }
+
+        public IconSet getIconSet(boolean active, int state) {
+            String name = active ? stateActiveIconNames.get(state) : null;
+            if (name == null) name = stateIconNames.get(state);
+            if (name != null) {
+                IconSet selected = iconSets.get(name);
+                if (selected != null) return selected;
+            }
+            return active && activeIcons != null ? activeIcons : icons;
+        }
 
         public boolean isHatch;
         public int colorMul = 0xFFFFFF;
