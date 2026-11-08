@@ -372,3 +372,11 @@ LHC3013 uses collider casing. Its saved machineMode selects accelerator0/collide
 Every referenced image is present in the installed JAR inventory; image frame
 counts come from the matching source assets. Shader/TESR effects outside the
 controller block are not inferred from texture records.
+
+## Beamcraft hatch
+
+Advanced beam output3014 inherits MTEHatchOutputBeamline and is registered UV8. Front normal/active icon receives machine-metal/paint modulation (17000); BO_CONN stays untinted. Preserve dynamic hatch casing lookup.
+
+Every referenced image is present in the installed JAR inventory; image frame
+counts come from the matching source assets. Shader/TESR effects outside the
+controller block are not inferred from texture records.

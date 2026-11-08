@@ -8759,3 +8759,11 @@ texture:id=remediation/beam/OVERLAY_FRONT_LHC_COLLIDER,filename=assets/gregtech/
 texture:id=remediation/beam/OVERLAY_FRONT_LHC_COLLIDER_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LHC_COLLIDER_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.beam.lhc_collider,output=0:remediation/beam/OVERLAY_FRONT_LHC_COLLIDER,output2=23000:remediation/beam/OVERLAY_FRONT_LHC_COLLIDER_GLOW
 moddata:mod=gtmte,type=mte,id=3013,mtetype=controller,basetex=0:remediation/beam/collider_casing,iconset=remediation.beam.lhc,statefield=machineMode,state0activeset=remediation.beam.lhc_accelerator,state1activeset=remediation.beam.lhc_collider
+
+# Beamcraft hatch (GT5 5.09.54.265).
+texture:id=remediation/beam/OVERLAY_BO_SIDES,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BO_SIDES.png,ycount=4
+texture:id=remediation/beam/BO_CONN,filename=assets/gregtech/textures/blocks/iconsets/BO_CONN.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.outputhatch,output=17000:remediation/beam/OVERLAY_BO_SIDES,output2=0:remediation/beam/BO_CONN
+texture:id=remediation/beam/OVERLAY_BO_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BO_ACTIVE.png,ycount=2
+moddata:mod=gtmte,type=iconset,name=remediation.beam.outputhatch_active,output=17000:remediation/beam/OVERLAY_BO_ACTIVE,output2=0:remediation/beam/BO_CONN
+moddata:mod=gtmte,type=mte,id=3014,baseset=hull.tier.08,iconset=remediation.beam.outputhatch,activeset=remediation.beam.outputhatch_active,ishatch=true
