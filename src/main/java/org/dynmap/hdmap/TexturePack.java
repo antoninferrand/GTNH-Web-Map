@@ -77,6 +77,25 @@ public class TexturePack {
         }
     }
 
+    /** Classify pack probes and inactive vanilla variants without weakening actual texture requirements. */
+    public static String getResourceRole(String packName, String path) {
+        synchronized (packlock) {
+            TexturePack pack = packs.get(packName);
+            if (pack == null) return "UNKNOWN_PACK";
+            if (pack.inactiveTerrainVariants.contains(path)) return "INACTIVE_TERRAIN_VARIANT";
+            if (pack.optionalResourceProbes.contains(path)) return "OPTIONAL_PROBE";
+            return "TEXTURE";
+        }
+    }
+
+    private static boolean isInactiveTerrainVariant(DynamicTileFile file, boolean resourcePack) {
+        return !file.explicitlyUsed && ((resourcePack && file.terrainVariant == 2)
+                || (!resourcePack && file.terrainVariant == 1));
+    }
+
+    private final Set<String> inactiveTerrainVariants = new HashSet<String>();
+    private Set<String> optionalResourceProbes = Collections.emptySet();
+
     public static boolean isBlankBlockMapping(int block, int metadata) {
         return HDTextureMap.getMap(block, metadata, 0) == HDTextureMap.blank;
     }
@@ -355,6 +374,8 @@ public class TexturePack {
         List<CustomTileRec> cust;
         String[] tilenames;         /* For TILESET, array of tilenames, indexed by tile index */
         boolean used;               // Set to true if any active references to the file
+        boolean explicitlyUsed;     // Actual parsed consumer, excluding built-in variant registration
+        int terrainVariant;         // 0 = ordinary declaration, 1 = resource pack, 2 = legacy terrain
         MaterialType material;      // Material type, if specified
 
         CustomTextureProcessor customProcessor;
@@ -400,6 +421,7 @@ public class TexturePack {
                 if (dtf != null) {  // Fix mapping of tile ID to global table index
                     dtf.tile_to_dyntile[0] = i;
                     dtf.used = true;
+                    dtf.terrainVariant = 1;
                 }
             }
         }
@@ -411,6 +433,7 @@ public class TexturePack {
                 DynamicTileFile dtf = addonfiles.get(idx);
                 if (dtf != null) {  // Fix mapping of tile ID to global table index
                     dtf.used = true;
+                    dtf.terrainVariant = 2;
                     dtf.tile_to_dyntile[0] = i;
                 }
             }
@@ -776,7 +799,7 @@ public class TexturePack {
         try {
             boolean is_rp = false;
             /* Check if resource pack */
-            is = tpl.openTPResource("pack.mcmeta");
+            is = tpl.openOptionalTPResource("pack.mcmeta");
             if (is != null) {
                 tpl.closeResource(is);
                 is_rp = true;
@@ -800,7 +823,7 @@ public class TexturePack {
             /* Load custom colors support, if enabled */
             if(core.isCustomColorsSupportEnabled()) {
                 fn = (is_rp?"assets/minecraft/mcpatcher/color.properties":"color.properties");
-                is = tpl.openTPResource(fn);
+                is = tpl.openOptionalTPResource(fn);
                 Properties p;
                 if (is != null) {
                     p = new Properties();
@@ -817,6 +840,9 @@ public class TexturePack {
                 DynamicTileFile dtf = addonfiles.get(i);
                 if (dtf.used == false) {    // Not used, skip it - save memory and avoid errors for downlevel mods and such
                     continue;
+                }
+                if (isInactiveTerrainVariant(dtf, is_rp)) {
+                    inactiveTerrainVariants.add(dtf.filename);
                 }
                 is = tpl.openModTPResource(dtf.filename, dtf.modname, dtf.fallbackFilename, dtf.fallbackModname, dtf.optional);
                 try {
@@ -842,55 +868,55 @@ public class TexturePack {
             /* Find and load terrain */
             loadTerrain(is_rp);
             /* Try to find and load misc/grasscolor.png */
-            is = tpl.openTPResource(GRASSCOLOR_PNG, GRASSCOLOR_RP_PNG);
+            is = tpl.openOptionalTPResource(GRASSCOLOR_PNG, GRASSCOLOR_RP_PNG);
             if (is != null) {
                 loadBiomeShadingImage(is, IMG_GRASSCOLOR);
                 tpl.closeResource(is);
             }
             /* Try to find and load misc/foliagecolor.png */
-            is = tpl.openTPResource(FOLIAGECOLOR_PNG, FOLIAGECOLOR_RP_PNG);
+            is = tpl.openOptionalTPResource(FOLIAGECOLOR_PNG, FOLIAGECOLOR_RP_PNG);
             if (is != null) {
                 loadBiomeShadingImage(is, IMG_FOLIAGECOLOR);
                 tpl.closeResource(is);
             }
             /* Try to find and load misc/swampgrasscolor.png */
-            is = tpl.openTPResource(SWAMPGRASSCOLOR_PNG, SWAMPGRASSCOLOR_RP_PNG);
+            is = tpl.openOptionalTPResource(SWAMPGRASSCOLOR_PNG, SWAMPGRASSCOLOR_RP_PNG);
             if (is != null) {
                 loadBiomeShadingImage(is, IMG_SWAMPGRASSCOLOR);
                 tpl.closeResource(is);
             }
             /* Try to find and load misc/swampfoliagecolor.png */
-            is = tpl.openTPResource(SWAMPFOLIAGECOLOR_PNG, SWAMPFOLIAGECOLOR_RP_PNG);
+            is = tpl.openOptionalTPResource(SWAMPFOLIAGECOLOR_PNG, SWAMPFOLIAGECOLOR_RP_PNG);
             if (is != null) {
                 loadBiomeShadingImage(is, IMG_SWAMPFOLIAGECOLOR);
                 tpl.closeResource(is);
             }
             /* Try to find and load misc/watercolor.png */
-            is = tpl.openTPResource(WATERCOLORX_PNG, WATERCOLORX_RP_PNG);
+            is = tpl.openOptionalTPResource(WATERCOLORX_PNG, WATERCOLORX_RP_PNG);
             if (is == null) {
                 /* Try to find and load colormap/water.png */
-                is = tpl.openTPResource(WATERCOLORX_PNG, WATERCOLORX2_RP_PNG);
+                is = tpl.openOptionalTPResource(WATERCOLORX_PNG, WATERCOLORX2_RP_PNG);
             }
             if (is != null) {
                 loadBiomeShadingImage(is, IMG_WATERCOLORX);
                 tpl.closeResource(is);
             }
             /* Try to find pine.png */
-            is = tpl.openTPResource(PINECOLOR_PNG, PINECOLOR_RP_PNG);
+            is = tpl.openOptionalTPResource(PINECOLOR_PNG, PINECOLOR_RP_PNG);
             if (is != null) {
                 loadBiomeShadingImage(is, IMG_PINECOLOR);
                 tpl.closeResource(is);
             }
             /* Try to find birch.png */
-            is = tpl.openTPResource(BIRCHCOLOR_PNG, BIRCHCOLOR_RP_PNG);
+            is = tpl.openOptionalTPResource(BIRCHCOLOR_PNG, BIRCHCOLOR_RP_PNG);
             if (is != null) {
                 loadBiomeShadingImage(is, IMG_BIRCHCOLOR);
                 tpl.closeResource(is);
             }
             /* Optional files - process if they exist */
-            is = tpl.openTPResource(CUSTOMLAVASTILL_PNG);
+            is = tpl.openOptionalTPResource(CUSTOMLAVASTILL_PNG);
             if (is == null) {
-                is = tpl.openTPResource("anim/" + CUSTOMLAVASTILL_PNG);
+                is = tpl.openOptionalTPResource("anim/" + CUSTOMLAVASTILL_PNG);
             }
             if (is != null) {
                 loadImage(is, IMG_CUSTOMLAVASTILL);
@@ -898,18 +924,18 @@ public class TexturePack {
                 patchTextureWithImage(IMG_CUSTOMLAVASTILL, TILEINDEX_STATIONARYLAVA);
                 patchTextureWithImage(IMG_CUSTOMLAVASTILL, TILEINDEX_MOVINGLAVA);
             }
-            is = tpl.openTPResource(CUSTOMLAVAFLOWING_PNG);
+            is = tpl.openOptionalTPResource(CUSTOMLAVAFLOWING_PNG);
             if (is == null) {
-                is = tpl.openTPResource("anim/" + CUSTOMLAVAFLOWING_PNG);
+                is = tpl.openOptionalTPResource("anim/" + CUSTOMLAVAFLOWING_PNG);
             }
             if (is != null) {
                 loadImage(is, IMG_CUSTOMLAVAMOVING);
                 tpl.closeResource(is);
                 patchTextureWithImage(IMG_CUSTOMLAVAMOVING, TILEINDEX_MOVINGLAVA);
             }
-            is = tpl.openTPResource(CUSTOMWATERSTILL_PNG);
+            is = tpl.openOptionalTPResource(CUSTOMWATERSTILL_PNG);
             if (is == null) {
-                is = tpl.openTPResource("anim/" + CUSTOMWATERSTILL_PNG);
+                is = tpl.openOptionalTPResource("anim/" + CUSTOMWATERSTILL_PNG);
             }
             if (is != null) {
                 loadImage(is, IMG_CUSTOMWATERSTILL);
@@ -917,9 +943,9 @@ public class TexturePack {
                 patchTextureWithImage(IMG_CUSTOMWATERSTILL, TILEINDEX_STATIONARYWATER);
                 patchTextureWithImage(IMG_CUSTOMWATERSTILL, TILEINDEX_MOVINGWATER);
             }
-            is = tpl.openTPResource(CUSTOMWATERFLOWING_PNG);
+            is = tpl.openOptionalTPResource(CUSTOMWATERFLOWING_PNG);
             if (is == null) {
-                is = tpl.openTPResource("anim/" + CUSTOMWATERFLOWING_PNG);
+                is = tpl.openOptionalTPResource("anim/" + CUSTOMWATERFLOWING_PNG);
             }
             if (is != null) {
                 loadImage(is, IMG_CUSTOMWATERMOVING);
@@ -939,6 +965,7 @@ public class TexturePack {
                 is = null;
             }
             resourceLookups = tpl.getResourceLookups();
+            optionalResourceProbes = tpl.getOptionalProbeResources();
             tpl.close();
         }
     }
@@ -3446,6 +3473,7 @@ public class TexturePack {
     private static void reserveProcessorTiles(HashMap<String, Integer> filetoidx, int fileId, String id, int count) {
         DynamicTileFile file = addonfiles.get(fileId);
         boolean wasUsed = file.used;
+        boolean wasExplicitlyUsed = file.explicitlyUsed;
         try {
             for (int i = 0; i < count; i++) {
                 parseTextureIndex(filetoidx, fileId, String.format("%d:%s", i, id));
@@ -3454,6 +3482,7 @@ public class TexturePack {
             // Actual block/moddata references activate resources. Reserving output
             // IDs alone must not override registry gates for absent legacy parts.
             file.used = wasUsed;
+            file.explicitlyUsed = wasExplicitlyUsed;
         }
     }
 
@@ -3476,6 +3505,7 @@ public class TexturePack {
             next_dynamic_tile++;    /* Allocate next ID */
         }
         f.used = true;  // Mark file as being used
+        f.explicitlyUsed = true;
         return f.tile_to_dyntile[tile_id];
     }
 

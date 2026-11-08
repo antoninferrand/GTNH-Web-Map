@@ -96,7 +96,7 @@ public class TexturePack {
  static final int COLORMOD_MULT_FILE=1000, COLORMOD_MULT_INTERNAL=1000000;
  static int next_dynamic_tile=100;
  static class DynamicTileFile {
-  boolean used; int[] tile_to_dyntile={-1,-1,-1}; String filename="legacy-cable"; String modname="ae2";
+  boolean used, explicitlyUsed; int[] tile_to_dyntile={-1,-1,-1}; String filename="legacy-cable"; String modname="ae2";
  }
  static ArrayList<DynamicTileFile> addonfiles=new ArrayList<DynamicTileFile>();
  public static HashMap<String,Integer> declarations=new HashMap<String,Integer>();

@@ -50,6 +50,23 @@ public class TexturePackLoader {
         }
         dsi = core.getServer();
     }
+    private final Set<String> optionalProbeResources = new HashSet<String>();
+    private final Set<String> declaredResourcePaths = new HashSet<String>();
+
+    /** Optional pack features probed by the constructor, never required block images. */
+    public InputStream openOptionalTPResource(String rname, String altname) {
+        InputStream stream = openOptionalTPResource(rname);
+        return stream == null && altname != null ? openOptionalTPResource(altname) : stream;
+    }
+
+    public InputStream openOptionalTPResource(String rname) {
+        return openTrackedResource(rname, null, null, null, true, true);
+    }
+
+    public Set<String> getOptionalProbeResources() {
+        return Collections.unmodifiableSet(new HashSet<String>(optionalProbeResources));
+    }
+
     public InputStream openTPResource(String rname, String altname) {
         InputStream is = openTPResource(rname);
         if (is == null) {
@@ -68,13 +85,28 @@ public class TexturePackLoader {
     }
 
     public InputStream openModTPResource(String rname, String modname, String fallback, String fallbackmod, boolean optional) {
+        return openTrackedResource(rname, modname, fallback, fallbackmod, optional, false);
+    }
+
+    private InputStream openTrackedResource(String rname, String modname, String fallback, String fallbackmod,
+            boolean optional, boolean probe) {
+        if (!probe) {
+            declaredResourcePaths.add(rname);
+            optionalProbeResources.remove(rname);
+        } else if (!declaredResourcePaths.contains(rname)) {
+            optionalProbeResources.add(rname);
+        }
         TextureResourceResolver.Result result = TextureResourceResolver.open(new TextureResourceResolver.Source() {
             @Override
             public InputStream open(String resource, String mod) {
                 return openResourceQuietly(resource, mod);
             }
         }, rname, modname, fallback, fallbackmod, optional);
-        resourceLookups.put(String.valueOf(modname) + ":" + rname, result.lookup);
+        String key = String.valueOf(modname) + ":" + rname;
+        // A later optional probe must not downgrade an actual required declaration.
+        if (!probe || !declaredResourcePaths.contains(rname) || !resourceLookups.containsKey(key)) {
+            resourceLookups.put(key, result.lookup);
+        }
         if (result.lookup.outcome == TextureResourceResolver.Outcome.REQUIRED_MISSING && modname != null) {
             Log.warning("Resource " + rname + " for mod " + modname + " not found"
                     + (fallback == null ? "" : " (fallback " + fallback + " also missing)"));
@@ -159,6 +191,8 @@ public class TexturePackLoader {
         }
         src_by_mod.clear();
         resourceLookups.clear();
+        optionalProbeResources.clear();
+        declaredResourcePaths.clear();
     }
     public void closeResource(InputStream is) {
         try {
