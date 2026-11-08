@@ -57,6 +57,7 @@ def main():
         'hydro': ['tools/test-hydroenergy.py'] + common + compiled,
         'wall-mirror': ['tools/test-wall-mirror.py'] + common + compiled,
         'vanilla-pixels': ['tools/test-vanilla-texture-pixels.py'] + common + compiled,
+        'definition-diagnostics': ['tools/test-texture-definition-diagnostics.py'] + common + compiled,
         'model-triangle-bounds': ['tools/test-model-triangle-bounds.py'] + common + compiled,
         'dedicated-aspects': ['tools/test-witching-dedicated-aspects.py'] + common + compiled,
         'techne': ['tools/test-techne-baker.py'],
