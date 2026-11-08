@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.Collections;
 import org.dynmap.renderer.RenderPatch;
 import org.dynmap.renderer.RenderPatchFactory;
 
@@ -19,22 +21,32 @@ public final class WavefrontModel {
     }
 
     public static WavefrontModel read(InputStream stream) throws IOException {
+        return read(stream, null);
+    }
+
+    /** Read selected OBJ object/group names; null selects every face. */
+    public static WavefrontModel read(InputStream stream, Set<String> groups) throws IOException {
         if (stream == null) throw new IOException("Missing OBJ model resource");
         List<double[]> vertices = new ArrayList<>(), uv = new ArrayList<>(), triangles = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
             String line;
             int number = 0;
+            boolean selected = groups == null;
             while ((line = reader.readLine()) != null) {
                 number++;
                 line = line.split("#", 2)[0].trim();
                 if (line.isEmpty()) continue;
                 String[] words = line.split("\\s+");
                 try {
-                    if (words[0].equals("v")) {
+                    if (words[0].equals("o") || words[0].equals("g")) {
+                        selected = groups == null;
+                        if (groups != null) for (int i = 1; i < words.length; i++)
+                            if (groups.contains(words[i])) selected = true;
+                    } else if (words[0].equals("v")) {
                         vertices.add(new double[] { finite(words[1]), finite(words[2]), finite(words[3]) });
                     } else if (words[0].equals("vt")) {
                         uv.add(new double[] { finite(words[1]), finite(words[2]) });
-                    } else if (words[0].equals("f")) {
+                    } else if (words[0].equals("f") && selected) {
                         if (words.length < 4) throw new IllegalArgumentException("Face needs three vertices");
                         double[][] face = new double[words.length - 1][];
                         for (int i = 1; i < words.length; i++) {
@@ -82,6 +94,13 @@ public final class WavefrontModel {
         int index = Integer.parseInt(value);
         if (index == 0) throw new IllegalArgumentException("OBJ indices start at one");
         return index > 0 ? index - 1 : size + index;
+    }
+
+    /** Deep copy for offline source baking; mutations cannot affect the loaded model. */
+    public List<double[]> triangles() {
+        List<double[]> copy = new ArrayList<>();
+        for (double[] triangle : triangles) copy.add(triangle.clone());
+        return Collections.unmodifiableList(copy);
     }
 
     public int triangleCount() {

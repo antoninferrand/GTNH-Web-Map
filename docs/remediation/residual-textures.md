@@ -245,3 +245,11 @@ respectively are occupied in saved `Items`; the base remains visible. Tests run
 all32 facing/slot-presence states through the real patch factory and cache.
 The source additionally displays equipped item meshes; those item renderers
 are not baked into this structural model and remain an explicit limitation.
+
+## Shared Wavefront source import
+
+The existing strict CPU OBJ reader now supports selected named object/group
+records and exposes deep-copied immutable triangle lists for offline baking.
+`read(stream)` still selects all groups. The offline importer uses this production
+parser; source winding/native vt coordinates and negative indices are preserved.
+Tests cover group selection, multiple named groups and defensive copies.
