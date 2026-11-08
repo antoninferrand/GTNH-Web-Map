@@ -52,7 +52,7 @@ public final class WavefrontModel {
                             System.arraycopy(face[0], 0, triangle, 0, 5);
                             System.arraycopy(face[i], 0, triangle, 5, 5);
                             System.arraycopy(face[i + 1], 0, triangle, 10, 5);
-                            triangles.add(triangle);
+                            if (hasArea(triangle)) triangles.add(triangle);
                         }
                     }
                 } catch (IllegalArgumentException | IndexOutOfBoundsException badModel) {
@@ -71,6 +71,13 @@ public final class WavefrontModel {
         return parsed;
     }
 
+    private static boolean hasArea(double[] p) {
+        double ux = p[5] - p[0], uy = p[6] - p[1], uz = p[7] - p[2];
+        double vx = p[10] - p[0], vy = p[11] - p[1], vz = p[12] - p[2];
+        double nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+        return nx * nx + ny * ny + nz * nz > 1e-20;
+    }
+
     private static int index(String value, int size) {
         int index = Integer.parseInt(value);
         if (index == 0) throw new IllegalArgumentException("OBJ indices start at one");
@@ -82,21 +89,28 @@ public final class WavefrontModel {
     }
 
     public RenderPatch[] patches(RenderPatchFactory factory, int yaw, double x, double y, double z, int texture) {
+        return patches(factory, yaw, x, y, z, texture, 1, 1);
+    }
+
+    public RenderPatch[] patches(RenderPatchFactory factory, int yaw, double x, double y, double z,
+                                 int texture, int columns, int rows) {
         List<RenderPatch> patches = new ArrayList<>();
         double radians = Math.toRadians(yaw), cos = Math.cos(radians), sin = Math.sin(radians);
         for (double[] source : triangles) {
-            double[] p = source.clone();
+          for (AtlasMesh.Triangle cell : AtlasMesh.split(source, columns, rows)) {
+            double[] p = cell.vertices.clone();
             for (int offset = 0; offset < 15; offset += 5) {
-                p[offset] = x + source[offset] * cos + source[offset + 2] * sin;
-                p[offset + 1] = y + source[offset + 1];
-                p[offset + 2] = z - source[offset] * sin + source[offset + 2] * cos;
+                p[offset] = x + cell.vertices[offset] * cos + cell.vertices[offset + 2] * sin;
+                p[offset + 1] = y + cell.vertices[offset + 1];
+                p[offset + 2] = z - cell.vertices[offset] * sin + cell.vertices[offset + 2] * cos;
             }
             RenderPatch patch = factory.getTriangleExplTexCoords(
                     p[0], p[1], p[2], p[3], p[4],
                     p[5], p[6], p[7], p[8], p[9],
                     p[10], p[11], p[12], p[13], p[14],
-                    RenderPatchFactory.SideVisible.TOP, texture);
+                    RenderPatchFactory.SideVisible.TOP, texture + cell.texture);
             if (patch != null) patches.add(patch);
+          }
         }
         return patches.toArray(new RenderPatch[patches.size()]);
     }

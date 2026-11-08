@@ -20,3 +20,8 @@ rotations, UV-preserving real patch allocation and malformed input. The actual
 installed-version source OBJ is also tested; no model/texture assets are copied
 into Web Map. Rendering-resource loading and visual appearance still need the
 isolated pack fixture comparison.
+
+The 64x64 atlas is split into4x4 native16px GRID cells. Geometry is clipped
+at UV cell boundaries before transforming it, preserving all sourcepixel details
+instead of shrinking the entire atlas to one map tile. ModelAtlasSupport registers
+all16 cells through explicit file-local dynamic texture indices.

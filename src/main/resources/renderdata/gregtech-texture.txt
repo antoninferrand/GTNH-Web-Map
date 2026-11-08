@@ -8894,7 +8894,9 @@ moddata:mod=gtmte,type=iconset,name=remediation.nano.BIOLOGICAL_COORDINATION_act
 moddata:mod=gtmte,type=mte,id=9514,mtetype=controller,basetex=0:gregtech/iconsets/NANOCHIP_MESH_INTERFACE_CASING,iconset=remediation.nano.BIOLOGICAL_COORDINATION,activeset=remediation.nano.BIOLOGICAL_COORDINATION_active
 
 # MTEIceCreamMachine uses an OBJ model with a single atlas, not a casing cube.
-texture:id=remediation/model/icecream,filename=assets/gregtech/textures/model/ice_cream_machine.png
+texture:id=remediation/model/icecream,filename=assets/gregtech/textures/model/ice_cream_machine.png,xcount=4,ycount=4
+specialModSupportLoader:org.dynmap.modsupport.loaders.ModelAtlasSupportLoader,name=modelatlas
+moddata:mod=modelatlas,name=gregtech:icecream,texture=remediation/model/icecream,columns=4,rows=4
 moddata:mod=gtmte,type=mte,id=20000,basetex=0:remediation/model/icecream,paint=false
 
 # Material wire uses GT texture-set fallback; retain resource-pack DULL overrides.

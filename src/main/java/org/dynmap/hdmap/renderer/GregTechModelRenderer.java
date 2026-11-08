@@ -5,6 +5,7 @@ import java.util.Map;
 import gregtech.api.GregTechAPI;
 import org.dynmap.Log;
 import org.dynmap.modsupport.GWM_Util;
+import org.dynmap.modsupport.ModelAtlasSupport;
 import org.dynmap.modsupport.gregtech.GregTechSupport;
 import org.dynmap.renderer.CustomRendererData;
 import org.dynmap.renderer.CustomTextureMapper;
@@ -25,7 +26,7 @@ public class GregTechModelRenderer extends GregTechMachineRenderer {
             iceCream = new RenderPatch[4][];
             for (int turn = 0; turn < 4; turn++) {
                 // MTEIceCreamMachine.renderTESR translates before rotating.
-                iceCream[turn] = model.patches(factory, turn * 90, 0.5, 1.0, 0.5, 0);
+                iceCream[turn] = model.patches(factory, turn * 90, 0.5, 1.0, 0.5, 0, 4, 4);
             }
         } catch (IOException invalidModel) {
             // Keep unrelated machines usable; expose a real model-loading error.
@@ -39,17 +40,12 @@ public class GregTechModelRenderer extends GregTechMachineRenderer {
         int id = GWM_Util.objectToInt(context.getBlockTileEntityField("mID"), -1);
         if (id == 20000 && iceCream != null) {
             GregTechSupport.MetaTileEntityEntry entry = GregTechSupport.INSTANCE.getMTEEntre(id);
-            if (entry != null && entry.baseTexture >= 0) {
+            CustomTextureMapper atlas = ModelAtlasSupport.getMapper("gregtech:icecream");
+            if (entry != null && atlas != null) {
                 int facing = GWM_Util.objectToInt(context.getBlockTileEntityField("mMainFacing"), 6);
                 // Source: NORTH=90, EAST=0, SOUTH=270, otherwise=180.
                 int turn = facing == 2 ? 1 : facing == 5 ? 0 : facing == 3 ? 3 : 2;
-                final int[] texture = { entry.baseTexture };
-                return new CustomRendererData(iceCream[turn], null, new CustomTextureMapper() {
-                    @Override
-                    public int[] getTextureLayersForPatchId(int patchId) {
-                        return texture;
-                    }
-                });
+                return new CustomRendererData(iceCream[turn], null, atlas);
             }
         }
         return super.getRenderData(context);

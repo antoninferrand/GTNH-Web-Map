@@ -21,6 +21,7 @@ public class WavefrontModelBehaviorTest {
                 + "vt 0 0\nvt 1 0\nvt 1 1\nvt 0 1\nf -4/-4 -3/-3 -2/-2 -1/-1\n";
         WavefrontModel model = parse(quad);
         check(model.triangleCount() == 2, "quad fan triangulation");
+        check(parse(quad + "f 1/1 1/1 1/1\n").triangleCount() == 2, "degenerate source faces are omitted");
         PatchDefinitionFactory factory = new PatchDefinitionFactory();
         for (int yaw : new int[] { 0, 90, 180, 270 }) {
             RenderPatch[] patches = model.patches(factory, yaw, 0.5, 1, 0.5, 7);
@@ -42,7 +43,18 @@ public class WavefrontModelBehaviorTest {
             check(actual.triangleCount() > 20, "actual machine geometry");
             for (int yaw : new int[] { 0, 90, 180, 270 }) {
                 RenderPatch[] patches = actual.patches(factory, yaw, 0.5, 1, 0.5, 0);
-                check(patches.length == actual.triangleCount(), "actual model has no invalid or discarded patches");
+                check(patches.length >= actual.triangleCount(), "repeat-wrapped UV clipping retains the model");
+                RenderPatch[] atlas = actual.patches(factory, yaw, 0.5, 1, 0.5, 0, 4, 4);
+                check(atlas.length >= patches.length, "atlas clipping retains the full geometry");
+                boolean[] cells = new boolean[16];
+                for (RenderPatch patch : atlas) {
+                    check(patch.getTextureIndex() >= 0 && patch.getTextureIndex() < 16,
+                            "actual atlas patches use registered cells");
+                    cells[patch.getTextureIndex()] = true;
+                }
+                int used = 0;
+                for (boolean cell : cells) if (cell) used++;
+                check(used > 4, "model retains atlas detail across distinct cells");
             }
             System.out.println("Actual ice cream model: " + actual.triangleCount() + " UV triangles x four facings passed");
         }

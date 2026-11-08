@@ -20,4 +20,4 @@ with tempfile.TemporaryDirectory(prefix="gwm-obj-test-") as work:
                "WavefrontModelBehaviorTest"]
     if args.model:
         command.append(str(args.model))
-    subprocess.run(command, check=True)
+    raise SystemExit(subprocess.run(command).returncode)
