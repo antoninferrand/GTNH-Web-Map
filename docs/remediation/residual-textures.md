@@ -253,3 +253,10 @@ records and exposes deep-copied immutable triangle lists for offline baking.
 `read(stream)` still selects all groups. The offline importer uses this production
 parser; source winding/native vt coordinates and negative indices are preserved.
 Tests cover group selection, multiple named groups and defensive copies.
+
+## Per-part tint for shared model atlases
+
+Baked meshes may assign separate texture-index ranges to source parts while
+reusing the same atlas images. A protected per-part color hook supplies runtime
+tints without putting colors into geometry caches. Static meshes keep their
+existing compact texture indices and behavior.

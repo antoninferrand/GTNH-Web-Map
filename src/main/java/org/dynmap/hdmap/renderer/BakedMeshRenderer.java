@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import org.dynmap.Log;
 import org.dynmap.renderer.CustomRenderer;
+import org.dynmap.renderer.CustomRendererData;
+import org.dynmap.renderer.CustomColorMultiplier;
 import org.dynmap.renderer.MapDataContext;
 import org.dynmap.renderer.RenderPatch;
 import org.dynmap.renderer.RenderPatchFactory;
@@ -24,7 +26,8 @@ public class BakedMeshRenderer extends CustomRenderer {
     private static final class Part {
         final List<AtlasMesh.Triangle> triangles = new ArrayList<>();
         final Map<Integer, double[]> rotations = new HashMap<>();
-        String field, visibilityField;
+        String name, field, visibilityField;
+        int textureOffset;
         int visibilitySlot = -1;
         double[] pivot = { 0, 0, 0 }, fallback = { 0, 0, 0 };
     }
@@ -33,7 +36,8 @@ public class BakedMeshRenderer extends CustomRenderer {
     private final Map<String, RenderPatch[]> poses = new ConcurrentHashMap<>();
     private RenderPatchFactory factory;
     private String[] fields;
-    private int textureCount;
+    private int textureCount, atlasSize;
+    private boolean separatePartTextures;
     private final Map<Integer, Integer> metadataYaw = new HashMap<>();
 
     @Override
@@ -47,7 +51,8 @@ public class BakedMeshRenderer extends CustomRenderer {
             JSONObject model = (JSONObject) new JSONParser().parse(new InputStreamReader(stream, StandardCharsets.UTF_8));
             JSONArray atlas = (JSONArray) model.get("atlas");
             int columns = ((Number) atlas.get(0)).intValue(), rows = ((Number) atlas.get(1)).intValue();
-            textureCount = columns * rows;
+            atlasSize = textureCount = columns * rows;
+            separatePartTextures = Boolean.TRUE.equals(model.get("separatePartTextures"));
             JSONObject yaw = (JSONObject) model.get("metadataYaw");
             if (yaw != null) for (Object key : yaw.keySet())
                 metadataYaw.put(Integer.valueOf((String) key), ((Number) yaw.get(key)).intValue());
@@ -55,6 +60,8 @@ public class BakedMeshRenderer extends CustomRenderer {
             for (Object partObject : (JSONArray) model.get("parts")) {
                 JSONObject data = (JSONObject) partObject;
                 Part part = new Part();
+                part.name = (String) data.get("name");
+                part.textureOffset = separatePartTextures ? parts.size() * atlasSize : 0;
                 JSONObject visible = (JSONObject) data.get("visibleWhen");
                 if (visible != null) {
                     part.visibilityField = (String) visible.get("field");
@@ -84,6 +91,7 @@ public class BakedMeshRenderer extends CustomRenderer {
                 }
                 parts.add(part);
             }
+            if (separatePartTextures) textureCount *= parts.size();
             fields = requested.toArray(new String[requested.size()]);
             return true;
         } catch (Exception invalid) {
@@ -146,13 +154,29 @@ public class BakedMeshRenderer extends CustomRenderer {
                         p[0], p[1], p[2], p[3], p[4],
                         p[5], p[6], p[7], p[8], p[9],
                         p[10], p[11], p[12], p[13], p[14],
-                        RenderPatchFactory.SideVisible.TOP, triangle.texture);
+                        RenderPatchFactory.SideVisible.TOP, part.textureOffset + triangle.texture);
                 if (patch != null) result.add(patch);
             }
         }
         RenderPatch[] built = result.toArray(new RenderPatch[result.size()]);
         RenderPatch[] previous = poses.putIfAbsent(poseKey, built);
         return previous == null ? built : previous;
+    }
+
+    /** Optional per-part tint, kept outside the immutable geometry cache. */
+    protected CustomColorMultiplier getPartColor(String name, MapDataContext context) {
+        return null;
+    }
+
+    @Override
+    public CustomRendererData getRenderData(final MapDataContext context) {
+        return new CustomRendererData(getRenderPatchList(context), null, null) {
+            @Override
+            public CustomColorMultiplier getCustomColorMultiplier(int patchId, int layer) {
+                int part = separatePartTextures && atlasSize > 0 ? patchId / atlasSize : -1;
+                return part >= 0 && part < parts.size() ? getPartColor(parts.get(part).name, context) : null;
+            }
+        };
     }
 
     private static boolean inventoryContains(MapDataContext context, String field, int slot) {
