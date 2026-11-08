@@ -198,7 +198,9 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                     if (casing >= 0) {
                         baseTex = casing;
                         baseSet = null;
-                    } else {
+                    } else if (mapDataCtx.getBlockTileEntityField("textureIndex") == null) {
+                        // Current hatches explicitly persist their casing choice (0/0
+                        // means no multi-block casing). Only old NBT needs inference.
                         tryStealBaseTexFromNeighbor(mapDataCtx, outputFacing);
                     }
                 }
@@ -249,6 +251,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                 page = index >>> 7;
                 index &= 127;
             }
+            if (!legacy && page == 0 && index == 0) return -1;
             return GregTechSupport.INSTANCE.getHatchBaseTexture(page, index);
         }
 

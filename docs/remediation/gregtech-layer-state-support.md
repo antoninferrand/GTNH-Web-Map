@@ -56,3 +56,13 @@ MTE records can additionally declare `wiretex`, `wirecolor` (RGB hexadecimal)
 and `endtex` for separate conductor, insulation and connector-cap rendering.
 These fields default to absent/white, so existing pipe and cable records retain
 the original shared renderer until explicitly opted into the cable adapter.
+
+## Unformed hatch casing sentinel
+
+Current `MTEHatch.getCasingTexture` explicitly treats saved
+`texturePage=0, textureIndex=0` as no multi-block casing. Web Map now preserves
+the declared tier hull for that sentinel instead of replacing it with the old
+page-zero ULV texture. Explicit current casing data also no longer falls back
+to guessing an unrelated neighbor's casing when it cannot resolve. Neighbor
+inference remains available for legacy `mMachineBlock` NBT. The fixture checks
+current zero/zero versus a valid legacy zero index independently.

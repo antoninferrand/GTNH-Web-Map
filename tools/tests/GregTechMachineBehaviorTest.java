@@ -100,7 +100,13 @@ public class GregTechMachineBehaviorTest {
         face(renderer, context, 2, 210, 14);
         SUPPORT.hatchBaseTextures2[0] = new int[128];
         SUPPORT.hatchBaseTextures2[0][127] = 211;
+        SUPPORT.hatchBaseTextures2[0][0] = 212;
+        context.fields.put("texturePage", 0);
+        context.fields.put("textureIndex", 0);
+        face(renderer, context, 2, 107, 14);
         context.fields.remove("textureIndex");
+        context.fields.put("mMachineBlock", (byte) 0);
+        face(renderer, context, 2, 212, 14);
         context.fields.put("mMachineBlock", (byte) -1);
         face(renderer, context, 2, 211, 14);
         mte(64005, "basetex", "108", "iconset", "fixture-old", "ishatch", "true", "inheritcasing", "false");
