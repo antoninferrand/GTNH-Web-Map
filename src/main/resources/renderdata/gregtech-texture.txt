@@ -2145,8 +2145,8 @@ texture:id=mte/TileEntities/adv_machine_screen_random2,filename=assets/miscutils
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_SMELTER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_SMELTER.png
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_SMELTER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_SMELTER_ACTIVE.png
 texture:id=mte/gt4/machine_top_crafting,filename=assets/miscutils/textures/blocks/TileEntities/gt4/machine_top_crafting.png
-texture:id=mte/picture/OVERLAY_GREEN,filename=assets/tectech/textures/gui/picture/OVERLAY_GREEN.png
-texture:id=mte/picture/OVERLAY_RED,filename=assets/tectech/textures/gui/picture/OVERLAY_RED.png
+texture:id=mte/picture/OVERLAY_GREEN,filename=assets/tectech/textures/gui/picture/overlay_green.png
+texture:id=mte/picture/OVERLAY_RED,filename=assets/tectech/textures/gui/picture/overlay_red.png
 texture:id=mte/gt4/OVERLAY_CROP,filename=assets/miscutils/textures/blocks/TileEntities/gt4/OVERLAY_CROP.png
 texture:id=mte/gt4/OVERLAY_BOXES,filename=assets/miscutils/textures/blocks/TileEntities/gt4/OVERLAY_BOXES.png
 texture:id=mte/iconsets/OVERLAY_ACCELERATOR,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png

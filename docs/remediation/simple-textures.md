@@ -19,3 +19,16 @@ baseline unique resources used from two support files.
 Validation: checked all targets against the installed asset inventory, kept
 texture identifiers and animation dimensions unchanged, and ran `git diff
 --check`. Live visual validation is pending fixture rendering.
+
+## TecTech colored overlay filenames
+
+Correct `OVERLAY_GREEN.png` and `OVERLAY_RED.png` to `overlay_green.png` and
+`overlay_red.png` in the GregTech and dreamcraft support definitions. The
+installed GregTech 5.09.54.265 JAR contains the lowercase files in the same
+TecTech resource directory, and contains neither uppercase file. The existing
+support IDs and all consumers remain unchanged. These are source-image path
+corrections, not a substitution of similarly named GUI assets.
+
+Validation: exact target paths exist in the installed JAR inventory; all four
+changed declarations preserve IDs and texture parameters; `git diff --check`
+passes. Machine state/geometry validation remains part of the fixture audit.
