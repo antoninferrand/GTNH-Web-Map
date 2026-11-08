@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""Check eager mod-support texture references in file-local declaration order.
+"""Check eager texture references in file-local declaration order.
 
-Named iconsets are deliberately late-bound. Block records need registry/version
-selection and are verified by the effective runtime audit instead.
+Named iconsets remain late-bound. Historical unknown block aliases are listed
+explicitly; version/registry selection still requires the effective runtime audit.
 """
 from pathlib import Path
 import argparse
+import json
 import re
 
+
+LEGACY_UNKNOWN = {tuple(row) for row in json.loads(
+    Path(__file__).with_name("legacy-unresolved-block-textures.json").read_text())}
 
 def errors_in(text, source):
     known = set()
@@ -18,10 +22,14 @@ def errors_in(text, source):
             properties = dict(token.split("=", 1) for token in line[8:].split(",") if "=" in token)
             if "id" in properties:
                 known.add(properties["id"])
-        elif line.startswith("moddata:"):
-            for key, value in re.findall(r"(?:^\w+:|,)([^=,]+)=([^,]+)", line):
+        elif line.startswith(("moddata:", "block:")):
+            fields = dict(re.findall(r"(?:^\w+:|,)([^=,]+)=([^,]+)", line))
+            for key, value in fields.items():
                 reference = re.fullmatch(r"-?\d+:([^,]+)", value)
                 if reference and reference[1] not in known:
+                    legacy = (source, fields.get("id", ""), key, reference[1])
+                    if line.startswith("block:") and legacy in LEGACY_UNKNOWN:
+                        continue
                     errors.append(f"{source}:{number}: {key} references undeclared local texture {reference[1]}")
     return errors
 

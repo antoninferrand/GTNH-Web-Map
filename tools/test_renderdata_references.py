@@ -11,6 +11,11 @@ class ReferenceOrderTest(unittest.TestCase):
         self.assertEqual(errors_in(after, "fixture"), [])
         self.assertEqual(len(errors_in("moddata:mod=gtmte,type=iconset,name=x,front2=23000:other_file_only", "fixture")), 1)
 
+    def test_block_references_reject_forward_and_new_unknown_names(self):
+        self.assertEqual(len(errors_in("block:id=%test,allfaces=0:late\ntexture:id=late,filename=x.png", "fixture")), 1)
+        self.assertEqual(len(errors_in("block:id=%test,allfaces=0:unknown", "fixture")), 1)
+        self.assertEqual(errors_in("texture:id=ready,filename=x.png\nblock:id=%test,allfaces=0:ready", "fixture"), [])
+
     def test_named_iconsets_remain_late_bound(self):
         self.assertEqual(errors_in("moddata:mod=gtmte,type=mte,id=1,iconset=later,activeset=mod:later", "fixture"), [])
 

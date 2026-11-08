@@ -39,3 +39,10 @@ Require server readiness, no custom-renderer/texture-definition failures, a
 successful tiny stdtexture render, and an audit with LOADED_PACKS_ONLY coverage.
 Run `gwm renderaudit` and preserve the resulting JSON, artifact hash and logs.
 Keep production server/world/notifications out of this fixture.
+
+The declaration-order checker covers both eager `moddata` and block references.
+`tools/legacy-unresolved-block-textures.json` records the31 exact unresolved
+block-face aliases present at baseline `e0cb1f30` (legacy dreamcraft block
+registrations). These explicit exceptions do not excuse new missing names or
+new forward references. Effective registered blocks still require the runtime
+audit and successful textured rendering.
