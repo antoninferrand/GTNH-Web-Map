@@ -8616,3 +8616,23 @@ texture:id=remediation/controller/31087/front_ACTIVE,filename=assets/gregtech/te
 texture:id=remediation/controller/31087/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_STEAM_FURNACE_MULTI_GLOW_ACTIVE.png
 moddata:mod=gtmte,type=iconset,name=remediation.controller.31087_active,output=0:remediation/controller/31087/front_ACTIVE,output2=23000:remediation/controller/31087/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=31087,mtetype=controller,baseset=remediation.controller.base.31087,iconset=remediation.controller.31087,activeset=remediation.controller.31087_active,casingstatefield=tierMachineCasing,casingstate2basetex=0:gregtech/iconsets/MACHINE_CASING_SOLID_STEEL
+
+# Source-registered 256A dynamo hatches (UV through UXV).
+texture:id=remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_256A_UV.png
+moddata:mod=gtmte,type=iconset,name=remediation.tt.dynamo256.UV,output=0:remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UV
+moddata:mod=gtmte,type=mte,id=16030,baseset=hull.tier.08,iconset=remediation.tt.dynamo256.UV,ishatch=true
+texture:id=remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UHV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_256A_UHV.png
+moddata:mod=gtmte,type=iconset,name=remediation.tt.dynamo256.UHV,output=0:remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UHV
+moddata:mod=gtmte,type=mte,id=16031,baseset=hull.tier.09,iconset=remediation.tt.dynamo256.UHV,ishatch=true
+texture:id=remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UEV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_256A_UEV.png
+moddata:mod=gtmte,type=iconset,name=remediation.tt.dynamo256.UEV,output=0:remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UEV
+moddata:mod=gtmte,type=mte,id=16032,baseset=hull.tier.10,iconset=remediation.tt.dynamo256.UEV,ishatch=true
+texture:id=remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UIV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_256A_UIV.png
+moddata:mod=gtmte,type=iconset,name=remediation.tt.dynamo256.UIV,output=0:remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UIV
+moddata:mod=gtmte,type=mte,id=16033,baseset=hull.tier.11,iconset=remediation.tt.dynamo256.UIV,ishatch=true
+texture:id=remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UMV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_256A_UMV.png
+moddata:mod=gtmte,type=iconset,name=remediation.tt.dynamo256.UMV,output=0:remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UMV
+moddata:mod=gtmte,type=mte,id=16034,baseset=hull.tier.12,iconset=remediation.tt.dynamo256.UMV,ishatch=true
+texture:id=remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UXV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_256A_UXV.png
+moddata:mod=gtmte,type=iconset,name=remediation.tt.dynamo256.UXV,output=0:remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UXV
+moddata:mod=gtmte,type=mte,id=16035,baseset=hull.tier.13,iconset=remediation.tt.dynamo256.UXV,ishatch=true
