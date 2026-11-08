@@ -8709,3 +8709,19 @@ moddata:mod=gtmte,type=mte,id=15759,baseset=hull.tier.11,iconset=remediation.tt.
 moddata:mod=gtmte,type=iconset,name=remediation.tt.detector.15761,output=0:remediation/tt/OVERLAY_HATCH_CONDENSATE_DETECTOR
 moddata:mod=gtmte,type=iconset,name=remediation.tt.detector.15761.active,output=23000:remediation/tt/OVERLAY_HATCH_CONDENSATE_DETECTOR_GLOW
 moddata:mod=gtmte,type=mte,id=15761,baseset=hull.tier.11,iconset=remediation.tt.detector.15761,activeset=remediation.tt.detector.15761.active,ishatch=true
+
+# Coke oven controller and mode-selectable hatch (GT5 5.09.54.265).
+texture:id=remediation/coke/controller_off,filename=assets/gregtech/textures/blocks/iconsets/COKE_OVEN_OVERLAY_INACTIVE.png,optional=true
+texture:id=remediation/coke/controller_off_glow,filename=assets/gregtech/textures/blocks/iconsets/COKE_OVEN_OVERLAY_INACTIVE_GLOW.png,optional=true
+texture:id=remediation/coke/controller_on,filename=assets/gregtech/textures/blocks/iconsets/COKE_OVEN_OVERLAY_ACTIVE.png,optional=true
+texture:id=remediation/coke/controller_on_glow,filename=assets/gregtech/textures/blocks/iconsets/COKE_OVEN_OVERLAY_ACTIVE_GLOW.png,optional=true
+texture:id=remediation/coke/item_in,filename=assets/gregtech/textures/blocks/iconsets/ITEM_IN_SIGN.png
+texture:id=remediation/coke/item_out,filename=assets/gregtech/textures/blocks/iconsets/ITEM_OUT_SIGN.png
+texture:id=remediation/coke/fluid_out,filename=assets/gregtech/textures/blocks/iconsets/FLUID_OUT_SIGN.png
+moddata:mod=gtmte,type=iconset,name=remediation/coke/controller_off,output=0:remediation/coke/controller_off,output2=23000:remediation/coke/controller_off_glow
+moddata:mod=gtmte,type=iconset,name=remediation/coke/controller_on,output=0:remediation/coke/controller_on,output2=23000:remediation/coke/controller_on_glow
+moddata:mod=gtmte,type=iconset,name=remediation/coke/input,output=0:mte/iconsets/OVERLAY_PIPE_IN,output2=0:remediation/coke/item_in
+moddata:mod=gtmte,type=iconset,name=remediation/coke/output_item,output=0:mte/iconsets/OVERLAY_PIPE_OUT,output2=0:remediation/coke/item_out
+moddata:mod=gtmte,type=iconset,name=remediation/coke/output_fluid,output=0:mte/iconsets/OVERLAY_PIPE_OUT,output2=0:remediation/coke/fluid_out
+moddata:mod=gtmte,type=mte,id=236,mtetype=controller,basetex=0:gregtech/iconsets/COKE_OVEN_CASING,iconset=remediation/coke/controller_off,activeset=remediation/coke/controller_on,paint=false
+moddata:mod=gtmte,type=mte,id=237,ishatch=true,inheritcasing=false,basetex=0:gregtech/iconsets/COKE_OVEN_CASING,iconset=remediation/coke/input,statefield=inputMode,state0iconset=remediation/coke/input,state1iconset=remediation/coke/output_item,state2iconset=remediation/coke/output_fluid,paint=false

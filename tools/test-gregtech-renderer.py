@@ -28,7 +28,7 @@ def main():
         if result.returncode:
             raise SystemExit(result.returncode)
         runtime_classpath = work + ':' + str(args.classes) + ':' + args.runtime_classpath.read_text().strip()
-        result = subprocess.run(['java', '-cp', runtime_classpath, 'org.dynmap.hdmap.renderer.GregTechMachineBehaviorTest'])
+        result = subprocess.run(['java', '-cp', runtime_classpath, 'org.dynmap.hdmap.renderer.GregTechMachineBehaviorTest', str(ROOT)])
         raise SystemExit(result.returncode)
 
 

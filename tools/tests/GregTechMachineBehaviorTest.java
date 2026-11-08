@@ -1,6 +1,7 @@
 package org.dynmap.hdmap.renderer;
 
 import java.util.*;
+import java.nio.file.*;
 import org.dynmap.modsupport.gregtech.GregTechSupport;
 import org.dynmap.hdmap.TexturePack;
 import org.dynmap.renderer.*;
@@ -144,7 +145,64 @@ public class GregTechMachineBehaviorTest {
                 TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
         check(SUPPORT.getHatchBaseTexture(2, 7) == 401, "authoritative casing follows effective mapping override");
         check(SUPPORT.getHatchBaseTexture(-1, 7) == -1 && SUPPORT.getHatchBaseTexture(128, 7) == -1, "authoritative casing bounds safe");
+        if (args.length > 0) {
+            Path root = Paths.get(args[0]);
+            List<String> mapping = Files.readAllLines(root.resolve("src/main/resources/renderdata/gregtech-texture.txt"));
+            // Only texture registration is needed; no PNG decoding or game bootstrap.
+            for (String line : mapping) {
+                if (!line.startsWith("texture:")) continue;
+                HashMap<String, String> record = record(line);
+                FILES.put(record.get("id"), TexturePack.findOrAddDynamicTileFile(record.get("filename"), "gregtech", 1, 1,
+                        TexturePack.TileFileFormat.GRID, new String[0], null));
+            }
+            boolean section = false;
+            for (String line : mapping) {
+                if (line.startsWith("# Coke oven controller")) section = true;
+                if (!section || !line.startsWith("moddata:")) continue;
+                HashMap<String, String> record = record(line);
+                if ("iconset".equals(record.get("type"))) SUPPORT.processIconSet(record, FILES);
+                if ("mte".equals(record.get("type"))) SUPPORT.processMte(record, FILES);
+            }
+            Context coke = new Context(237);
+            int casing = texture("0:gregtech/iconsets/COKE_OVEN_CASING");
+            String[] overlays = { "0:mte/iconsets/OVERLAY_PIPE_IN", "0:mte/iconsets/OVERLAY_PIPE_OUT", "0:mte/iconsets/OVERLAY_PIPE_OUT" };
+            String[] signs = { "0:remediation/coke/item_in", "0:remediation/coke/item_out", "0:remediation/coke/fluid_out" };
+            for (int mode = 0; mode < 3; mode++) {
+                coke.fields.put("inputMode", (byte) mode);
+                for (int facing = 0; facing < 6; facing++) {
+                    coke.fields.put("mFacing", (short) facing);
+                    face(renderer, coke, facing, casing, texture(overlays[mode]), texture(signs[mode]));
+                    face(renderer, coke, facing ^ 1, casing);
+                }
+            }
+            coke.fields.remove("inputMode");
+            coke.fields.put("mFacing", (short) 2);
+            face(renderer, coke, 2, casing, texture(overlays[0]), texture(signs[0]));
+            coke.fields.put("inputMode", 99);
+            face(renderer, coke, 2, casing, texture(overlays[0]), texture(signs[0]));
+            coke.fields.put("texturePage", 1);
+            coke.fields.put("textureIndex", 4);
+            face(renderer, coke, 3, casing);
+            check(Arrays.asList(renderer.getTileEntityFieldsNeeded()).contains("inputMode"), "coke mode requested from saved NBT");
+            coke.fields.put("mID", 236);
+            face(renderer, coke, 2, casing, texture("0:remediation/coke/controller_off"), texture("23000:remediation/coke/controller_off_glow"));
+            coke.fields.put("mActive", (byte) 1);
+            face(renderer, coke, 2, casing, texture("0:remediation/coke/controller_on"), texture("23000:remediation/coke/controller_on_glow"));
+        }
         System.out.println("GregTech saved-state rendering: " + assertions + " assertions passed");
+    }
+
+    private static int texture(String reference) {
+        return TexturePack.parseTextureIndex(FILES, reference);
+    }
+
+    private static HashMap<String, String> record(String line) {
+        HashMap<String, String> record = new HashMap<String, String>();
+        for (String pair : line.substring(line.indexOf(':') + 1).split(",")) {
+            String[] parts = pair.split("=", 2);
+            if (parts.length == 2) record.put(parts[0], parts[1]);
+        }
+        return record;
     }
 
     private static class Context implements MapDataContext {
