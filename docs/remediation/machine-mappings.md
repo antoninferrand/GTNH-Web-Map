@@ -305,3 +305,10 @@ ULV NameRemover reuses disassembler textures. Source constructor registrations a
 GT5 5.09.54.265. All required images exist; optional missing images match
 explicit createOptional declarations. Animated frames use square source-image
 strips. Special metadata requires the shared renderer contract.
+
+## drawer_framer: 32050, 32051, 32052
+
+LV/MV/HV DrawerFramer uses static side/top/bottom with active front/glow. Source constructor registrations and texture methods were checked in
+GT5 5.09.54.265. All required images exist; optional missing images match
+explicit createOptional declarations. Animated frames use square source-image
+strips. Special metadata requires the shared renderer contract.

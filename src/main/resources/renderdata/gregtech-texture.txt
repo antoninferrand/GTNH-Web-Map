@@ -8564,3 +8564,17 @@ texture:id=remediation/name_remover/OVERLAY_BOTTOM_DISASSEMBLER_ACTIVE,filename=
 texture:id=remediation/name_remover/OVERLAY_BOTTOM_DISASSEMBLER_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_DISASSEMBLER_ACTIVE_GLOW.png,optional=true
 moddata:mod=gtmte,type=iconset,name=remediation.name_remover_active,output=0:mte/iconsets/OVERLAY_PIPE_OUT,front=0:remediation/name_remover/OVERLAY_FRONT_DISASSEMBLER_ACTIVE,front2=23000:remediation/name_remover/OVERLAY_FRONT_DISASSEMBLER_ACTIVE_GLOW,side=0:remediation/name_remover/OVERLAY_SIDE_DISASSEMBLER_ACTIVE,side2=23000:remediation/name_remover/OVERLAY_SIDE_DISASSEMBLER_ACTIVE_GLOW,top=0:remediation/name_remover/OVERLAY_TOP_DISASSEMBLER_ACTIVE,top2=23000:remediation/name_remover/OVERLAY_TOP_DISASSEMBLER_ACTIVE_GLOW,bottom=0:remediation/name_remover/OVERLAY_BOTTOM_DISASSEMBLER_ACTIVE,bottom2=23000:remediation/name_remover/OVERLAY_BOTTOM_DISASSEMBLER_ACTIVE_GLOW
 moddata:mod=gtmte,type=mte,id=12070,baseset=hull.tier.00,iconset=remediation.name_remover,activeset=remediation.name_remover_active
+
+# LV/MV/HV DrawerFramer uses static side/top/bottom with active front/glow.
+texture:id=remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_DRAWER_FRAMER.png
+texture:id=remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_DRAWER_FRAMER_GLOW.png
+texture:id=remediation/drawer_framer/OVERLAY_SIDE_DRAWER_FRAMER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_SIDE_DRAWER_FRAMER.png
+texture:id=remediation/drawer_framer/OVERLAY_TOP_DRAWER_FRAMER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_TOP_DRAWER_FRAMER.png
+texture:id=remediation/drawer_framer/OVERLAY_BOTTOM_DRAWER_FRAMER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_DRAWER_FRAMER.png
+moddata:mod=gtmte,type=iconset,name=remediation.drawer_framer,output=0:mte/iconsets/OVERLAY_PIPE_OUT,front=0:remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER,front2=23000:remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER_GLOW,side=0:remediation/drawer_framer/OVERLAY_SIDE_DRAWER_FRAMER,top=0:remediation/drawer_framer/OVERLAY_TOP_DRAWER_FRAMER,bottom=0:remediation/drawer_framer/OVERLAY_BOTTOM_DRAWER_FRAMER
+texture:id=remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_DRAWER_FRAMER_ACTIVE.png
+texture:id=remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_DRAWER_FRAMER_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.drawer_framer_active,output=0:mte/iconsets/OVERLAY_PIPE_OUT,front=0:remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER_ACTIVE,front2=23000:remediation/drawer_framer/OVERLAY_FRONT_DRAWER_FRAMER_ACTIVE_GLOW,side=0:remediation/drawer_framer/OVERLAY_SIDE_DRAWER_FRAMER,top=0:remediation/drawer_framer/OVERLAY_TOP_DRAWER_FRAMER,bottom=0:remediation/drawer_framer/OVERLAY_BOTTOM_DRAWER_FRAMER
+moddata:mod=gtmte,type=mte,id=32050,baseset=hull.tier.01,iconset=remediation.drawer_framer,activeset=remediation.drawer_framer_active
+moddata:mod=gtmte,type=mte,id=32051,baseset=hull.tier.02,iconset=remediation.drawer_framer,activeset=remediation.drawer_framer_active
+moddata:mod=gtmte,type=mte,id=32052,baseset=hull.tier.03,iconset=remediation.drawer_framer,activeset=remediation.drawer_framer_active
