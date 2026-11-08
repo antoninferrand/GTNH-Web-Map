@@ -19,3 +19,14 @@ and pipe texture definitions already exist and their PNGs exist in the installed
 GregTech JAR. Input bus paint stripes and optional indicator layers need the
 shared multi-layer hatch renderer work; these records establish their correct
 base appearance rather than claiming that missing feature is solved.
+
+## Pattern providers: 2719–2723
+
+`MTEHatchPatternProvider.getTexturesActive/Inactive()` applies the same
+`OVERLAY_HATCH_PATTERN_PROVIDER` on the hatch facing in both states. The loader
+registers IV through UHV, tiers 5–9. Define its icon using `output`, which the
+map renderer orients with `mFacing` on all six directions; `front` would use
+the unrelated `mMainFacing`. Preserve dynamic multi-block casing selection.
+
+Validation: all five IDs are unique; the exact overlay PNG is present in the
+installed GregTech asset inventory, and tiers reuse validated hull definitions.
