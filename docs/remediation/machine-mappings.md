@@ -194,3 +194,12 @@ Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATI
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Spinmatron: 1033
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings12:9`.
+Front source: `assets/gregtech/textures/blocks/iconsets/TFFT`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
