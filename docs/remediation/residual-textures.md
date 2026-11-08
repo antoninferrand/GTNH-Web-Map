@@ -107,3 +107,17 @@ this static base-model fix.
 Validation: installed atlas path and64x32 dimensions checked, actual ModelBox
 position/UV golden test passed, and real BakedMeshRenderer/PatchDefinitionFactory
 produces84 valid atlas patches at the expected bounds.
+
+## ThaumicMachina node transmodifier
+
+Use the eight-part source model with its rotated support arms and actual
+512x256 `textures/model/nodeTransmodifier.png` atlas (logical model UV size256x128), rather than painting the
+GUI/model sheet onto a cube. The source's renderer in tag0.2.6-GTNH uses the
+same `(x+.5,y+1.5,z+.5)` and `(1,-1,-1)` outer transform. Bake all96 source
+triangles; atlas clipping yields336 patches with bounds
+`[0,0,0]..[1,.687500002,1]`. The source's spinning-cube method is empty, so
+there is no additional animated component to reconstruct.
+
+Validation: exact atlas path and512x256 dimensions checked against installed
+assets and matching source, source position/UV golden test passed, and the
+real renderer/patch factory accepts all336 patches and atlas indices.

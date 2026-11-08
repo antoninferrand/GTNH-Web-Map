@@ -9,6 +9,7 @@ import json
 import math
 import pathlib
 import re
+import struct
 
 NUMBER = r'[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?[fFdD]?'
 
@@ -119,8 +120,15 @@ if __name__ == '__main__':
     parser.add_argument('--offset',default='.5,1.5,.5')
     parser.add_argument('--scale',default='1,-1,-1')
     parser.add_argument('--source-reference',help='Versioned source URL recorded with its SHA-256')
+    parser.add_argument('--atlas-image',type=pathlib.Path,help='Actual PNG dimensions for higher-resolution atlases')
     args=parser.parse_args()
     model=bake(args.source.read_text(),numbers(args.offset),numbers(args.scale))
+    if args.atlas_image:
+        raw=args.atlas_image.read_bytes()
+        if raw[:8]!=b'\x89PNG\r\n\x1a\n':raise ValueError('Expected a PNG atlas')
+        width,height=struct.unpack('>II',raw[16:24])
+        if width%16 or height%16:raise ValueError('Atlas must have whole16-pixel cells')
+        model['atlas']=[width//16,height//16]
     if args.source_reference:
         model['source']={'url':args.source_reference,'sha256':hashlib.sha256(args.source.read_bytes()).hexdigest()}
     args.output.parent.mkdir(parents=True,exist_ok=True)

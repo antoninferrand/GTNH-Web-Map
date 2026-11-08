@@ -29,3 +29,5 @@ boxblock:id=%metaphysicalBrick,xmin=0.0,xmax=1.0E-4,ymin=0.0,ymax=1.0E-4,zmin=0.
 # %metaphysicalRose:* (metaphysicalRose), render=(CUSTOM), opaque=false,cls=jcm2606.thaumicmachina.block.metaphysical.BlockMetaphysicalRose
 # FIXME: Box constraints truncated to 0.0<=val<=1.0
 boxblock:id=%metaphysicalRose,xmin=0.0,xmax=1.0E-4,ymin=0.0,ymax=1.0E-4,zmin=0.0,zmax=1.0E-4,data=*
+
+customblock:id=%nodeTransmodifier,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/node-transmodifier.json
