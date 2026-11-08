@@ -1,9 +1,13 @@
 package org.dynmap.hdmap.renderer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.dynmap.Log;
 import org.dynmap.modsupport.HydroEnergySnapshots;
-import org.dynmap.renderer.*;
+import org.dynmap.renderer.MapDataContext;
+import org.dynmap.renderer.RenderPatch;
+import org.dynmap.renderer.RenderPatchFactory;
 
 /** Flat dam water surface with a height from the main-thread HydroEnergy snapshot. */
 public class HydroEnergyWaterRenderer extends VanillaWaterSurfaceRenderer {

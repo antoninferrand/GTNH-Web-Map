@@ -3,7 +3,10 @@ package org.dynmap.hdmap.renderer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.dynmap.renderer.*;
+import org.dynmap.renderer.CustomRenderer;
+import org.dynmap.renderer.MapDataContext;
+import org.dynmap.renderer.RenderPatch;
+import org.dynmap.renderer.RenderPatchFactory;
 
 /** Minecraft RenderBlocks liquid geometry, sampled entirely from the map snapshot. */
 public class VanillaWaterSurfaceRenderer extends CustomRenderer {

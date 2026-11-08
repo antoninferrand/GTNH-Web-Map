@@ -1,7 +1,12 @@
 package org.dynmap.modsupport;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldSavedData;
@@ -10,7 +15,9 @@ import net.minecraftforge.common.DimensionManager;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import org.dynmap.*;
+import org.dynmap.DynmapCommonAPI;
+import org.dynmap.DynmapCommonAPIListener;
+import org.dynmap.Log;
 import org.dynmap.forge.ForgeWorld;
 
 /** Copies optional HydroEnergy global state on the server thread; renderers never read HEServer. */
