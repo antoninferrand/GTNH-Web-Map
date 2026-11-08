@@ -8268,14 +8268,14 @@ moddata:mod=gtmte,type=mte,id=2747,baseset=hull.tier.10,iconset=hatch.output_bus
 moddata:mod=gtmte,type=mte,id=2748,baseset=hull.tier.11,iconset=hatch.output_bus,ishatch=true
 moddata:mod=gtmte,type=mte,id=2749,baseset=hull.tier.12,iconset=hatch.output_bus,ishatch=true
 moddata:mod=gtmte,type=mte,id=2750,baseset=hull.tier.13,iconset=hatch.output_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2751,baseset=hull.tier.06,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2752,baseset=hull.tier.07,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2753,baseset=hull.tier.08,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2754,baseset=hull.tier.09,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2755,baseset=hull.tier.10,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2756,baseset=hull.tier.11,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2757,baseset=hull.tier.12,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=2758,baseset=hull.tier.13,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2751,baseset=hull.tier.06,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=2752,baseset=hull.tier.07,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=2753,baseset=hull.tier.08,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=2754,baseset=hull.tier.09,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=2755,baseset=hull.tier.10,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=2756,baseset=hull.tier.11,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=2757,baseset=hull.tier.12,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=2758,baseset=hull.tier.13,iconset=hatch.input_bus.painted,ishatch=true
 
 # Pattern provider faces follow MTEHatch.mFacing, including vertical facings.
 texture:id=remediation/pattern_provider,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_PATTERN_PROVIDER.png
@@ -8287,7 +8287,26 @@ moddata:mod=gtmte,type=mte,id=2722,baseset=hull.tier.08,iconset=hatch.pattern_pr
 moddata:mod=gtmte,type=mte,id=2723,baseset=hull.tier.09,iconset=hatch.pattern_provider,ishatch=true
 
 # Extrusion hatches inherit the normal input bus exterior (IV through UV).
-moddata:mod=gtmte,type=mte,id=31785,baseset=hull.tier.05,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=31786,baseset=hull.tier.06,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=31787,baseset=hull.tier.07,iconset=hatch.input_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=31788,baseset=hull.tier.08,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=31785,baseset=hull.tier.05,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=31786,baseset=hull.tier.06,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=31787,baseset=hull.tier.07,iconset=hatch.input_bus.painted,ishatch=true
+moddata:mod=gtmte,type=mte,id=31788,baseset=hull.tier.08,iconset=hatch.input_bus.painted,ishatch=true
+
+# Input bus paint stripes follow GT OVERLAY_PIPE_COLORS order; unpainted has no layer.
+texture:id=remediation/pipe_color/BLACK,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_BLACK.png
+texture:id=remediation/pipe_color/RED,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_RED.png
+texture:id=remediation/pipe_color/GREEN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_GREEN.png
+texture:id=remediation/pipe_color/BROWN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_BROWN.png
+texture:id=remediation/pipe_color/BLUE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_BLUE.png
+texture:id=remediation/pipe_color/PURPLE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_PURPLE.png
+texture:id=remediation/pipe_color/CYAN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_CYAN.png
+texture:id=remediation/pipe_color/LIGHTGRAY,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_LIGHTGRAY.png
+texture:id=remediation/pipe_color/GRAY,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_GRAY.png
+texture:id=remediation/pipe_color/PINK,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_PINK.png
+texture:id=remediation/pipe_color/LIME,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_LIME.png
+texture:id=remediation/pipe_color/YELLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_YELLOW.png
+texture:id=remediation/pipe_color/LIGHTBLUE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_LIGHTBLUE.png
+texture:id=remediation/pipe_color/MAGENTA,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_MAGENTA.png
+texture:id=remediation/pipe_color/ORANGE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_ORANGE.png
+texture:id=remediation/pipe_color/WHITE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_WHITE.png
+moddata:mod=gtmte,type=iconset,name=hatch.input_bus.painted,output=0:mte/iconsets/OVERLAY_PIPE_IN,outputpaint1=0:remediation/pipe_color/BLACK,outputpaint2=0:remediation/pipe_color/RED,outputpaint3=0:remediation/pipe_color/GREEN,outputpaint4=0:remediation/pipe_color/BROWN,outputpaint5=0:remediation/pipe_color/BLUE,outputpaint6=0:remediation/pipe_color/PURPLE,outputpaint7=0:remediation/pipe_color/CYAN,outputpaint8=0:remediation/pipe_color/LIGHTGRAY,outputpaint9=0:remediation/pipe_color/GRAY,outputpaint10=0:remediation/pipe_color/PINK,outputpaint11=0:remediation/pipe_color/LIME,outputpaint12=0:remediation/pipe_color/YELLOW,outputpaint13=0:remediation/pipe_color/LIGHTBLUE,outputpaint14=0:remediation/pipe_color/MAGENTA,outputpaint15=0:remediation/pipe_color/ORANGE,outputpaint16=0:remediation/pipe_color/WHITE

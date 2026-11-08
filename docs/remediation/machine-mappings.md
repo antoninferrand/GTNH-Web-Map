@@ -40,3 +40,13 @@ buses, paint/indicator layers depend on shared renderer support.
 
 Validation: the four IDs were absent and are now uniquely defined; they use
 the already validated existing input overlay and hull assets.
+
+## Follow-up: input bus paint stripes
+
+Add a source-ordered `outputpaint1`–`outputpaint16` texture selection to the new
+compressed input and extrusion records. Unpainted `OVERLAY_PIPE_COLOR_NONE` is
+optional and absent in the installed JAR, so index 0 adds no layer. Every one
+of the sixteen real stripe PNGs exists. This uses the shared renderer's new
+painted output-layer contract and resolves the paint limitation recorded above.
+Client-configurable ITEM_IN/OUT_SIGN indicators follow the map's existing
+non-indicator default and are not added unconditionally.
