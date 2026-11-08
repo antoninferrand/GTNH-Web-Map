@@ -182,3 +182,12 @@ Validation: the real texture-map and patch factory tests cover slot0 selection,
 metadata7, distinct directional faces, copied tint, non-block entries, absent
 inventory and out-of-range metadata. Standard block metadata0..15 is supported;
 item-only variants beyond the block metadata range remain an explicit limitation.
+
+## MalisisDoors invisible collision helpers
+
+MalisisDoors 1.19.13-GTNH `CollisionHelperBlock` explicitly returns renderType -1,
+`shouldSideBeRendered=false`, and has no registered TESR. Its collision bounds
+are not visible door panels. Remove the two invented CARRIAGE/MEDIEVAL PNGs
+and render both helpers with an empty mesh and explicit transparent blank mapping.
+The main BigDoor retains its existing model. Source contract and all32 metadata
+mappings checked; no missing required texture is made optional.
