@@ -714,6 +714,11 @@ public class ForgeMapChunkCache extends MapChunkCache
             return laststep;
         }
         @Override
+        @Override
+        public String getWorldName() {
+            return dw == null ? null : dw.getName();
+        }
+
         public int getWorldHeight()
         {
             return worldheight;

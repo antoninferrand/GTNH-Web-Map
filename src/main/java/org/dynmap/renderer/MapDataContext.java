@@ -62,5 +62,8 @@ public interface MapDataContext {
      */
     public int getZ();
 
+    /** Snapshot world identity, or null for contexts which cannot supply it. */
+    default String getWorldName() { return null; }
+
     public int getBlockDataFull();
 }
