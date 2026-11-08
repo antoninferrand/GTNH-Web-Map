@@ -413,3 +413,15 @@ bundled exact vanilla checker, keeping all current metadata consumers intact.
 This closes the invalid file reference; it does not claim that every existing
 Chisel metadata mapping is visually complete. The canonical PNG's entire pixel
 array was already verified against TextureUtil's literal colors/quadrants.
+
+Chisel2.17.34-GTNH consumer proof now uses cycle6's290 initialized helper masks.
+Every818 registered metadata consumer of this texture maps to a null source
+CarvableHelper.infoMap slot, so the client really returns missingno. Concrete
+stair metadata is translated through blockMeta+metadata/8 before checking(the
+last stair pair maps8..15 to nonexistent variant11). The only absent consumer
+is the old wroughtironblock registry alias, renamed to castironblock in the
+source's BlockNameConversion. Amber and bloodBrick orphan registered helpers
+have no own variants and intentionally return missingno.
+
+The reproducible checker and per-consumer evidence CSV are committed; no valid
+registered Chisel variant has been changed to a checker.
