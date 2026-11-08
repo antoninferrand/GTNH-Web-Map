@@ -8258,3 +8258,21 @@ moddata:mod=gtmte,type=hatchbaseexpl,page=32,index=17,tex=0:mte/spaceElevator/Mo
 moddata:mod=gtmte,type=hatchbaseexpl,page=32,index=18,tex=0:mte/spaceElevator/MotorT3_Side
 moddata:mod=gtmte,type=hatchbaseexpl,page=32,index=19,tex=0:mte/spaceElevator/MotorT4_Side
 moddata:mod=gtmte,type=hatchbaseexpl,page=32,index=20,tex=0:mte/spaceElevator/MotorT5_Side
+
+# Compressed and quantum buses (GT 5.09.54.265); suffix numbers are not voltage tiers.
+moddata:mod=gtmte,type=mte,id=2743,baseset=hull.tier.06,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2744,baseset=hull.tier.07,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2745,baseset=hull.tier.08,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2746,baseset=hull.tier.09,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2747,baseset=hull.tier.10,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2748,baseset=hull.tier.11,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2749,baseset=hull.tier.12,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2750,baseset=hull.tier.13,iconset=hatch.output_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2751,baseset=hull.tier.06,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2752,baseset=hull.tier.07,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2753,baseset=hull.tier.08,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2754,baseset=hull.tier.09,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2755,baseset=hull.tier.10,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2756,baseset=hull.tier.11,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2757,baseset=hull.tier.12,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=2758,baseset=hull.tier.13,iconset=hatch.input_bus,ishatch=true
