@@ -228,3 +228,10 @@ and six source cuboids. The hammer handle follows its parent hammer head's
 non-axis-aligned rotation and pivot. Match the renderer180-degree Z transform;
 metadata does not rotate this source model. Installed asset/dimensions checked,
 ModelBox UV golden and real patch-factory geometry/atlas checks pass.
+
+## Saved inventory model-part visibility and metadata facing
+
+Baked meshes support explicit source inventory-slot predicates for parts and a
+bounded metadata-to-yaw table. Cache keys include only the resulting visibility
+bits and known yaw/pose states, so inventory contents do not grow geometry caches.
+These parameters model conditional source draw calls without client linkage.

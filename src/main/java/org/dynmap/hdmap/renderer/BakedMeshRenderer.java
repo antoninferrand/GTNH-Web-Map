@@ -24,7 +24,8 @@ public class BakedMeshRenderer extends CustomRenderer {
     private static final class Part {
         final List<AtlasMesh.Triangle> triangles = new ArrayList<>();
         final Map<Integer, double[]> rotations = new HashMap<>();
-        String field;
+        String field, visibilityField;
+        int visibilitySlot = -1;
         double[] pivot = { 0, 0, 0 }, fallback = { 0, 0, 0 };
     }
 
@@ -33,12 +34,13 @@ public class BakedMeshRenderer extends CustomRenderer {
     private RenderPatchFactory factory;
     private String[] fields;
     private int textureCount;
+    private final Map<Integer, Integer> metadataYaw = new HashMap<>();
 
     @Override
     public boolean initializeRenderer(RenderPatchFactory factory, int id, int mask, Map<String, String> parameters) {
         if (!super.initializeRenderer(factory, id, mask, parameters)) return false;
         this.factory = factory;
-        parts.clear(); poses.clear();
+        parts.clear(); poses.clear(); metadataYaw.clear();
         String resource = parameters.get("mesh");
         try (InputStream stream = getClass().getClassLoader().getResourceAsStream(resource)) {
             if (stream == null) throw new IllegalArgumentException("Missing baked model " + resource);
@@ -46,10 +48,21 @@ public class BakedMeshRenderer extends CustomRenderer {
             JSONArray atlas = (JSONArray) model.get("atlas");
             int columns = ((Number) atlas.get(0)).intValue(), rows = ((Number) atlas.get(1)).intValue();
             textureCount = columns * rows;
+            JSONObject yaw = (JSONObject) model.get("metadataYaw");
+            if (yaw != null) for (Object key : yaw.keySet())
+                metadataYaw.put(Integer.valueOf((String) key), ((Number) yaw.get(key)).intValue());
             Set<String> requested = new LinkedHashSet<>();
             for (Object partObject : (JSONArray) model.get("parts")) {
                 JSONObject data = (JSONObject) partObject;
                 Part part = new Part();
+                JSONObject visible = (JSONObject) data.get("visibleWhen");
+                if (visible != null) {
+                    part.visibilityField = (String) visible.get("field");
+                    part.visibilitySlot = ((Number) visible.get("slot")).intValue();
+                    if (part.visibilityField == null || part.visibilitySlot < 0)
+                        throw new IllegalArgumentException("Invalid visibility inventory predicate");
+                    requested.add(part.visibilityField);
+                }
                 JSONObject pose = (JSONObject) data.get("pose");
                 if (pose != null) {
                     part.field = (String) pose.get("field");
@@ -101,9 +114,14 @@ public class BakedMeshRenderer extends CustomRenderer {
 
     @Override
     public RenderPatch[] getRenderPatchList(MapDataContext context) {
-        StringBuilder key = new StringBuilder();
+        Integer yaw = metadataYaw.get(context == null || metadataYaw.isEmpty() ? 0 : context.getBlockData());
+        int rotationYaw = yaw == null ? 0 : yaw;
+        StringBuilder key = new StringBuilder().append(rotationYaw).append(':');
+        List<Boolean> visible = new ArrayList<>();
         List<double[]> selected = new ArrayList<>();
         for (Part part : parts) {
+            boolean show = part.visibilityField == null || inventoryContains(context, part.visibilityField, part.visibilitySlot);
+            visible.add(show); key.append(show ? '1' : '0');
             Object raw = part.field == null || context == null ? null : context.getBlockTileEntityField(part.field);
             int value = raw instanceof Number ? ((Number) raw).intValue() : 0;
             double[] rotation = part.rotations.get(value);
@@ -116,10 +134,14 @@ public class BakedMeshRenderer extends CustomRenderer {
         List<RenderPatch> result = new ArrayList<>();
         for (int index = 0; index < parts.size(); index++) {
             Part part = parts.get(index);
+            if (!visible.get(index)) continue;
             double[] rotation = selected.get(index);
             for (AtlasMesh.Triangle triangle : part.triangles) {
                 double[] p = triangle.vertices.clone();
-                for (int i = 0; i < 15; i += 5) rotate(p, i, part.pivot, rotation);
+                for (int i = 0; i < 15; i += 5) {
+                    rotate(p, i, part.pivot, rotation);
+                    if (rotationYaw != 0) rotate(p, i, new double[] { .5, .5, .5 }, new double[] { 0, rotationYaw, 0 });
+                }
                 RenderPatch patch = factory.getTriangleExplTexCoords(
                         p[0], p[1], p[2], p[3], p[4],
                         p[5], p[6], p[7], p[8], p[9],
@@ -131,6 +153,17 @@ public class BakedMeshRenderer extends CustomRenderer {
         RenderPatch[] built = result.toArray(new RenderPatch[result.size()]);
         RenderPatch[] previous = poses.putIfAbsent(poseKey, built);
         return previous == null ? built : previous;
+    }
+
+    private static boolean inventoryContains(MapDataContext context, String field, int slot) {
+        Object raw = context == null ? null : context.getBlockTileEntityField(field);
+        if (!(raw instanceof List<?>)) return false;
+        for (Object item : (List<?>) raw) {
+            if (!(item instanceof Map<?, ?>)) continue;
+            Object number = ((Map<?, ?>) item).get("Slot");
+            if (number instanceof Number && ((Number) number).intValue() == slot) return true;
+        }
+        return false;
     }
 
     private static void rotate(double[] p, int index, double[] pivot, double[] angles) {
