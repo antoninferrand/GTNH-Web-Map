@@ -48,3 +48,30 @@ casing and uplink blocks, emissive layer selection, inactive/removed/invalid
 controller cleanup and the tile-connection contract. It does not replace the
 final in-game/Flat/Surface screenshot comparison or block-update integration
 smoke test.
+
+## Neighbor updates and server state changes
+
+A changed casing or a changed block beside a vending casing now invalidates a
+two-block map volume, covering both the connected edges and all five display
+positions even when a controller is removed or a casing is replaced. The
+adjacency probe checks only the six cardinal neighbors and returns air for
+unloaded chunks/out-of-height coordinates; it never loads chunks to inspect
+neighbors.
+
+GT5 5.09.54.265 sends active/facing changes through `GTBlockEventTracker` custom
+packets, which do not reliably invoke vanilla `markBlockForUpdate`. To observe
+those changes, each world tracker compares detached active/facing values for
+loaded vending controller/uplink entities every 20 server ticks. It scans the
+loaded tile-entity list on the main server thread, reads only the two vending
+MTE types, and serializes no NBT. A change or disappearance invalidates the
+relevant chunk snapshot and display volume. Unchanged values cause no work.
+Only coordinates and integer state values are retained, with the existing
+per-world tracker lifecycle; no live tile entities or world references are
+stored in the state cache.
+
+`tools/test-vending-updates.py` passes 54 assertions for bounded probes, disabled
+mod behavior, controller removal, activation/rotation/replacement state changes,
+unchanged values, detached snapshots and the complete display dependency radius.
+The production plugin and server adapter also compile against the actual mod
+classpath. A full dedicated-server smoke test still needs to confirm state
+change scheduling and render completion in the integration fixture.

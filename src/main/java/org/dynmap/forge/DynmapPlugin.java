@@ -158,6 +158,7 @@ public class DynmapPlugin
     	int x, y, z;
     }
     ConcurrentLinkedQueue<BlockUpdateRec> blockupdatequeue = new ConcurrentLinkedQueue<BlockUpdateRec>();
+    private int vendingCasingBlockId = -1;
 
     public static final int getBlockID(World w, int x, int y, int z) {
         // Block.getIdFromBlock(w.getBlockType(x,y,z))
@@ -839,6 +840,12 @@ public class DynmapPlugin
                 core.serverTick(tps);
             }
 
+            // GT sends active/facing changes through its own block-event packets.
+            // Observe only the two vending MTE types on the server thread once a second.
+            if (mapManager != null && cur_tick % 20 == 0 && getVendingCasingBlockId() > 0) {
+                for (WorldUpdateTracker tracker : updateTrackers.values()) tracker.refreshVendingStates();
+            }
+
             boolean done = false;
             TaskRecord tr = null;
 
@@ -855,6 +862,9 @@ public class DynmapPlugin
                         mapManager.touch(r.wid, r.x, r.y, r.z, "blockchange[" + id + ":" + meta + "]");
                     else
                         mapManager.touch(r.wid, r.x, r.y, r.z, "blockchange");
+                }
+                if (r.w != null && needsVendingNeighborUpdate(r.w, id, r.x, r.y, r.z)) {
+                    touchVendingVolume(r.wid, r.x, r.y, r.z);
                 }
             }
 
@@ -1702,9 +1712,43 @@ public class DynmapPlugin
     private boolean onblockchange_with_id = false;
     
     
+    private int getVendingCasingBlockId() {
+        if (vendingCasingBlockId < 0) {
+            Block casing = GameRegistry.findBlock("vendingmachine", "casing");
+            vendingCasingBlockId = casing == null ? 0 : Block.getIdFromBlock(casing);
+        }
+        return vendingCasingBlockId;
+    }
+
+    private void touchVendingVolume(String worldid, int x, int y, int z) {
+        int radius = VendingRenderUpdates.RADIUS;
+        mapManager.touchVolume(worldid, x - radius, y - radius, z - radius, x + radius, y + radius, z + radius, "vending-neighbor-change");
+    }
+
+    private boolean needsVendingNeighborUpdate(final World world, int changedBlock, int x, int y, int z) {
+        return VendingRenderUpdates.needsVolume(getVendingCasingBlockId(), changedBlock, x, y, z, new VendingRenderUpdates.Blocks() {
+            @Override public int get(int px, int py, int pz) {
+                if (py < 0 || py >= world.getHeight() || !world.getChunkProvider().chunkExists(px >> 4, pz >> 4)) return 0;
+                return getBlockID(world, px, py, pz);
+            }
+        });
+    }
+
     public class WorldUpdateTracker implements IWorldAccess {
     	String worldid;
     	World world;
+        private final VendingRenderUpdates.States vendingStates = new VendingRenderUpdates.States();
+
+        void refreshVendingStates() {
+            if (world == null) return;
+            vendingStates.update(VendingTileStates.read(world), new VendingRenderUpdates.Listener() {
+                @Override public void changed(int x, int y, int z) {
+                    if (sscache != null) sscache.invalidateSnapshot(worldid, x, y, z);
+                    touchVendingVolume(worldid, x, y, z);
+                }
+            });
+        }
+
 		@Override
         public void markBlockForUpdate(int x, int y, int z) {
             if(sscache != null)
