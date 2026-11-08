@@ -774,7 +774,7 @@ texture:id=witchery/wolfsbane_stage_4,filename=assets/witchery/textures/blocks/w
 texture:id=witchery/wolfsbane_stage_5,filename=assets/witchery/textures/blocks/wolfsbane_stage_5.png
 texture:id=witchery/wolfsbane_stage_6,filename=assets/witchery/textures/blocks/wolfsbane_stage_6.png
 texture:id=witchery/wolfsbane_stage_7,filename=assets/witchery/textures/blocks/wolfsbane_stage_7.png
-texture:id=minecraft/missingno,filename=assets/minecraft/textures/blocks/missingno.png
+texture:id=minecraft/missingno,filename=assets/gtnhwebmap/textures/blocks/missing.png
 
 
 

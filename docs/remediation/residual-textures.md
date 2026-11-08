@@ -453,3 +453,12 @@ closure must not be presented as complete large-scale visibility support.
 Executable tests compare every original and padded PNG pixel, including native
 HD padding, every source model bound/facing, UV/index bounds, immutable default
 cache reuse and exact patch counts across all sixteen facing/scale cases.
+## CropsNH invalid-tier missing sprite
+
+Exact2.0.140 CropsNHBlockIndustrialFarmTiredComponent.getIcon explicitly returns
+CropsNHUtils.getMissingBlockTexture outside its registered tier range. The latter
+requests the client-generated missingno sprite. All29 configured metadata states
+using missingno are outside MV2..UXV13, or outside ZPM7..UXV13 for the overclocked
+growth unit. SeedBed's override retains its fixed top image and delegates other
+faces to the same invalid-tier check. Point this synthetic sprite at the exact
+bundled vanilla checker; no valid tier artwork is replaced.
