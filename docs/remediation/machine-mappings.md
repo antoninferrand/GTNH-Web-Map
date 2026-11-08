@@ -138,3 +138,12 @@ images on its top (including active and glow), and voltage-specific
 `OVERLAYS_ENERGY_OUT[tier+1]` on `mFacing`. New iconsets represent those exact
 faces and fix active-output omission in older records. All required PNGs
 exist in the installed GregTech JAR; the absent inactive top glow is source-declared optional. The mod JAR, which now includes BartWorks.
+
+## BartWorks creative scanner: 12800
+
+`ItemRegistry` instantiates the creative scanner at tier 14 (MAX). It inherits
+`MTEScanner` textures, including the normal/active scanner process front and
+separate glow images, plus pipe-output facing. Side/top/bottom scanner overlays
+are source-optional and absent in the installed JAR. Preserve their optional
+declarations so resource packs can still supply them. All four required front
+images and the MAX hull images exist in the installed GregTech JAR.

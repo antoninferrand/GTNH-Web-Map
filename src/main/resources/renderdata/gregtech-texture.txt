@@ -8340,3 +8340,24 @@ texture:id=remediation/acid/output_IV,filename=assets/gregtech/textures/blocks/i
 moddata:mod=gtmte,type=iconset,name=remediation.acid.05,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT,top2=23000:remediation/acid/top/OVERLAY_FRONT_GLOW,output=0:remediation/acid/output_IV
 moddata:mod=gtmte,type=iconset,name=remediation.acid.05_active,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT_ACTIVE,top2=23000:remediation/acid/top/OVERLAY_FRONT_ACTIVE_GLOW,output=0:remediation/acid/output_IV
 moddata:mod=gtmte,type=mte,id=12742,baseset=hull.tier.05,iconset=remediation.acid.05,activeset=remediation.acid.05_active
+
+# Creative debug scanner inherits MTEScanner at MAX tier.
+texture:id=remediation/scanner/OVERLAY_FRONT_SCANNER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_SCANNER.png
+texture:id=remediation/scanner/OVERLAY_FRONT_SCANNER_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_SCANNER_GLOW.png
+texture:id=remediation/scanner/OVERLAY_FRONT_SCANNER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_SCANNER_ACTIVE.png
+texture:id=remediation/scanner/OVERLAY_FRONT_SCANNER_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_SCANNER_ACTIVE_GLOW.png
+texture:id=remediation/scanner/OVERLAY_SIDE_SCANNER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_SIDE_SCANNER.png,optional=true
+texture:id=remediation/scanner/OVERLAY_SIDE_SCANNER_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_SIDE_SCANNER_GLOW.png,optional=true
+texture:id=remediation/scanner/OVERLAY_SIDE_SCANNER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_SIDE_SCANNER_ACTIVE.png,optional=true
+texture:id=remediation/scanner/OVERLAY_SIDE_SCANNER_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_SIDE_SCANNER_ACTIVE_GLOW.png,optional=true
+texture:id=remediation/scanner/OVERLAY_TOP_SCANNER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_TOP_SCANNER.png,optional=true
+texture:id=remediation/scanner/OVERLAY_TOP_SCANNER_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_TOP_SCANNER_GLOW.png,optional=true
+texture:id=remediation/scanner/OVERLAY_TOP_SCANNER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_TOP_SCANNER_ACTIVE.png,optional=true
+texture:id=remediation/scanner/OVERLAY_TOP_SCANNER_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_TOP_SCANNER_ACTIVE_GLOW.png,optional=true
+texture:id=remediation/scanner/OVERLAY_BOTTOM_SCANNER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_SCANNER.png,optional=true
+texture:id=remediation/scanner/OVERLAY_BOTTOM_SCANNER_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_SCANNER_GLOW.png,optional=true
+texture:id=remediation/scanner/OVERLAY_BOTTOM_SCANNER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_SCANNER_ACTIVE.png,optional=true
+texture:id=remediation/scanner/OVERLAY_BOTTOM_SCANNER_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_SCANNER_ACTIVE_GLOW.png,optional=true
+moddata:mod=gtmte,type=iconset,name=remediation.creativescanner,output=0:mte/iconsets/OVERLAY_PIPE_OUT,front=0:remediation/scanner/OVERLAY_FRONT_SCANNER,front2=23000:remediation/scanner/OVERLAY_FRONT_SCANNER_GLOW,side=0:remediation/scanner/OVERLAY_SIDE_SCANNER,side2=23000:remediation/scanner/OVERLAY_SIDE_SCANNER_GLOW,top=0:remediation/scanner/OVERLAY_TOP_SCANNER,top2=23000:remediation/scanner/OVERLAY_TOP_SCANNER_GLOW,bottom=0:remediation/scanner/OVERLAY_BOTTOM_SCANNER,bottom2=23000:remediation/scanner/OVERLAY_BOTTOM_SCANNER_GLOW
+moddata:mod=gtmte,type=iconset,name=remediation.creativescanner_active,output=0:mte/iconsets/OVERLAY_PIPE_OUT,front=0:remediation/scanner/OVERLAY_FRONT_SCANNER_ACTIVE,front2=23000:remediation/scanner/OVERLAY_FRONT_SCANNER_ACTIVE_GLOW,side=0:remediation/scanner/OVERLAY_SIDE_SCANNER_ACTIVE,side2=23000:remediation/scanner/OVERLAY_SIDE_SCANNER_ACTIVE_GLOW,top=0:remediation/scanner/OVERLAY_TOP_SCANNER_ACTIVE,top2=23000:remediation/scanner/OVERLAY_TOP_SCANNER_ACTIVE_GLOW,bottom=0:remediation/scanner/OVERLAY_BOTTOM_SCANNER_ACTIVE,bottom2=23000:remediation/scanner/OVERLAY_BOTTOM_SCANNER_ACTIVE_GLOW
+moddata:mod=gtmte,type=mte,id=12800,baseset=hull.tier.14,iconset=remediation.creativescanner,activeset=remediation.creativescanner_active
