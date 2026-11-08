@@ -52,3 +52,13 @@ names. `TextureSet.SET_ASTRAL_TITANIUM`, `SET_CELESTIAL_TUNGSTEN` and
 uses those texture sets. Correcting the original paths and selecting the
 `gregtech` owner preserves the real material appearance; using `NONE` alone
 would incorrectly replace the actual design. See the accompanying evidence CSV.
+
+## Material fallback declarations
+
+Twelve baseline material resources have explicit `NONE` alternatives using the
+contract in `GTTextureSetBlockIconContainer` and `Textures.TextureSetFallback`.
+All fallback PNGs were verified in the installed JAR asset inventory. The six
+missing pipe-side resources now resolve to `NONE/pipeSide.png`. The six corrected
+custom block/frame resources still resolve to their actual images first; their
+fallback only applies when that original cannot be found. Neither texture IDs,
+material multipliers nor pipe geometry are changed by this fix.

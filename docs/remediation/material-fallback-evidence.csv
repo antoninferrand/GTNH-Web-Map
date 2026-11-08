@@ -1,0 +1,13 @@
+baseline_resource,resource,fallback,fallbackmod,declarations
+assets/gregtech/textures/blocks/materialicons/CUSTOM/AstralTitanium/block5.png,assets/gregtech/textures/blocks/materialicons/CUSTOM/astraltitanium/block5.png,assets/gregtech/textures/blocks/materialicons/NONE/block5.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/CUSTOM/AstralTitanium/frameGt.png,assets/gregtech/textures/blocks/materialicons/CUSTOM/astraltitanium/frameGt.png,assets/gregtech/textures/blocks/materialicons/NONE/frameGt.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/CUSTOM/awakeneddraconium/pipeSide.png,assets/gregtech/textures/blocks/materialicons/CUSTOM/awakeneddraconium/pipeSide.png,assets/gregtech/textures/blocks/materialicons/NONE/pipeSide.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/CUSTOM/CelestialTungsten/block5.png,assets/gregtech/textures/blocks/materialicons/CUSTOM/celestialtungsten/block5.png,assets/gregtech/textures/blocks/materialicons/NONE/block5.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/CUSTOM/CelestialTungsten/frameGt.png,assets/gregtech/textures/blocks/materialicons/CUSTOM/celestialtungsten/frameGt.png,assets/gregtech/textures/blocks/materialicons/NONE/frameGt.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/CUSTOM/ChromaticGlass/block5.png,assets/gregtech/textures/blocks/materialicons/CUSTOM/chromaticglass/block5.png,assets/gregtech/textures/blocks/materialicons/NONE/block5.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/CUSTOM/ChromaticGlass/frameGt.png,assets/gregtech/textures/blocks/materialicons/CUSTOM/chromaticglass/frameGt.png,assets/gregtech/textures/blocks/materialicons/NONE/frameGt.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/DULL/pipeSide.png,assets/gregtech/textures/blocks/materialicons/DULL/pipeSide.png,assets/gregtech/textures/blocks/materialicons/NONE/pipeSide.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/METALLIC/pipeSide.png,assets/gregtech/textures/blocks/materialicons/METALLIC/pipeSide.png,assets/gregtech/textures/blocks/materialicons/NONE/pipeSide.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/NETHERSTAR/pipeSide.png,assets/gregtech/textures/blocks/materialicons/NETHERSTAR/pipeSide.png,assets/gregtech/textures/blocks/materialicons/NONE/pipeSide.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/ROUGH/pipeSide.png,assets/gregtech/textures/blocks/materialicons/ROUGH/pipeSide.png,assets/gregtech/textures/blocks/materialicons/NONE/pipeSide.png,gregtech,1
+assets/gregtech/textures/blocks/materialicons/SHINY/pipeSide.png,assets/gregtech/textures/blocks/materialicons/SHINY/pipeSide.png,assets/gregtech/textures/blocks/materialicons/NONE/pipeSide.png,gregtech,1
