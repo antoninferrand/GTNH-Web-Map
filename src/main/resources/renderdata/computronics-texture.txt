@@ -150,7 +150,7 @@ block:id=%computronics.digitalReceiverBox,data=*,stdrot=true,face0=2:railcraft/s
 block:id=%computronics.digitalControllerBox,data=*,stdrot=true,face0=2:railcraft/signal.box,face1=0:computronics/digital_controller_box,face2-5=0:railcraft/signal.box
 
 # %computronics.detector:* (computronics.detector), render=pl.asie.lib.client.BlockBaseRender(CUSTOM), opaque=true,cls=pl.asie.computronics.integration.railcraft.block.BlockDigitalDetector
-block:id=%computronics.detector,data=*,stdrot=true,face0-1=0:computronics/digital_detector,face2=1:computronics/digital_detector,face3-5=0:computronics/digital_detector
+block:id=%computronics.detector,data=*,patch0=0:computronics/digital_detector,patch1=1:computronics/digital_detector
 
 # %computronics.ticketMachine:* (computronics.ticketMachine), render=pl.asie.lib.client.BlockBaseRender(CUSTOM), opaque=true,cls=pl.asie.computronics.integration.railcraft.block.BlockTicketMachine
 block:id=%computronics.ticketMachine,data=0,stdrot=true,face0=0:computronics/machine_bottom,face1=0:computronics/machine_top,face2=0:computronics/ticket_machine_front,face3-5=0:computronics/machine_side

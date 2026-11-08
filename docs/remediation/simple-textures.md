@@ -100,3 +100,19 @@ Validation: all selected indices lie within their grids; old nonexistent
 filenames and synthetic references are removed; `git diff --check` passes.
 The existing detector face orientation is retained; its tile-entity `direction`
 field needs separate renderer coverage before claiming full orientation parity.
+
+## Computronics detector orientation
+
+Bind the existing `RotatedBoxRenderer` to the digital detector's saved
+`direction` byte, using explicit side-texture swaps for all six ForgeDirection
+values. The detector source `getIcon(world, ..., side)` displays its connector
+icon exactly when the face ordinal equals that direction. Supply explicit
+patch 0 (body) and patch 1 (connector) mappings instead of fixed north-facing
+cube textures. This requires no new Java API or dedicated-server dependency.
+
+Validation: checked all six model maps against ForgeDirection order
+(down/up/north/south/west/east) and CustomRenderer.addBox face order
+(down/up/west/east/north/south); each places exactly one connector on the
+source-selected face. `TileDigitalDetector.writeToNBT` persists the requested
+byte; `RotatedBoxRenderer` accepts Number fields and requests that attribute.
+`git diff --check` passes. Fixture rendering remains the visual check.

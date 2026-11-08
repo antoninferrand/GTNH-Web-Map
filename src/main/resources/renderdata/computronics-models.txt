@@ -46,6 +46,7 @@ boxblock:id=%computronics.audioCable,xmin=0.3050000071525574,xmax=0.694999992847
 # %computronics.locomotiveRelay:* (computronics.locomotiveRelay), render=pl.asie.lib.client.BlockBaseRender(CUSTOM), opaque=true,cls=pl.asie.computronics.integration.railcraft.block.BlockLocomotiveRelay
 
 # %computronics.detector:* (computronics.detector), render=pl.asie.lib.client.BlockBaseRender(CUSTOM), opaque=true,cls=pl.asie.computronics.integration.railcraft.block.BlockDigitalDetector
+customblock:id=%computronics.detector,data=*,class=org.dynmap.hdmap.renderer.RotatedBoxRenderer,textureIndex=direction,index0=0,map0=S100000,index1=1,map1=S010000,index2=2,map2=S000010,index3=3,map3=S000001,index4=4,map4=S001000,index5=5,map5=S000100
 
 # %computronics.ticketMachine:* (computronics.ticketMachine), render=pl.asie.lib.client.BlockBaseRender(CUSTOM), opaque=true,cls=pl.asie.computronics.integration.railcraft.block.BlockTicketMachine
 
