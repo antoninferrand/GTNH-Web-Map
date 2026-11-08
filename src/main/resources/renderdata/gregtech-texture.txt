@@ -8530,3 +8530,16 @@ texture:id=remediation/controller/15551/front_ACTIVE,filename=assets/miscutils/t
 texture:id=remediation/controller/15551/glow_ACTIVE,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlantActiveGlow.png,resourcemod=miscutils,ycount=8
 moddata:mod=gtmte,type=iconset,name=remediation.controller.15551_active,output=0:remediation/controller/15551/front_ACTIVE,output2=23000:remediation/controller/15551/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=15551,mtetype=controller,baseset=remediation.controller.base.15551,iconset=remediation.controller.15551,activeset=remediation.controller.15551_active
+
+# Industrial forming press (GT 5.09.54.265).
+texture:id=remediation/controller/15552/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_STABLE_TITANIUM.png
+texture:id=remediation/controller/15552/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_STABLE_TITANIUM.png
+texture:id=remediation/controller/15552/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_STABLE_TITANIUM.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15552,side=0:remediation/controller/15552/base_side,top=0:remediation/controller/15552/base_top,bottom=0:remediation/controller/15552/base_bottom
+texture:id=remediation/controller/15552/front,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialPlatePress.png,resourcemod=miscutils,ycount=10
+texture:id=remediation/controller/15552/glow,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialPlatePressGlow.png,resourcemod=miscutils,ycount=10
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15552,output=0:remediation/controller/15552/front,output2=23000:remediation/controller/15552/glow
+texture:id=remediation/controller/15552/front_ACTIVE,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialPlatePressActive.png,resourcemod=miscutils,ycount=8
+texture:id=remediation/controller/15552/glow_ACTIVE,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialPlatePressActiveGlow.png,resourcemod=miscutils,ycount=8
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15552_active,output=0:remediation/controller/15552/front_ACTIVE,output2=23000:remediation/controller/15552/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15552,mtetype=controller,baseset=remediation.controller.base.15552,iconset=remediation.controller.15552,activeset=remediation.controller.15552_active

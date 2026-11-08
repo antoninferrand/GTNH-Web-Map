@@ -289,3 +289,12 @@ Front source: `assets/miscutils/textures/blocks/iconsets/controllerFaces/industr
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Industrial forming press: 15552
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_STABLE_TITANIUM.png`.
+Front source: `assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialPlatePress`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
