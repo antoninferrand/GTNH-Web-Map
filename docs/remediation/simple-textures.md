@@ -32,3 +32,22 @@ corrections, not a substitution of similarly named GUI assets.
 Validation: exact target paths exist in the installed JAR inventory; all four
 changed declarations preserve IDs and texture parameters; `git diff --check`
 passes. Machine state/geometry validation remains part of the fixture audit.
+
+## OpenModularTurrets inventory expander
+
+Use the packaged `ExpanderInvTierOne.png` image instead of the absent lowercase
+`expanderInvTierOne.png`. The installed OpenModularTurrets 2.4.8 JAR contains
+only the uppercase initial filename. The matching 2.4.8 source's
+`BlockExpanderInvTierOne.registerBlockIcons` registers the lowercase name, so
+this corrects a source/packaging mismatch rather than copying that mismatch
+into Web Map. Preserve the block's registry name and existing texture ID.
+
+Validation: replacement path verified in the installed JAR inventory and the
+matching source checkout; `git diff --check` passes.
+
+## Existing Ginkgo corrections
+
+Fork commit `e0cb1f30` already corrected `gingkoBark`, `gingkoTrunk` and
+`Gingko` planks to `ginkgoBark`, `ginkgoTrunk` and `Ginkgo`. All three corrected
+paths exist in the installed BinnieCore asset inventory. No duplicate fix is
+needed for those baseline resources.

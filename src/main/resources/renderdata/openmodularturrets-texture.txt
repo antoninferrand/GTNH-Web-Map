@@ -10,7 +10,7 @@ texturepath:assets/openmodularturrets/textures/blocks/
 texture:id=openmodularturrets/disposeItemTurret,filename=assets/openmodularturrets/textures/blocks/disposeItemTurret.png
 texture:id=openmodularturrets/expanderInvTierFive,filename=assets/openmodularturrets/textures/blocks/expanderInvTierFive.png
 texture:id=openmodularturrets/expanderInvTierFour,filename=assets/openmodularturrets/textures/blocks/expanderInvTierFour.png
-texture:id=openmodularturrets/expanderInvTierOne,filename=assets/openmodularturrets/textures/blocks/expanderInvTierOne.png
+texture:id=openmodularturrets/expanderInvTierOne,filename=assets/openmodularturrets/textures/blocks/ExpanderInvTierOne.png
 texture:id=openmodularturrets/expanderInvTierThree,filename=assets/openmodularturrets/textures/blocks/expanderInvTierThree.png
 texture:id=openmodularturrets/expanderInvTierTwo,filename=assets/openmodularturrets/textures/blocks/expanderInvTierTwo.png
 texture:id=openmodularturrets/expanderPowerTierFive,filename=assets/openmodularturrets/textures/blocks/expanderPowerTierFive.png
