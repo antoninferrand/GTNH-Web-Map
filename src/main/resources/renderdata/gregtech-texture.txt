@@ -8873,4 +8873,3 @@ texture:id=remediation/model/icecream,filename=assets/gregtech/textures/model/ic
 specialModSupportLoader:org.dynmap.modsupport.loaders.ModelAtlasSupportLoader,name=modelatlas
 moddata:mod=modelatlas,name=gregtech:icecream,texture=remediation/model/icecream,columns=4,rows=4
 moddata:mod=gtmte,type=mte,id=20000,basetex=0:remediation/model/icecream,paint=false
-
