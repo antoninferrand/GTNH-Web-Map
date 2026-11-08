@@ -163,3 +163,7 @@ Validation: exact installed atlas assets/dimensions, actual ModelBox UV goldens,
 ## Blood Magic calcinator base model
 
 Replace its nonexistent scraper placeholder with the 13-part source model and actual 128x128 `assets/alchemicalwizardry/textures/models/AlchemicalCalcinator.png` atlas. Match the TESR180-degree Z transform and retain transparent glass regions. Installed assets, actual ModelBox UV golden and real patch-factory bounds/indices are validated. This addresses the missing base model/texture; the source also draws optional floating inventory/reagent contents as separate effects, which are not baked into the static model.
+
+## Blood Magic belljar base model
+
+Replace its nonexistent scraper placeholder with the 8-part source model and actual 128x64 `assets/alchemicalwizardry/textures/models/CrystalBelljar.png` atlas. Match the TESR180-degree Z transform and retain transparent glass regions. Installed assets, actual ModelBox UV golden and real patch-factory bounds/indices are validated. This addresses the missing base model/texture; the source also draws optional floating inventory/reagent contents as separate effects, which are not baked into the static model.
