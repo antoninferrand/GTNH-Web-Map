@@ -63,3 +63,17 @@ This requires the shared resource-owner metadata change.
 The existing cropsnh file receives its own GregTech support loader registration
 (the loader registry is file-local). All new asset paths were checked against
 installed JAR entries and all 12 IDs against the runtime registry.
+
+## CropsNH seed_generator: 28013–28024
+
+The matching CropsNH 2.0.140 MTE constructor supplies the normal/active
+seed_generator front with a separate glow layer and optional scanner side/top/bottom
+layers to MTEBasicMachine. Preserve process front (`mMainFacing`) and pipe
+output (`mFacing`), tiers 1–12, and normal/active texture sets.
+Use `front2`/face2 glow layers (modifier 23000) under the shared layered-icon
+contract. Scanner side/top/bottom images are absent in the installed GT JAR
+and source-declared optional; retain optional declarations for resource packs.
+
+All four front PNGs exist in the installed CropsNH JAR. Animated strips are
+read as square frames using their source PNG dimensions. New MTE IDs are
+unique, local texture IDs resolve, and resource owners are explicit.
