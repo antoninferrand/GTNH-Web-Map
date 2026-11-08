@@ -959,7 +959,9 @@ public class DynmapPlugin
         public InputStream openResource(String modid, String rname) {
             if (modid != null) {
                 ModContainer mc = Loader.instance().getIndexedModList().get(modid);
-                Object mod = mc.getMod();
+                // Resource domains and legacy fallback owners are not always
+                // registered Forge mod IDs. Continue the normal resource search.
+                Object mod = mc == null ? null : mc.getMod();
                 if (mod != null) {
                     InputStream is = mod.getClass().getClassLoader().getResourceAsStream(rname);
                     if (is != null) {
