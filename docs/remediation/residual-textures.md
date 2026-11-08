@@ -135,3 +135,9 @@ Validation: source-baked group centroids point in each of the six expected
 Forge directions. Actual renderer tests exercise all36 input/output pairs and
 cache identity, with unchanged patch coverage and native atlas coordinates.
 Static life-infuser and node models are rechecked as regression controls.
+
+## Blood Magic spell paradigm
+
+Replace the scraper placeholder for %AlchemicalWizardrytile.blockSpellParadigm with its actual 11-part model and 64x64 model atlas. Select all16 metadata states using the matching TESpellParadigmBlock.getResourceLocationForMeta source, including its explicit default. Saved inputFace/outputFace fields rotate only their source-defined connector groups; frame/core parts remain fixed. The outer180-degree Z rotation is baked as(-1,-1,1), not the Y rotation used by other mods.
+
+Validation: exact installed atlas assets/dimensions, actual ModelBox UV goldens, all36 input/output pose combinations, six directional group centroids and real patch-factory atlas/bounds checks passed.
