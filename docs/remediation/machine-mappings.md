@@ -119,3 +119,11 @@ and source-declared optional; retain optional declarations for resource packs.
 All four front PNGs exist in the installed CropsNH JAR. Animated strips are
 read as square frames using their source PNG dimensions. New MTE IDs are
 unique, local texture IDs resolve, and resource owners are explicit.
+
+## CropsNH industrial farm: 28055
+
+`MTEIndustrialFarm.getTexture()` uses `createTextureWithCasing()` with assembly
+line normal/active and glow overlays on `mFacing`. `getCasingTexture()` uses
+CropsNH casing page 20 index 0 (`brickedAgriculturalCasing`). Add the controller
+and register that casing page for surrounding generic hatches. All four overlay
+assets and the casing PNG exist in the installed pack; MTE ID is unique.

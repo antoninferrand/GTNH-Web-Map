@@ -1212,3 +1212,13 @@ moddata:mod=gtmte,type=mte,id=28051,baseset=cropsnh.hull.tier.09,iconset=cropsnh
 moddata:mod=gtmte,type=mte,id=28052,baseset=cropsnh.hull.tier.10,iconset=cropsnh.crop_synthesizer,activeset=cropsnh.crop_synthesizer_active
 moddata:mod=gtmte,type=mte,id=28053,baseset=cropsnh.hull.tier.11,iconset=cropsnh.crop_synthesizer,activeset=cropsnh.crop_synthesizer_active
 moddata:mod=gtmte,type=mte,id=28054,baseset=cropsnh.hull.tier.12,iconset=cropsnh.crop_synthesizer,activeset=cropsnh.crop_synthesizer_active
+
+# Industrial farm controller, GT casing page 20 index 0.
+texture:id=cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_ASSEMBLY_LINE.png,resourcemod=gregtech
+texture:id=cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_ASSEMBLY_LINE_GLOW.png,resourcemod=gregtech
+texture:id=cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE.png,resourcemod=gregtech
+texture:id=cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE_GLOW.png,resourcemod=gregtech
+moddata:mod=gtmte,type=iconset,name=cropsnh.industrialfarm,output=0:cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE,output2=23000:cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE_GLOW
+moddata:mod=gtmte,type=iconset,name=cropsnh.industrialfarm_active,output=0:cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE,output2=23000:cropsnh/gt/OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE_GLOW
+moddata:mod=gtmte,type=mte,id=28055,mtetype=controller,basetex=0:cropsnh/industrialFarm/brickedAgriculturalCasing,iconset=cropsnh.industrialfarm,activeset=cropsnh.industrialfarm_active
+moddata:mod=gtmte,type=hatchbase,block=cropsnh:cropsnh.casings1,page=20,start=0
