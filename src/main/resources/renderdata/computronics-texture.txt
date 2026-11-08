@@ -2,9 +2,7 @@
 version:1.7
 modname:computronics
 
-
 cfgfile:config/computronics.cfg
-
 
 texturepath:assets/computronics/textures/blocks/
 texture:id=computronics/advanced/cipher_front,filename=assets/computronics/textures/blocks/advanced/cipher_front.png
@@ -16,8 +14,8 @@ texture:id=computronics/camera_front,filename=assets/computronics/textures/block
 texture:id=computronics/chatbox_side,filename=assets/computronics/textures/blocks/chatbox_side.png
 texture:id=computronics/cipher_front,filename=assets/computronics/textures/blocks/cipher_front.png
 texture:id=computronics/digital_controller_box,filename=assets/computronics/textures/blocks/digital_controller_box.png
-texture:id=computronics/digital_detector.0,filename=assets/computronics/textures/blocks/digital_detector.0.png
-texture:id=computronics/digital_detector.1,filename=assets/computronics/textures/blocks/digital_detector.1.png
+texture:id=computronics/digital_detector,filename=assets/computronics/textures/blocks/digital_detector.png,xcount=2
+
 texture:id=computronics/digital_receiver_box,filename=assets/computronics/textures/blocks/digital_receiver_box.png
 texture:id=computronics/lamp_layer_0,filename=assets/computronics/textures/blocks/lamp_layer_0.png
 texture:id=computronics/locorelay_top,filename=assets/computronics/textures/blocks/locorelay_top.png
@@ -32,8 +30,7 @@ texture:id=computronics/speaker_front,filename=assets/computronics/textures/bloc
 texture:id=computronics/speech_box_front,filename=assets/computronics/textures/blocks/speech_box_front.png
 texture:id=computronics/tape_drive_front,filename=assets/computronics/textures/blocks/tape_drive_front.png
 texture:id=computronics/ticket_machine_front,filename=assets/computronics/textures/blocks/ticket_machine_front.png
-texture:id=railcraft/signal.box.0,filename=assets/railcraft/textures/blocks/signal.box.0.png
-texture:id=railcraft/signal.box.2,filename=assets/railcraft/textures/blocks/signal.box.2.png
+texture:id=railcraft/signal.box,filename=assets/railcraft/textures/blocks/signal.box.png,xcount=6
 
 
 
@@ -147,13 +144,13 @@ block:id=%computronics.colorfulLamp,data=*,stdrot=true,face0-5=0:computronics/la
 block:id=%computronics.locomotiveRelay,data=*,stdrot=true,face0=0:computronics/machine_bottom,face1=0:computronics/locorelay_top,face2-5=0:computronics/machine_side
 
 # %computronics.digitalReceiverBox:* (computronics.digitalReceiverBox), render=pl.asie.computronics.integration.railcraft.client.SignalBoxRenderer(CUSTOM), opaque=false,cls=pl.asie.computronics.integration.railcraft.block.BlockDigitalReceiverBox
-block:id=%computronics.digitalReceiverBox,data=*,stdrot=true,face0=0:railcraft/signal.box.2,face1=0:computronics/digital_receiver_box,face2-5=0:railcraft/signal.box.0
+block:id=%computronics.digitalReceiverBox,data=*,stdrot=true,face0=2:railcraft/signal.box,face1=0:computronics/digital_receiver_box,face2-5=0:railcraft/signal.box
 
 # %computronics.digitalControllerBox:* (computronics.digitalControllerBox), render=pl.asie.computronics.integration.railcraft.client.SignalBoxRenderer(CUSTOM), opaque=false,cls=pl.asie.computronics.integration.railcraft.block.BlockDigitalControllerBox
-block:id=%computronics.digitalControllerBox,data=*,stdrot=true,face0=0:railcraft/signal.box.2,face1=0:computronics/digital_controller_box,face2-5=0:railcraft/signal.box.0
+block:id=%computronics.digitalControllerBox,data=*,stdrot=true,face0=2:railcraft/signal.box,face1=0:computronics/digital_controller_box,face2-5=0:railcraft/signal.box
 
 # %computronics.detector:* (computronics.detector), render=pl.asie.lib.client.BlockBaseRender(CUSTOM), opaque=true,cls=pl.asie.computronics.integration.railcraft.block.BlockDigitalDetector
-block:id=%computronics.detector,data=*,stdrot=true,face0-1=0:computronics/digital_detector.0,face2=0:computronics/digital_detector.1,face3-5=0:computronics/digital_detector.0
+block:id=%computronics.detector,data=*,stdrot=true,face0-1=0:computronics/digital_detector,face2=1:computronics/digital_detector,face3-5=0:computronics/digital_detector
 
 # %computronics.ticketMachine:* (computronics.ticketMachine), render=pl.asie.lib.client.BlockBaseRender(CUSTOM), opaque=true,cls=pl.asie.computronics.integration.railcraft.block.BlockTicketMachine
 block:id=%computronics.ticketMachine,data=0,stdrot=true,face0=0:computronics/machine_bottom,face1=0:computronics/machine_top,face2=0:computronics/ticket_machine_front,face3-5=0:computronics/machine_side
