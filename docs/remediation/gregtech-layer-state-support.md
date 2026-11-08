@@ -34,3 +34,18 @@ face mappings, layer order/glow, paint indexes, late binding, active variants,
 state/casing overrides and NBT requests, all facings, current/legacy/invalid
 casing indexes, fixed casings and the down-facing chest exception. It requires
 existing compiled dependency classes; it does not boot or modify a world.
+
+## Registered multi-block casing pages
+
+For `hatchbaseexpl` records, the registered GregTech casing page is now checked
+before parsing an old explicit texture reference. If the actual slot contains a
+`GTCopiedBlockTextureRender`, its registered block ID/metadata is stored and its
+Web Map block texture is resolved when rendering. This uses only server-safe
+`getBlock`/`getMeta` data, not client icons or world objects. Deferred resolution
+also avoids capturing a blank map before the owning mod's textures load.
+
+This corrects changed casing-slot designs and prevents obsolete scraped PNGs
+from being marked used solely by old page declarations. The original explicit
+reference remains the fallback when no supported registered copied-block casing
+exists. An unmapped authoritative block still returns a missing texture; it is
+not replaced by an arbitrary old image.

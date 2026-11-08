@@ -222,10 +222,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                 page = index >>> 7;
                 index &= 127;
             }
-            int[][] textures = GregTechSupport.INSTANCE.hatchBaseTextures2;
-            if (page < 0 || page >= textures.length || index < 0 || index >= 128) return -1;
-            int[] texturesOnPage = textures[page];
-            return texturesOnPage != null && index < texturesOnPage.length && texturesOnPage[index] > 0 ? texturesOnPage[index] : -1;
+            return GregTechSupport.INSTANCE.getHatchBaseTexture(page, index);
         }
 
         private void tryStealBaseTexFromNeighbor(MapDataContext mapDataCtx, int outputFacing) {

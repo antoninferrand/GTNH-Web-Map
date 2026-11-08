@@ -2,6 +2,7 @@ package org.dynmap.hdmap.renderer;
 
 import java.util.*;
 import org.dynmap.modsupport.gregtech.GregTechSupport;
+import org.dynmap.hdmap.TexturePack;
 import org.dynmap.renderer.*;
 
 /** Exercises production mapping parsing and saved-state texture selection without a world. */
@@ -38,7 +39,7 @@ public class GregTechMachineBehaviorTest {
         check(Arrays.equals(expected, actual), "face " + face + ": expected " + Arrays.toString(expected) + ", got " + Arrays.toString(actual));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         GregTechMachineRenderer renderer = new GregTechMachineRenderer();
         icon("fixture-old", "bottom", "10", "top", "11", "side", "12", "front", "13", "output", "14");
         mte(64000, "basetex", "100", "iconset", "fixture-old");
@@ -126,6 +127,23 @@ public class GregTechMachineBehaviorTest {
         context.fields.put("mID", 64007);
         context.fields.put("mColor", 16);
         face(renderer, context, 1, 110, 24, 25, 26);
+        java.lang.reflect.Method initialize = TexturePack.HDTextureMap.class.getDeclaredMethod("initializeTable");
+        initialize.setAccessible(true);
+        initialize.invoke(null);
+        java.lang.reflect.Field registeredField = GregTechSupport.class.getDeclaredField("registeredHatchBaseBlocks");
+        registeredField.setAccessible(true);
+        int[][][] registered = (int[][][]) registeredField.get(SUPPORT);
+        registered[2][7] = new int[] { 200, 3 };
+        SUPPORT.hatchBaseTextures2[2] = new int[128];
+        SUPPORT.hatchBaseTextures2[2][7] = 300;
+        check(SUPPORT.getHatchBaseTexture(2, 7) == -1, "unmapped authoritative casing does not select obsolete explicit texture");
+        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 3, new int[] { 400 }, null,
+                TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
+        check(SUPPORT.getHatchBaseTexture(2, 7) == 400, "authoritative casing resolved after mapping loads");
+        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 3, new int[] { 401 }, null,
+                TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
+        check(SUPPORT.getHatchBaseTexture(2, 7) == 401, "authoritative casing follows effective mapping override");
+        check(SUPPORT.getHatchBaseTexture(-1, 7) == -1 && SUPPORT.getHatchBaseTexture(128, 7) == -1, "authoritative casing bounds safe");
         System.out.println("GregTech saved-state rendering: " + assertions + " assertions passed");
     }
 

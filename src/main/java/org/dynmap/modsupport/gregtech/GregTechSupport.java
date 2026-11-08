@@ -43,6 +43,7 @@ public class GregTechSupport {
 
     public int[][] validHatchBaseBlocks = new int[65536][];
     public int[][] hatchBaseTextures2 = new int[128][];
+    private final int[][][] registeredHatchBaseBlocks = new int[128][128][];
     public boolean[] meConnectables;
     private final LinkedHashSet<String> stateFields = new LinkedHashSet<>();
     private String[] stateFieldsNeeded = new String[0];
@@ -204,12 +205,38 @@ public class GregTechSupport {
         int page = GWM_Util.objectToInt(data.get("page"), 0);
         String tex = data.get("tex");
         if(index >= 0 && index < 128 && page >= 0 && page < 128 && tex != null){
+            // Casing pages are registered on the server. A copied-block texture is
+            // authoritative and may differ from old scraped PNGs for the same slot.
+            ITexture registered = Textures.BlockIcons.getCasingTextureForId((page << 7) | index);
+            if (registered instanceof GTCopiedBlockTextureRender) {
+                GTCopiedBlockTextureRender copied = (GTCopiedBlockTextureRender) registered;
+                Block block = copied.getBlock();
+                int blockId = block == null ? -1 : Block.getIdFromBlock(block);
+                int metadata = copied.getMeta();
+                if (blockId > 0 && blockId < 65536 && metadata >= 0 && metadata < 16) {
+                    registeredHatchBaseBlocks[page][index] = new int[] { blockId, metadata };
+                    return; // Do not force the obsolete explicit PNG into the used set.
+                }
+            }
+            registeredHatchBaseBlocks[page][index] = null;
             if(hatchBaseTextures2[page] == null)
                 hatchBaseTextures2[page] = new int[128];
 
             hatchBaseTextures2[page][index] = TexturePack.parseTextureIndex(filetoidx, tex);
         }
     }
+    public int getHatchBaseTexture(int page, int index) {
+        if (page < 0 || page >= 128 || index < 0 || index >= 128) return -1;
+        int[] block = registeredHatchBaseBlocks[page][index];
+        if (block != null) {
+            // Model/texture definitions can load after casing-page support data.
+            // Resolve the block mapping now rather than capturing an early blank.
+            return TexturePack.HDTextureMap.getMap(block[0], block[1], 0).getIndexForFace(0);
+        }
+        int[] textures = hatchBaseTextures2[page];
+        return textures != null && index < textures.length && textures[index] > 0 ? textures[index] : -1;
+    }
+
     public void processHatchBase(HashMap<String, String> data, HashMap<String, Integer> filetoidx) {
         String blockId = data.get("block");
         if(blockId != null){
