@@ -8374,3 +8374,29 @@ texture:id=remediation/controller/368/front_ACTIVE,filename=assets/gregtech/text
 texture:id=remediation/controller/368/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MASS_SOLIDIFIER_ACTIVE_GLOW.png,ycount=16
 moddata:mod=gtmte,type=iconset,name=remediation.controller.368_active,output=0:remediation/controller/368/front_ACTIVE,output2=23000:remediation/controller/368/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=368,mtetype=controller,baseset=remediation.controller.base.368,iconset=remediation.controller.368,activeset=remediation.controller.368_active
+
+# PCB bio chamber (GT 5.09.54.265).
+texture:id=remediation/controller/730/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL.png
+texture:id=remediation/controller/730/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL.png
+texture:id=remediation/controller/730/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.730,bottom=0:remediation/controller/730/base_bottom,top=0:remediation/controller/730/base_top,side=0:remediation/controller/730/base_side
+texture:id=remediation/controller/730/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT.png
+texture:id=remediation/controller/730/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.730,output=0:remediation/controller/730/front,output2=23000:remediation/controller/730/glow
+texture:id=remediation/controller/730/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT_ACTIVE.png
+texture:id=remediation/controller/730/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.730_active,output=0:remediation/controller/730/front_ACTIVE,output2=23000:remediation/controller/730/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=730,mtetype=controller,baseset=remediation.controller.base.730,iconset=remediation.controller.730,activeset=remediation.controller.730_active
+
+# PCB cooling tower (GT 5.09.54.265).
+texture:id=remediation/controller/731/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_PCB_TIER_2.png
+texture:id=remediation/controller/731/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_PCB_TIER_2.png
+texture:id=remediation/controller/731/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_PCB_TIER_2.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.731,bottom=0:remediation/controller/731/base_bottom,top=0:remediation/controller/731/base_top,side=0:remediation/controller/731/base_side
+texture:id=remediation/controller/731/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT.png
+texture:id=remediation/controller/731/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.731,output=0:remediation/controller/731/front,output2=23000:remediation/controller/731/glow
+texture:id=remediation/controller/731/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT_ACTIVE.png
+texture:id=remediation/controller/731/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.731_active,output=0:remediation/controller/731/front_ACTIVE,output2=23000:remediation/controller/731/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=731,mtetype=controller,baseset=remediation.controller.base.731,iconset=remediation.controller.731,activeset=remediation.controller.731_active

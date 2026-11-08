@@ -176,3 +176,21 @@ Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MASS_SOLID
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## PCB bio chamber: 730
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings4:1`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
+
+## PCB cooling tower: 731
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings8:12`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_PURIFICATION_PLANT`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
