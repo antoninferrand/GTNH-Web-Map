@@ -260,3 +260,22 @@ Baked meshes may assign separate texture-index ranges to source parts while
 reusing the same atlas images. A protected per-part color hook supplies runtime
 tints without putting colors into geometry caches. Static meshes keep their
 existing compact texture indices and behavior.
+
+## WitchingGadgets terraformer and eleven foci
+
+Replace twelve invented block PNGs with selected source OBJ groups and the actual
+64x32 terraformer model atlas from1.8.53-GTNH. Preserve native OBJ vt coordinates,
+winding and TESR translations. Only crystal groups receive required-aspect tint.
+Initialize colors through the installed block's pure requiredAspect(metadata) API,
+so ForbiddenMagic's optional NETHER aspect is respected. The terraformer reads
+the neighboring focus metadata from the immutable map snapshot; no world or client
+render calls occur on render threads. Other/custom third-party focus tiles are
+not yet represented by this source-specific adapter.
+
+Real patch-factory atlas/bounds checks and all16 source metadata tint selections
+pass. Foci's separate animated floating block display is not included in this
+structural model; it has no bearing on selecting the correct structural atlas.
+
+The terraformer OBJ's outer tubes extend .384229block beyond each horizontal
+side of its owner. Preserve these source positions, but flag owner-cell ray
+traversal as a limitation for rays that never enter the owning block.

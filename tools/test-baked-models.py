@@ -15,6 +15,11 @@ with tempfile.TemporaryDirectory(prefix='gwm-baked-') as out:
     subprocess.run(['javac','--release','8','-cp',str(args.classes)+':'+args.compile_classpath.read_text().strip(),'-d',out,
                     str(root/'src/main/java/org/dynmap/hdmap/renderer/AtlasMesh.java'),
                     str(root/'src/main/java/org/dynmap/hdmap/renderer/BakedMeshRenderer.java'),
+                    str(root/'src/main/java/org/dynmap/hdmap/renderer/WitchingTerraformRenderer.java'),
+                    str(root/'tools/tests/WitchingTerraformBehaviorTest.java'),
                     str(root/'tools/tests/BakedMeshBehaviorTest.java')],check=True)
     subprocess.run(['java','-cp',out+':'+str(root/'src/main/resources')+':'+str(args.classes)+':'+args.runtime_classpath.read_text().strip(),
                     'BakedMeshBehaviorTest']+args.models,check=True)
+
+    subprocess.run(['java','-cp',out+':'+str(root/'src/main/resources')+':'+str(args.classes)+':'+args.runtime_classpath.read_text().strip(),
+                    'WitchingTerraformBehaviorTest'],check=True)

@@ -67,8 +67,10 @@ public class BakedMeshBehaviorTest {
                 }
                 for(double uv:p.explicitTexCoords)check(uv>=-1e-8 && uv<=1+1e-8,"UV escaped clipped atlas cell");
             }
-            double minZ=resource.equals("models/baked/tinkersdefense-jewelers-bench.json")?-.25:0;
-            check(low[0]>=-1e-8 && high[0]<=1+1e-8 && low[2]>=minZ-1e-8 && high[2]<=1+1e-8,"Model exceeds source block footprint");
+            double minXZ=resource.equals("models/baked/witchinggadgets-terraformer.json")?-.384229:0;
+            double maxXZ=resource.equals("models/baked/witchinggadgets-terraformer.json")?1.384229:1;
+            double minZ=resource.equals("models/baked/tinkersdefense-jewelers-bench.json")?-.25:minXZ;
+            check(low[0]>=minXZ-1e-8 && high[0]<=maxXZ+1e-8 && low[2]>=minZ-1e-8 && high[2]<=maxXZ+1e-8,"Model exceeds source block footprint");
             check(low[1]>=-1e-8 && high[1]<=1.5+1e-8,"Model height out of expected bounds");
             System.out.println(resource+": "+patches.length+" atlas-clipped patches, bounds "+Arrays.toString(low)+".."+Arrays.toString(high));
         }
