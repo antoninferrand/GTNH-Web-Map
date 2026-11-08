@@ -147,3 +147,15 @@ separate glow images, plus pipe-output facing. Side/top/bottom scanner overlays
 are source-optional and absent in the installed JAR. Preserve their optional
 declarations so resource packs can still supply them. All four required front
 images and the MAX hull images exist in the installed GregTech JAR.
+
+## KubaTech electrode and detector hatches: 14203–14204
+
+Both constructors use IV hulls. Electrode hatch inherits MTEHatchInputBus, so
+its front uses PIPE_IN and source-ordered paint stripes. The detector uses
+HEAT_SENSOR plus its glow only while active. Both retain generic dynamic
+multiblock casing selection. All required PNGs, including the 16 stripes and
+heat sensor glow, exist in the installed GregTech JAR.
+
+Append to the existing KubaTech support file, reuse its loader registration,
+and explicitly mark the GregTech resource owner. Local IV hull/iconset records
+avoid depending on other renderdata files' load order.

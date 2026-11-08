@@ -36,3 +36,33 @@ block:id=%kubablocks,data=1,stdrot=true,face0-5=0:kubatech/tea_storage
 specialModSupportLoader:org.dynmap.modsupport.loaders.GregTechModSupportLoader,name=gtmte
 
 moddata:mod=gtmte,type=hatchbaseexpl,page=1,index=63,tex=0:kubatech/casing/defc_0
+
+# Electrode hatches use IV hulls and inherited generic hatch casing selection.
+texture:id=kubatech/gt/hull/side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_IV_SIDE.png,resourcemod=gregtech
+texture:id=kubatech/gt/hull/top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_IV_TOP.png,resourcemod=gregtech
+texture:id=kubatech/gt/hull/bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_IV_BOTTOM.png,resourcemod=gregtech
+moddata:mod=gtmte,type=iconset,name=kubatech.hull.iv,side=0:kubatech/gt/hull/side,top=0:kubatech/gt/hull/top,bottom=0:kubatech/gt/hull/bottom
+texture:id=kubatech/gt/OVERLAY_PIPE_IN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_IN.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_HATCH_HEAT_SENSOR,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_HEAT_SENSOR.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_HATCH_HEAT_SENSOR_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_HEAT_SENSOR_GLOW.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_BLACK,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_BLACK.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_RED,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_RED.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_GREEN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_GREEN.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_BROWN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_BROWN.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_BLUE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_BLUE.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_PURPLE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_PURPLE.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_CYAN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_CYAN.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_LIGHTGRAY,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_LIGHTGRAY.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_GRAY,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_GRAY.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_PINK,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_PINK.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_LIME,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_LIME.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_YELLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_YELLOW.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_LIGHTBLUE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_LIGHTBLUE.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_MAGENTA,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_MAGENTA.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_ORANGE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_ORANGE.png,resourcemod=gregtech
+texture:id=kubatech/gt/OVERLAY_PIPE_COLOR_WHITE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_WHITE.png,resourcemod=gregtech
+moddata:mod=gtmte,type=iconset,name=kubatech.electrode,output=0:kubatech/gt/OVERLAY_PIPE_IN,outputpaint1=0:kubatech/gt/OVERLAY_PIPE_COLOR_BLACK,outputpaint2=0:kubatech/gt/OVERLAY_PIPE_COLOR_RED,outputpaint3=0:kubatech/gt/OVERLAY_PIPE_COLOR_GREEN,outputpaint4=0:kubatech/gt/OVERLAY_PIPE_COLOR_BROWN,outputpaint5=0:kubatech/gt/OVERLAY_PIPE_COLOR_BLUE,outputpaint6=0:kubatech/gt/OVERLAY_PIPE_COLOR_PURPLE,outputpaint7=0:kubatech/gt/OVERLAY_PIPE_COLOR_CYAN,outputpaint8=0:kubatech/gt/OVERLAY_PIPE_COLOR_LIGHTGRAY,outputpaint9=0:kubatech/gt/OVERLAY_PIPE_COLOR_GRAY,outputpaint10=0:kubatech/gt/OVERLAY_PIPE_COLOR_PINK,outputpaint11=0:kubatech/gt/OVERLAY_PIPE_COLOR_LIME,outputpaint12=0:kubatech/gt/OVERLAY_PIPE_COLOR_YELLOW,outputpaint13=0:kubatech/gt/OVERLAY_PIPE_COLOR_LIGHTBLUE,outputpaint14=0:kubatech/gt/OVERLAY_PIPE_COLOR_MAGENTA,outputpaint15=0:kubatech/gt/OVERLAY_PIPE_COLOR_ORANGE,outputpaint16=0:kubatech/gt/OVERLAY_PIPE_COLOR_WHITE
+moddata:mod=gtmte,type=iconset,name=kubatech.electrode_detector,output=0:kubatech/gt/OVERLAY_HATCH_HEAT_SENSOR
+moddata:mod=gtmte,type=iconset,name=kubatech.electrode_detector_active,output=0:kubatech/gt/OVERLAY_HATCH_HEAT_SENSOR,output2=23000:kubatech/gt/OVERLAY_HATCH_HEAT_SENSOR_GLOW
+moddata:mod=gtmte,type=mte,id=14203,baseset=kubatech.hull.iv,iconset=kubatech.electrode,ishatch=true
+moddata:mod=gtmte,type=mte,id=14204,baseset=kubatech.hull.iv,iconset=kubatech.electrode_detector,activeset=kubatech.electrode_detector_active,ishatch=true
