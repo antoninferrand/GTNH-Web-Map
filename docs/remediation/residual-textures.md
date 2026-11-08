@@ -28,3 +28,9 @@ resource-pack images. Required/optional errors retain their existing handling.
 Validation: reviewed original/fallback lookup identity and per-pack storage;
 `git diff --check` passes. The ExtraUtilities processor regression exercises
 the intended original/fallback behavior alongside the actual mod's algorithm.
+
+Exact sentinel pixel validation additionally uses Minecraft 1.7.10's
+`TextureUtil` static initializer: color -524040 (RGBA 248,0,248,255) appears
+in the top-left/bottom-right 8x8 quadrants, and -16777216 is black in the
+other two. Every decoded pixel and every PNG chunk CRC was checked against
+that source pattern, rather than assuming generic full-intensity magenta.

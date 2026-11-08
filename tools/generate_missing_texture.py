@@ -12,7 +12,7 @@ def generate():
     for y in range(16):
         row = bytearray([0])
         for x in range(16):
-            row.extend((0, 0, 0, 255) if (x < 8) == (y < 8) else (255, 0, 255, 255))
+            row.extend((248, 0, 248, 255) if (x < 8) == (y < 8) else (0, 0, 0, 255))
         rows.append(bytes(row))
     return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', 16, 16, 8, 6, 0, 0, 0)) +
             chunk(b'IDAT', zlib.compress(b''.join(rows))) + chunk(b'IEND', b''))
