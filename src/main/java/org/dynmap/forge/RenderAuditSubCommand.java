@@ -7,6 +7,7 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import net.minecraft.block.Block;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import org.dynmap.DynmapCore;
@@ -32,6 +34,71 @@ final class RenderAuditSubCommand extends GwmSubCommand {
     RenderAuditSubCommand(DynmapPlugin plugin) {
         super("renderaudit");
         this.plugin = plugin;
+    }
+
+    /** Inspect saved registry variation definitions without loading icons or touching worlds. */
+    private static Map<String, Object> auditChiselVariants(Map<Integer, String> registered) {
+        Map<String, Object> result = new TreeMap<>();
+        for (Map.Entry<Integer, String> entry : registered.entrySet()) {
+            if (!entry.getValue().startsWith("chisel:")) continue;
+            Map<String, Object> row = new LinkedHashMap<>();
+            result.put(entry.getValue(), row);
+            try {
+                Block block = Block.getBlockById(entry.getKey());
+                if (block == null) {
+                    row.put("status", "UNAVAILABLE_BLOCK");
+                    continue;
+                }
+                row.put("class", block.getClass().getName());
+                Field helperField;
+                try {
+                    helperField = inheritedField(block.getClass(), "carverHelper");
+                } catch (NoSuchFieldException absentHelper) {
+                    row.put("status", "NO_HELPER");
+                    continue;
+                }
+                Object helper = helperField.get(block);
+                if (helper == null) {
+                    row.put("status", "NULL_HELPER");
+                    continue;
+                }
+                row.put("helperClass", helper.getClass().getName());
+                Object map = inheritedField(helper.getClass(), "infoMap").get(helper);
+                if (!(map instanceof Object[])) {
+                    row.put("status", "UNAVAILABLE_INFO_MAP");
+                    continue;
+                }
+                Object[] variants = (Object[]) map;
+                int mask = 0;
+                List<Integer> metadata = new ArrayList<>();
+                for (int meta = 0; meta < Math.min(16, variants.length); meta++) {
+                    if (variants[meta] == null) continue;
+                    mask |= 1 << meta;
+                    metadata.add(meta);
+                }
+                row.put("status", "OK");
+                row.put("infoMapLength", variants.length);
+                row.put("nonnullMetadataMask", mask);
+                row.put("nonnullMetadata", metadata);
+            } catch (ReflectiveOperationException | RuntimeException | LinkageError unavailable) {
+                row.put("status", "UNAVAILABLE");
+                row.put("diagnostic", unavailable.getClass().getName() + ": " + unavailable.getMessage());
+            }
+        }
+        return result;
+    }
+
+    private static Field inheritedField(Class<?> type, String name) throws NoSuchFieldException {
+        for (Class<?> current = type; current != null; current = current.getSuperclass()) {
+            try {
+                Field field = current.getDeclaredField(name);
+                field.setAccessible(true);
+                return field;
+            } catch (NoSuchFieldException notHere) {
+                // Some Chisel blocks inherit their helper or helper implementation.
+            }
+        }
+        throw new NoSuchFieldException(type.getName() + "." + name);
     }
 
     @Override
@@ -72,6 +139,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
             blocks.add(block);
         }
         report.put("blocks", blocks);
+        report.put("chiselVariants", auditChiselVariants(registered));
         report.put("blankMetadataNote", "Candidates include unused metadata; explicit invisible mappings are defined, not blank");
         report.put("failedCustomModels", HDBlockModels.getFailedCustomModels());
 
