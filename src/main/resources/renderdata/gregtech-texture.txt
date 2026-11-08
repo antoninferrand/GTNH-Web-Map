@@ -8801,3 +8801,10 @@ moddata:mod=gtmte,type=iconset,name=remediation.nano.OUTPUT,output=17000:remedia
 texture:id=remediation/nano/OVERLAY_VACUUM_HATCH_OUTPUT_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_VACUUM_HATCH_OUTPUT_ACTIVE.png,ycount=16
 moddata:mod=gtmte,type=iconset,name=remediation.nano.OUTPUT_active,output=17000:remediation/nano/OVERLAY_VACUUM_HATCH_OUTPUT_ACTIVE,output2=0:remediation/nano/OVERLAY_VACUUM_PIPE_PORT_OUTPUT
 moddata:mod=gtmte,type=mte,id=9502,baseset=hull.tier.09,iconset=remediation.nano.OUTPUT,activeset=remediation.nano.OUTPUT_active,ishatch=true
+
+# Nanochip redstone (GT5 5.09.54.265).
+texture:id=remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_SPLITTER_REDSTONE.png
+moddata:mod=gtmte,type=iconset,name=remediation.nano.redstone,output=0:remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE
+texture:id=remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_SPLITTER_REDSTONE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.nano.redstone_active,output=0:remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE,output2=23000:remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE_GLOW
+moddata:mod=gtmte,type=mte,id=9515,baseset=hull.tier.10,iconset=remediation.nano.redstone,activeset=remediation.nano.redstone_active,ishatch=true

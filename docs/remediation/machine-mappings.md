@@ -404,3 +404,10 @@ Vacuum conveyor hatches9501–9502 are UHV9. Their normal/active facing overlays
 
 All required PNGs were checked in the installed GregTech JAR inventory.
 Matching source PNG dimensions determine animated-strip frame counts.
+
+## Nanochip redstone
+
+Nanochip redstone9515 registers UEV10 and adds an independent glow layer only while active. Preserve normal facing overlay and generic hatch casing.
+
+All required PNGs were checked in the installed GregTech JAR inventory.
+Matching source PNG dimensions determine animated-strip frame counts.
