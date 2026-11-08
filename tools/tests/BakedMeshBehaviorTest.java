@@ -1,4 +1,6 @@
 import java.util.*;
+import java.lang.reflect.Proxy;
+import org.dynmap.renderer.MapDataContext;
 import org.dynmap.hdmap.renderer.BakedMeshRenderer;
 import org.dynmap.renderer.RenderPatch;
 import org.dynmap.utils.PatchDefinition;
@@ -13,6 +15,23 @@ public class BakedMeshBehaviorTest {
             check(renderer.initializeRenderer(new PatchDefinitionFactory(),1,0xffff,settings),"Baked model failed: "+resource);
             RenderPatch[] patches=renderer.getRenderPatchList(null);
             check(patches.length>0,"No model geometry");
+            if(renderer.getTileEntityFieldsNeeded().length>0) {
+                Set<RenderPatch[]> observed=Collections.newSetFromMap(new IdentityHashMap<RenderPatch[],Boolean>());
+                for(int input=0;input<6;input++)for(int output=0;output<6;output++) {
+                    final int in=input,out=output;
+                    MapDataContext context=(MapDataContext)Proxy.newProxyInstance(MapDataContext.class.getClassLoader(),
+                            new Class<?>[]{MapDataContext.class},(proxy,method,values)-> {
+                                if(method.getName().equals("getBlockTileEntityField"))return values[0].equals("inputFace")?in:out;
+                                throw new AssertionError("Unexpected context dependency "+method.getName());
+                            });
+                    RenderPatch[] pose=renderer.getRenderPatchList(context);
+                    check(pose.length==patches.length,"Pose changed source triangle coverage");
+                    check(pose==renderer.getRenderPatchList(context),"Equivalent state did not reuse immutable mesh");
+                    observed.add(pose);
+                }
+                check(observed.size()>=6,"Source direction poses are not being selected");
+                System.out.println(resource+": all36 input/output combinations and pose-cache identity passed");
+            }
             double[] low={100,100,100},high={-100,-100,-100};
             for(RenderPatch patch:patches) {
                 check(patch.getTextureIndex()>=0 && patch.getTextureIndex()<renderer.getMaximumTextureCount(),"Atlas tile out of bounds");

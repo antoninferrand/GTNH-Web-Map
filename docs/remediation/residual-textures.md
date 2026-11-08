@@ -121,3 +121,17 @@ there is no additional animated component to reconstruct.
 Validation: exact atlas path and512x256 dimensions checked against installed
 assets and matching source, source position/UV golden test passed, and the
 real renderer/patch factory accepts all336 patches and atlas indices.
+
+## Source-defined part orientation
+
+Baked parts can select rotations from bounded saved-state tables around their
+source pivot. The renderer requests only the declared NBT fields and caches
+immutable meshes by the selected finite poses. Unknown values share a default
+pose rather than creating an unbounded cache. The baker explicitly imports
+Blood Magic's input/output direction switches and maps model-space axes
+through the TESR outer transform; static frame pieces remain unchanged.
+
+Validation: source-baked group centroids point in each of the six expected
+Forge directions. Actual renderer tests exercise all36 input/output pairs and
+cache identity, with unchanged patch coverage and native atlas coordinates.
+Static life-infuser and node models are rechecked as regression controls.

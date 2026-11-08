@@ -67,7 +67,41 @@ def cuboid(box, uv, atlas, mirror=False):
     return result
 
 
-def bake(source, offset=(.5,1.5,.5), scale=(1,-1,-1)):
+def orientation_poses(source, scale):
+    """Explicitly bake the two documented Blood Magic direction switches."""
+    if len({abs(x) for x in scale})!=1:
+        raise ValueError('Direction poses require uniform outer scale')
+    determinant=math.prod(1 if x>0 else -1 for x in scale)
+    axes=[determinant*(1 if x>0 else -1) for x in scale]
+    cases={'DOWN':0,'UP':1,'NORTH':2,'SOUTH':3,'WEST':4,'EAST':5}
+    result={}
+    for kind in ['Input','Output']:
+        marker=re.search(r'switch\s*\(\s*'+kind.lower()+r'\s*\)\s*\{',source)
+        if not marker:continue
+        depth=1;end=marker.end()
+        while depth:
+            depth+=(source[end]=='{')-(source[end]=='}');end+=1
+        block=source[marker.end():end-1]
+        rotations={}
+        for case in re.finditer(r'case\s+(\w+)\s*:(.*?)(?=case\s+\w+\s*:|default\s*:|$)',block,re.S):
+            if case[1] not in cases:raise ValueError('Unknown Forge direction')
+            angles=[]
+            for axis in 'xyz':
+                expression=re.search(axis+kind+r'Rot\s*=\s*([^;]+);',case[2])
+                if not expression:raise ValueError('Missing direction angle')
+                value=expression[1].replace('(float)','').replace('Math.PI',str(math.pi))
+                value=re.sub(r'(?<=\d)[fFdD]','',value)
+                if re.search(r'[^0-9.eE+*/()\s-]',value):raise ValueError('Unsupported direction expression')
+                angles.append(math.degrees(eval(value,{'__builtins__':{}})))
+            rotations[str(cases[case[1]])]=[a*b for a,b in zip(angles,axes)]
+        pattern=r'(?:this\.)?setRotation\(\s*(?:this\.)?(\w+)\s*,\s*x'+kind+r'Rot\s*,\s*y'+kind+r'Rot\s*,\s*z'+kind+r'Rot\s*\)'
+        for part in re.findall(pattern,source):
+            result[part]={'field':kind.lower()+'Face','rotations':rotations,'default':[0,0,0]}
+    if not result:raise ValueError('No supported direction-driven parts found')
+    return result
+
+
+def bake(source, offset=(.5,1.5,.5), scale=(1,-1,-1), orientable=False):
     # The supported exports have a no-argument constructor and independent parts.
     source = re.sub(r'//[^\n]*|/\*.*?\*/','',source,flags=re.S)
     cls=re.search(r'class\s+(\w+)',source)[1]
@@ -76,6 +110,7 @@ def bake(source, offset=(.5,1.5,.5), scale=(1,-1,-1)):
     while depth:
         depth += (source[end]=='{')-(source[end]=='}');end+=1
     constructor=source[start:end-1]
+    poses=orientation_poses(source,scale) if orientable else {}
     if '.addChild(' in constructor:
         raise ValueError('Child transforms need explicit baking support')
     width=re.search(r'(?:this\.)?textureWidth\s*=\s*('+NUMBER+r')',constructor)
@@ -102,12 +137,17 @@ def bake(source, offset=(.5,1.5,.5), scale=(1,-1,-1)):
         rotation=numbers(rotation[1]) if rotation else [0,0,0]
         if len(rotation)!=3 or len(pivot)!=3:
             raise ValueError('Invalid part transform for '+name)
+        if name in poses:rotation=[0,0,0]
         triangles=cuboid(box_values,uv,atlas,mirrored)
         for tri in triangles:
             for index in [0,5,10]:
                 point=rotate(tri[index:index+3],rotation)
                 tri[index:index+3]=[offset[j]+scale[j]*(point[j]+pivot[j])/16 for j in range(3)]
-        parts.append({'name':name,'triangles':triangles})
+        part={'name':name,'triangles':triangles}
+        if name in poses:
+            part['pose']=poses[name]
+            part['pivot']=[offset[j]+scale[j]*pivot[j]/16 for j in range(3)]
+        parts.append(part)
     if not parts:
         raise ValueError('No ModelRenderer parts found')
     return {'atlas':[atlas[0]//16,atlas[1]//16],'parts':parts}
@@ -118,11 +158,12 @@ if __name__ == '__main__':
     parser.add_argument('source',type=pathlib.Path)
     parser.add_argument('output',type=pathlib.Path)
     parser.add_argument('--offset',default='.5,1.5,.5')
+    parser.add_argument('--bloodmagic-orientable',action='store_true',help='Import source input/output direction switches')
     parser.add_argument('--scale',default='1,-1,-1')
     parser.add_argument('--source-reference',help='Versioned source URL recorded with its SHA-256')
     parser.add_argument('--atlas-image',type=pathlib.Path,help='Actual PNG dimensions for higher-resolution atlases')
     args=parser.parse_args()
-    model=bake(args.source.read_text(),numbers(args.offset),numbers(args.scale))
+    model=bake(args.source.read_text(),numbers(args.offset),numbers(args.scale),args.bloodmagic_orientable)
     if args.atlas_image:
         raw=args.atlas_image.read_bytes()
         if raw[:8]!=b'\x89PNG\r\n\x1a\n':raise ValueError('Expected a PNG atlas')

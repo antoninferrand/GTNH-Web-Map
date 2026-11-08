@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate baked cuboids and, optionally, compare against actual Minecraft ModelBox."""
 import argparse
+import math
 import json
 import pathlib
 import runpy
@@ -40,3 +41,22 @@ if args.minecraft_jar:
                 assert all(abs(x-y)<1e-8 for x,y in zip(a,b)),(mirror,a,b)
         print('Exact Minecraft ModelBox positions/UVs match for ordinary and mirrored cuboids')
 print('Static ModelRenderer baking, TESR transform and unsupported-source checks passed')
+
+# Independently check source-baked connection group centroids against ForgeDirection.
+directions={0:[0,-1,0],1:[0,1,0],2:[0,0,-1],3:[0,0,1],4:[-1,0,0],5:[1,0,0]}
+for model_path in (root/'src/main/resources/models/baked').glob('bloodmagic-spell-*.json'):
+    model=json.loads(model_path.read_text())
+    for field in ['inputFace','outputFace']:
+        parts=[p for p in model['parts'] if p.get('pose',{}).get('field')==field]
+        if not parts:continue
+        vectors=[]
+        for part in parts:
+            vertices=[t[i:i+3] for t in part['triangles'] for i in [0,5,10]]
+            vectors.append([sum(p[j] for p in vertices)/len(vertices)-part['pivot'][j] for j in range(3)])
+        center=[sum(p[j] for p in vectors)/len(vectors) for j in range(3)]
+        for key,angles in parts[0]['pose']['rotations'].items():
+            actual=baker['rotate'](center,[math.radians(x) for x in angles])
+            direction=directions[int(key)]
+            largest=max(range(3),key=lambda i:abs(actual[i]))
+            assert actual[largest]*direction[largest]>0,(model_path,field,key,actual)
+        print(model_path.name,field,'all6 source connection directions validated')
