@@ -314,6 +314,8 @@ public class TexturePack {
         int idx;                    /* Index of tile in addonfiles */
         String filename;
         String modname;             /* Modname associated with file, if any */
+        String fallbackFilename;
+        String fallbackModname;
         int tilecnt_x, tilecnt_y;   /* Number of tiles horizontally and vertically */
         int tile_to_dyntile[];      /* Mapping from tile index in tile file to dynamic ID in global tile table (terrain_argb): 0=unassigned */
         TileFileFormat format;
@@ -782,7 +784,7 @@ public class TexturePack {
                 if (dtf.used == false) {    // Not used, skip it - save memory and avoid errors for downlevel mods and such
                     continue;
                 }
-                is = tpl.openModTPResource(dtf.filename, dtf.modname);
+                is = tpl.openModTPResource(dtf.filename, dtf.modname, dtf.fallbackFilename, dtf.fallbackModname, false);
                 try {
                     if(dtf.format == TileFileFormat.BIOME) {
                       loadBiomeShadingImage(is, i+IMG_CNT); /* Load image file */
@@ -3250,6 +3252,16 @@ public class TexturePack {
         }
         return -1;
     }
+    private static void applyTextureResourceOptions(DynamicTileFile file, String[] args) {
+        for (String arg : args) {
+            String[] parts = arg.split("=", 2);
+            if (parts.length != 2) continue;
+            if (parts[0].equals("resourcemod")) file.modname = parts[1];
+            else if (parts[0].equals("fallback")) file.fallbackFilename = parts[1];
+            else if (parts[0].equals("fallbackmod")) file.fallbackModname = parts[1];
+        }
+    }
+
     /**
      * Add new dynmaic file definition, or return existing
      *
@@ -3266,12 +3278,14 @@ public class TexturePack {
         /* Find existing, if already there */
         f = addonfilesbyname.get(fname);
         if (f != null && customProcessor == f.customProcessor) {
+            applyTextureResourceOptions(f, args);
             return f.idx;
         }
         /* Add new tile file entry */
         f = new DynamicTileFile();
         f.filename = fname;
         f.modname = modname;
+        applyTextureResourceOptions(f, args);
         f.tilecnt_x = xdim;
         f.tilecnt_y = ydim;
         f.format = fmt;

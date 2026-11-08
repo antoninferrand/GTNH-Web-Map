@@ -5,6 +5,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +32,8 @@ public class TexturePackLoader {
     }
     private HashMap<String, ModSource> src_by_mod = new HashMap<String, ModSource>();
     
+    private final Map<String, TextureResourceResolver.Lookup> resourceLookups = new LinkedHashMap<String, TextureResourceResolver.Lookup>();
+
     public TexturePackLoader(File tp, DynmapCore core) {        
         if (tp.isFile() && tp.canRead()) {
             try {
@@ -57,6 +64,30 @@ public class TexturePackLoader {
     }
     
     public InputStream openModTPResource(String rname, String modname) {
+        return openModTPResource(rname, modname, null, null, false);
+    }
+
+    public InputStream openModTPResource(String rname, String modname, String fallback, String fallbackmod, boolean optional) {
+        TextureResourceResolver.Result result = TextureResourceResolver.open(new TextureResourceResolver.Source() {
+            @Override
+            public InputStream open(String resource, String mod) {
+                return openResourceQuietly(resource, mod);
+            }
+        }, rname, modname, fallback, fallbackmod, optional);
+        resourceLookups.put(String.valueOf(modname) + ":" + rname, result.lookup);
+        if (result.lookup.outcome == TextureResourceResolver.Outcome.REQUIRED_MISSING && modname != null) {
+            Log.warning("Resource " + rname + " for mod " + modname + " not found"
+                    + (fallback == null ? "" : " (fallback " + fallback + " also missing)"));
+        }
+        return result.stream;
+    }
+
+    /** Snapshot for diagnostics; closing the loader releases its retained lookup metadata. */
+    public Collection<TextureResourceResolver.Lookup> getResourceLookups() {
+        return Collections.unmodifiableList(new ArrayList<TextureResourceResolver.Lookup>(resourceLookups.values()));
+    }
+
+    private InputStream openResourceQuietly(String rname, String modname) {
         try {
             if (zf != null) {
                 ZipEntry ze = zf.getEntry(rname);
@@ -114,10 +145,6 @@ public class TexturePackLoader {
         if (is == null) {
             is = getClass().getClassLoader().getResourceAsStream(RESOURCEPATH + "/" + rname);
         }
-        if ((is == null) && (modname != null)) {
-            Log.warning("Resource " + rname + " for mod " + modname + " not found");
-        }
-        
         return is;
     }
     public void close() {
@@ -131,6 +158,7 @@ public class TexturePackLoader {
             }
         }
         src_by_mod.clear();
+        resourceLookups.clear();
     }
     public void closeResource(InputStream is) {
         try {
