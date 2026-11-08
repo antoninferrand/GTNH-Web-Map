@@ -89,7 +89,8 @@ dependencies {
 
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:GT5-Unofficial:5.09.54.265:dev")
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:CropsNH:2.0.140:dev")
-    runtimeOnlyNonPublishable("com.github.GTNewHorizons:VendingMachine:0.4.103:dev")
+    // VendingMachine 0.4.103 is supplied by the external installed-pack fixture;
+    // this coordinate is not published on GTNH Maven.
     compileOnly("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev") {
         transitive = false
     }
