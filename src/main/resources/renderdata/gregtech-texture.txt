@@ -534,7 +534,6 @@ texture:id=gregtech/iconsets/RADIATION_ABSORBENT_CASING,filename=assets/gregtech
 texture:id=gregtech/iconsets/SPINMATRON_CASING,filename=assets/gregtech/textures/blocks/iconsets/SPINMATRON_CASING.png
 texture:id=gregtech/iconsets/SPINMATRON_GRATE,filename=assets/gregtech/textures/blocks/iconsets/SPINMATRON_GRATE.png
 texture:id=gregtech/iconsets/TEXTURE_METAL_PANEL_E,filename=assets/gregtech/textures/blocks/iconsets/TEXTURE_METAL_PANEL_E.png
-texture:id=gregtech/iconsets/TRANSPARENT,filename=assets/gregtech/textures/blocks/iconsets/TRANSPARENT.png
 texture:id=gregtech/iconsets/UEV_SIDE_CYCLOTRON_SOLENOID,filename=assets/gregtech/textures/blocks/iconsets/UEV_SIDE_CYCLOTRON_SOLENOID.png
 texture:id=gregtech/iconsets/UEV_TOP_CYCLOTRON_SOLENOID,filename=assets/gregtech/textures/blocks/iconsets/UEV_TOP_CYCLOTRON_SOLENOID.png
 texture:id=gregtech/iconsets/UHV_SIDE_CYCLOTRON_SOLENOID,filename=assets/gregtech/textures/blocks/iconsets/UHV_SIDE_CYCLOTRON_SOLENOID.png
@@ -1199,17 +1198,15 @@ block:id=%gt.blocktintedglass,data=4,data=5,data=6,data=7,data=8,data=9,data=10,
 # %gt.laserplate:* (gt.laserplate), render=(STANDARD), opaque=false,cls=gregtech.common.blocks.BlockLaser
 block:id=%gt.laserplate,data=*,stdrot=true,face0-5=0:gregtech/iconsets/LASER_PLATE
 
-# %gt.dronerenderer:* (gt.dronerenderer), render=(CUSTOM), opaque=false,cls=gregtech.common.blocks.BlockRenderer
-block:id=%gt.dronerenderer,data=*,stdrot=true,face0-5=0:gregtech/iconsets/TRANSPARENT
 
 # %gt.wormholerenderer:* (gt.wormholerenderer), render=(CUSTOM), opaque=false,cls=gregtech.common.blocks.BlockRenderer
-block:id=%gt.wormholerenderer,data=*,stdrot=true,face0-5=0:gregtech/iconsets/TRANSPARENT
+block:id=%gt.wormholerenderer,data=*,transparency=TRANSPARENT
 
 # %gt.blackholerenderer:* (gt.blackholerenderer), render=(CUSTOM), opaque=false,cls=gregtech.common.blocks.BlockRenderer
-block:id=%gt.blackholerenderer,data=*,stdrot=true,face0-5=0:gregtech/iconsets/TRANSPARENT
+block:id=%gt.blackholerenderer,data=*,transparency=TRANSPARENT
 
 # %gt.nanoforgerenderer:* (gt.nanoforgerenderer), render=(CUSTOM), opaque=false,cls=gregtech.common.blocks.BlockRenderer
-block:id=%gt.nanoforgerenderer,data=*,stdrot=true,face0-5=0:gregtech/iconsets/TRANSPARENT
+block:id=%gt.nanoforgerenderer,data=*,transparency=TRANSPARENT
 
 # %gt.blockores2:* (gt.blockores2), render=gregtech.common.render.GTRendererBlock(CUSTOM), opaque=true,cls=gregtech.common.blocks.GTBlockOre
 block:id=%gt.blockores2,data=*,stdrot=true,face0-5=12000:minecraft/stone

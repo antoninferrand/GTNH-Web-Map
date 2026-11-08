@@ -83,3 +83,8 @@ customblock:id=%gt.blockframes,class=org.dynmap.hdmap.renderer.GregTechFrameRend
 # %bw.sheetmetal:* (bw.sheetmetal), render=gregtech.common.render.GTRendererBlock(CUSTOM), opaque=true,cls=gregtech.common.blocks.BlockSheetMetal
 
 # %gt.blockcasings.cyclotron_coils:* (gt.blockcasings.cyclotron_coils), render=gregtech.common.render.GTRendererCasing(CUSTOM), opaque=true,cls=gregtech.common.blocks.BlockCyclotronCoils
+
+# BlockRenderer has no block-atlas base; client-only TESR effects are outside this static model.
+customblock:id=%gt.wormholerenderer,data=*,class=org.dynmap.hdmap.renderer.InvisibleBlockRenderer
+customblock:id=%gt.blackholerenderer,data=*,class=org.dynmap.hdmap.renderer.InvisibleBlockRenderer
+customblock:id=%gt.nanoforgerenderer,data=*,class=org.dynmap.hdmap.renderer.InvisibleBlockRenderer
