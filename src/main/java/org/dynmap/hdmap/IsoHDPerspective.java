@@ -469,7 +469,19 @@ public class IsoHDPerspective implements HDPerspective {
             return false;
         }
         
+        private void ensurePatchCapacity(int count) {
+            if (patch_t.length >= count) return;
+            // Texture slots can be shared by many geometric patches. Each patch
+            // can add an intercept, so size every parallel buffer for the mesh.
+            patch_t = new double[count];
+            patch_u = new double[count];
+            patch_v = new double[count];
+            patch_step = new BlockStep[count];
+            patch_id = new int[count];
+        }
+
         private final boolean handlePatches(RenderPatch[] patches, HDShaderState[] shaderstate, boolean[] shaderdone) {
+            ensurePatchCapacity(patches.length);
             int hitcnt = 0;
             /* Loop through patches : compute intercept values for each */
             for(int i = 0; i < patches.length; i++) {
