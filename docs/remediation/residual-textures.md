@@ -147,3 +147,9 @@ Validation: exact installed atlas assets/dimensions, actual ModelBox UV goldens,
 Replace the scraper placeholder for %AlchemicalWizardrytile.blockSpellEnhancement with its actual 24-part model and 128x64 model atlas. Select all16 metadata states using the matching TESpellEnhancementBlock.getResourceLocationForMeta source, including its explicit default. Saved inputFace/outputFace fields rotate only their source-defined connector groups; frame/core parts remain fixed. The outer180-degree Z rotation is baked as(-1,-1,1), not the Y rotation used by other mods.
 
 Validation: exact installed atlas assets/dimensions, actual ModelBox UV goldens, all36 input/output pose combinations, six directional group centroids and real patch-factory atlas/bounds checks passed.
+
+## Blood Magic spell modifier
+
+Replace the scraper placeholder for %AlchemicalWizardrytile.blockSpellModifier with its actual 19-part model and 64x64 model atlas. Select all16 metadata states using the matching TESpellModifierBlock.getResourceLocationForMeta source, including its explicit default. Saved inputFace/outputFace fields rotate only their source-defined connector groups; frame/core parts remain fixed. The outer180-degree Z rotation is baked as(-1,-1,1), not the Y rotation used by other mods.
+
+Validation: exact installed atlas assets/dimensions, actual ModelBox UV goldens, all36 input/output pose combinations, six directional group centroids and real patch-factory atlas/bounds checks passed.
