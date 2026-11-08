@@ -49,7 +49,13 @@ final class RenderAuditSubCommand extends GwmSubCommand {
 
         List<Map<String, Object>> blocks = new ArrayList<>();
         int blankMetadata = 0;
-        for (Map.Entry<Integer, String> entry : new TreeMap<>(core.getServer().getBlockIDMap()).entrySet()) {
+        // EndlessIDs' numeric array includes unassigned slots filled with air.
+        // Enumerate actual unique registry names rather than reporting 65,535 blocks.
+        Map<Integer, String> registered = new TreeMap<>();
+        for (Map.Entry<String, Integer> entry : core.getBlockIDMap().entrySet()) {
+            registered.put(entry.getValue(), entry.getKey());
+        }
+        for (Map.Entry<Integer, String> entry : registered.entrySet()) {
             if (entry.getKey() == 0) continue;
             Map<String, Object> block = new LinkedHashMap<>();
             block.put("id", entry.getKey());
