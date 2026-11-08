@@ -59,3 +59,5 @@ customblock:id=%AlchemicalWizardrytile.blockSpellParadigm,data=*,class=org.dynma
 customblock:id=%AlchemicalWizardrytile.blockSpellEnhancement,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/bloodmagic-spell-enhancement.json
 
 customblock:id=%AlchemicalWizardrytile.blockSpellModifier,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/bloodmagic-spell-modifier.json
+
+customblock:id=%AlchemicalWizardrytile.blockSpellEffect,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/bloodmagic-spell-effect.json
