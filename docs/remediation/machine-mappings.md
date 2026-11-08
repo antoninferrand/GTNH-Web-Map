@@ -167,3 +167,12 @@ mapped acid generators. They could overwrite corrected GregTech records based
 on file load order. Remove those duplicate MTE records; GregTech now owns the
 whole family. Preserve unrelated legacy texture/icon definitions for separate
 reachability review. This prevents a corrected record from silently reverting.
+
+## Mass solidifier: 368
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings10:13`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MASS_SOLIDIFIER`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
