@@ -182,6 +182,16 @@ def reconcile(baseline, current, original, runtime, evidence, assets, markdown=(
     return results
 
 
+def runtime_gate(runtime):
+    required = ['requiredMissingResources', 'textureDefinitionErrors', 'failedCustomModelBlocks',
+                'unmappedMtes', 'mappedMtesWithoutBase', 'unresolvedMteIconSets']
+    summary = runtime.get('summary', {})
+    failures = {key: summary[key] for key in required if summary.get(key, 0)}
+    unreported = [key for key in required if key not in summary]
+    passed = not failures and not unreported and runtime.get('schemaVersion', 0) >= 2 and runtime.get('resourceCoverage') == 'LOADED_PACKS_ONLY'
+    return passed, failures, unreported
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repo', type=Path, default=Path(__file__).resolve().parents[1])
@@ -208,6 +218,7 @@ def main():
     verified = {'loaded_original', 'replacement_loaded_source_verified', 'fallback_loaded_source_verified',
                 'optional_absent_source_verified', 'inactive_terrain_variant', 'retired_source_verified',
                 'inactive_declaration_source_verified', 'declaration_removed_source_verified'}
+    gate_passed, gate_failures, unreported = runtime_gate(runtime)
     source_head = subprocess.check_output(['git', '-C', str(args.repo), 'rev-parse', 'HEAD'], text=True).strip()
     summary = dict(baselineRows=len(rows), sourceHead=source_head, runtimeDynmapVersion=runtime.get('versions', {}).get('Dynmap'),
                    evidenceKindCounts=dict(sorted(Counter(kind for row in rows for kind in {p['kind'] for p in row['sourceEvidence']}).items())), statusCounts=dict(sorted(Counter(r['status'] for r in rows).items())),
@@ -215,7 +226,8 @@ def main():
                    needsReviewOrRuntime=sum(r['status'] not in verified for r in rows),
                    declarationCounts=dict(sorted(Counter(r['declarationStatus'] for r in rows).items())),
                    runtimeSchemaVersion=runtime.get('schemaVersion'), resourceCoverage=runtime.get('resourceCoverage'),
-                   runtimeSummary=runtime.get('summary'), baselineRevision=args.baseline_revision,
+                   runtimeSummary=runtime.get('summary'), runtimeGatePassed=gate_passed,
+                   runtimeGateFailures=gate_failures, runtimeUnreportedChecks=unreported, baselineRevision=args.baseline_revision,
                    baselineSha256=hashlib.sha256(baseline_path.read_bytes()).hexdigest(),
                    runtimeSha256=hashlib.sha256(args.runtime.read_bytes()).hexdigest(), missingBaselineSourceFiles=absent)
     report = dict(summary=summary, limitations=[
@@ -236,7 +248,7 @@ def main():
         for row in rows:
             writer.writerow({key: json.dumps(row[key], separators=(',', ':')) if isinstance(row[key], (list, dict)) else row[key] for key in fields})
     print(json.dumps(summary, indent=2))
-    return int(args.fail_on_gaps and summary['needsReviewOrRuntime'] > 0)
+    return int(args.fail_on_gaps and (summary['needsReviewOrRuntime'] > 0 or not summary['runtimeGatePassed']))
 
 
 if __name__ == '__main__':

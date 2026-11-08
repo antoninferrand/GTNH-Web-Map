@@ -63,7 +63,7 @@ Classification rules deliberately keep evidence boundaries visible:
 - Asset existence never substitutes for an observed runtime load. Runtime
   inactivity needs independent consumer/registry evidence.
 
-`python3 tools/test_baseline_reconciliation.py` exercises twelve production
+`python3 tools/test_baseline_reconciliation.py` exercises fourteen production
 policy cases, including unexplained removal, false document matches, required
 failures, optional/fallback contracts, inactive gates, per-file texture IDs,
 loader identity, and format skips without fabricated lookups.
@@ -74,3 +74,10 @@ explicit ledgers accounted for 586 source-backed asset/consumer outcomes and
 final claim that those 586 appearances match the Minecraft client. The final
 candidate report must be regenerated after the remaining migrations and fixes
 are loaded and rendered.
+
+`--fail-on-gaps` additionally requires the global runtime gate: zero required
+lookup failures, texture-definition errors, failed custom models, unmapped MTEs,
+missing MTE bases, and unresolved iconsets. Missing summary fields are reported
+as unverified checks rather than assumed zero. Thus all 637 baseline rows can
+be explained while an additional non-baseline resource/parser error still
+correctly prevents a clean final validation result.

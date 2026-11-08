@@ -2,7 +2,7 @@
 """Evidence-boundary checks for the production baseline reconciliation policy."""
 import unittest
 from pathlib import Path
-from reconcile_baseline_textures import reconcile
+from reconcile_baseline_textures import reconcile, runtime_gate
 
 
 class ReconciliationPolicyTest(unittest.TestCase):
@@ -72,6 +72,23 @@ class ReconciliationPolicyTest(unittest.TestCase):
         row = self.run_row(current=[self.definition()], assets=['old.png'])
         self.assertEqual(row['status'], 'declared_not_runtime_observed')
         self.assertTrue(row['originalAssetExists'])
+
+    def test_runtime_gate_keeps_global_and_parser_failures(self):
+        runtime = {'schemaVersion': 2, 'resourceCoverage': 'LOADED_PACKS_ONLY', 'summary': {
+            'requiredMissingResources': 1, 'textureDefinitionErrors': 1, 'failedCustomModelBlocks': 0,
+            'unmappedMtes': 0, 'mappedMtesWithoutBase': 0, 'unresolvedMteIconSets': 0}}
+        passed, failures, unreported = runtime_gate(runtime)
+        self.assertFalse(passed)
+        self.assertEqual(failures, {'requiredMissingResources': 1, 'textureDefinitionErrors': 1})
+        self.assertEqual(unreported, [])
+        runtime['summary']['requiredMissingResources'] = 0
+        runtime['summary']['textureDefinitionErrors'] = 0
+        self.assertTrue(runtime_gate(runtime)[0])
+
+    def test_unreported_checks_do_not_fabricate_a_clean_runtime(self):
+        passed, failures, unreported = runtime_gate({'schemaVersion': 2, 'resourceCoverage': 'LOADED_PACKS_ONLY'})
+        self.assertFalse(passed)
+        self.assertTrue(unreported)
 
     def test_texture_ids_are_file_qualified(self):
         other = dict(self.definition('wrong.png'), source='other-texture.txt', loader_mod='other')
