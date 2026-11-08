@@ -279,3 +279,14 @@ structural model; it has no bearing on selecting the correct structural atlas.
 The terraformer OBJ's outer tubes extend .384229block beyond each horizontal
 side of its owner. Preserve these source positions, but flag owner-cell ray
 traversal as a limitation for rays that never enter the owning block.
+
+## ThaumicBases node linker
+
+Use the actual1.9.22 OBJ and256x256 nodeLinkerUV atlas, with the exact TESR
+(.5,0,.5) translation and .5uniform scale. Replace its fake missing-icon mapping
+with native16pixel atlas cells. Source model SHA/version URL is recorded in the
+baked geometry; installed asset existence and patch-factory UV/bounds checks pass.
+
+The exact node linker model extends .1597315block horizontally and .183729block
+below its owner. Retain these coordinates and flag the same owner-cell ray
+traversal limitation as the source terraformer.

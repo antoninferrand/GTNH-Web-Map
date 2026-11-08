@@ -67,11 +67,12 @@ public class BakedMeshBehaviorTest {
                 }
                 for(double uv:p.explicitTexCoords)check(uv>=-1e-8 && uv<=1+1e-8,"UV escaped clipped atlas cell");
             }
-            double minXZ=resource.equals("models/baked/witchinggadgets-terraformer.json")?-.384229:0;
-            double maxXZ=resource.equals("models/baked/witchinggadgets-terraformer.json")?1.384229:1;
-            double minZ=resource.equals("models/baked/tinkersdefense-jewelers-bench.json")?-.25:minXZ;
-            check(low[0]>=minXZ-1e-8 && high[0]<=maxXZ+1e-8 && low[2]>=minZ-1e-8 && high[2]<=maxXZ+1e-8,"Model exceeds source block footprint");
-            check(low[1]>=-1e-8 && high[1]<=1.5+1e-8,"Model height out of expected bounds");
+            double[] limits={0,0,0,1,1.5,1};
+            if(resource.equals("models/baked/tinkersdefense-jewelers-bench.json"))limits=new double[]{0,0,-.25,1,1.5,1};
+            if(resource.equals("models/baked/witchinggadgets-terraformer.json"))limits=new double[]{-.384229,0,-.384229,1.384229,1.5,1.384229};
+            if(resource.equals("models/baked/thaumicbases-node-linker.json"))limits=new double[]{-.1597315,-.183729,-.1597315,1.1597315,.9055955,1.1597315};
+            if(resource.startsWith("models/baked/thaumicbases-node-manipulator-"))limits=new double[]{-.030673,.4,-.030673,1.030673,1,1.030673};
+            for(int axis=0;axis<3;axis++)check(low[axis]>=limits[axis]-1e-8 && high[axis]<=limits[axis+3]+1e-8,"Model exceeds source bounds");
             System.out.println(resource+": "+patches.length+" atlas-clipped patches, bounds "+Arrays.toString(low)+".."+Arrays.toString(high));
         }
     }

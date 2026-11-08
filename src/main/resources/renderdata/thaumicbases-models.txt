@@ -118,3 +118,5 @@ patchblock:id=%goldenOakSapling,patch0=VertX1Z0ToX0Z1#0,patch1=VertX1Z0ToX0Z1@90
 
 # %entityDeconstructor:* (entityDeconstructor), render=(CUSTOM), opaque=false,cls=tb.common.block.BlockEntityDeconstructor
 boxblock:id=%entityDeconstructor,xmin=0.0,xmax=1.0,ymin=0.0,ymax=0.10000000149011612,zmin=0.0,zmax=1.0,data=*
+
+customblock:id=%nodeLinker,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/thaumicbases-node-linker.json
