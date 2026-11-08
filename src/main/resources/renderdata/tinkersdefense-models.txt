@@ -71,3 +71,5 @@ boxblock:id=%moltenDogbearium,ymax=0.25,data=14
 boxblock:id=%moltenDogbearium,ymax=0.125,data=15
 
 customblock:id=%Block_JewelersBench,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/tinkersdefense-jewelers-bench.json
+
+customblock:id=%Block_ArmorAnvil,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/tinkersdefense-armor-anvil.json

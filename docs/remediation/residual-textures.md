@@ -220,3 +220,11 @@ ModelRenderer.render matrix stack does, and recognizes Tabula's setRotateAngle
 helper. It rejects cycles, multiple parents, missing parents and dynamic nested
 poses. A hand-derived90-degree parent rotation fixture validates child pivot
 composition; actual ModelBox UV goldens and existing models remain valid.
+
+## TinkersDefense armor anvil
+
+Replace its fake missing-icon reference with actual1.3.4 ArmorAnvil64x64atlas
+and six source cuboids. The hammer handle follows its parent hammer head's
+non-axis-aligned rotation and pivot. Match the renderer180-degree Z transform;
+metadata does not rotate this source model. Installed asset/dimensions checked,
+ModelBox UV golden and real patch-factory geometry/atlas checks pass.
