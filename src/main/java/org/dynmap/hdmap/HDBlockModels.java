@@ -232,7 +232,7 @@ public class HDBlockModels {
 
         @Override
         public int getTextureCount() {
-            return render.getMaximumTextureCount(pdf);
+            return render == null ? 0 : render.getMaximumTextureCount(pdf);
         }
 
         private static final RenderPatch[] empty_list = new RenderPatch[0];
@@ -497,7 +497,8 @@ public class HDBlockModels {
         if(customModelsRequestingTileData.get(idx)) {
             HDBlockModel mod = models_by_id_data.get(idx);
             if(mod instanceof CustomBlockModel) {
-                return ((CustomBlockModel)mod).render.getTileEntityFieldsNeeded();
+                CustomRenderer renderer = ((CustomBlockModel)mod).render;
+                return renderer == null ? null : renderer.getTileEntityFieldsNeeded();
             }
         }
         return null;
