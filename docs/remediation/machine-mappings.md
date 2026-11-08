@@ -235,3 +235,21 @@ Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_DISTI
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Exothermic hearth: 15517
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings14:3`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_HEARTH`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Endothermic fridge: 15518
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings14:4`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_FRIDGE`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.

@@ -8452,3 +8452,29 @@ texture:id=remediation/controller/15516/front_ACTIVE,filename=assets/gregtech/te
 texture:id=remediation/controller/15516/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_DISTILLATION_TOWER_ACTIVE_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.controller.15516_active,output=0:remediation/controller/15516/front_ACTIVE,output2=23000:remediation/controller/15516/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=15516,mtetype=controller,baseset=remediation.controller.base.15516,iconset=remediation.controller.15516,activeset=remediation.controller.15516_active
+
+# Exothermic hearth (GT 5.09.54.265).
+texture:id=remediation/controller/15517/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_HEARTH_BOTTOM.png
+texture:id=remediation/controller/15517/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_HEARTH_TOP.png
+texture:id=remediation/controller/15517/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_HEARTH_SIDE.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15517,bottom=0:remediation/controller/15517/base_bottom,top=0:remediation/controller/15517/base_top,side=0:remediation/controller/15517/base_side
+texture:id=remediation/controller/15517/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_HEARTH.png
+texture:id=remediation/controller/15517/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_HEARTH_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15517,output=0:remediation/controller/15517/front,output2=23000:remediation/controller/15517/glow
+texture:id=remediation/controller/15517/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_HEARTH_ACTIVE.png
+texture:id=remediation/controller/15517/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_HEARTH_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15517_active,output=0:remediation/controller/15517/front_ACTIVE,output2=23000:remediation/controller/15517/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15517,mtetype=controller,baseset=remediation.controller.base.15517,iconset=remediation.controller.15517,activeset=remediation.controller.15517_active
+
+# Endothermic fridge (GT 5.09.54.265).
+texture:id=remediation/controller/15518/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FRIDGE_BOTTOM.png
+texture:id=remediation/controller/15518/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FRIDGE_TOP.png
+texture:id=remediation/controller/15518/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_FRIDGE_SIDE.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15518,bottom=0:remediation/controller/15518/base_bottom,top=0:remediation/controller/15518/base_top,side=0:remediation/controller/15518/base_side
+texture:id=remediation/controller/15518/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_FRIDGE.png
+texture:id=remediation/controller/15518/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_FRIDGE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15518,output=0:remediation/controller/15518/front,output2=23000:remediation/controller/15518/glow
+texture:id=remediation/controller/15518/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_FRIDGE_ACTIVE.png
+texture:id=remediation/controller/15518/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_FRIDGE_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15518_active,output=0:remediation/controller/15518/front_ACTIVE,output2=23000:remediation/controller/15518/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15518,mtetype=controller,baseset=remediation.controller.base.15518,iconset=remediation.controller.15518,activeset=remediation.controller.15518_active
