@@ -73,3 +73,21 @@ Validation: `python3 tools/test-atlas-mesh.py` compiles and executes the real
 helper, checking400 randomized triangles over five atlas resolutions, total
 surface area, bounds, row orientation, repeat wrapping, constant UV edge cases
 and rejection of non-finite coordinates.
+
+## Source-baked static ModelRenderer models
+
+`tools/bake-techne-model.py` imports literal independent cuboids from a mod's
+ModelRenderer constructor, including box UV offsets, pivots, local Euler
+rotations, mirroring at construction time, inflation and the declared atlas.
+It applies the renderer's explicit outer transform supplied on the command
+line, rejecting child hierarchies, nonliteral coordinates and multiple-box
+constructs until explicitly supported. `BakedMeshRenderer` loads the resulting
+CPU-only geometry and uses `AtlasMesh` to preserve atlas cell resolution.
+There is no linkage to a mod's client model class or GL methods on the server.
+
+Validation: `tools/test-techne-baker.py` checks supported/rejected source forms
+and the block-space TESR transform. With `--minecraft-jar` and
+`--runtime-classpath`, it executes the actual Minecraft 1.7.10 `ModelBox` class
+(without rendering) and compares every exported position and UV for ordinary
+and mirrored cuboids. `tools/test-baked-models.py` exercises the real patch
+factory, atlas index/UV bounds and exported model bounds.
