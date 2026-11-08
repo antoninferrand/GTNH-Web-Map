@@ -87,3 +87,9 @@ casings. The production fixture now invokes the actual private
 through `face5` images, then checks every controller orientation and hatch
 selection. The original synthetic array fixture would not have caught this
 convention mismatch; the corrected parser-based checks pass all 257 assertions.
+
+These fixed controller casing textures are also explicitly `paint=false`:
+their traced `getTexture`/`getCasingTexture` implementations do not consume the
+requested paint color. Their source block images retain their own design and
+the shared renderer no longer multiplies the entire fixed casing and overlay
+by saved `mColor`. This uses the existing tested per-record opt-out.
