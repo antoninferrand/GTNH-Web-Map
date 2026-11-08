@@ -124,6 +124,9 @@ public class GregTechSupport {
 
         ent.baseTexture = getTexture(data, "basetex", filetoidx);
         ent.baseTexture2 = getTexture(data, "basetex2", filetoidx);
+        ent.wireTexture = getTexture(data, "wiretex", filetoidx);
+        ent.endTexture = getTexture(data, "endtex", filetoidx);
+        if (data.get("wirecolor") != null) ent.wireColor = Integer.parseInt(data.get("wirecolor"), 16);
 
         String isHatch = data.get("ishatch");
 
@@ -312,6 +315,8 @@ public class GregTechSupport {
     public class MetaTileEntityEntry{
         public int baseTexture = -1;
         public int baseTexture2 = -1;
+        public int wireTexture = -1, endTexture = -1;
+        public int wireColor = 0xFFFFFF;
         public volatile IconSet baseTextureSet;
         public volatile IconSet icons;
         public volatile IconSet activeIcons;

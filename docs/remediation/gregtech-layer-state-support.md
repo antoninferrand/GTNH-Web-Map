@@ -49,3 +49,10 @@ from being marked used solely by old page declarations. The original explicit
 reference remains the fallback when no supported registered copied-block casing
 exists. An unmapped authoritative block still returns a missing texture; it is
 not replaced by an arbitrary old image.
+
+## Opt-in cable conductor/end textures
+
+MTE records can additionally declare `wiretex`, `wirecolor` (RGB hexadecimal)
+and `endtex` for separate conductor, insulation and connector-cap rendering.
+These fields default to absent/white, so existing pipe and cable records retain
+the original shared renderer until explicitly opted into the cable adapter.
