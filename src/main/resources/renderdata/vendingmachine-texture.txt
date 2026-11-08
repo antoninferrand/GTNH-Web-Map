@@ -1,0 +1,20 @@
+# VendingMachine 0.4.103: fixed casing, controller and ME uplink textures.
+version:1.7
+modname:vendingmachine
+specialModSupportLoader:org.dynmap.modsupport.loaders.GregTechModSupportLoader,name=gtmte
+
+texture:id=vendingmachine/casing,filename=assets/vendingmachine/textures/blocks/vending_machine_casing.png
+texture:id=vendingmachine/front_off,filename=assets/vendingmachine/textures/blocks/vending_machine_front_off.png
+texture:id=vendingmachine/front_on,filename=assets/vendingmachine/textures/blocks/vending_machine_front_on.png
+texture:id=vendingmachine/front_glow,filename=assets/vendingmachine/textures/blocks/vending_machine_front_on_glow.png,ycount=4
+texture:id=vendingmachine/uplink_off,filename=assets/vendingmachine/textures/blocks/vending_uplink_machine_overlay_inactive.png
+texture:id=vendingmachine/uplink_on,filename=assets/vendingmachine/textures/blocks/vending_uplink_machine_overlay_active.png
+
+block:id=%casing,data=0,stdrot=true,face0-5=0:vendingmachine/casing
+moddata:mod=gtmte,type=hatchbase,block=vendingmachine:casing
+moddata:mod=gtmte,type=iconset,name=vendingmachine/controller_off,output=0:vendingmachine/front_off
+moddata:mod=gtmte,type=iconset,name=vendingmachine/controller_on,output=0:vendingmachine/front_on,output2=23000:vendingmachine/front_glow
+moddata:mod=gtmte,type=iconset,name=vendingmachine/uplink_off,output=0:vendingmachine/uplink_off
+moddata:mod=gtmte,type=iconset,name=vendingmachine/uplink_on,output=0:vendingmachine/uplink_on
+moddata:mod=gtmte,type=mte,id=2741,mtetype=controller,basetex=0:vendingmachine/casing,iconset=vendingmachine/controller_off,activeset=vendingmachine/controller_on,paint=false
+moddata:mod=gtmte,type=mte,id=2742,ishatch=true,inheritcasing=false,basetex=0:vendingmachine/casing,iconset=vendingmachine/uplink_off,activeset=vendingmachine/uplink_on,paint=false
