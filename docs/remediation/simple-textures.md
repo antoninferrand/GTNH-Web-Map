@@ -116,3 +116,46 @@ Validation: checked all six model maps against ForgeDirection order
 source-selected face. `TileDigitalDetector.writeToNBT` persists the requested
 byte; `RotatedBoxRenderer` accepts Number fields and requests that attribute.
 `git diff --check` passes. Fixture rendering remains the visual check.
+
+## Reachability of legacy IC2 crop recipes
+
+`IC2CropsSupportLoader` now snapshots the installed IC2 registry before parsing
+crop stage references. A definition is loaded only if its exact crop name is
+registered and, when supplied, its owner matches. Thus absent legacy recipes do
+not mark nonexistent PNGs as used. Registered crops still parse their stages
+normally, including retaining required-resource failures. If IC2 or the
+registry API is unavailable, preserve prior behavior; warn when IC2 is present
+but its registry cannot be inspected. Skip counts are exposed through getters
+and cumulative diagnostic messages.
+
+Owner evidence: all 55 GregTech legacy crop names appear explicitly as
+`gregtech:<name>` in CropsNH 2.0.140 `handler/migrations/IC2Migrations.java`.
+The same source identifies Hemp as `Gtplusplus:Hemp`. Annotate those 56
+records. Force's historical owner is not established here, so retain its
+owner-less conservative matching behavior. Existing IC2 recipes without owner
+continue matching any registered crop with the same exact name.
+
+GregTech 5.09.54.265 has no IC2 CropCard/registration implementation, while
+CropsNH's existing renderer and definitions handle the migrated crop registry.
+Do not remap the old IC2 support names into CropsNH just because images look
+similar: Rape migrates to Canola; Quantaria migrates probabilistically to
+Osmianth/Iridine; those are not simple filename aliases. The loaded registry
+is authoritative if another pack/mod still registers a legacy crop.
+
+Timing: `DynmapMod.serverStarted(FMLServerStartedEvent)` starts the plugin and
+`DynmapPlugin.onStart()` enables core/texture support after mod init/post-init
+crop registrations. A null registry fails open instead of falsely declaring
+all crops absent. The optional IC2 API is isolated in a nested reader class
+and pinned as a compile-only dependency, with the existing runtime pin retained.
+
+Validation: `python3 -m unittest discover -s tools/tests -p
+ test_ic2_crop_registry.py` compiles and executes the actual Java loader against
+registry and texture-boundary doubles. It verifies owner collisions, registered
+crops, owner-less compatibility, preservation of required failures, null and
+empty registries, counter reset, and loading with no IC2 classes on the classpath.
+It also passes all 57 actual GT/GT++ support definitions through an IC2-only
+registry: 221 stage references remain inactive, including all 207 baseline
+missing references (197 GT + ten GT++). The other 14 stage references were not
+missing baseline resources. This is runtime reachability gating, not deletion
+or migration of support entries. A fixture/server registry audit remains the
+integration check of the concrete target registry contents.
