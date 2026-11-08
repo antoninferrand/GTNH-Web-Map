@@ -41,3 +41,14 @@ Source evidence at GregTech 5.09.54.265:
 Only the 270 baseline resource paths covered by these contracts are annotated
 in this change. Every duplicate texture declaration for the same path receives
 the same property; this avoids depending on which alias registers first.
+
+## Custom GT++ material paths
+
+The six baseline mixed-case AstralTitanium, CelestialTungsten and ChromaticGlass
+block/frame references were initially classified as fallback candidates. Their
+actual images exist in the installed GregTech JAR under lowercase custom set
+names. `TextureSet.SET_ASTRAL_TITANIUM`, `SET_CELESTIAL_TUNGSTEN` and
+`SET_CHROMATIC_GLASS` declare those lowercase names and GT++ `MaterialsElements`
+uses those texture sets. Correcting the original paths and selecting the
+`gregtech` owner preserves the real material appearance; using `NONE` alone
+would incorrectly replace the actual design. See the accompanying evidence CSV.
