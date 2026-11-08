@@ -1,0 +1,94 @@
+{
+  "baselineRows": 637,
+  "sourceHead": "ccc2d771d19dfdcb094280da03782be2d8c085f9",
+  "runtimeDynmapVersion": "ccc2d77",
+  "evidenceKindCounts": {
+    "consumer_migration": 75,
+    "generated_fallback": 17,
+    "invisible_base": 3,
+    "material_fallback": 12,
+    "optional": 270,
+    "registry_gate": 241,
+    "retirement": 7,
+    "source_correction": 19
+  },
+  "statusCounts": {
+    "fallback_loaded_source_verified": 22,
+    "inactive_declaration_source_verified": 277,
+    "optional_absent_source_verified": 270,
+    "replacement_loaded_source_verified": 58,
+    "retired_source_verified": 10
+  },
+  "verifiedAssetOrConsumerOutcomes": 637,
+  "needsReviewOrRuntime": 0,
+  "declarationCounts": {
+    "migrated": 21,
+    "removed_or_prebaseline_correction": 47,
+    "retained": 569
+  },
+  "runtimeSchemaVersion": 2,
+  "resourceCoverage": "LOADED_PACKS_ONLY",
+  "runtimeSummary": {
+    "registeredBlocks": 4258,
+    "blankMetadataCandidates": 3028,
+    "registeredMtes": 3412,
+    "unmappedMtes": 0,
+    "mappedMtesWithoutBase": 0,
+    "unresolvedMteIconSets": 0,
+    "inactiveMissingTerrainVariants": 0,
+    "requiredMissingResources": 0,
+    "optionalAbsentResources": 325,
+    "fallbackResources": 23,
+    "failedCustomModelBlocks": 0,
+    "textureDefinitionErrors": 0
+  },
+  "runtimeGatePassed": true,
+  "runtimeGateFailures": {},
+  "runtimeUnreportedChecks": [],
+  "baselineRevision": "e0cb1f30",
+  "baselineSha256": "ccc4ab25eb108a3472d68a6eb04e98ca48ea6a7e45703986e0c0f989e2378508",
+  "runtimeSha256": "a0fb691b64773f78086758e4f8330abd92c0621bf66362b057aed29691d63e99",
+  "missingBaselineSourceFiles": [],
+  "artifact": {
+    "artifact": "gtnh-web-map-ccc2d77.jar",
+    "sourceCommit": "ccc2d771d19dfdcb094280da03782be2d8c085f9",
+    "sha256": "b8677d38e57ea2c80e996214287c1ff0a60466386de505ee740c44ca9085f803"
+  },
+  "scope": "Final production loaded-pack audit; independently reconciled against current root definitions",
+  "ledgerCsv": "final-baseline637-reconciliation.csv",
+  "ledgerCsvSha256": "b2feb554d659df6bc9081093c439e38e02d4d18174964edf7a449173b025e3a4",
+  "ledgerByteIdenticalToIsolated": true,
+  "renderRefresh": {
+    "center": [
+      626,
+      -200
+    ],
+    "radius": 64,
+    "flat": {
+      "status": "completed",
+      "tiles": 36,
+      "evidence": "root production console confirmation"
+    },
+    "surface": {
+      "status": "queued_pending",
+      "evidence": "root queued separately after initial already-active rejection"
+    }
+  },
+  "gitHubPush": "Not performed; canceled by latest user instruction",
+  "isolatedVisualEvidence": {
+    "sourceCommit": "af109fdb407a937617cf2cdf69fcb9a2e562cd26",
+    "artifactSha256": "5d91c7897e6491f59e41c7cf1d8c23d48ff8fd8bd82ab5831284c2214c0564e9",
+    "report": "../final-validation.md"
+  },
+  "productionRenderRefresh": {
+    "world": "World",
+    "center": [
+      626,
+      -200
+    ],
+    "radius": 64,
+    "flatTiles": 36,
+    "surfaceTiles": 952,
+    "completed": true
+  }
+}
