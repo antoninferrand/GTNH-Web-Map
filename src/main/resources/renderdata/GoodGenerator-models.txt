@@ -263,3 +263,6 @@ boxblock:id=%supercriticalSteam,ymax=0.5,data=12
 boxblock:id=%supercriticalSteam,ymax=0.375,data=13
 boxblock:id=%supercriticalSteam,ymax=0.25,data=14
 boxblock:id=%supercriticalSteam,ymax=0.125,data=15
+
+# AntimatterRenderBlock has no visible base-block geometry or atlas sprite.
+customblock:id=%antimatterRenderBlock,data=*,class=org.dynmap.hdmap.renderer.InvisibleBlockRenderer

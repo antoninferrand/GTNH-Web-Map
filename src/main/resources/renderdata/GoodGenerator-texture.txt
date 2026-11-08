@@ -103,7 +103,6 @@ texture:id=GoodGenerator/yottaFluidTankCell/8,filename=assets/goodgenerator/text
 texture:id=GoodGenerator/yottaFluidTankCell/9,filename=assets/goodgenerator/textures/blocks/yottaFluidTankCell/9.png
 texture:id=gregtech/iconsets/CONCRETE_LIGHT_STONE,filename=assets/gregtech/textures/blocks/iconsets/CONCRETE_LIGHT_STONE.png
 texture:id=gregtech/iconsets/MACHINE_CASING_MINING_BLACKPLUTONIUM,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MINING_BLACKPLUTONIUM.png
-texture:id=gregtech/iconsets/TRANSPARENT,filename=assets/gregtech/textures/blocks/iconsets/TRANSPARENT.png
 
 
 
@@ -213,7 +212,7 @@ block:id=%antimatterAnnihilationMatrix,data=*,stdrot=true,face0-5=0:GoodGenerato
 block:id=%gravityStabilizationCasing,data=*,stdrot=true,face0-5=0:GoodGenerator/gravityStabilizationCasing
 
 # %antimatterRenderBlock:* (antimatterRenderBlock), render=(STANDARD), opaque=false,cls=goodgenerator.blocks.regularBlock.AntimatterRenderBlock
-block:id=%antimatterRenderBlock,data=*,stdrot=true,face0-5=0:gregtech/iconsets/TRANSPARENT
+block:id=%antimatterRenderBlock,data=*,transparency=TRANSPARENT
 
 # %magicCasing:* (magicCasing), render=(STANDARD), opaque=true,cls=goodgenerator.blocks.regularBlock.BlockCasing
 block:id=%magicCasing,data=*,stdrot=true,face0-5=0:GoodGenerator/MagicCasing

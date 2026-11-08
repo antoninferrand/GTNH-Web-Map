@@ -338,3 +338,38 @@ until the next successful server tick, rather than inventing a water level.
 Executable tests verify immutable publication, cross-world rejection, fractional
 height, dry cells and submerged cells through the actual patch factory. Fullpack
 fixture boot/tick and changed-volume invalidation remain integration validation.
+
+## WitchingGadgets two-block wall mirror
+
+Its nonexistent nil.png is replaced with the actual source pixel-block frame
+and inactive glass atlas frame. Extract source palette/shape into reproducible
+JSON; retain per-pixel cuboid thickness and source RGB/256 tint. Crop the first
+64x128 glass frame into32 native16pixel cells from the actual2048x256atlas,
+without resampling away detail.
+
+Render each half inside its real block: the dummy upper block reconstructs the
+source's mirrored upper frame and reads persistent isActive from the lower block
+snapshot. All four saved facings match the source OpenGL transforms (Dynmap's
+patch-factory rotations use the opposite sign). Active mirrors omit inactive
+glass as the source does; animated activation transitions/player reflections
+are client effects and are not reconstructed.
+
+Tests cover all16 half/facing/active combinations, geometry bounds inside each
+owner cell, isolated frame tint and every extracted native source glass pixel.
+
+## GoodGenerator invisible antimatter base: active effect still unsupported
+
+Exact GregTech5.09.54.265 AntimatterRenderBlock registers no block-atlas icon,
+returns renderType -1 and delegates its visible effects to AntimatterRenderer.
+Remove the nonexistent TRANSPARENT.png reference and false solid cube, using
+explicit invisible-base geometry and a transparent blank mapping. This closes
+a false resource requirement only; it does not implement the active antimatter
+effect.
+
+The active effect is a time-dependent shader-deformed OBJ with a maximum7block
+radius, a black containment sphere, and optional protomatter beams/ring. Its
+geometry lies beyond Dynmap's patch coordinate range[-1,2] and owner-cell ray
+lookup. Correct support needs a multi-block owner lookup plus CPU evaluation of
+source vertex deformation/colors, saved scale/spike/orientation fields and a
+defined static animation sample. A guessed block texture or blank active effect
+must not be reported as a complete visual fix.
