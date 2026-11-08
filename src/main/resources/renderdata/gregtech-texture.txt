@@ -2093,7 +2093,7 @@ texture:id=mte/iconsets/OVERLAY_SIDE_MASSFAB,filename=assets/gregtech/textures/b
 texture:id=mte/TileEntities/adv_machine_matterfab,filename=assets/miscutils/textures/blocks/TileEntities/adv_machine_matterfab.png
 texture:id=mte/iconsets/OVERLAY_BOTTOM_MASSFAB,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_MASSFAB.png
 texture:id=mte/iconsets/OVERLAY_SIDE_MASSFAB_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_SIDE_MASSFAB_ACTIVE.png
-texture:id=mte/TileEntities/adv_machine_matterfab_ACTIVE,filename=assets/miscutils/textures/blocks/TileEntities/adv_machine_matterfab_ACTIVE.png
+texture:id=mte/TileEntities/adv_machine_matterfab_ACTIVE,filename=assets/miscutils/textures/blocks/TileEntities/adv_machine_matterfab_active.png
 texture:id=mte/iconsets/OVERLAY_BOTTOM_MASSFAB_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_MASSFAB_ACTIVE.png
 texture:id=mte/potionbrewer/OVERLAY_FRONT_POTIONBREWER,filename=assets/gregtech/textures/blocks/basicmachines/potionbrewer/OVERLAY_FRONT_POTIONBREWER.png
 texture:id=mte/iconsets/OVERLAY_BOTTOM_ROCK_BREAKER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BOTTOM_ROCK_BREAKER.png
@@ -2135,12 +2135,12 @@ texture:id=mte/blocks/basicmachines/chemical_bath/OVERLAY_FRONT_ACTIVE,filename=
 texture:id=mte/blocks/basicmachines/fluid_heater/OVERLAY_SIDE_ACTIVE,filename=assets/gregtech/textures/blocks/basicmachines/fluid_heater/OVERLAY_SIDE_ACTIVE.png
 texture:id=mte/blocks/basicmachines/plasma_arc_furnace/OVERLAY_BOTTOM_ACTIVE,filename=assets/gregtech/textures/blocks/basicmachines/plasma_arc_furnace/OVERLAY_BOTTOM_ACTIVE.png
 texture:id=mte/TileEntities/machine_top_dieselmotor,filename=assets/miscutils/textures/blocks/TileEntities/machine_top_dieselmotor.png
-texture:id=mte/TileEntities/machine_top_dieselmotor_ACTIVE,filename=assets/miscutils/textures/blocks/TileEntities/machine_top_dieselmotor_ACTIVE.png,ycount=4
+texture:id=mte/TileEntities/machine_top_dieselmotor_ACTIVE,filename=assets/miscutils/textures/blocks/TileEntities/machine_top_dieselmotor_active.png,ycount=4
 texture:id=mte/TileEntities/machine_top_vent_rotating,filename=assets/miscutils/textures/blocks/TileEntities/machine_top_vent_rotating.png,ycount=4
 texture:id=mte/TileEntities/machine_top_dieselmotor2,filename=assets/miscutils/textures/blocks/TileEntities/machine_top_dieselmotor2.png
 texture:id=mte/TileEntities/cover_redstone_conductor,filename=assets/miscutils/textures/blocks/TileEntities/cover_redstone_conductor.png
 texture:id=mte/TileEntities/machine_bottom,filename=assets/miscutils/textures/blocks/TileEntities/machine_bottom.png
-texture:id=mte/TileEntities/machine_top_dieselmotor2_ACTIVE,filename=assets/miscutils/textures/blocks/TileEntities/machine_top_dieselmotor2_ACTIVE.png,ycount=4
+texture:id=mte/TileEntities/machine_top_dieselmotor2_ACTIVE,filename=assets/miscutils/textures/blocks/TileEntities/machine_top_dieselmotor2_active.png,ycount=4
 texture:id=mte/TileEntities/adv_machine_screen_random2,filename=assets/miscutils/textures/blocks/TileEntities/adv_machine_screen_random2.png,ycount=16
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_SMELTER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_SMELTER.png
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_SMELTER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_SMELTER_ACTIVE.png
