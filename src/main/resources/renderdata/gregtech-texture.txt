@@ -8725,3 +8725,25 @@ moddata:mod=gtmte,type=iconset,name=remediation/coke/output_item,output=0:mte/ic
 moddata:mod=gtmte,type=iconset,name=remediation/coke/output_fluid,output=0:mte/iconsets/OVERLAY_PIPE_OUT,output2=0:remediation/coke/fluid_out
 moddata:mod=gtmte,type=mte,id=236,mtetype=controller,basetex=0:gregtech/iconsets/COKE_OVEN_CASING,iconset=remediation/coke/controller_off,activeset=remediation/coke/controller_on,paint=false
 moddata:mod=gtmte,type=mte,id=237,ishatch=true,inheritcasing=false,basetex=0:gregtech/iconsets/COKE_OVEN_CASING,iconset=remediation/coke/input,statefield=inputMode,state0iconset=remediation/coke/input,state1iconset=remediation/coke/output_item,state2iconset=remediation/coke/output_fluid,paint=false
+
+# Beamcraft controllers (GT5 5.09.54.265).
+texture:id=remediation/beam/shielded_casing,filename=assets/gtnhlanth/textures/blocks/casing.shielded_accelerator.png,resourcemod=gtnhlanth
+texture:id=remediation/beam/OVERLAY_FRONT_BEAMCRAFTER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAMCRAFTER.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.crafter,output=0:remediation/beam/OVERLAY_FRONT_BEAMCRAFTER
+texture:id=remediation/beam/OVERLAY_FRONT_BEAMCRAFTER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAMCRAFTER_ACTIVE.png,ycount=8
+moddata:mod=gtmte,type=iconset,name=remediation.beam.crafter_active,output=0:remediation/beam/OVERLAY_FRONT_BEAMCRAFTER,output2=23000:remediation/beam/OVERLAY_FRONT_BEAMCRAFTER_ACTIVE
+moddata:mod=gtmte,type=mte,id=3015,mtetype=controller,basetex=0:remediation/beam/shielded_casing,iconset=remediation.beam.crafter,activeset=remediation.beam.crafter_active
+texture:id=remediation/beam/OVERLAY_FRONT_BEAM_MIRROR,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAM_MIRROR.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.mirror,output=0:remediation/beam/OVERLAY_FRONT_BEAM_MIRROR
+moddata:mod=gtmte,type=iconset,name=remediation.beam.mirror_active,output=0:remediation/beam/OVERLAY_FRONT_BEAM_MIRROR
+moddata:mod=gtmte,type=mte,id=3016,mtetype=controller,basetex=0:remediation/beam/shielded_casing,iconset=remediation.beam.mirror,activeset=remediation.beam.mirror_active
+texture:id=remediation/beam/OVERLAY_FRONT_BEAM_SPLITTER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAM_SPLITTER.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.splitter,output=0:remediation/beam/OVERLAY_FRONT_BEAM_SPLITTER
+texture:id=remediation/beam/OVERLAY_FRONT_BEAM_SPLITTER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAM_SPLITTER_ACTIVE.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.splitter_active,output=23000:remediation/beam/OVERLAY_FRONT_BEAM_SPLITTER_ACTIVE
+moddata:mod=gtmte,type=mte,id=3017,mtetype=controller,basetex=0:remediation/beam/shielded_casing,iconset=remediation.beam.splitter,activeset=remediation.beam.splitter_active
+texture:id=remediation/beam/OVERLAY_FRONT_BEAM_STABILIZER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAM_STABILIZER.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.stabilizer,output=0:remediation/beam/OVERLAY_FRONT_BEAM_STABILIZER
+texture:id=remediation/beam/OVERLAY_FRONT_BEAM_STABILIZER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAM_STABILIZER_ACTIVE.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.stabilizer_active,output=0:remediation/beam/OVERLAY_FRONT_BEAM_STABILIZER_ACTIVE
+moddata:mod=gtmte,type=mte,id=3018,mtetype=controller,basetex=0:remediation/beam/shielded_casing,iconset=remediation.beam.stabilizer,activeset=remediation.beam.stabilizer_active

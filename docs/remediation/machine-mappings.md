@@ -356,3 +356,11 @@ only for value 2; all other values use BronzePlatedBricks. `tierMachine` is a
 processing tier and must not drive the casing. The active glow's actual source
 name is `OVERLAY_FRONT_STEAM_FURNACE_MULTI_GLOW_ACTIVE` (unusual suffix order).
 Normal/active overlays remain independent of the casing-tier state selector.
+
+## Beamcraft controllers
+
+Beam controllers3015–3018 use ShieldedAcceleratorCasing. Crafter active adds an emissive overlay over its normal front, mirror is static, splitter active is emissive, and stabilizer active is not emissive. These distinctions come directly from each getTexture method.
+
+Every referenced image is present in the installed JAR inventory; image frame
+counts come from the matching source assets. Shader/TESR effects outside the
+controller block are not inferred from texture records.
