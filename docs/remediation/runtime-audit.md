@@ -26,3 +26,11 @@ missing inactive vanilla terrain-format alternatives receive
 `INACTIVE_TERRAIN_VARIANT`; custom required images stay required even without a
 mod owner. Optional feature probes are recorded separately. The raw results
 remain available for reviewing this classification.
+
+The audit also retains `textureDefinitionErrors` with source file and line.
+A texture-file parser can stop before later mappings while reporting zero
+missing loaded images; cycle6 exposed this with a checker atlas dimension
+collision in Blood Magic. The summary must have zero definition errors as
+well as zero failed custom renderers before resource closure is accepted.
+Parser diagnostics remain severe in the server log; the audit does not hide
+or automatically repair malformed definitions.

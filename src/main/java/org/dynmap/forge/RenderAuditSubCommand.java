@@ -142,6 +142,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         report.put("chiselVariants", auditChiselVariants(registered));
         report.put("blankMetadataNote", "Candidates include unused metadata; explicit invisible mappings are defined, not blank");
         report.put("failedCustomModels", HDBlockModels.getFailedCustomModels());
+        report.put("textureDefinitionErrors", TexturePack.getTextureDefinitionErrors());
 
         List<Map<String, Object>> machines = new ArrayList<>();
         int unsupported = 0, missingBase = 0, unresolvedIcons = 0;
@@ -214,6 +215,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         summary.put("optionalAbsentResources", optionalAbsent);
         summary.put("fallbackResources", fallbacks);
         summary.put("failedCustomModelBlocks", HDBlockModels.getFailedCustomModels().size());
+        summary.put("textureDefinitionErrors", TexturePack.getTextureDefinitionErrors().size());
         report.put("summary", summary);
 
         Path output = core.getDataFolder().toPath().resolve("render-audit.json");

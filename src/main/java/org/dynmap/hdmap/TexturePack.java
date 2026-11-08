@@ -66,6 +66,20 @@ import java.util.zip.ZipFile;
 public class TexturePack {
     private java.util.Collection<TextureResourceResolver.Lookup> resourceLookups = Collections.emptyList();
 
+    private static final List<String> textureDefinitionErrors = Collections.synchronizedList(new ArrayList<String>());
+
+    /** Parser failures can leave later block mappings absent even when all loaded images resolve. */
+    public static List<String> getTextureDefinitionErrors() {
+        synchronized (textureDefinitionErrors) {
+            return Collections.unmodifiableList(new ArrayList<>(textureDefinitionErrors));
+        }
+    }
+
+    private static void recordTextureDefinitionError(String file, int line, String message) {
+        textureDefinitionErrors.add(file + ":" + line + ": " + message);
+        Log.severe(message);
+    }
+
     /** Effective loaded-pack diagnostics without reloading resources or retaining streams. */
     public static Map<String, java.util.Collection<TextureResourceResolver.Lookup>> getLoadedResourceLookups() {
         synchronized (packlock) {
@@ -415,6 +429,7 @@ public class TexturePack {
 
     /* Reset add-on tile data */
     private static void resetFiles(DynmapCore core) {
+        textureDefinitionErrors.clear();
         synchronized(packlock) {
             packs.clear();
         }
@@ -2076,7 +2091,7 @@ public class TexturePack {
                 if ((line.length() > 0) && (line.charAt(0) == '[')) {    // If version constrained like
                     int end = line.indexOf(']');    // Find end
                     if (end < 0) {
-                        Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname + ": bad version limit");
+                        recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname + ": bad version limit");
                         return;
                     }
                     String vertst = line.substring(1, end);
@@ -2165,7 +2180,7 @@ public class TexturePack {
                             if(filetoidx.containsKey(av[1]))
                                 srctxtid = filetoidx.get(av[1]);
                             else
-                                Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname + ": bad texture " + av[1]);
+                                recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname + ": bad texture " + av[1]);
                         }
                     }
                     // Build ID list : abort rest of processing if no valid values
@@ -2221,7 +2236,7 @@ public class TexturePack {
                                     fid0 = fid1 = Integer.parseInt(ids[0]);
                                 }
                                 if((fid0 < 0) || (fid1 < fid0)) {
-                                    Log.severe("Texture mapping has invalid face index - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
+                                    recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture mapping has invalid face index - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
                                     return;
                                 }
                                 int faceToOrd[] = { BlockStep.Y_PLUS.ordinal(), BlockStep.Y_MINUS.ordinal(),
@@ -2254,7 +2269,7 @@ public class TexturePack {
                                 if(filetoidx.containsKey(av[1]))
                                     blockColorIdx = filetoidx.get(av[1]);
                                 else
-                                    Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname + ": bad texture " + av[1]);
+                                    recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname + ": bad texture " + av[1]);
                             }
                             else if(av[0].startsWith("patch")) {
                                 int patchid0, patchid1;
@@ -2268,7 +2283,7 @@ public class TexturePack {
                                     patchid0 = patchid1 = Integer.parseInt(ids[0]);
                                 }
                                 if((patchid0 < 0) || (patchid1 < patchid0)) {
-                                    Log.severe("Texture mapping has invalid patch index - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
+                                    recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture mapping has invalid patch index - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
                                     return;
                                 }
                                 if(faces.length <= patchid1) {
@@ -2290,7 +2305,7 @@ public class TexturePack {
                                 trans = BlockTransparency.valueOf(av[1]);
                                 if(trans == null) {
                                     trans = BlockTransparency.OPAQUE;
-                                    Log.severe("Texture mapping has invalid transparency setting - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
+                                    recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture mapping has invalid transparency setting - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
                                 }
                                 /* For leaves, base on leaf transparency setting */
                                 if(trans == BlockTransparency.LEAVES) {
@@ -2315,7 +2330,7 @@ public class TexturePack {
                                     Class<?> cls = Class.forName(av[1]);
                                     custColorMult = (CustomColorMultiplier)cls.newInstance();
                                 } catch (Exception x) {
-                                    Log.severe("Error loading custom color multiplier - " + av[1] + ": " + x.getMessage());
+                                    recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Error loading custom color multiplier - " + av[1] + ": " + x.getMessage());
                                 }
                             }
                             else if(av[0].equals("stdrot")) {
@@ -2363,7 +2378,7 @@ public class TexturePack {
                             cnt++;
                         }
                         else {
-                            Log.severe("Texture mapping missing required parameters = line " + rdr.getLineNumber() + " of " + txtname);
+                            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture mapping missing required parameters = line " + rdr.getLineNumber() + " of " + txtname);
                         }
                     }
                 }
@@ -2401,7 +2416,7 @@ public class TexturePack {
                             trans = BlockTransparency.valueOf(av[1]);
                             if(trans == null) {
                                 trans = BlockTransparency.OPAQUE;
-                                Log.severe("Texture mapping has invalid transparency setting - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
+                                recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture mapping has invalid transparency setting - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
                             }
                             /* For leaves, base on leaf transparency setting */
                             if(trans == BlockTransparency.LEAVES) {
@@ -2422,7 +2437,7 @@ public class TexturePack {
                     if((blkids.size() > 0) && (srcid > 0)) {
                         HDTextureMap map = HDTextureMap.getMap(srcid, srcmeta, srcmeta);
                         if (map == null) {
-                            Log.severe("Copy of texture mapping failed = line " + rdr.getLineNumber() + " of " + txtname);
+                            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Copy of texture mapping failed = line " + rdr.getLineNumber() + " of " + txtname);
                         }
                         else {
                             HDTextureMap nmap = new HDTextureMap(blkids, databits, map, trans);
@@ -2444,7 +2459,7 @@ public class TexturePack {
                         }
                     }
                     else {
-                        Log.severe("Texture mapping copy missing required parameters = line " + rdr.getLineNumber() + " of " + txtname);
+                        recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture mapping copy missing required parameters = line " + rdr.getLineNumber() + " of " + txtname);
                     }
                 }
                 else if(line.startsWith("addtotexturemap:")) {
@@ -2459,7 +2474,7 @@ public class TexturePack {
                             if(filetoidx.containsKey(av[1]))
                                 srctxtid = filetoidx.get(av[1]);
                             else
-                                Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname);
+                                recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname);
                         }
                         else if(av[0].equals("mapid")) {
                             mapid = av[1];
@@ -2478,7 +2493,7 @@ public class TexturePack {
                         }
                     }
                     else {
-                        Log.severe("Missing mapid  - line " + rdr.getLineNumber() + " of " + txtname);
+                        recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Missing mapid  - line " + rdr.getLineNumber() + " of " + txtname);
                     }
                 }
                 else if(line.startsWith("texturemap:")) {
@@ -2514,7 +2529,7 @@ public class TexturePack {
                             trans = BlockTransparency.valueOf(av[1]);
                             if(trans == null) {
                                 trans = BlockTransparency.OPAQUE;
-                                Log.severe("Texture mapping has invalid transparency setting - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
+                                recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture mapping has invalid transparency setting - " + av[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
                             }
                             /* For leaves, base on leaf transparency setting */
                             if(trans == BlockTransparency.LEAVES) {
@@ -2539,7 +2554,7 @@ public class TexturePack {
                                 Class<?> cls = Class.forName(av[1]);
                                 custColorMult = (CustomColorMultiplier)cls.newInstance();
                             } catch (Exception x) {
-                                Log.severe("Error loading custom color multiplier - " + av[1] + ": " + x.getMessage());
+                                recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Error loading custom color multiplier - " + av[1] + ": " + x.getMessage());
                             }
                         }
                     }
@@ -2550,7 +2565,7 @@ public class TexturePack {
                         addTextureIndex(mapid, blkids, databits, trans, userenderdata, colorMult, custColorMult, blockset);
                     }
                     else {
-                        Log.severe("Texture map missing required parameters = line " + rdr.getLineNumber() + " of " + txtname);
+                        recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Texture map missing required parameters = line " + rdr.getLineNumber() + " of " + txtname);
                     }
                 }
                 else if(line.startsWith("texturefile:") || line.startsWith("texture:")) {
@@ -2593,7 +2608,7 @@ public class TexturePack {
                         else if(aval[0].equals("format")) {
                             fmt = TileFileFormat.valueOf(aval[1].toUpperCase());
                             if(fmt == null) {
-                                Log.severe("Invalid format type " + aval[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
+                                recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Invalid format type " + aval[1] + " - line " + rdr.getLineNumber() + " of " + txtname);
                                 return;
                             }
                         }
@@ -2628,7 +2643,7 @@ public class TexturePack {
 
                     }
                     else {
-                        Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname);
+                        recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname);
                         return;
                     }
                 }
@@ -2656,7 +2671,7 @@ public class TexturePack {
                     for(int i = 0; i < args.length; i++) {
                         String[] v = args[i].split("=");
                         if(v.length < 2) {
-                            Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname);
+                            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname);
                             return;
                         }
                         try {
@@ -2664,7 +2679,7 @@ public class TexturePack {
                             int parmval = config.getInteger(v[0], val); /* Read value, with applied default */
                             varvals.put(v[0], parmval); /* And save value */
                         } catch (NumberFormatException nfx) {
-                            Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname + ": " + nfx.getMessage());
+                            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname + ": " + nfx.getMessage());
                             return;
                         }
                     }
@@ -2732,7 +2747,7 @@ public class TexturePack {
                     for(int i = 0; i < args.length; i++) {
                         String[] v = args[i].split("=");
                         if(v.length < 2) {
-                            Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname);
+                            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname);
                             return;
                         }
                         if(v[0].equals("id")) {
@@ -2768,7 +2783,7 @@ public class TexturePack {
                     if(id > 0) {
                         BiomeMap b = BiomeMap.byBiomeID(id); /* Find biome */
                         if(b == null) {
-                            Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname + ": " + id);
+                            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname + ": " + id);
                         }
                         else {
                             if(foliagecolormult != -1)
@@ -2801,14 +2816,14 @@ public class TexturePack {
                 }
             }
             if(mod_cfg_needed) {
-                Log.severe("Error loading configuration file for " + modname);
+                recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Error loading configuration file for " + modname);
             }
 
             Log.verboseinfo("Loaded " + cnt + " texture mappings from " + txtname);
         } catch (IOException iox) {
-            Log.severe("Error reading " + txtname + " - " + iox.toString());
+            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Error reading " + txtname + " - " + iox.toString());
         } catch (NumberFormatException nfx) {
-            Log.severe("Format error - line " + rdr.getLineNumber() + " of " + txtname + ": " + nfx.getMessage());
+            recordTextureDefinitionError(txtname, rdr == null ? 0 : rdr.getLineNumber(), "Format error - line " + rdr.getLineNumber() + " of " + txtname + ": " + nfx.getMessage());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (InstantiationException e) {
