@@ -1,6 +1,7 @@
 package org.dynmap.hdmap.renderer;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
+import cpw.mods.fml.common.Loader;
 import java.util.Map;
 import org.dynmap.Log;
 import org.dynmap.renderer.CustomColorMultiplier;
@@ -19,20 +20,28 @@ public class WitchingTerraformRenderer extends BakedMeshRenderer {
         try {
             aspectColors = sourceAspectColors(id);
             return true;
-        } catch (ReflectiveOperationException failure) {
+        } catch (ReflectiveOperationException | LinkageError failure) {
             Log.severe("Cannot read WitchingGadgets required-aspect colors", failure);
             return false;
         }
     }
 
-    /** Evaluate the installed block's pure metadata API once, including optional-mod aspect choices. */
+    /** Read common-side Aspect fields; never reflect on a client-bearing Block hierarchy. */
     protected int[] sourceAspectColors(int id) throws ReflectiveOperationException {
-        Object block = net.minecraft.block.Block.getBlockById(id);
-        Method required = block.getClass().getMethod("requiredAspect", int.class);
+        Class<?> aspectType = Class.forName("thaumcraft.api.aspects.Aspect");
+        Field color = aspectType.getDeclaredField("color");
+        color.setAccessible(true);
+        String[] aspects = { "PLANT", "COLD", "FIRE", "TREE", "FIRE", "TAINT", "SLIME", "WATER", "WATER", "ELDRITCH", "HEAL" };
         int[] colors = new int[16];
-        for (int meta = 0; meta < colors.length; meta++) {
-            Object aspect = required.invoke(block, meta);
-            colors[meta] = aspect == null ? 0xffffff : ((Number) aspect.getClass().getMethod("getColor").invoke(aspect)).intValue();
+        java.util.Arrays.fill(colors, 0xffffff);
+        for (int meta = 3; meta <= 13; meta++) {
+            Object aspect;
+            if (meta == 7 && Loader.isModLoaded("ForbiddenMagic")) {
+                aspect = Class.forName("fox.spiteful.forbidden.DarkAspects").getField("NETHER").get(null);
+            } else {
+                aspect = aspectType.getField(aspects[meta - 3]).get(null);
+            }
+            colors[meta] = color.getInt(aspect);
         }
         return colors;
     }

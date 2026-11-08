@@ -266,8 +266,9 @@ existing compact texture indices and behavior.
 Replace twelve invented block PNGs with selected source OBJ groups and the actual
 64x32 terraformer model atlas from1.8.53-GTNH. Preserve native OBJ vt coordinates,
 winding and TESR translations. Only crystal groups receive required-aspect tint.
-Initialize colors through the installed block's pure requiredAspect(metadata) API,
-so ForbiddenMagic's optional NETHER aspect is respected. The terraformer reads
+Read the source requiredAspect metadata table through common-side Aspect fields,
+so ForbiddenMagic's optional NETHER aspect is respected without reflecting on
+Block methods that mention unavailable dedicated-server client classes. The terraformer reads
 the neighboring focus metadata from the immutable map snapshot; no world or client
 render calls occur on render threads. Other/custom third-party focus tiles are
 not yet represented by this source-specific adapter.
@@ -373,3 +374,9 @@ lookup. Correct support needs a multi-block owner lookup plus CPU evaluation of
 source vertex deformation/colors, saved scale/spike/orientation fields and a
 defined static animation sample. A guessed block texture or blank active effect
 must not be reported as a complete visual fix.
+
+Dedicated-side regression: a classloader deliberately rejects IIconRegister,
+reproduces the old reflective Block.getMethod linkage failure, then executes the
+production common-side Aspect field lookup for all16 metadata states. Model
+initialization also contains optional LinkageError failures as an explicit error
+instead of crashing the entire server. No source Block-method reflection remains.
