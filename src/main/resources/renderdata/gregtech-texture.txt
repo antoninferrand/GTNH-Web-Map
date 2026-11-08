@@ -6353,7 +6353,7 @@ moddata:mod=gtmte,type=mte,id=12612,iconset=energydistributoruiv,baseset=hull.ti
 moddata:mod=gtmte,type=mte,id=12613,iconset=energydistributorumv,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12614,iconset=energydistributoruxv,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12615,iconset=energydistributormax,baseset=hull.tier.01
-moddata:mod=gtmte,type=mte,id=12617,baseset=hull.tier.-01
+moddata:mod=gtmte,type=mte,id=12617,baseset=hull.tier.00
 moddata:mod=gtmte,type=mte,id=12618,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12619,baseset=hull.tier.02
 moddata:mod=gtmte,type=mte,id=12620,baseset=hull.tier.03
@@ -6368,7 +6368,7 @@ moddata:mod=gtmte,type=mte,id=12628,baseset=hull.tier.11
 moddata:mod=gtmte,type=mte,id=12629,baseset=hull.tier.12
 moddata:mod=gtmte,type=mte,id=12630,baseset=hull.tier.13
 moddata:mod=gtmte,type=mte,id=12631,baseset=hull.tier.14
-moddata:mod=gtmte,type=mte,id=12633,baseset=hull.tier.-01
+moddata:mod=gtmte,type=mte,id=12633,baseset=hull.tier.00
 moddata:mod=gtmte,type=mte,id=12634,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12635,baseset=hull.tier.02
 moddata:mod=gtmte,type=mte,id=12636,baseset=hull.tier.03
@@ -6383,7 +6383,7 @@ moddata:mod=gtmte,type=mte,id=12644,baseset=hull.tier.11
 moddata:mod=gtmte,type=mte,id=12645,baseset=hull.tier.12
 moddata:mod=gtmte,type=mte,id=12646,baseset=hull.tier.13
 moddata:mod=gtmte,type=mte,id=12647,baseset=hull.tier.14
-moddata:mod=gtmte,type=mte,id=12649,baseset=hull.tier.-01
+moddata:mod=gtmte,type=mte,id=12649,baseset=hull.tier.00
 moddata:mod=gtmte,type=mte,id=12650,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12651,baseset=hull.tier.02
 moddata:mod=gtmte,type=mte,id=12652,baseset=hull.tier.03
@@ -6398,7 +6398,7 @@ moddata:mod=gtmte,type=mte,id=12660,baseset=hull.tier.11
 moddata:mod=gtmte,type=mte,id=12661,baseset=hull.tier.12
 moddata:mod=gtmte,type=mte,id=12662,baseset=hull.tier.13
 moddata:mod=gtmte,type=mte,id=12663,baseset=hull.tier.14
-moddata:mod=gtmte,type=mte,id=12665,baseset=hull.tier.-01
+moddata:mod=gtmte,type=mte,id=12665,baseset=hull.tier.00
 moddata:mod=gtmte,type=mte,id=12666,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12667,baseset=hull.tier.02
 moddata:mod=gtmte,type=mte,id=12668,baseset=hull.tier.03
@@ -6413,7 +6413,7 @@ moddata:mod=gtmte,type=mte,id=12676,baseset=hull.tier.11
 moddata:mod=gtmte,type=mte,id=12677,baseset=hull.tier.12
 moddata:mod=gtmte,type=mte,id=12678,baseset=hull.tier.13
 moddata:mod=gtmte,type=mte,id=12679,baseset=hull.tier.14
-moddata:mod=gtmte,type=mte,id=12681,baseset=hull.tier.-01
+moddata:mod=gtmte,type=mte,id=12681,baseset=hull.tier.00
 moddata:mod=gtmte,type=mte,id=12682,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12683,baseset=hull.tier.02
 moddata:mod=gtmte,type=mte,id=12684,baseset=hull.tier.03
