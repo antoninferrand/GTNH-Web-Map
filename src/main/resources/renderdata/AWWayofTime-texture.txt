@@ -63,6 +63,7 @@ texture:id=minecraft/planks_oak,filename=assets/minecraft/textures/blocks/planks
 
 
 # %Altar:* (Altar), render=(CUSTOM), opaque=false,cls=WayofTime.alchemicalWizardry.common.block.BlockAltar
+texture:id=awmodel/MimicDefault,filename=assets/gtnhwebmap/textures/blocks/missing.png
 block:id=%Altar,data=*,stdrot=true,face0=0:AlchemicalWizardry/BloodAltar_Bottom,face1=0:AlchemicalWizardry/BloodAltar_Top,face2-5=0:AlchemicalWizardry/BloodAltar_SideType2
 
 # %AlchemicalWizardrybloodRune:* (AlchemicalWizardrybloodRune), render=(STANDARD), opaque=true,cls=WayofTime.alchemicalWizardry.common.block.BloodRune
@@ -294,5 +295,3 @@ block:id=%blockAlchemicCalcinator,data=*,transparency=TRANSPARENT,patch0=0:awmod
 
 texture:id=awmodel/CrystalBelljar,filename=assets/alchemicalwizardry/textures/models/CrystalBelljar.png,xcount=8,ycount=4
 block:id=%blockCrystalBelljar,data=*,transparency=TRANSPARENT,patch0=0:awmodel/CrystalBelljar,patch1=1:awmodel/CrystalBelljar,patch2=2:awmodel/CrystalBelljar,patch3=3:awmodel/CrystalBelljar,patch4=4:awmodel/CrystalBelljar,patch5=5:awmodel/CrystalBelljar,patch6=6:awmodel/CrystalBelljar,patch7=7:awmodel/CrystalBelljar,patch8=8:awmodel/CrystalBelljar,patch9=9:awmodel/CrystalBelljar,patch10=10:awmodel/CrystalBelljar,patch11=11:awmodel/CrystalBelljar,patch12=12:awmodel/CrystalBelljar,patch13=13:awmodel/CrystalBelljar,patch14=14:awmodel/CrystalBelljar,patch15=15:awmodel/CrystalBelljar,patch16=16:awmodel/CrystalBelljar,patch17=17:awmodel/CrystalBelljar,patch18=18:awmodel/CrystalBelljar,patch19=19:awmodel/CrystalBelljar,patch20=20:awmodel/CrystalBelljar,patch21=21:awmodel/CrystalBelljar,patch22=22:awmodel/CrystalBelljar,patch23=23:awmodel/CrystalBelljar,patch24=24:awmodel/CrystalBelljar,patch25=25:awmodel/CrystalBelljar,patch26=26:awmodel/CrystalBelljar,patch27=27:awmodel/CrystalBelljar,patch28=28:awmodel/CrystalBelljar,patch29=29:awmodel/CrystalBelljar,patch30=30:awmodel/CrystalBelljar,patch31=31:awmodel/CrystalBelljar
-
-texture:id=awmodel/MimicDefault,filename=assets/gtnhwebmap/textures/blocks/missing.png
