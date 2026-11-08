@@ -91,3 +91,17 @@ and source-declared optional; retain optional declarations for resource packs.
 All four front PNGs exist in the installed CropsNH JAR. Animated strips are
 read as square frames using their source PNG dimensions. New MTE IDs are
 unique, local texture IDs resolve, and resource owners are explicit.
+
+## CropsNH gene_extractor: 28037–28045
+
+The matching CropsNH 2.0.140 MTE constructor supplies the normal/active
+gene_extractor front with a separate glow layer and optional scanner side/top/bottom
+layers to MTEBasicMachine. Preserve process front (`mMainFacing`) and pipe
+output (`mFacing`), tiers 4–12, and normal/active texture sets.
+Use `front2`/face2 glow layers (modifier 23000) under the shared layered-icon
+contract. Scanner side/top/bottom images are absent in the installed GT JAR
+and source-declared optional; retain optional declarations for resource packs.
+
+All four front PNGs exist in the installed CropsNH JAR. Animated strips are
+read as square frames using their source PNG dimensions. New MTE IDs are
+unique, local texture IDs resolve, and resource owners are explicit.
