@@ -81,3 +81,8 @@ The dedicated fixture exposed model initialization occurring before
 defers its default machine-block lookup until actual rendering; initialization
 requires no texture registry. The JVM fixture explicitly initializes the model
 with a null registry and checks successful rendering after registry setup.
+
+The static casing mapping provides all 24 quarter-patch fallback entries, matching
+its custom renderer's declared texture count. This avoids the texture loader's
+insufficient-face-definition error while the dynamic mapper supplies CTM/display
+layers for the same patch IDs.

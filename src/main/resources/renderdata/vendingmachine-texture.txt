@@ -10,7 +10,7 @@ texture:id=vendingmachine/front_glow,filename=assets/vendingmachine/textures/blo
 texture:id=vendingmachine/uplink_off,filename=assets/vendingmachine/textures/blocks/vending_uplink_machine_overlay_inactive.png
 texture:id=vendingmachine/uplink_on,filename=assets/vendingmachine/textures/blocks/vending_uplink_machine_overlay_active.png
 
-block:id=%casing,data=0,stdrot=true,face0-5=0:vendingmachine/casing
+block:id=%casing,data=0,stdrot=true,patch0-23=0:vendingmachine/casing
 moddata:mod=gtmte,type=hatchbase,block=vendingmachine:casing
 moddata:mod=gtmte,type=iconset,name=vendingmachine/controller_off,output=0:vendingmachine/front_off
 moddata:mod=gtmte,type=iconset,name=vendingmachine/controller_on,output=0:vendingmachine/front_on,output2=23000:vendingmachine/front_glow
