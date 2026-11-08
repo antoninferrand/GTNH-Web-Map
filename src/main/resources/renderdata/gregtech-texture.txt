@@ -8892,3 +8892,7 @@ texture:id=remediation/nano/OVERLAY_FRONT_BIOLOGICAL_COORDINATION_ACTIVE,filenam
 texture:id=remediation/nano/OVERLAY_FRONT_BIOLOGICAL_COORDINATION_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BIOLOGICAL_COORDINATION_ACTIVE_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.nano.BIOLOGICAL_COORDINATION_active,output=0:remediation/nano/OVERLAY_FRONT_BIOLOGICAL_COORDINATION,output2=0:remediation/nano/OVERLAY_FRONT_BIOLOGICAL_COORDINATION_ACTIVE,output3=23000:remediation/nano/OVERLAY_FRONT_BIOLOGICAL_COORDINATION_ACTIVE_GLOW
 moddata:mod=gtmte,type=mte,id=9514,mtetype=controller,basetex=0:gregtech/iconsets/NANOCHIP_MESH_INTERFACE_CASING,iconset=remediation.nano.BIOLOGICAL_COORDINATION,activeset=remediation.nano.BIOLOGICAL_COORDINATION_active
+
+# MTEIceCreamMachine uses an OBJ model with a single atlas, not a casing cube.
+texture:id=remediation/model/icecream,filename=assets/gregtech/textures/model/ice_cream_machine.png
+moddata:mod=gtmte,type=mte,id=20000,basetex=0:remediation/model/icecream,paint=false
