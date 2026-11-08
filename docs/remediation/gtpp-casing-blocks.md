@@ -93,3 +93,13 @@ their traced `getTexture`/`getCasingTexture` implementations do not consume the
 requested paint color. Their source block images retain their own design and
 the shared renderer no longer multiplies the entire fixed casing and overlay
 by saved `mColor`. This uses the existing tested per-record opt-out.
+
+The 46-row `legacy-texture-resolution-ledger.csv` accounts for this baseline
+package: 35 resources have their active consumers migrated to registered casing
+sources, three already use corrected source asset names/checker declarations,
+seven are retired with unreachable consumers, and BlackGate now uses its actual
+containment-frame image. The ledger explicitly records whether a historical
+texture declaration remains as legacy fallback. Retained unused declarations
+are not claimed to be present files; the integration pack lookup audit must
+distinguish them from an attempted required lookup. Runtime validation remains
+the integration fixture's responsibility.
