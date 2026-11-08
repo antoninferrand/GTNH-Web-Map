@@ -159,3 +159,7 @@ Validation: exact installed atlas assets/dimensions, actual ModelBox UV goldens,
 Replace the scraper placeholder for %AlchemicalWizardrytile.blockSpellEffect with its actual 24-part model and 64x64 model atlas. Select all16 metadata states using the matching TESpellEffectBlock.getResourceLocationForMeta source, including its explicit default. Saved inputFace/outputFace fields rotate only their source-defined connector groups; frame/core parts remain fixed. The outer180-degree Z rotation is baked as(-1,-1,1), not the Y rotation used by other mods.
 
 Validation: exact installed atlas assets/dimensions, actual ModelBox UV goldens, all36 input/output pose combinations, six directional group centroids and real patch-factory atlas/bounds checks passed.
+
+## Blood Magic calcinator base model
+
+Replace its nonexistent scraper placeholder with the 13-part source model and actual 128x128 `assets/alchemicalwizardry/textures/models/AlchemicalCalcinator.png` atlas. Match the TESR180-degree Z transform and retain transparent glass regions. Installed assets, actual ModelBox UV golden and real patch-factory bounds/indices are validated. This addresses the missing base model/texture; the source also draws optional floating inventory/reagent contents as separate effects, which are not baked into the static model.
