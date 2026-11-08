@@ -397,3 +397,10 @@ Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_NANOCHIP_A
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Nanochip hatches
+
+Vacuum conveyor hatches9501–9502 are UHV9. Their normal/active facing overlays receive paint modulation, while the additional port image is untinted. The source inherits dynamic multiblock hatch casing selection.
+
+All required PNGs were checked in the installed GregTech JAR inventory.
+Matching source PNG dimensions determine animated-strip frame counts.
