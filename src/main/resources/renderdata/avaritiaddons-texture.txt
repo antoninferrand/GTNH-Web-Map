@@ -3,7 +3,7 @@ version:1.7
 modname:avaritiaddons
 
 
-cfgfile:config/avaritiaddons.cfg
+cfgfile:config/Avaritiaddons.cfg
 
 
 texturepath:assets/avaritiaddons/textures/blocks/

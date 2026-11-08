@@ -482,3 +482,13 @@ mirror404, nodeLinker878, manipulator731/759, spellModifier834, spellEffect906,
 calcinator1644, belljar1230 and empty crest mount162 over the fixed sampling
 grid. This rules out globally inverted TOP winding for those structural meshes.
 It does not replace actual texture-alpha/shader and fresh-cache fixture rendering.
+
+## Avaritiaddons configuration filename on Linux
+
+Use `config/Avaritiaddons.cfg` in both model and texture support files.
+Avaritiaddons1.9.6-GTNH and1.10.0-GTNH `Config` construct the filename from
+`Reference.MOD_NAME + ".cfg"`; `MOD_NAME` is exactly `Avaritiaddons`. Production
+Linux diagnostics exposed the lowercase-path mismatch, which the case-insensitive
+macOS fixture concealed. Both declarations now match the source and actual Linux
+filename. Validation checked both source tags and exact declaration spelling;
+this is a resource-definition change with no Java code changes.
