@@ -2584,8 +2584,7 @@ public class TexturePack {
                             if (addonfiles.get(fid).processorOnlyOnFallback && num != xdim * ydim) {
                                 throw new IllegalArgumentException("processoronlyfallback requires matching source-grid and processor tile counts");
                             }
-                            for(int i = 0; i < num; i++)
-                                TexturePack.parseTextureIndex(filetoidx, fid, String.format("%d:%s", i, id));
+                            reserveProcessorTiles(filetoidx, fid, id, num);
                         }
 
                     }
@@ -3443,6 +3442,21 @@ public class TexturePack {
 
         return f.idx;
     }
+    /** Reserve contiguous processor outputs without activating an unused declaration. */
+    private static void reserveProcessorTiles(HashMap<String, Integer> filetoidx, int fileId, String id, int count) {
+        DynamicTileFile file = addonfiles.get(fileId);
+        boolean wasUsed = file.used;
+        try {
+            for (int i = 0; i < count; i++) {
+                parseTextureIndex(filetoidx, fileId, String.format("%d:%s", i, id));
+            }
+        } finally {
+            // Actual block/moddata references activate resources. Reserving output
+            // IDs alone must not override registry gates for absent legacy parts.
+            file.used = wasUsed;
+        }
+    }
+
     /**
      * Add or find dynamic tile index of given dynamic tile
      * @param dynfile_idx - index of file
