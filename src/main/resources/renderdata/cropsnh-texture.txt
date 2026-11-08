@@ -1158,3 +1158,23 @@ moddata:mod=gtmte,type=mte,id=28021,baseset=cropsnh.hull.tier.09,iconset=cropsnh
 moddata:mod=gtmte,type=mte,id=28022,baseset=cropsnh.hull.tier.10,iconset=cropsnh.seed_generator,activeset=cropsnh.seed_generator_active
 moddata:mod=gtmte,type=mte,id=28023,baseset=cropsnh.hull.tier.11,iconset=cropsnh.seed_generator,activeset=cropsnh.seed_generator_active
 moddata:mod=gtmte,type=mte,id=28024,baseset=cropsnh.hull.tier.12,iconset=cropsnh.seed_generator,activeset=cropsnh.seed_generator_active
+
+# crop_breeder tiered machines; source MTEBasicMachine front is mMainFacing.
+texture:id=cropsnh/crop_breeder,filename=assets/cropsnh/textures/blocks/tileEntities/machines/crop_breeder/OVERLAY_CROP_BREEDER_FRONT.png
+texture:id=cropsnh/crop_breeder_GLOW,filename=assets/cropsnh/textures/blocks/tileEntities/machines/crop_breeder/OVERLAY_CROP_BREEDER_FRONT_GLOW.png
+texture:id=cropsnh/crop_breeder_ACTIVE,filename=assets/cropsnh/textures/blocks/tileEntities/machines/crop_breeder/OVERLAY_CROP_BREEDER_FRONT_ACTIVE.png
+texture:id=cropsnh/crop_breeder_ACTIVE_GLOW,filename=assets/cropsnh/textures/blocks/tileEntities/machines/crop_breeder/OVERLAY_CROP_BREEDER_FRONT_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=cropsnh.crop_breeder,output=0:cropsnh/gt/pipe_out,front=0:cropsnh/crop_breeder,front2=23000:cropsnh/crop_breeder_GLOW,side=0:cropsnh/gt/OVERLAY_SIDE_SCANNER,side2=23000:cropsnh/gt/OVERLAY_SIDE_SCANNER_GLOW,top=0:cropsnh/gt/OVERLAY_TOP_SCANNER,top2=23000:cropsnh/gt/OVERLAY_TOP_SCANNER_GLOW,bottom=0:cropsnh/gt/OVERLAY_BOTTOM_SCANNER,bottom2=23000:cropsnh/gt/OVERLAY_BOTTOM_SCANNER_GLOW
+moddata:mod=gtmte,type=iconset,name=cropsnh.crop_breeder_active,output=0:cropsnh/gt/pipe_out,front=0:cropsnh/crop_breeder_ACTIVE,front2=23000:cropsnh/crop_breeder_ACTIVE_GLOW,side=0:cropsnh/gt/OVERLAY_SIDE_SCANNER_ACTIVE,side2=23000:cropsnh/gt/OVERLAY_SIDE_SCANNER_ACTIVE_GLOW,top=0:cropsnh/gt/OVERLAY_TOP_SCANNER_ACTIVE,top2=23000:cropsnh/gt/OVERLAY_TOP_SCANNER_ACTIVE_GLOW,bottom=0:cropsnh/gt/OVERLAY_BOTTOM_SCANNER_ACTIVE,bottom2=23000:cropsnh/gt/OVERLAY_BOTTOM_SCANNER_ACTIVE_GLOW
+moddata:mod=gtmte,type=mte,id=28025,baseset=cropsnh.hull.tier.01,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28026,baseset=cropsnh.hull.tier.02,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28027,baseset=cropsnh.hull.tier.03,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28028,baseset=cropsnh.hull.tier.04,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28029,baseset=cropsnh.hull.tier.05,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28030,baseset=cropsnh.hull.tier.06,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28031,baseset=cropsnh.hull.tier.07,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28032,baseset=cropsnh.hull.tier.08,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28033,baseset=cropsnh.hull.tier.09,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28034,baseset=cropsnh.hull.tier.10,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28035,baseset=cropsnh.hull.tier.11,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
+moddata:mod=gtmte,type=mte,id=28036,baseset=cropsnh.hull.tier.12,iconset=cropsnh.crop_breeder,activeset=cropsnh.crop_breeder_active
