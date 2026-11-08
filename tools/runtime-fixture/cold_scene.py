@@ -91,7 +91,7 @@ def main():
   casings=[]
   for dx in [-1,0,1]:
    for dy in [-1,0,1]:
-    if dy==0 and dx in [0,1]:continue
+    if (dy==0 and dx in [0,1]) or (dx==1 and dy==1):continue
     casing={'x':vx+dx,'y':80+dy,'z':vz,'registryName':'vendingmachine:casing','metadata':0};casings.append(casing)
     commands.append('setblock {x} {y} {z} vendingmachine:casing 0 replace'.format(**casing))
   commands.append('save-all')
@@ -115,16 +115,18 @@ def main():
      index=((y%16)*16+(z%16))*16+(x%16);data=section['Data'][index//2];result['savedBlockMetadata']=(data>>(4*(index%2)))&15
    result['matches']=te is not None and te.get('mID')==entry['mteId'] and result.get('savedBlockMetadata')==entry['blockMetadata']
    results.append(result)
-  run=json.loads((scene/'placement-run.json').read_text());console=(root/'console.log').read_bytes()[run['consoleOffset']:].decode(errors='replace')
+  run=json.loads((scene/'placement-run.json').read_text());boot=json.loads((root/'supervisor-status.json').read_text())
+  reloaded=boot.get('started_at',0)>run['startedAt']
+  console=(root/'console.log').read_bytes()[0 if reloaded else run['consoleOffset']:].decode(errors='replace')
   (scene/'placement-console.log').write_text(console)
   errors=[line for line in console.splitlines() if re.search(r'ERROR|Exception|CRITICAL|FATAL|tagError|outOfWorld|Could not|noChange',line,re.I)]
-  report={'artifact':manifest['artifact'],'checkedAt':time.time(),'requested':len(results),'matches':sum(r['matches'] for r in results),'coldDisabled':sum(r.get('mWorks')==1 for r in results),'active':sum(bool(r.get('mActive')) for r in results),'storedEnergyNonzero':sum(bool(r.get('mStoredEnergy')) for r in results),'consoleErrors':errors,'results':results}
+  report={'artifact':json.loads((root/'artifact.json').read_text()),'sceneOriginArtifact':manifest['artifact'],'consoleScope':'current_boot' if reloaded else 'initial_placement','mteLoadErrors':[line for line in console.splitlines() if 'Exception while loading MetaTileEntity' in line or 'Zero length BigInteger' in line],'checkedAt':time.time(),'requested':len(results),'matches':sum(r['matches'] for r in results),'coldDisabled':sum(r.get('mWorks')==1 for r in results),'active':sum(bool(r.get('mActive')) for r in results),'storedEnergyNonzero':sum(bool(r.get('mStoredEnergy')) for r in results),'consoleErrors':errors,'results':results}
   write_json(scene/'placement-verification.json',report);print(json.dumps({k:v for k,v in report.items() if k!='results'},indent=2))
  elif args.action=='render':
   m=json.loads(manifest_path.read_text());x,y,z=m['center'];commands=['dynmap pause all','dmap mapset Fixture:flat shader:stdtexture perspective:iso_S_90_hires','dmap mapset Fixture:surface shader:stdtexture perspective:iso_SE_60_hires','dynmap pause none','dynmap radiusrender Fixture %d %d 64 %s'%(x,z,args.map)]
   (scene/('render-commands-'+args.map+'.txt')).write_text('\n'.join(commands)+'\n')
   if args.enqueue:
-   write_json(scene/('render-run-'+args.map+'.json'),{'startedAt':time.time(),'consoleOffset':(root/'console.log').stat().st_size,'commands':commands})
+   write_json(scene/('render-run-'+args.map+'.json'),{'artifact':json.loads((root/'artifact.json').read_text()),'startedAt':time.time(),'consoleOffset':(root/'console.log').stat().st_size,'commands':commands})
    append(root,commands)
   print('Prepared guarded '+args.map+' radius64 render; enqueued=',args.enqueue)
 

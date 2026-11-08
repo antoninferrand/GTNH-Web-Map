@@ -72,3 +72,38 @@ all saved-state branches, or comparison with a Minecraft client. Source/unit
 checks and saved-NBT checks remain separate evidence. Models extending beyond
 their owner cell can need additional render bounds validation; the contact
 sheet does not prove every overhanging surface is complete.
+
+## Additional native models and fresh-cache comparison
+
+Cycle 6 (`b6db3859`) loaded the saved nanochip defaults cleanly: no
+`Zero length BigInteger` or MetaTileEntity-load errors occurred. All 169 original
+requested IDs and metadata still matched; processing was disabled and no stored
+energy existed. Twenty additional native blocks were placed with exact
+source-defined registry names, metadata and minimal inert NBT. Their actual
+saved tile classes/fields are recorded in
+[runtime-fixture/native-scene-manifest.csv](runtime-fixture/native-scene-manifest.csv).
+The mirror lower/upper dummy pair remained present; walrus samples were added
+later with metadata 2–5 and persisted `scale=1.0f`.
+
+![Cycle 6 labelled native-model locations](runtime-fixture/cycle6-native-annotated.png)
+
+This intermediate image exposes an important validation limit: the apparently
+empty native samples all fall in chunk X=-41, Z=56, while visible neighboring
+samples occupy different chunks. Their saved tile entities were present and
+placement produced no exceptions. Stale chunk snapshots are therefore a strong
+hypothesis; this image does **not** establish that each model itself is broken.
+A fresh candidate restart/render is required before changing geometry. Both
+cycle-6 radius renders finished (400 flat, 776 surface); originals and logs are
+preserved separately from cycle 4.
+
+The original full 3×3 vending sample naturally formed after a normal reload,
+despite processing being disabled, and saved `mActive=1`. Removing its
+upper-right corner at `(-626,81,900)` naturally cleared `mActive` to 0; the
+incomplete cold sample generator now leaves that corner absent. A **separate**
+complete 3×3 panel centered at `(-615,80,900)` faces SOUTH, with an ME uplink at
+`(-614,80,900)`. Normal server ticks set its saved `mActive=1`; `mWorks=1` and
+stored energy 0 remain. No active flag, live API call, energy, inventory or trade
+was injected. This is an explicitly labelled natural formation/display test,
+separate from the cold grid. The four scale-1 walrus samples are at X=-639,
+-636, -633, -630, Y=80, Z=909. Their owner-cell overhang limitation remains
+separate from their source geometry and texture verification.

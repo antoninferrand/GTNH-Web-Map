@@ -1,0 +1,21 @@
+label,registry_name,metadata,x,y,z,saved_tile_entity_id,saved_fields
+1,WitchingGadgets:WG_MetalDevice,2,-660,80,906,WitchingGadgets_.TileEntityTerraformer,{}
+2,WitchingGadgets:WG_MetalDevice,3,-657,80,906,WitchingGadgets_.TileEntityTerraformFocus,{}
+3,WitchingGadgets:WG_MetalDevice,0,-654,80,906,WitchingGadgets_.TileEntityEssentiaPump,"{""facing"": 2}"
+4,WitchingGadgets:WG_WallMirror,0,-651,80,906,WitchingGadgets_.TileEntityWallMirror,"{""facing"": 2, ""isActive"": 0, ""isDummy"": 0}"
+5,WitchingGadgets:WG_WallMirror,0,-651,81,906,WitchingGadgets_.TileEntityWallMirror,"{""facing"": 2, ""isActive"": 0, ""isDummy"": 1}"
+6,thaumicbases:nodeLinker,0,-648,80,906,tb.nodeLinker,{}
+7,thaumicbases:nodeManipulator,0,-645,80,906,tb.manipulator,"{""workTime"": 0}"
+8,thaumicbases:nodeManipulator,1,-642,80,906,tb.manipulator,"{""workTime"": 0}"
+9,tinkersdefense:Block_JewelersBench,0,-639,80,906,Tile_JewelersBench,{}
+10,tinkersdefense:Block_ArmorAnvil,0,-636,80,906,Tile_ArmorAnvil,{}
+11,tinkersdefense:Block_CrestMount,1,-633,80,906,Tile_CrestMount,{}
+12,tinkersdefense:Block_CrestMount,2,-630,80,906,Tile_CrestMount,{}
+13,tinkersdefense:Block_CrestMount,3,-627,80,906,Tile_CrestMount,{}
+14,tinkersdefense:Block_CrestMount,4,-624,80,906,Tile_CrestMount,{}
+15,AWWayofTime:AlchemicalWizardrytile.blockSpellParadigm,0,-660,80,909,containerSpellParadigmBlock,"{""inputFace"": 0, ""outputFace"": 3}"
+16,AWWayofTime:AlchemicalWizardrytile.blockSpellEnhancement,0,-657,80,909,containerSpellEnhancementBlock,"{""inputFace"": 2, ""outputFace"": 3}"
+17,AWWayofTime:AlchemicalWizardrytile.blockSpellModifier,0,-654,80,909,containerSpellModifierBlock,"{""inputFace"": 2, ""outputFace"": 3}"
+18,AWWayofTime:AlchemicalWizardrytile.blockSpellEffect,0,-651,80,909,containerSpellEffectBlock,"{""inputFace"": 2, ""outputFace"": 3}"
+19,AWWayofTime:blockAlchemicCalcinator,0,-648,80,909,containerAlchemicCalcinator,{}
+20,AWWayofTime:blockCrystalBelljar,0,-645,80,909,containerBellJar,{}

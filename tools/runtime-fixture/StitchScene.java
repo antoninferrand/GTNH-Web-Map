@@ -48,6 +48,19 @@ public class StitchScene {
                 }
             }
         }
+        if (args.length > 9) {
+            graphics.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 11));
+            for (String line : java.nio.file.Files.readAllLines(java.nio.file.Paths.get(args[9]))) {
+                if (line.startsWith("label,")) continue;
+                String[] values = line.split(",");
+                Vector3D world = new Vector3D(Double.parseDouble(values[1]) + .5, Double.parseDouble(values[2]) + .5, Double.parseDouble(values[3]) + .5);
+                Vector3D map = new Vector3D(); matrix.transform(world, map);
+                int px = (int) Math.round(map.x) - left, py = top - (int) Math.round(map.y);
+                graphics.setColor(java.awt.Color.YELLOW); graphics.drawRect(px - 3, py - 3, 6, 6);
+                graphics.setColor(java.awt.Color.BLACK); graphics.drawString(values[0], px + 7, py - 4);
+                graphics.setColor(java.awt.Color.WHITE); graphics.drawString(values[0], px + 6, py - 5);
+            }
+        }
         graphics.dispose();
         ImageIO.write(image, "png", new File(args[1]));
         System.out.println(count + " source tiles stitched into " + width + "x" + height + " " + args[1]);
