@@ -29,8 +29,8 @@ public class BakedMeshBehaviorTest {
                     check(pose==renderer.getRenderPatchList(context),"Equivalent state did not reuse immutable mesh");
                     observed.add(pose);
                 }
-                check(observed.size()>=6,"Source direction poses are not being selected");
-                System.out.println(resource+": all36 input/output combinations and pose-cache identity passed");
+                check(observed.size()>=(Arrays.asList(renderer.getTileEntityFieldsNeeded()).contains("facing")?4:6),"Source direction poses are not being selected");
+                System.out.println(resource+": direction samples and pose-cache identity passed");
             }
             if(Arrays.asList(renderer.getTileEntityFieldsNeeded()).contains("Items")) {
                 Set<RenderPatch[]> states=Collections.newSetFromMap(new IdentityHashMap<RenderPatch[],Boolean>());

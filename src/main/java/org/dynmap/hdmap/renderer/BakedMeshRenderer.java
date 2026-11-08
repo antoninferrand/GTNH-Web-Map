@@ -27,7 +27,7 @@ public class BakedMeshRenderer extends CustomRenderer {
         final List<AtlasMesh.Triangle> triangles = new ArrayList<>();
         final Map<Integer, double[]> rotations = new HashMap<>();
         String name, field, visibilityField;
-        int textureOffset;
+        int textureOffset, textureCount;
         int visibilitySlot = -1;
         double[] pivot = { 0, 0, 0 }, fallback = { 0, 0, 0 };
     }
@@ -36,7 +36,7 @@ public class BakedMeshRenderer extends CustomRenderer {
     private final Map<String, RenderPatch[]> poses = new ConcurrentHashMap<>();
     private RenderPatchFactory factory;
     private String[] fields;
-    private int textureCount, atlasSize;
+    private int textureCount;
     private boolean separatePartTextures;
     private final Map<Integer, Integer> metadataYaw = new HashMap<>();
 
@@ -51,17 +51,24 @@ public class BakedMeshRenderer extends CustomRenderer {
             JSONObject model = (JSONObject) new JSONParser().parse(new InputStreamReader(stream, StandardCharsets.UTF_8));
             JSONArray atlas = (JSONArray) model.get("atlas");
             int columns = ((Number) atlas.get(0)).intValue(), rows = ((Number) atlas.get(1)).intValue();
-            atlasSize = textureCount = columns * rows;
+            textureCount = columns * rows;
             separatePartTextures = Boolean.TRUE.equals(model.get("separatePartTextures"));
             JSONObject yaw = (JSONObject) model.get("metadataYaw");
             if (yaw != null) for (Object key : yaw.keySet())
                 metadataYaw.put(Integer.valueOf((String) key), ((Number) yaw.get(key)).intValue());
+            int totalTextures = 0;
             Set<String> requested = new LinkedHashSet<>();
             for (Object partObject : (JSONArray) model.get("parts")) {
                 JSONObject data = (JSONObject) partObject;
                 Part part = new Part();
                 part.name = (String) data.get("name");
-                part.textureOffset = separatePartTextures ? parts.size() * atlasSize : 0;
+                JSONArray partAtlas = (JSONArray) data.get("atlas");
+                int partColumns = partAtlas == null ? columns : ((Number) partAtlas.get(0)).intValue();
+                int partRows = partAtlas == null ? rows : ((Number) partAtlas.get(1)).intValue();
+                part.textureCount = partColumns * partRows;
+                part.textureOffset = separatePartTextures ? totalTextures : 0;
+                totalTextures += part.textureCount;
+                textureCount = Math.max(textureCount, part.textureCount);
                 JSONObject visible = (JSONObject) data.get("visibleWhen");
                 if (visible != null) {
                     part.visibilityField = (String) visible.get("field");
@@ -87,11 +94,11 @@ public class BakedMeshRenderer extends CustomRenderer {
                     if (values.size() != 15) throw new IllegalArgumentException("Invalid baked triangle");
                     double[] source = new double[15];
                     for (int i = 0; i < 15; i++) source[i] = ((Number) values.get(i)).doubleValue();
-                    part.triangles.addAll(AtlasMesh.split(source, columns, rows));
+                    part.triangles.addAll(AtlasMesh.split(source, partColumns, partRows));
                 }
                 parts.add(part);
             }
-            if (separatePartTextures) textureCount *= parts.size();
+            if (separatePartTextures) textureCount = totalTextures;
             fields = requested.toArray(new String[requested.size()]);
             return true;
         } catch (Exception invalid) {
@@ -173,8 +180,10 @@ public class BakedMeshRenderer extends CustomRenderer {
         return new CustomRendererData(getRenderPatchList(context), null, null) {
             @Override
             public CustomColorMultiplier getCustomColorMultiplier(int patchId, int layer) {
-                int part = separatePartTextures && atlasSize > 0 ? patchId / atlasSize : -1;
-                return part >= 0 && part < parts.size() ? getPartColor(parts.get(part).name, context) : null;
+                if (separatePartTextures) for (Part part : parts)
+                    if (patchId >= part.textureOffset && patchId < part.textureOffset + part.textureCount)
+                        return getPartColor(part.name, context);
+                return null;
             }
         };
     }

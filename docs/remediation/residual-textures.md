@@ -380,3 +380,11 @@ reproduces the old reflective Block.getMethod linkage failure, then executes the
 production common-side Aspect field lookup for all16 metadata states. Model
 initialization also contains optional LinkageError failures as an explicit error
 instead of crashing the entire server. No source Block-method reflection remains.
+
+## Independent native atlas grids within one model
+
+Model parts may now define different atlas grids with contiguous texture-index
+ranges. This preserves square16pixel cells for models combining64x64,16x16 and
+128x64 source images; forcing one grid would crop rectangular cells incorrectly.
+The per-part tint hook selects by the actual texture range, preserving existing
+shared-atlas models. Regression geometry/state/tint tests pass.
