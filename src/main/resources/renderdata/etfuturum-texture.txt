@@ -109,7 +109,6 @@ texture:id=metalbarrels/steel_barrel_bottom,filename=assets/metalbarrels/texture
 texture:id=metalbarrels/steel_barrel_side,filename=assets/metalbarrels/textures/blocks/steel_barrel_side.png
 texture:id=metalbarrels/steel_barrel_top,filename=assets/metalbarrels/textures/blocks/steel_barrel_top.png
 texture:id=metalbarrels/steel_barrel_top_open,filename=assets/metalbarrels/textures/blocks/steel_barrel_top_open.png
-texture:id=minecraft/MISSING_ICON_BLOCK_2639_bubble_column,filename=assets/minecraft/textures/blocks/MISSING_ICON_BLOCK_2639_bubble_column.png
 texture:id=minecraft/amethyst_block,filename=assets/minecraft/textures/blocks/amethyst_block.png
 texture:id=minecraft/amethyst_cluster,filename=assets/minecraft/textures/blocks/amethyst_cluster.png
 texture:id=minecraft/ancient_debris_side,filename=assets/minecraft/textures/blocks/ancient_debris_side.png
@@ -2109,7 +2108,6 @@ block:id=%potion_cauldron,data=*,stdrot=true,face0=0:minecraft/cauldron_bottom,f
 
 
 # %bubble_column:* (bubble_column), render=ganymedes01.etfuturum.client.renderer.block.BlockBubbleColumnRenderer(CUSTOM), opaque=false,cls=ganymedes01.etfuturum.blocks.BlockBubbleColumn
-block:id=%bubble_column,data=*,stdrot=true,transparency=TRANSPARENT,face0-5=0:minecraft/MISSING_ICON_BLOCK_2639_bubble_column
 
 
 # %barrel:* (barrel), render=ganymedes01.etfuturum.client.renderer.block.BlockBarrelRenderer(CUSTOM), opaque=true,cls=ganymedes01.etfuturum.blocks.BlockBarrel
@@ -3300,3 +3298,5 @@ block:id=%cave_vine,data=1,stdrot=true,transparency=TRANSPARENT,patch0=0:minecra
 
 # %anvil:* (anvil), render=(ANVIL), opaque=false,cls=ganymedes01.etfuturum.blocks.BlockNewAnvil
 block:id=%anvil,data=*,stdrot=true,transparency=TRANSPARENT,face0-5=0:minecraft/anvil_base
+# BlockBubbleColumnRenderer delegates to vanilla water, including biome water tint.
+block:id=%bubble_column,data=*,transparency=SEMITRANSPARENT,patch0=3257,patch1=3258

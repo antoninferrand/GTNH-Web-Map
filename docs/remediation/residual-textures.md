@@ -301,3 +301,18 @@ only the base (the source draws its base then fails the out-of-range foci lookup
 All actual atlas paths exist; native atlas splitting and real patch-factory
 geometry checks pass. The small .030673horizontal source overhang is retained
 and subject to owner-cell ray traversal limits.
+
+## EtFuturum bubble-column water surface
+
+Installed2.6.65-GTNH BlockBubbleColumnRenderer explicitly delegates to vanilla
+RenderBlocks.renderBlockLiquid(Blocks.water). Replace its invented missing PNG
+and 0.0001block placeholder with snapshot-based vanilla water surface geometry.
+The renderer ports weighted corner heights, liquid neighbors/opaque-side culling,
+flow-direction UV rotation, still/flowing water textures and biome water tint.
+The registry's immutable block material/opacity flags are copied at initialization;
+all per-position reads use MapDataContext, never the live world.
+
+The actual RenderBlocks.getLiquidHeight source method is compiled as the golden
+and compared bit-for-bit for4000 corners. Another1000 randomized snapshot cases
+exercise genuine patch-factory UV/index bounds, including stacked water. Bubble
+particles are client effects and are not part of the map surface.

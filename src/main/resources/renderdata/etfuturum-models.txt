@@ -482,7 +482,6 @@ boxblock:id=%enchantment_table,xmin=0.0,xmax=1.0,ymin=0.0,ymax=0.75,zmin=0.0,zma
 
 # %bubble_column:* (bubble_column), render=ganymedes01.etfuturum.client.renderer.block.BlockBubbleColumnRenderer(CUSTOM), opaque=false,cls=ganymedes01.etfuturum.blocks.BlockBubbleColumn
 # FIXME: Box constraints truncated to 0.0<=val<=1.0
-boxblock:id=%bubble_column,xmin=0.0,xmax=1.0E-4,ymin=0.0,ymax=1.0E-4,zmin=0.0,zmax=1.0E-4,data=*
 
 # %barrel:* (barrel), render=ganymedes01.etfuturum.client.renderer.block.BlockBarrelRenderer(CUSTOM), opaque=true,cls=ganymedes01.etfuturum.blocks.BlockBarrel
 
@@ -1280,3 +1279,4 @@ patchblock:id=%cave_vine,patch0=VertX1Z0ToX0Z1#0,patch1=VertX1Z0ToX0Z1@90#0,data
 
 # %anvil:* (anvil), render=(ANVIL), opaque=false,cls=ganymedes01.etfuturum.blocks.BlockNewAnvil
 
+customblock:id=%bubble_column,data=*,class=org.dynmap.hdmap.renderer.VanillaWaterSurfaceRenderer
