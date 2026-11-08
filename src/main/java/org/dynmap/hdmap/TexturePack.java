@@ -88,6 +88,17 @@ public class TexturePack {
         }
     }
 
+    /** Pack-format alternatives skipped before resource lookup; explicit consumers remain required. */
+    public static Map<String, Set<String>> getInactiveTerrainVariants() {
+        synchronized (packlock) {
+            Map<String, Set<String>> result = new java.util.TreeMap<>();
+            for (Map.Entry<String, TexturePack> entry : packs.entrySet()) {
+                result.put(entry.getKey(), Collections.unmodifiableSet(new TreeSet<>(entry.getValue().inactiveTerrainVariants)));
+            }
+            return Collections.unmodifiableMap(result);
+        }
+    }
+
     private static boolean isInactiveTerrainVariant(DynamicTileFile file, boolean resourcePack) {
         return !file.explicitlyUsed && ((resourcePack && file.terrainVariant == 2)
                 || (!resourcePack && file.terrainVariant == 1));
@@ -843,6 +854,7 @@ public class TexturePack {
                 }
                 if (isInactiveTerrainVariant(dtf, is_rp)) {
                     inactiveTerrainVariants.add(dtf.filename);
+                    continue;
                 }
                 is = tpl.openModTPResource(dtf.filename, dtf.modname, dtf.fallbackFilename, dtf.fallbackModname, dtf.optional);
                 try {

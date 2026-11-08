@@ -201,6 +201,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         }
         report.put("resourcePacks", resources);
         report.put("inactiveResourceDeclarations", TexturePack.getInactiveResourceDeclarations());
+        report.put("inactiveTerrainVariants", TexturePack.getInactiveTerrainVariants());
         Map<String, Object> summary = new LinkedHashMap<>();
         summary.put("registeredBlocks", blocks.size());
         summary.put("blankMetadataCandidates", blankMetadata);
