@@ -25,3 +25,7 @@ patch:id=HorizY100ZTop,Ox=0.0,Oy=1.0,Oz=0.0,Ux=1.0,Uy=1.0,Uz=0.0,Vx=0.0,Vy=1.0,V
 
 # %tile.turretHeadEM:* (tile.turretHeadEM), render=(CUSTOM), opaque=false,cls=com.github.technus.tectech.compatibility.openmodularturrets.blocks.turretheads.TurretHeadEM
 boxblock:id=%tile.turretHeadEM,xmin=0.20000000298023224,xmax=0.800000011920929,ymin=0.0,ymax=1.0,zmin=0.20000000298023224,zmax=0.800000011920929,data=*
+
+# These helper blocks have no atlas icon or normal base geometry; active TESRs are client effects.
+customblock:id=%Eye of Harmony Renderer,data=*,class=org.dynmap.hdmap.renderer.InvisibleBlockRenderer
+customblock:id=%ForgeOfGodsRenderBlock,data=*,class=org.dynmap.hdmap.renderer.InvisibleBlockRenderer
