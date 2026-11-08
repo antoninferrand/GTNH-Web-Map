@@ -92,8 +92,8 @@ def audit(renderdata, assets, baseline):
         records = machines.get(int(row["id"]), [])
         issues = []
         for record in records:
-            if not any(record.get(key) for key in ("basetex", "baseset")):
-                issues.append("missing base texture or base set")
+            if not any(record.get(key) for key in ("basetex", "baseset", "baseblock")):
+                issues.append("missing base texture, base set or registered base block")
             for key in ("iconset", "activeset", "baseset"):
                 if record.get(key) and record[key] not in iconsets:
                     issues.append("unknown %s %s" % (key, record[key]))

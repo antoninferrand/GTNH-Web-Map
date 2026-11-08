@@ -18,3 +18,11 @@ resources is not evidence of coverage. Render a small fixture area and repeat.
 
 The production Java build validates linkage. Full-pack fixture execution is the
 integration check for registry order, dynamic resolution and saved-state behavior.
+
+Schema2 includes the missing-base and unresolved-iconset counts for registered
+MTEs, including deferred registered-block bases. Resource rows preserve both
+`rawOutcome` and the effective `outcome`, plus a precise resource `role`. Only
+missing inactive vanilla terrain-format alternatives receive
+`INACTIVE_TERRAIN_VARIANT`; custom required images stay required even without a
+mod owner. Optional feature probes are recorded separately. The raw results
+remain available for reviewing this classification.
