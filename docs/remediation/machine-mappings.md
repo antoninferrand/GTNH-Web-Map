@@ -388,3 +388,12 @@ Toxic residue sensor3019 is registered ZPM7. Its output-facing icon gains a sepa
 Every referenced image is present in the installed JAR inventory; image frame
 counts come from the matching source assets. Shader/TESR effects outside the
 controller block are not inferred from texture records.
+
+## Nanochip assembly complex: 9500
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings12:1`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_NANOCHIP_ASSEMBLY_COMPLEX`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.

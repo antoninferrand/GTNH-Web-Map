@@ -8774,3 +8774,16 @@ moddata:mod=gtmte,type=iconset,name=remediation.beam.toxic_sensor,output=0:remed
 texture:id=remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.beam.toxic_sensor_active,output=0:remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR,output2=23000:remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR_GLOW
 moddata:mod=gtmte,type=mte,id=3019,baseset=hull.tier.07,iconset=remediation.beam.toxic_sensor,activeset=remediation.beam.toxic_sensor_active,ishatch=true
+
+# Nanochip assembly complex (GT 5.09.54.265).
+texture:id=remediation/controller/9500/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/NANOCHIP_MESH_INTERFACE_CASING.png
+texture:id=remediation/controller/9500/base_top,filename=assets/gregtech/textures/blocks/iconsets/NANOCHIP_MESH_INTERFACE_CASING.png
+texture:id=remediation/controller/9500/base_side,filename=assets/gregtech/textures/blocks/iconsets/NANOCHIP_MESH_INTERFACE_CASING.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.9500,bottom=0:remediation/controller/9500/base_bottom,top=0:remediation/controller/9500/base_top,side=0:remediation/controller/9500/base_side
+texture:id=remediation/controller/9500/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_NANOCHIP_ASSEMBLY_COMPLEX.png
+texture:id=remediation/controller/9500/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_NANOCHIP_ASSEMBLY_COMPLEX_GLOW.png,optional=true
+moddata:mod=gtmte,type=iconset,name=remediation.controller.9500,output=0:remediation/controller/9500/front,output2=23000:remediation/controller/9500/glow
+texture:id=remediation/controller/9500/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_NANOCHIP_ASSEMBLY_COMPLEX_ACTIVE.png
+texture:id=remediation/controller/9500/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_NANOCHIP_ASSEMBLY_COMPLEX_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.9500_active,output=0:remediation/controller/9500/front_ACTIVE,output2=23000:remediation/controller/9500/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=9500,mtetype=controller,baseset=remediation.controller.base.9500,iconset=remediation.controller.9500,activeset=remediation.controller.9500_active
