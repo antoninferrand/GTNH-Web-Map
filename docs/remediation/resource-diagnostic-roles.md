@@ -18,3 +18,5 @@ remain required; the guard excludes explicitly consumed paths. This eliminates
 false missing-image loads and their placeholder allocations. Legacy terrain
 packs retain their own active branch. Raw attempted lookup outcomes remain
 unmodified in the report; skipped paths are reported separately.
+
+`tools/test-vanilla-texture-pixels.py` independently checks the inactive-format skip using the complete production TexturePack constructor and real bundled grass/stone/dirt PNGs. It verifies every native pixel in modern and legacy packs, confirms inactive alternatives never perform a lookup, and proves explicit legacy consumers and custom null-owner missing images remain required. Its 2,343 assertions pass without accessing a world or modifying a fixture server.

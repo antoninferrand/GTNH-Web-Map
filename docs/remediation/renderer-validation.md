@@ -6,7 +6,7 @@ Run the CPU suite after compiling main classes. Generate the build's actual comp
 ./gradlew --no-configuration-cache -I tools/render-test-classpaths.gradle writeRenderTestClasspaths
 ```
 
-Set `GTNH_VALIDATION_OBJ` to the installed/source `ice_cream_machine.obj` and `GTNH_VALIDATION_EXTRAUTILITIES_JAR` to the matching installed ExtraUtilities JAR. The complete suite, including external golden comparisons, is:
+Set `GTNH_VALIDATION_OBJ` to the installed/source `ice_cream_machine.obj` and `GTNH_VALIDATION_EXTRAUTILITIES_JAR` to the matching installed ExtraUtilities JAR. Set `GTNH_VALIDATION_WALRUS_PNG` to AE2 Fluid Crafting's original `assets/ae2fc/textures/blocks/walrus.png`. The complete suite, including external golden comparisons, is:
 
 ```sh
 python3 tools/run-renderer-regressions.py \
@@ -17,6 +17,7 @@ python3 tools/run-renderer-regressions.py \
   --minecraft-golden build/rfg/srg_merged_minecraft.jar \
   --obj-model "$GTNH_VALIDATION_OBJ" \
   --extrautilities-jar "$GTNH_VALIDATION_EXTRAUTILITIES_JAR" \
+  --walrus-atlas "$GTNH_VALIDATION_WALRUS_PNG" \
   --require-goldens
 ```
 
@@ -34,6 +35,10 @@ Omitting an external golden flag explicitly records a coverage gap and reports `
 | Patch capacity | `tools/test-patch-capacity.py` with both classpaths and main classes; actual perspective path beyond texture-slot capacity |
 | Water | `tools/test-water-surface.py` with both classpaths, main classes and `--minecraft-sources`; actual RenderBlocks liquid-height golden |
 | HydroEnergy | `tools/test-hydroenergy.py` with both classpaths and main classes |
+| Wall mirror | `tools/test-wall-mirror.py` with both classpaths and main classes; source pixel-grid cuboids, palette, active/dummy neighbor state and four facings |
+| Vanilla texture pixels | `tools/test-vanilla-texture-pixels.py` with both classpaths and main classes; real TexturePack construction/loadTerrain preserves native RP and legacy pixels, explicit consumers remain required |
+| Model triangle API | `tools/test-model-triangle-bounds.py` with both classpaths and main classes; opt-in finite model coordinates and legacy bounds/default API compatibility |
+| Walrus | `tools/test-walrus.py` with both classpaths, main classes and `--atlas`; source saved scales/facings and exact original/HD atlas padding |
 | Dedicated-side aspect lookup | `tools/test-witching-dedicated-aspects.py` with both classpaths and main classes; classloader denies client IIconRegister |
 | Techne | `tools/test-techne-baker.py --minecraft-jar` with the SRG golden and runtime classpath; exact Minecraft ModelBox positions/UVs, mirrored cuboids and nested transforms |
 | Atlas | `python3 tools/test-atlas-mesh.py` |
@@ -55,3 +60,5 @@ An immutable e82c8d34 source/classes snapshot passed the original 18 harnesses. 
 The ordinary WitchingGadgets pose fixture substitutes aspect colors and therefore cannot detect dedicated-server linkage failures. The new dedicated-side test denies IIconRegister, first reproduces the old broad Block-method reflection failure, then executes the actual common-side aspect lookup for all 16 metadata states. This targeted classloader barrier complements the other CPU fixtures. A real Forge dedicated-server boot remains necessary because Minecraft/Forge side stripping and all mod initialization cannot be reproduced by a collection of classpath fixtures.
 
 Full-pack headless startup, runtime resource closure, Chisel masks and final visual-grid rendering are separate fixture checks. Their final candidate validation was pending when this document was committed; successful CPU results do not assert visual parity or replace those checks.
+
+The follow-up suite adds four harnesses, for 23 with the external walrus atlas supplied. The standalone mirror test passes 97,366 source pixel/palette/state assertions. The vanilla test passes 2,343 assertions through the complete production TexturePack constructor, including three native PNGs in both supported formats and explicit legacy/custom null-owner missing resources. It confirms the 013e279d inactive-variant skip leaves known vanilla pixels unchanged. The model-triangle API test passes 75 assertions. The final combined rerun including the imported walrus renderer remains pending until its candidate build is complete.

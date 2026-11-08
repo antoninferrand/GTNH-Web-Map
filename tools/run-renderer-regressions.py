@@ -20,7 +20,8 @@ def main():
     parser.add_argument('--minecraft-golden', type=Path, help='Actual SRG Minecraft binary JAR for ModelBox golden')
     parser.add_argument('--obj-model', type=Path, help='Installed/source ice_cream_machine.obj fixture')
     parser.add_argument('--extrautilities-jar', type=Path, help='Installed ExtraUtilities JAR for pixel golden')
-    parser.add_argument('--require-goldens', action='store_true', help='Require all three external golden fixtures')
+    parser.add_argument('--walrus-atlas', type=Path, help='Installed/source AE2 Fluid Crafting walrus PNG')
+    parser.add_argument('--require-goldens', action='store_true', help='Require every external golden fixture')
     parser.add_argument('--jobs', type=int, default=3)
     parser.add_argument('--output', type=Path, help='Log/report directory, default build/render-test-results')
     args = parser.parse_args()
@@ -34,12 +35,12 @@ def main():
         if not path.exists():
             parser.error(label + ' does not exist: ' + str(path))
     external = {'minecraftModelBox': args.minecraft_golden, 'installedObj': args.obj_model,
-                'extraUtilitiesPixels': args.extrautilities_jar}
+                'extraUtilitiesPixels': args.extrautilities_jar, 'walrusAtlas': args.walrus_atlas}
     for label, path in external.items():
         if path is not None and not path.is_file():
             parser.error(label + ' fixture does not exist: ' + str(path))
     if args.require_goldens and any(path is None for path in external.values()):
-        parser.error('--require-goldens requires --minecraft-golden, --obj-model and --extrautilities-jar')
+        parser.error('--require-goldens requires --minecraft-golden, --obj-model, --extrautilities-jar and --walrus-atlas')
     common = ['--compile-classpath', str(args.compile_classpath.resolve()),
               '--runtime-classpath', str(args.runtime_classpath.resolve())]
     compiled = ['--classes', str(classes)]
@@ -54,10 +55,15 @@ def main():
         'patch-capacity': ['tools/test-patch-capacity.py'] + common + compiled,
         'water': ['tools/test-water-surface.py'] + common + compiled + ['--minecraft-sources', str(args.minecraft_sources.resolve())],
         'hydro': ['tools/test-hydroenergy.py'] + common + compiled,
+        'wall-mirror': ['tools/test-wall-mirror.py'] + common + compiled,
+        'vanilla-pixels': ['tools/test-vanilla-texture-pixels.py'] + common + compiled,
+        'model-triangle-bounds': ['tools/test-model-triangle-bounds.py'] + common + compiled,
         'dedicated-aspects': ['tools/test-witching-dedicated-aspects.py'] + common + compiled,
         'techne': ['tools/test-techne-baker.py'],
         'nested': ['-m', 'unittest', 'discover', '-s', 'tools/tests', '-p', 'test_*.py'],
     }
+    if args.walrus_atlas:
+        tasks['walrus'] = ['tools/test-walrus.py'] + common + compiled + ['--atlas', str(args.walrus_atlas.resolve())]
     if args.obj_model:
         tasks['wavefront'] += ['--model', str(args.obj_model.resolve())]
     if args.minecraft_golden:
