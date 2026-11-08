@@ -802,6 +802,10 @@ block:id=%blockDarkWorldGround2,data=3,data=4,data=5,data=6,data=7,data=8,data=9
 # %blockDarkWorldPortalFrame:* (blockDarkWorldPortalFrame), render=(STANDARD), opaque=true,cls=toxiceverglades.block.BlockDarkWorldPortalFrame
 block:id=%blockDarkWorldPortalFrame,data=*,stdrot=true,face0-5=0:gregtech/iconsets/CONTAINMENT_FRAME
 
+# The current flotation controller explicitly copies this block (its TAE slot is incorrect).
+texture:id=remediation/gtpp-special/FLOTATION,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_FLOTATION.png,resourcemod=gregtech
+block:id=%gtplusplus.blockspecialcasings.1,data=9,stdrot=true,face0-5=0:remediation/gtpp-special/FLOTATION
+
 # Current GT++ casing block icons (GT5 5.09.54.265).
 texture:id=remediation/gtpp-casings/global/RENDERING_ERROR,filename=assets/gtnhwebmap/textures/blocks/missing.png,resourcemod=gregtech
 texture:id=remediation/gtpp-casings/gt/AQUATIC_CASING,filename=assets/gregtech/textures/blocks/iconsets/AQUATIC_CASING.png,resourcemod=gregtech

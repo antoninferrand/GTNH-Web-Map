@@ -12,3 +12,37 @@ dreamcraft-texture.txt,15545,gregtech:gt.blockcasings12,15,MTEAlgaePond.getCasin
 dreamcraft-texture.txt,15554,miscutils:gtplusplus.blockcasings.5,5,MTEIndustrialChisel.getCasingTexture:Casings.SturdyPrinterCasing
 dreamcraft-texture.txt,31050,miscutils:gtplusplus.blockcasings.5,3,"MTEElementalDuplicator.getCasingTextureId:TAE(0,3); Casings.ElementalConfinementShell"
 dreamcraft-texture.txt,31069,miscutils:gtplusplus.blockcasings.5,5,"MTEIndustrialChiselLegacy.getCasingTextureId:90; TAE(1,10) registered by casing5meta5"
+gregtech-texture.txt,366,gregtech:gt.blockcasings10,13,MTEFluidShaper.getCasingTexture
+gregtech-texture.txt,799,miscutils:miscutils.blockcasings,9,MTEMassFabricator.getCasingTextureId:TAE.GTPP_INDEX(9)
+gregtech-texture.txt,811,miscutils:gtplusplus.blockcasings.3,2,"MTEIndustrialMixerLegacy.CASING_TEXTURE_ID:TAE(2,2)"
+gregtech-texture.txt,829,miscutils:gtplusplus.blockcasings.3,0,MTEIndustrialFishingPondLegacy.getCasingTextureIndex:TAE.GTPP_INDEX(32)
+gregtech-texture.txt,840,miscutils:gtplusplus.blockcasings.2,5,MTEIndustrialSifterLegacy.getCasingTextureId:TAE.GTPP_INDEX(21)
+gregtech-texture.txt,859,miscutils:gtplusplus.blockcasings.3,1,MTEIndustrialExtruderLegacy.getCasingTextureId:TAE.GTPP_INDEX(33)
+gregtech-texture.txt,862,miscutils:gtplusplus.blockcasings.4,3,"MTEIndustrialArcFurnaceLegacy.mCasingTextureID:TAE(3,3)"
+gregtech-texture.txt,992,miscutils:gtplusplus.blockcasings.2,13,MTEIndustrialCuttingMachineLegacy.getCasingTextureId:TAE.GTPP_INDEX(29)
+gregtech-texture.txt,995,miscutils:gtplusplus.blockcasings.4,10,"MTEIndustrialDehydrator.CASING_TEXTURE_ID:TAE(3,10)"
+gregtech-texture.txt,31023,miscutils:gtplusplus.blockcasings.3,1,"MTEIndustrialAlloySmelter.CASING_TEXTURE_ID:TAE(2,1)"
+gregtech-texture.txt,31028,miscutils:gtplusplus.blockcasings.3,1,"MTEFrothFlotationCellLegacy.getCasingTextureId:TAE(2,1); preserve actual legacy Inconel getter"
+gregtech-texture.txt,31075,miscutils:gtplusplus.blockcasings.5,6,"MTEIndustrialForgeHammerLegacy.getCasingTextureId:TAE(1,11), registered casing5meta6"
+gregtech-texture.txt,31085,gregtech:gt.blockcasings9,2,MTESteamWaterPump.getCurrentCasing:Casings.PrimitiveWoodenCasing
+dreamcraft-texture.txt,366,gregtech:gt.blockcasings10,13,MTEFluidShaper.getCasingTexture
+dreamcraft-texture.txt,799,miscutils:miscutils.blockcasings,9,MTEMassFabricator.getCasingTextureId:TAE.GTPP_INDEX(9)
+dreamcraft-texture.txt,811,miscutils:gtplusplus.blockcasings.3,2,"MTEIndustrialMixerLegacy.CASING_TEXTURE_ID:TAE(2,2)"
+dreamcraft-texture.txt,829,miscutils:gtplusplus.blockcasings.3,0,MTEIndustrialFishingPondLegacy.getCasingTextureIndex:TAE.GTPP_INDEX(32)
+dreamcraft-texture.txt,840,miscutils:gtplusplus.blockcasings.2,5,MTEIndustrialSifterLegacy.getCasingTextureId:TAE.GTPP_INDEX(21)
+dreamcraft-texture.txt,859,miscutils:gtplusplus.blockcasings.3,1,MTEIndustrialExtruderLegacy.getCasingTextureId:TAE.GTPP_INDEX(33)
+dreamcraft-texture.txt,862,miscutils:gtplusplus.blockcasings.4,3,"MTEIndustrialArcFurnaceLegacy.mCasingTextureID:TAE(3,3)"
+dreamcraft-texture.txt,992,miscutils:gtplusplus.blockcasings.2,13,MTEIndustrialCuttingMachineLegacy.getCasingTextureId:TAE.GTPP_INDEX(29)
+dreamcraft-texture.txt,995,miscutils:gtplusplus.blockcasings.4,10,"MTEIndustrialDehydrator.CASING_TEXTURE_ID:TAE(3,10)"
+dreamcraft-texture.txt,15540,miscutils:gtplusplus.blockcasings.2,13,MTEIndustrialCuttingMachine.getCasingTexture:Casings.CuttingFactoryFrame
+dreamcraft-texture.txt,15542,miscutils:gtplusplus.blockcasings.2,5,MTEIndustrialSifter.getCasingTexture:Casings.IndustrialSieveCasing
+dreamcraft-texture.txt,15544,miscutils:gtplusplus.blockcasings.3,0,MTEIndustrialFishingPond.getCasingTexture:Casings.AquaticCasing
+dreamcraft-texture.txt,15548,gregtech:gt.blockcasings2,0,kubatech.MTEIndustrialArcFurnace.getCasingTexture:Casings.SolidSteelMachineCasing
+dreamcraft-texture.txt,15549,gregtech:gt.blockcasings14,6,MTEIndustrialExtruder.getCasingTexture:Casings.ExtruderMachineCasing
+dreamcraft-texture.txt,15555,miscutils:gtplusplus.blockcasings.5,6,MTEIndustrialForgeHammer.getCasingTexture:Casings.ForgeCasing
+dreamcraft-texture.txt,15560,miscutils:gtplusplus.blockspecialcasings.1,9,MTEFrothFlotationCell.getCasingTexture:direct Casings.FlotationCellCasings block (explicitly avoids wrong TAE slot)
+dreamcraft-texture.txt,15566,gregtech:gt.blockcasings12,13,MTEIndustrialMixer.getCasingTexture:Casings.MixerCasing
+dreamcraft-texture.txt,31023,miscutils:gtplusplus.blockcasings.3,1,"MTEIndustrialAlloySmelter.CASING_TEXTURE_ID:TAE(2,1)"
+dreamcraft-texture.txt,31028,miscutils:gtplusplus.blockcasings.3,1,"MTEFrothFlotationCellLegacy.getCasingTextureId:TAE(2,1); preserve actual legacy Inconel getter"
+dreamcraft-texture.txt,31075,miscutils:gtplusplus.blockcasings.5,6,"MTEIndustrialForgeHammerLegacy.getCasingTextureId:TAE(1,11), registered casing5meta6"
+dreamcraft-texture.txt,31085,gregtech:gt.blockcasings9,2,MTESteamWaterPump.getCurrentCasing:Casings.PrimitiveWoodenCasing

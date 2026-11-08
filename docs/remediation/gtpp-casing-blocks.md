@@ -28,8 +28,8 @@ change adds actual block appearance rather than replacing obsolete aliases with
 unrelated textures or dropping required-image warnings.
 
 Controller records now reference the same registered casing blocks for the
-source-proven machines listed in `legacy-controller-casing-source.csv` (13
-records covering eight IDs across the two historical mapping files). This
+source-proven machines listed in `legacy-controller-casing-source.csv` (47
+records covering 29 IDs across the two historical mapping files). This
 preserves face-specific tree-farm/algae/chisel/duplicator casing designs and
 avoids forcing their obsolete standalone PNG aliases. The power substation
 uses casing-2 metadata 7 on its sides and metadata 8 on its front/back, matching
@@ -47,3 +47,11 @@ returns `Textures.BlockIcons.CONTAINMENT_FRAME`; the removed `blockFrameGt.png`
 reference was the block's only consumer. Its source tint remains `202020`, and
 its translucent render pass is now represented by `SEMITRANSPARENT`. The current
 containment-frame asset already has an existing declaration in this file.
+
+The additional source ledger includes all active controller consumers of the
+legacy chrono/metro casing aliases. Legacy flotation ID 31028 deliberately uses
+the registered Inconel casing selected by its actual getter; current ID 15560
+uses the explicit flotation block metadata 9, as its source intentionally avoids
+the misleading casing registry slot. That block face map has been added using
+the installed `MACHINE_CASING_FLOTATION` image. The production JVM fixtures
+remain green (124 shared/coke assertions and 6,760 vending assertions).
