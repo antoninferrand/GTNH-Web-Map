@@ -30,3 +30,13 @@ the unrelated `mMainFacing`. Preserve dynamic multi-block casing selection.
 
 Validation: all five IDs are unique; the exact overlay PNG is present in the
 installed GregTech asset inventory, and tiers reuse validated hull definitions.
+
+## Extrusion hatches: 31785–31788
+
+`MTEHatchExtrusion` inherits `MTEHatchInputBus` without overriding texture
+methods. Registry names confirm tiers 5–8. Reuse its existing input pipe
+overlay, tier hulls and multi-block casing behavior. As for compressed input
+buses, paint/indicator layers depend on shared renderer support.
+
+Validation: the four IDs were absent and are now uniquely defined; they use
+the already validated existing input overlay and hull assets.

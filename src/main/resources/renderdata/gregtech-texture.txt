@@ -8285,3 +8285,9 @@ moddata:mod=gtmte,type=mte,id=2720,baseset=hull.tier.06,iconset=hatch.pattern_pr
 moddata:mod=gtmte,type=mte,id=2721,baseset=hull.tier.07,iconset=hatch.pattern_provider,ishatch=true
 moddata:mod=gtmte,type=mte,id=2722,baseset=hull.tier.08,iconset=hatch.pattern_provider,ishatch=true
 moddata:mod=gtmte,type=mte,id=2723,baseset=hull.tier.09,iconset=hatch.pattern_provider,ishatch=true
+
+# Extrusion hatches inherit the normal input bus exterior (IV through UV).
+moddata:mod=gtmte,type=mte,id=31785,baseset=hull.tier.05,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=31786,baseset=hull.tier.06,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=31787,baseset=hull.tier.07,iconset=hatch.input_bus,ishatch=true
+moddata:mod=gtmte,type=mte,id=31788,baseset=hull.tier.08,iconset=hatch.input_bus,ishatch=true
