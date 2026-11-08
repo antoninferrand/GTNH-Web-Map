@@ -1,6 +1,8 @@
 package org.dynmap.forge;
 
 import com.google.gson.GsonBuilder;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import net.minecraft.util.ChatComponentText;
 import org.dynmap.DynmapCore;
 import org.dynmap.Log;
 import org.dynmap.hdmap.TexturePack;
+import org.dynmap.hdmap.HDBlockModels;
 import org.dynmap.hdmap.TextureResourceResolver;
 import org.dynmap.modsupport.gregtech.GregTechSupport;
 
@@ -42,8 +45,8 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         report.put("schemaVersion", 1);
         report.put("scope", "Effective loaded mappings and resource outcomes; visual correctness requires fixture comparison");
         Map<String, String> versions = new LinkedHashMap<>();
-        for (String mod : new String[] { "gregtech", "cropsnh", "vendingmachine", "appliedenergistics2", "IC2" }) {
-            versions.put(mod, core.getServer().getModVersion(mod));
+        for (ModContainer mod : Loader.instance().getActiveModList()) {
+            versions.put(mod.getModId(), mod.getVersion());
         }
         report.put("versions", versions);
 
@@ -70,6 +73,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         }
         report.put("blocks", blocks);
         report.put("blankMetadataNote", "Candidates include unused metadata; explicit invisible mappings are defined, not blank");
+        report.put("failedCustomModels", HDBlockModels.getFailedCustomModels());
 
         List<Map<String, Object>> machines = new ArrayList<>();
         int unsupported = 0;
@@ -82,6 +86,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
                 machine.put("id", id);
                 machine.put("name", prototype.getMetaName());
                 machine.put("class", prototype.getClass().getName());
+                machine.put("blockMetadata", prototype.getTileEntityBaseType());
                 machine.put("mapped", support != null);
                 if (support == null) {
                     unsupported++;
@@ -118,6 +123,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
             resources.put(pack.getKey(), lookups);
         }
         report.put("resourcePacks", resources);
+        report.put("inactiveResourceDeclarations", TexturePack.getInactiveResourceDeclarations());
         Map<String, Object> summary = new LinkedHashMap<>();
         summary.put("registeredBlocks", blocks.size());
         summary.put("blankMetadataCandidates", blankMetadata);
@@ -126,6 +132,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         summary.put("requiredMissingResources", requiredMissing);
         summary.put("optionalAbsentResources", optionalAbsent);
         summary.put("fallbackResources", fallbacks);
+        summary.put("failedCustomModelBlocks", HDBlockModels.getFailedCustomModels().size());
         report.put("summary", summary);
 
         Path output = core.getDataFolder().toPath().resolve("render-audit.json");

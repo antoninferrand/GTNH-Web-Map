@@ -45,6 +45,22 @@ public class HDBlockModels {
     private static int linkmap[][] = new int[BLOCKTABLELEN][];
     private static int max_patches;
     private static HashMap<Integer, HDBlockModel> models_by_id_data = new HashMap<Integer, HDBlockModel>();
+
+    public static Map<Integer, List<Integer>> getFailedCustomModels() {
+        Map<Integer, List<Integer>> failures = new java.util.TreeMap<>();
+        for (Map.Entry<Integer, HDBlockModel> entry : models_by_id_data.entrySet()) {
+            if (entry.getValue() instanceof CustomBlockModel && ((CustomBlockModel) entry.getValue()).render == null) {
+                int block = entry.getKey() >> 4;
+                List<Integer> metadata = failures.get(block);
+                if (metadata == null) {
+                    metadata = new ArrayList<>();
+                    failures.put(block, metadata);
+                }
+                metadata.add(entry.getKey() & 15);
+            }
+        }
+        return failures;
+    }
     private static PatchDefinitionFactory pdf = new PatchDefinitionFactory();
     private static BitSet customModelsRequestingTileData = new BitSet(); // Index by 16*id + data
     private static BitSet changeIgnoredBlocks = new BitSet();   // Index by 16*id + data

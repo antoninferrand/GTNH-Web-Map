@@ -21,6 +21,8 @@ public class RendererFailureBehaviorTest {
         if (failed.getMeshForBlock(null).getCustomMesh().length != 0) throw new AssertionError("failed mesh");
         if (HDBlockModels.getTileEntityFieldsNeeded(62000, 0) != null)
             throw new AssertionError("stale requested-fields flag must not dereference a missing renderer");
+        if (!HDBlockModels.getFailedCustomModels().containsKey(62000))
+            throw new AssertionError("failed custom model must stay visible to the audit");
         System.out.println("Failed custom renderer keeps initialization/chunk-field checks usable");
     }
 }

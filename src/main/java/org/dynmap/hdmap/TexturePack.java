@@ -80,6 +80,21 @@ public class TexturePack {
     public static boolean isBlankBlockMapping(int block, int metadata) {
         return HDTextureMap.getMap(block, metadata, 0) == HDTextureMap.blank;
     }
+
+    /** Declared historical images with no parsed consumer do not require a load. */
+    public static List<Map<String, Object>> getInactiveResourceDeclarations() {
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (DynamicTileFile file : addonfiles) {
+            if (file.used) continue;
+            Map<String, Object> row = new java.util.LinkedHashMap<>();
+            row.put("resource", file.filename);
+            row.put("mod", file.modname);
+            row.put("optional", file.optional);
+            row.put("fallback", file.fallbackFilename);
+            result.add(row);
+        }
+        return result;
+    }
     /* Loaded texture packs */
     private static HashMap<String, TexturePack> packs = new HashMap<String, TexturePack>();
     private static Object packlock = new Object();
