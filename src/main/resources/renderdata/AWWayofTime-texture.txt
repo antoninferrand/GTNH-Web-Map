@@ -269,7 +269,7 @@ block:id=%AlchemicalWizardrytile.blockSpellModifier,data=15,transparency=TRANSPA
 
 # Source model atlas and metadata variants: BloodMagic 1.9.16 Effect
 texture:id=awmodel/SpellEffectEarth,filename=assets/alchemicalwizardry/textures/models/SpellEffectEarth.png,xcount=4,ycount=4
-texture:id=awmodel/EffectInvalidMetadata,filename=assets/gtnhwebmap/textures/blocks/missing.png,xcount=4,ycount=4
+texture:id=awmodel/EffectInvalidMetadata,filename=assets/gtnhwebmap/textures/blocks/missing-model-atlas.png,xcount=4,ycount=4
 texture:id=awmodel/SpellEffectWind,filename=assets/alchemicalwizardry/textures/models/SpellEffectWind.png,xcount=4,ycount=4
 texture:id=awmodel/SpellEffectFire,filename=assets/alchemicalwizardry/textures/models/SpellEffectFire.png,xcount=4,ycount=4
 texture:id=awmodel/SpellEffectIce,filename=assets/alchemicalwizardry/textures/models/SpellEffectIce.png,xcount=4,ycount=4

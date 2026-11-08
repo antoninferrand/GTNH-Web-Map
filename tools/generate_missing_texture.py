@@ -21,4 +21,7 @@ def generate():
 if __name__ == '__main__':
     target = pathlib.Path(__file__).resolve().parents[1] / (
         'src/main/resources/texturepacks/standard/assets/gtnhwebmap/textures/blocks/missing.png')
-    target.write_bytes(generate())
+    pixels = generate()
+    target.write_bytes(pixels)
+    # Separate filename keeps its 4x4 model UV layout independent of 1x1 consumers.
+    target.with_name('missing-model-atlas.png').write_bytes(pixels)
