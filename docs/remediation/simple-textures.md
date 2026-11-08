@@ -66,3 +66,18 @@ Validation: both new assets exist and both original names are absent in the
 installed asset inventory; the source block metadata/index correspondence was
 checked; `git diff --check` passes. This corrects casing images, not the
 separate missing machine-ID coverage.
+
+## Deprecated BartWorks glass images
+
+Keep the deprecated `BW_GlasBlocks` block's metadata mappings but update its
+missing image sources. In the matching GregTech/BartWorks source,
+`bartworks/common/loaders/ItemRegistry.java` declares `bw_deprecatedglass`
+metadata 3 as `RhodiumPlatedPalladiumReinforcedBoronSilicateGlassBlock` and
+metadata 14 as `InfinityReinforcedBoronSilicateGlassBlock`. Use those images
+for the existing `LuVTierMaterial...` and `CosmicNeutronium...` texture IDs,
+respectively. Preserve the connected-glass processor and patch selections.
+
+Validation: verified metadata positions in the source registry array, both
+new PNGs in the installed JAR inventory, and absence of both original PNGs.
+`git diff --check` passes. Coverage for the newer `BW_TieredGlass` and
+`BW_ExtraGlass` block registrations is a separate registry-audit concern.
