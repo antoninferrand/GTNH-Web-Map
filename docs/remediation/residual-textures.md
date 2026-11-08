@@ -57,3 +57,19 @@ eight compression levels and 8/16/32-pixel source resolutions. Premade image
 pixels are checked against the mod's original-resource early-return behavior.
 The JAR is not committed. The 16 declaration fallback paths, levels and
 processor flags are checked separately against their corresponding materials.
+
+## Native-resolution model atlases
+
+`AtlasMesh.split(double[15], columns, rows)` clips each xyz/UV triangle into
+ordinary 16-pixel atlas cells. Returned `Triangle.vertices` contains xyz/UV
+coordinates for three vertices, with local bottom-origin UVs, and
+`Triangle.texture` is the top-origin row-major GRID index. Coordinates and
+winding are interpolated without changing surface area. Repeating/mirrored
+UVs are supported; finite-coordinate and UV-span checks reject invalid data.
+This lets OBJ and baked cuboid models retain atlas detail through the existing
+GRID texture pipeline instead of downsampling an entire atlas to one block tile.
+
+Validation: `python3 tools/test-atlas-mesh.py` compiles and executes the real
+helper, checking400 randomized triangles over five atlas resolutions, total
+surface area, bounds, row orientation, repeat wrapping, constant UV edge cases
+and rejection of non-finite coordinates.
