@@ -8312,12 +8312,12 @@ texture:id=remediation/pipe_color/WHITE,filename=assets/gregtech/textures/blocks
 moddata:mod=gtmte,type=iconset,name=hatch.input_bus.painted,output=0:mte/iconsets/OVERLAY_PIPE_IN,outputpaint1=0:remediation/pipe_color/BLACK,outputpaint2=0:remediation/pipe_color/RED,outputpaint3=0:remediation/pipe_color/GREEN,outputpaint4=0:remediation/pipe_color/BROWN,outputpaint5=0:remediation/pipe_color/BLUE,outputpaint6=0:remediation/pipe_color/PURPLE,outputpaint7=0:remediation/pipe_color/CYAN,outputpaint8=0:remediation/pipe_color/LIGHTGRAY,outputpaint9=0:remediation/pipe_color/GRAY,outputpaint10=0:remediation/pipe_color/PINK,outputpaint11=0:remediation/pipe_color/LIME,outputpaint12=0:remediation/pipe_color/YELLOW,outputpaint13=0:remediation/pipe_color/LIGHTBLUE,outputpaint14=0:remediation/pipe_color/MAGENTA,outputpaint15=0:remediation/pipe_color/ORANGE,outputpaint16=0:remediation/pipe_color/WHITE
 
 # Black-plutonium insulated cables: installed registry IDs and thicknesses.
-moddata:mod=gtmte,type=mte,id=11396,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=250
-moddata:mod=gtmte,type=mte,id=11397,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=375
-moddata:mod=gtmte,type=mte,id=11398,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=500
-moddata:mod=gtmte,type=mte,id=11399,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=625
-moddata:mod=gtmte,type=mte,id=11400,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=750
-moddata:mod=gtmte,type=mte,id=11401,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=875
+moddata:mod=gtmte,type=mte,id=11396,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=250,wiretex=17000:remediation/cable/blackplutonium_wire,wirecolor=323232,endtex=17000:remediation/cable/end_TINY
+moddata:mod=gtmte,type=mte,id=11397,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=375,wiretex=17000:remediation/cable/blackplutonium_wire,wirecolor=323232,endtex=17000:remediation/cable/end_SMALL
+moddata:mod=gtmte,type=mte,id=11398,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=500,wiretex=17000:remediation/cable/blackplutonium_wire,wirecolor=323232,endtex=17000:remediation/cable/end_MEDIUM
+moddata:mod=gtmte,type=mte,id=11399,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=625,wiretex=17000:remediation/cable/blackplutonium_wire,wirecolor=323232,endtex=17000:remediation/cable/end_MEDIUM_PLUS
+moddata:mod=gtmte,type=mte,id=11400,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=750,wiretex=17000:remediation/cable/blackplutonium_wire,wirecolor=323232,endtex=17000:remediation/cable/end_LARGE
+moddata:mod=gtmte,type=mte,id=11401,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=875,wiretex=17000:remediation/cable/blackplutonium_wire,wirecolor=323232,endtex=17000:remediation/cable/end_HUGE
 
 # BartWorks acid generators: real tier hulls, voltage-specific energy output.
 texture:id=remediation/acid/output_LV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_LV.png
@@ -8896,3 +8896,12 @@ moddata:mod=gtmte,type=mte,id=9514,mtetype=controller,basetex=0:gregtech/iconset
 # MTEIceCreamMachine uses an OBJ model with a single atlas, not a casing cube.
 texture:id=remediation/model/icecream,filename=assets/gregtech/textures/model/ice_cream_machine.png
 moddata:mod=gtmte,type=mte,id=20000,basetex=0:remediation/model/icecream,paint=false
+
+# Material wire uses GT texture-set fallback; retain resource-pack DULL overrides.
+texture:id=remediation/cable/blackplutonium_wire,filename=assets/gregtech/textures/blocks/materialicons/DULL/wire.png,fallback=assets/gregtech/textures/blocks/materialicons/NONE/wire.png,fallbackmod=gregtech
+texture:id=remediation/cable/end_TINY,filename=assets/gregtech/textures/blocks/iconsets/INSULATION_TINY.png
+texture:id=remediation/cable/end_SMALL,filename=assets/gregtech/textures/blocks/iconsets/INSULATION_SMALL.png
+texture:id=remediation/cable/end_MEDIUM,filename=assets/gregtech/textures/blocks/iconsets/INSULATION_MEDIUM.png
+texture:id=remediation/cable/end_MEDIUM_PLUS,filename=assets/gregtech/textures/blocks/iconsets/INSULATION_MEDIUM_PLUS.png
+texture:id=remediation/cable/end_LARGE,filename=assets/gregtech/textures/blocks/iconsets/INSULATION_LARGE.png
+texture:id=remediation/cable/end_HUGE,filename=assets/gregtech/textures/blocks/iconsets/INSULATION_HUGE.png
