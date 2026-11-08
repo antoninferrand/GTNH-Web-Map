@@ -58,7 +58,6 @@ texture:id=AlchemicalWizardry/Teleposer_Top,filename=assets/alchemicalwizardry/t
 texture:id=AlchemicalWizardry/WaterRitualStone,filename=assets/alchemicalwizardry/textures/blocks/WaterRitualStone.png
 texture:id=AlchemicalWizardry/lifeEssenceStill,filename=assets/alchemicalwizardry/textures/blocks/lifeEssenceStill.png
 texture:id=minecraft/MISSING_ICON_BLOCK_774_schematicSaver,filename=assets/minecraft/textures/blocks/MISSING_ICON_BLOCK_774_schematicSaver.png
-texture:id=minecraft/MISSING_ICON_BLOCK_780_blockMimic,filename=assets/minecraft/textures/blocks/MISSING_ICON_BLOCK_780_blockMimic.png
 texture:id=minecraft/planks_oak,filename=assets/minecraft/textures/blocks/planks_oak.png
 
 
@@ -176,7 +175,7 @@ block:id=%blockCrystal,data=1,stdrot=true,face0-5=0:AlchemicalWizardry/ShardClus
 block:id=%blockCrystal,data=2,data=3,data=4,data=5,data=6,data=7,data=8,data=9,data=10,data=11,data=12,data=13,data=14,data=15,stdrot=true,face0-5=0:AlchemicalWizardry/BlankRune
 
 # %blockMimic:* (blockMimic), render=(STANDARD), opaque=false,cls=WayofTime.alchemicalWizardry.common.block.MimicBlock
-block:id=%blockMimic,data=*,stdrot=true,face0-5=12000:minecraft/MISSING_ICON_BLOCK_780_blockMimic
+block:id=%blockMimic,data=*,transparency=TRANSPARENT,face0-5=0:awmodel/MimicDefault
 
 # %blockEnchantmentGlyph:* (blockEnchantmentGlyph), render=(STANDARD), opaque=true,cls=WayofTime.alchemicalWizardry.common.block.BlockEnchantmentGlyph
 block:id=%blockEnchantmentGlyph,data=0,stdrot=true,face0-5=0:AlchemicalWizardry/GlyphEnchantability
@@ -295,3 +294,5 @@ block:id=%blockAlchemicCalcinator,data=*,transparency=TRANSPARENT,patch0=0:awmod
 
 texture:id=awmodel/CrystalBelljar,filename=assets/alchemicalwizardry/textures/models/CrystalBelljar.png,xcount=8,ycount=4
 block:id=%blockCrystalBelljar,data=*,transparency=TRANSPARENT,patch0=0:awmodel/CrystalBelljar,patch1=1:awmodel/CrystalBelljar,patch2=2:awmodel/CrystalBelljar,patch3=3:awmodel/CrystalBelljar,patch4=4:awmodel/CrystalBelljar,patch5=5:awmodel/CrystalBelljar,patch6=6:awmodel/CrystalBelljar,patch7=7:awmodel/CrystalBelljar,patch8=8:awmodel/CrystalBelljar,patch9=9:awmodel/CrystalBelljar,patch10=10:awmodel/CrystalBelljar,patch11=11:awmodel/CrystalBelljar,patch12=12:awmodel/CrystalBelljar,patch13=13:awmodel/CrystalBelljar,patch14=14:awmodel/CrystalBelljar,patch15=15:awmodel/CrystalBelljar,patch16=16:awmodel/CrystalBelljar,patch17=17:awmodel/CrystalBelljar,patch18=18:awmodel/CrystalBelljar,patch19=19:awmodel/CrystalBelljar,patch20=20:awmodel/CrystalBelljar,patch21=21:awmodel/CrystalBelljar,patch22=22:awmodel/CrystalBelljar,patch23=23:awmodel/CrystalBelljar,patch24=24:awmodel/CrystalBelljar,patch25=25:awmodel/CrystalBelljar,patch26=26:awmodel/CrystalBelljar,patch27=27:awmodel/CrystalBelljar,patch28=28:awmodel/CrystalBelljar,patch29=29:awmodel/CrystalBelljar,patch30=30:awmodel/CrystalBelljar,patch31=31:awmodel/CrystalBelljar
+
+texture:id=awmodel/MimicDefault,filename=assets/gtnhwebmap/textures/blocks/missing.png

@@ -65,3 +65,5 @@ customblock:id=%AlchemicalWizardrytile.blockSpellEffect,data=*,class=org.dynmap.
 customblock:id=%blockAlchemicCalcinator,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/bloodmagic-calcinator.json
 
 customblock:id=%blockCrystalBelljar,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/bloodmagic-belljar.json
+
+customblock:id=%blockMimic,data=*,class=org.dynmap.hdmap.renderer.InventoryMimicRenderer

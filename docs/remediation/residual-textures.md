@@ -167,3 +167,18 @@ Replace its nonexistent scraper placeholder with the 13-part source model and ac
 ## Blood Magic belljar base model
 
 Replace its nonexistent scraper placeholder with the 8-part source model and actual 128x64 `assets/alchemicalwizardry/textures/models/CrystalBelljar.png` atlas. Match the TESR180-degree Z transform and retain transparent glass regions. Installed assets, actual ModelBox UV golden and real patch-factory bounds/indices are validated. This addresses the missing base model/texture; the source also draws optional floating inventory/reagent contents as separate effects, which are not baked into the static model.
+
+## Blood Magic mimic block
+
+The mimic block has no fixed image: `TEMimicBlock` saves its slot0 ItemBlock in
+`Inventory`, and `MimicBlock.getIcon` reads that block's metadata-specific face
+icons. `InventoryMimicRenderer` now selects that saved item, resolves numeric
+or named Minecraft item IDs to their underlying block, and copies its six
+face textures and static tint. Empty/non-block/invalid entries keep the source's
+missing-sprite appearance, supplied by the explicit bundled checkerboard.
+There is no substitution of an arbitrary solid block for a dynamic mimic.
+
+Validation: the real texture-map and patch factory tests cover slot0 selection,
+metadata7, distinct directional faces, copied tint, non-block entries, absent
+inventory and out-of-range metadata. Standard block metadata0..15 is supported;
+item-only variants beyond the block metadata range remain an explicit limitation.
