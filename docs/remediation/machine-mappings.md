@@ -217,3 +217,12 @@ Exo foundry additional rendering remains separate from its controller cube:
 `MTEExoFoundry.renderTESR()` loads `textures/model/foundry_ring.obj` and
 compiles ring VBOs. The controller texture mapping does not reproduce that
 world-spanning shader geometry; it must remain tracked as a visual parity item.
+
+## Mega chemical reactor: 15515
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings8:0`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.

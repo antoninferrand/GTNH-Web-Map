@@ -8426,3 +8426,16 @@ texture:id=remediation/controller/14050/front_ACTIVE,filename=assets/gregtech/te
 texture:id=remediation/controller/14050/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_EXOFOUNDRY_ACTIVE_GLOW.png,ycount=16
 moddata:mod=gtmte,type=iconset,name=remediation.controller.14050_active,output=0:remediation/controller/14050/front_ACTIVE,output2=23000:remediation/controller/14050/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=14050,mtetype=controller,baseset=remediation.controller.base.14050,iconset=remediation.controller.14050,activeset=remediation.controller.14050_active
+
+# Mega chemical reactor (GT 5.09.54.265).
+texture:id=remediation/controller/15515/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CHEMICALLY_INERT.png
+texture:id=remediation/controller/15515/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CHEMICALLY_INERT.png
+texture:id=remediation/controller/15515/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CHEMICALLY_INERT.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15515,bottom=0:remediation/controller/15515/base_bottom,top=0:remediation/controller/15515/base_top,side=0:remediation/controller/15515/base_side
+texture:id=remediation/controller/15515/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR.png
+texture:id=remediation/controller/15515/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15515,output=0:remediation/controller/15515/front,output2=23000:remediation/controller/15515/glow
+texture:id=remediation/controller/15515/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE.png
+texture:id=remediation/controller/15515/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15515_active,output=0:remediation/controller/15515/front_ACTIVE,output2=23000:remediation/controller/15515/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15515,mtetype=controller,baseset=remediation.controller.base.15515,iconset=remediation.controller.15515,activeset=remediation.controller.15515_active
