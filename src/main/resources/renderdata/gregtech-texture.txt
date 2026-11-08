@@ -1610,7 +1610,7 @@ texture:id=mte/chrono/MetalSheet9,filename=assets/miscutils/textures/blocks/chro
 texture:id=mte/metro/TEXTURE_TECH_PANEL_H,filename=assets/miscutils/textures/blocks/metro/TEXTURE_TECH_PANEL_H.png
 texture:id=mte/TileEntities/MACHINE_CASING_STABLE_TALONITE,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_TALONITE.png
 texture:id=mte/metro/TEXTURE_TECH_B,filename=assets/miscutils/textures/blocks/metro/TEXTURE_TECH_B.png
-texture:id=mte/iconsets/RENDERING_ERROR,filename=assets/gregtech/textures/blocks/iconsets/RENDERING_ERROR.png
+texture:id=mte/iconsets/RENDERING_ERROR,filename=assets/gtnhwebmap/textures/blocks/missing.png
 texture:id=mte/TileEntities/sterileCasing,filename=assets/miscutils/textures/blocks/TileEntities/sterileCasing.png
 texture:id=mte/metro/TEXTURE_METAL_PANEL_B,filename=assets/miscutils/textures/blocks/metro/TEXTURE_METAL_PANEL_B.png
 texture:id=mte/metro/TEXTURE_METAL_PANEL_D,filename=assets/miscutils/textures/blocks/metro/TEXTURE_METAL_PANEL_D.png
