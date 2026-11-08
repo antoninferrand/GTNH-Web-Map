@@ -40,7 +40,10 @@ public class PipeRendererBase extends CustomRenderer {
     private static void generateSingleModel(RenderPatchFactory rpf, double radius, double midBoxRadius, int[] pipeTextures, int[] midBoxTextures, int i, ArrayList<RenderPatch> list) {
         double midOff = midBoxRadius >= radius ? midBoxRadius : radius;
         if(midBoxRadius >= radius || i == 0) {
-            CustomRenderer.addBox(rpf, list, 0.5 - midBoxRadius, 0.5 + midBoxRadius, 0.5 - midBoxRadius, 0.5 + midBoxRadius, 0.5 - midBoxRadius, 0.5 + midBoxRadius, midBoxTextures);
+            // Some pipe families have no separate central fitting. An isolated
+            // pipe must still have its own thickness rather than a zero-size box.
+            double centerRadius = Math.max(midBoxRadius, radius);
+            CustomRenderer.addBox(rpf, list, 0.5 - centerRadius, 0.5 + centerRadius, 0.5 - centerRadius, 0.5 + centerRadius, 0.5 - centerRadius, 0.5 + centerRadius, midBoxTextures);
         }
         if((i & 1) == 1) {
             CustomRenderer.addBox(rpf, list, 0.5 - radius, 0.5 + radius, 0, 0.5 + midOff, 0.5 - radius, 0.5 + radius, pipeTextures);

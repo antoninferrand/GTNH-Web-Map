@@ -5709,7 +5709,7 @@ moddata:mod=gtmte,type=mte,id=5589,mtetype=pipe,basetex=17000:gregtech/materiali
 moddata:mod=gtmte,type=mte,id=5590,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=375
 moddata:mod=gtmte,type=mte,id=5591,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=500
 moddata:mod=gtmte,type=mte,id=5592,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=750
-moddata:mod=gtmte,type=mte,id=5593,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=1000
+moddata:mod=gtmte,type=mte,id=5593,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=875
 moddata:mod=gtmte,type=mte,id=5594,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=250
 moddata:mod=gtmte,type=mte,id=5595,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=375
 moddata:mod=gtmte,type=mte,id=5596,mtetype=pipe,basetex=17000:gregtech/materialicons/DULL/pipeSide,colormul=DCDCDC,size=500

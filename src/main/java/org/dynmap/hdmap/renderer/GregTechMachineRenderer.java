@@ -108,8 +108,10 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                             break;
 
                     }
-                    if (connections instanceof Byte) {
-                        version = ((Byte) connections).byteValue();
+                    if (connections instanceof Number) {
+                        // Six direction bits select the mesh. Saved connection
+                        // flags must not index outside the 64 connection models.
+                        version = ((Number) connections).intValue() & 0x3F;
                     }
 
                     return new CustomRendererData(patchSetToUse[version], pipeTexturesAndColorsThing, pipeTexturesAndColorsThing);
