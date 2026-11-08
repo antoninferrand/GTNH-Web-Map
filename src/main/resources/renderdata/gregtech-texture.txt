@@ -6447,9 +6447,9 @@ moddata:mod=gtmte,type=mte,id=12715,iconset=bw.radiohatchiv,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=12716,iconset=bw.radiohatchluv,baseset=hull.tier.01,ishatch=true
 moddata:mod=gtmte,type=mte,id=12717,iconset=bw.radiohatchzpm,baseset=hull.tier.01,ishatch=true
 moddata:mod=gtmte,type=mte,id=12718,iconset=bw.radiohatchuv,baseset=hull.tier.01,ishatch=true
-moddata:mod=gtmte,type=mte,id=12726,iconset=acidgeneratormv,activeset=acidgeneratormv_active,baseset=hull.tier.01
-moddata:mod=gtmte,type=mte,id=12727,iconset=acidgeneratorhv,activeset=acidgeneratorhv_active,baseset=hull.tier.01
-moddata:mod=gtmte,type=mte,id=12728,iconset=acidgeneratorev,activeset=acidgeneratorev_active,baseset=hull.tier.01
+moddata:mod=gtmte,type=mte,id=12726,baseset=hull.tier.02,iconset=remediation.acid.02,activeset=remediation.acid.02_active
+moddata:mod=gtmte,type=mte,id=12727,baseset=hull.tier.03,iconset=remediation.acid.03,activeset=remediation.acid.03_active
+moddata:mod=gtmte,type=mte,id=12728,baseset=hull.tier.04,iconset=remediation.acid.04,activeset=remediation.acid.04_active
 moddata:mod=gtmte,type=mte,id=12729,iconset=multimachine.dehp,activeset=multimachine.dehp_active,basetex=0:gregtech/iconsets/MACHINE_HEATPROOFCASING
 moddata:mod=gtmte,type=mte,id=12730,iconset=multimachine.megablastfurnace,activeset=multimachine.megablastfurnace_active,basetex=0:gregtech/iconsets/MACHINE_HEATPROOFCASING
 moddata:mod=gtmte,type=mte,id=12731,iconset=multimachine.megavacuumfreezer,activeset=multimachine.megavacuumfreezer_active,basetex=0:gregtech/iconsets/MACHINE_CASING_FROST_PROOF
@@ -6465,7 +6465,7 @@ moddata:mod=gtmte,type=mte,id=12740,iconset=multimachine.voidminer2,activeset=mu
 moddata:mod=gtmte,type=mte,id=12741,iconset=multimachine.voidminer1,activeset=multimachine.voidminer1_active,basetex=0:gregtech/iconsets/MACHINE_UV_SIDE
 moddata:mod=gtmte,type=mte,id=12791,iconset=multimachine.htgr,activeset=multimachine.htgr_active,basetex=0:gregtech/iconsets/MACHINE_CASING_ADVANCEDRADIATIONPROOF
 moddata:mod=gtmte,type=mte,id=12792,iconset=multimachine.extremegreenhouse,mtetype=controller,activeset=multimachine.extremegreenhouse_active,basetex=0:gregtech/iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL
-moddata:mod=gtmte,type=mte,id=12793,iconset=acidgeneratorlv,activeset=acidgeneratorlv_active,baseset=hull.tier.01
+moddata:mod=gtmte,type=mte,id=12793,baseset=hull.tier.01,iconset=remediation.acid.01,activeset=remediation.acid.01_active
 moddata:mod=gtmte,type=mte,id=12799,iconset=humongousinputhatch,baseset=hull.tier.01,ishatch=true
 moddata:mod=gtmte,type=mte,id=13001,iconset=multimachine.research_completer,activeset=multimachine.research_completer_active,basetex=0:gregtech/iconsets/MACHINE_CASING_MAGICAL
 moddata:mod=gtmte,type=mte,id=13101,iconset=multimachine.fuelcellmk1,mtetype=controller,activeset=multimachine.fuelcellmk1_active,basetex=0:gregtech/iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL
@@ -8318,3 +8318,25 @@ moddata:mod=gtmte,type=mte,id=11398,mtetype=cable,basetex=17000:gt_cable,colormu
 moddata:mod=gtmte,type=mte,id=11399,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=625
 moddata:mod=gtmte,type=mte,id=11400,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=750
 moddata:mod=gtmte,type=mte,id=11401,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=875
+
+# BartWorks acid generators: real tier hulls, voltage-specific energy output.
+texture:id=remediation/acid/output_LV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_LV.png
+texture:id=remediation/acid/top/OVERLAY_FRONT,filename=assets/gregtech/textures/blocks/basicmachines/chemical_reactor/OVERLAY_FRONT.png
+texture:id=remediation/acid/top/OVERLAY_FRONT_GLOW,filename=assets/gregtech/textures/blocks/basicmachines/chemical_reactor/OVERLAY_FRONT_GLOW.png,optional=true
+moddata:mod=gtmte,type=iconset,name=remediation.acid.01,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT,top2=23000:remediation/acid/top/OVERLAY_FRONT_GLOW,output=0:remediation/acid/output_LV
+texture:id=remediation/acid/top/OVERLAY_FRONT_ACTIVE,filename=assets/gregtech/textures/blocks/basicmachines/chemical_reactor/OVERLAY_FRONT_ACTIVE.png
+texture:id=remediation/acid/top/OVERLAY_FRONT_ACTIVE_GLOW,filename=assets/gregtech/textures/blocks/basicmachines/chemical_reactor/OVERLAY_FRONT_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.acid.01_active,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT_ACTIVE,top2=23000:remediation/acid/top/OVERLAY_FRONT_ACTIVE_GLOW,output=0:remediation/acid/output_LV
+texture:id=remediation/acid/output_MV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MV.png
+moddata:mod=gtmte,type=iconset,name=remediation.acid.02,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT,top2=23000:remediation/acid/top/OVERLAY_FRONT_GLOW,output=0:remediation/acid/output_MV
+moddata:mod=gtmte,type=iconset,name=remediation.acid.02_active,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT_ACTIVE,top2=23000:remediation/acid/top/OVERLAY_FRONT_ACTIVE_GLOW,output=0:remediation/acid/output_MV
+texture:id=remediation/acid/output_HV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_HV.png
+moddata:mod=gtmte,type=iconset,name=remediation.acid.03,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT,top2=23000:remediation/acid/top/OVERLAY_FRONT_GLOW,output=0:remediation/acid/output_HV
+moddata:mod=gtmte,type=iconset,name=remediation.acid.03_active,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT_ACTIVE,top2=23000:remediation/acid/top/OVERLAY_FRONT_ACTIVE_GLOW,output=0:remediation/acid/output_HV
+texture:id=remediation/acid/output_EV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_EV.png
+moddata:mod=gtmte,type=iconset,name=remediation.acid.04,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT,top2=23000:remediation/acid/top/OVERLAY_FRONT_GLOW,output=0:remediation/acid/output_EV
+moddata:mod=gtmte,type=iconset,name=remediation.acid.04_active,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT_ACTIVE,top2=23000:remediation/acid/top/OVERLAY_FRONT_ACTIVE_GLOW,output=0:remediation/acid/output_EV
+texture:id=remediation/acid/output_IV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_IV.png
+moddata:mod=gtmte,type=iconset,name=remediation.acid.05,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT,top2=23000:remediation/acid/top/OVERLAY_FRONT_GLOW,output=0:remediation/acid/output_IV
+moddata:mod=gtmte,type=iconset,name=remediation.acid.05_active,side=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,bottom=0:mte/iconsets/MACHINE_CASING_ACIDHAZARD,top=0:remediation/acid/top/OVERLAY_FRONT_ACTIVE,top2=23000:remediation/acid/top/OVERLAY_FRONT_ACTIVE_GLOW,output=0:remediation/acid/output_IV
+moddata:mod=gtmte,type=mte,id=12742,baseset=hull.tier.05,iconset=remediation.acid.05,activeset=remediation.acid.05_active

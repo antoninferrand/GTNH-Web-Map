@@ -127,3 +127,14 @@ line normal/active and glow overlays on `mFacing`. `getCasingTexture()` uses
 CropsNH casing page 20 index 0 (`brickedAgriculturalCasing`). Add the controller
 and register that casing page for surrounding generic hatches. All four overlay
 assets and the casing PNG exist in the installed pack; MTE ID is unique.
+
+## BartWorks acid generator: 12742 and existing family corrections
+
+`ItemRegistry` registers IV generator 12742 at tier 5. It was missing entirely.
+The same source confirms the existing LV/MV/HV/EV IDs 12793/12726/12727/12728
+are tiers 1/2/3/4; several old records incorrectly used tier 1 for every tier.
+`MTEAcidGenerator` uses acid-hazard side/back/bottom, chemical reactor front
+images on its top (including active and glow), and voltage-specific
+`OVERLAYS_ENERGY_OUT[tier+1]` on `mFacing`. New iconsets represent those exact
+faces and fix active-output omission in older records. All required PNGs
+exist in the installed GregTech JAR; the absent inactive top glow is source-declared optional. The mod JAR, which now includes BartWorks.
