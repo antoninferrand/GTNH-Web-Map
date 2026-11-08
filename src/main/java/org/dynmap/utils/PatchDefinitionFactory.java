@@ -180,6 +180,26 @@ public class PatchDefinitionFactory implements RenderPatchFactory {
     }
 
     @Override
+    public RenderPatch getModelTriangleExplTexCoords(double x0, double y0, double z0, double tu0, double tv0,
+            double x1, double y1, double z1, double tu1, double tv1,
+            double x2, double y2, double z2, double tu2, double tv2, SideVisible sidevis, int textureidx) {
+        double[] values = {x0, y0, z0, tu0, tv0, x1, y1, z1, tu1, tv1, x2, y2, z2, tu2, tv2};
+        for (double value : values) {
+            if (!Double.isFinite(value)) return null;
+        }
+        if (sidevis == null) return null;
+        double ux = x1 - x0, uy = y1 - y0, uz = z1 - z0;
+        double vx = x2 - x0, vy = y2 - y0, vz = z2 - z0;
+        double nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+        if (!Double.isFinite(nx) || !Double.isFinite(ny) || !Double.isFinite(nz)
+                || (nx == 0 && ny == 0 && nz == 0)) return null;
+        // Explicit UVs retain the existing triangle API's finite wrapping semantics.
+        // Bounds validation belongs to block patches, not opt-in source model vertices.
+        return getTriangleExplTexCoords(x0, y0, z0, tu0, tv0, x1, y1, z1, tu1, tv1,
+                x2, y2, z2, tu2, tv2, sidevis, textureidx);
+    }
+
+    @Override
     public RenderPatch getPatchExplTexCoords(double x0, double y0, double z0, double tu0, double tv0, double x1, double y1, double z1, double tu1, double tv1, double x2, double y2, double z2, double tu2, double tv2, double uplusvmax, SideVisible sidevis, int textureidx) {
         PatchDefinition ret = new PatchDefinition();
         ret.update(x0, y0, z0, x1, y1, z1, x2, y2, z2,0,1,0,1,uplusvmax, sidevis, textureidx);

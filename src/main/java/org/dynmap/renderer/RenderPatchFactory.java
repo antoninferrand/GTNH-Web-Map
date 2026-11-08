@@ -96,6 +96,17 @@ public interface RenderPatchFactory {
     public int getTextureCountFromMap(String id);
 
     public RenderPatch getTriangleExplTexCoords(double x0, double y0, double z0, double tu0, double tv0, double x1, double y1, double z1, double tu1, double tv1, double x2, double y2, double z2, double tu2, double tv2, SideVisible sidevis, int textureidx);
+    /**
+     * Explicit model triangle whose finite vertices may extend beyond a block cell.
+     * Implementations without model-specific support retain their existing triangle behavior.
+     */
+    default RenderPatch getModelTriangleExplTexCoords(double x0, double y0, double z0, double tu0, double tv0,
+            double x1, double y1, double z1, double tu1, double tv1,
+            double x2, double y2, double z2, double tu2, double tv2, SideVisible sidevis, int textureidx) {
+        return getTriangleExplTexCoords(x0, y0, z0, tu0, tv0, x1, y1, z1, tu1, tv1,
+                x2, y2, z2, tu2, tv2, sidevis, textureidx);
+    }
+
     public RenderPatch getPatchExplTexCoords(double x0, double y0, double z0, double tu0, double tv0, double x1, double y1, double z1, double tu1, double tv1, double x2, double y2, double z2, double tu2, double tv2, double uplusvmax, SideVisible sidevis, int textureidx);
     public RenderPatch getTriangleAutoTexCoords(double x0, double y0, double z0, double x1, double y1, double z1, double x2, double y2, double z2, SideVisible sidevis, int textureidx);
     public RenderPatch getTriangleAutoTexCoords(double x0, double y0, double z0, double x1, double y1, double z1, double x2, double y2, double z2, double uplusvmax, SideVisible sidevis, int textureidx);
