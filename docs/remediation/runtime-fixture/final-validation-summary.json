@@ -1,0 +1,80 @@
+{
+  "baselineRows": 637,
+  "sourceHead": "af109fdb407a937617cf2cdf69fcb9a2e562cd26",
+  "runtimeDynmapVersion": "af109fd",
+  "evidenceKindCounts": {
+    "consumer_migration": 75,
+    "generated_fallback": 17,
+    "invisible_base": 3,
+    "material_fallback": 12,
+    "optional": 270,
+    "registry_gate": 241,
+    "retirement": 7,
+    "source_correction": 19
+  },
+  "statusCounts": {
+    "fallback_loaded_source_verified": 22,
+    "inactive_declaration_source_verified": 277,
+    "optional_absent_source_verified": 270,
+    "replacement_loaded_source_verified": 58,
+    "retired_source_verified": 10
+  },
+  "verifiedAssetOrConsumerOutcomes": 637,
+  "needsReviewOrRuntime": 0,
+  "declarationCounts": {
+    "migrated": 21,
+    "removed_or_prebaseline_correction": 47,
+    "retained": 569
+  },
+  "runtimeSchemaVersion": 2,
+  "resourceCoverage": "LOADED_PACKS_ONLY",
+  "runtimeSummary": {
+    "registeredBlocks": 4258,
+    "blankMetadataCandidates": 3028,
+    "registeredMtes": 3412,
+    "unmappedMtes": 0,
+    "mappedMtesWithoutBase": 0,
+    "unresolvedMteIconSets": 0,
+    "inactiveMissingTerrainVariants": 0,
+    "requiredMissingResources": 0,
+    "optionalAbsentResources": 325,
+    "fallbackResources": 23,
+    "failedCustomModelBlocks": 0,
+    "textureDefinitionErrors": 0
+  },
+  "runtimeGatePassed": true,
+  "runtimeGateFailures": {},
+  "runtimeUnreportedChecks": [],
+  "baselineRevision": "e0cb1f30",
+  "baselineSha256": "ccc4ab25eb108a3472d68a6eb04e98ca48ea6a7e45703986e0c0f989e2378508",
+  "runtimeSha256": "d19220d94fa0dad4526d59853d58e4ddb1f654a943a4a1346734b463d209c1fe",
+  "missingBaselineSourceFiles": [],
+  "artifact": {
+    "cycle": 8,
+    "commit": "af109fdb",
+    "artifact": "gtnh-web-map-af109fd.jar",
+    "sha256": "5d91c7897e6491f59e41c7cf1d8c23d48ff8fd8bd82ab5831284c2214c0564e9",
+    "copiedAt": 1794169090.4815192
+  },
+  "renderedMaps": [
+    {
+      "map": "flat",
+      "rendered": 400,
+      "preservedPngs": 101
+    },
+    {
+      "map": "surface",
+      "rendered": 776,
+      "preservedPngs": 198
+    }
+  ],
+  "baselineMtesMapped": 157,
+  "savedColdPlacements": 169,
+  "nativeTileEntities": 20,
+  "walrusFacings": 4,
+  "walrusScale": 1.0,
+  "naturalVendingActive": true,
+  "deformedVendingActive": false,
+  "fullRawAuditPath": "/private/tmp/gwm-fixture/cycle8-render-audit.json",
+  "imageArchivePath": "/private/tmp/gwm-fixture/visual-scene/cycle8-hires-tiles"
+}
