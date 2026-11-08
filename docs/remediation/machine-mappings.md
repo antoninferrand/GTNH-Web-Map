@@ -298,3 +298,10 @@ Front source: `assets/miscutils/textures/blocks/iconsets/controllerFaces/industr
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## name_remover: 12070
+
+ULV NameRemover reuses disassembler textures. Source constructor registrations and texture methods were checked in
+GT5 5.09.54.265. All required images exist; optional missing images match
+explicit createOptional declarations. Animated frames use square source-image
+strips. Special metadata requires the shared renderer contract.
