@@ -341,3 +341,18 @@ Stationary for state 2, Ultimate Static for state 3 and Strengthened Inanimate
 for all other values. Declare the exact state override instead of fixing all
 structures to their tier-1 casing. Shared renderer clears the default base set
 when applying a selected state base texture.
+
+## Steam furnace multiblock: 31087
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings:10`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_STEAM_FURNACE_MULTI`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
+
+Steam furnace source saves `tierMachineCasing` as an integer. It selects steel
+only for value 2; all other values use BronzePlatedBricks. `tierMachine` is a
+processing tier and must not drive the casing. The active glow's actual source
+name is `OVERLAY_FRONT_STEAM_FURNACE_MULTI_GLOW_ACTIVE` (unusual suffix order).
+Normal/active overlays remain independent of the casing-tier state selector.
