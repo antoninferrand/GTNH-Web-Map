@@ -98,6 +98,7 @@ public class GregTechSupport {
         ent.baseTextureSetName = baseSet;
         ent.inheritCasing = !"false".equals(data.get("inheritcasing"));
         ent.paintable = !"false".equals(data.get("paint"));
+        ent.vending = "true".equals(data.get("vending"));
         ent.stateField = data.get("statefield");
         ent.casingStateField = data.get("casingstatefield");
         if (ent.stateField != null && stateFields.add(ent.stateField)) stateFieldsNeeded = stateFields.toArray(new String[0]);
@@ -328,6 +329,7 @@ public class GregTechSupport {
         private final HashMap<Integer, String> stateActiveIconNames = new HashMap<>();
         public boolean inheritCasing = true;
         public boolean paintable = true;
+        public boolean vending;
 
         private void resolveIconSets() {
             // Some mod-scoped support files declare shared iconsets after their MTEs.

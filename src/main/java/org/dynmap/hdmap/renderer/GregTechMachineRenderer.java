@@ -22,6 +22,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
     private static final int fullBlockPatchList[] = { 0, 1, 4, 5, 2, 3 };
     private RenderPatch[] fullBlock;
     private GregTechCableRenderer cableRenderer;
+    private volatile VendingMachineRenderer vendingRenderer;
     RenderPatch[][] pipes125;
     RenderPatch[][] pipes250;
     RenderPatch[][] pipes375;
@@ -135,11 +136,27 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                     int mainFacing = validFacing(number(tmpMainFacing, facing), facing);
 
                     BasicMachineTextureAndColor bmtac = new BasicMachineTextureAndColor(typeId, mapDataCtx, active, facing, mainFacing, mColor);
+                    if (entry.vending) return getVendingRenderer(mapDataCtx).getMachineRenderData(mapDataCtx, bmtac, bmtac);
                     return new CustomRendererData(fullBlock, bmtac, bmtac);
                 }
             }
         }
         return new CustomRendererData(fullBlock, null, null);
+    }
+
+    private VendingMachineRenderer getVendingRenderer(MapDataContext context) {
+        if (vendingRenderer == null) {
+            synchronized (this) {
+                if (vendingRenderer == null) {
+                    VendingMachineRenderer renderer = new VendingMachineRenderer();
+                    java.util.HashMap<String, String> parameters = new java.util.HashMap<>();
+                    parameters.put("machineblock", String.valueOf(context.getBlockTypeID()));
+                    renderer.initializeRenderer(context.getPatchFactory(), GWM_Util.blockNameToId("vendingmachine:casing"), 1, parameters);
+                    vendingRenderer = renderer;
+                }
+            }
+        }
+        return vendingRenderer;
     }
 
     @Override

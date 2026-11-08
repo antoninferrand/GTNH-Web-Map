@@ -20,16 +20,18 @@ def main():
     parser.add_argument('--runtime-classpath', type=Path, required=True)
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix='gwm-gregtech-renderer-') as work:
-        production = ['org/dynmap/modsupport/gregtech/GregTechSupport.java', 'org/dynmap/hdmap/renderer/GregTechMachineRenderer.java']
+        production = ['org/dynmap/modsupport/gregtech/GregTechSupport.java', 'org/dynmap/hdmap/renderer/GregTechMachineRenderer.java', 'org/dynmap/hdmap/renderer/VendingMachineRenderer.java']
         sources = [str(ROOT / 'src/main/java' / path) for path in production]
-        sources.append(str(ROOT / 'tools/tests/GregTechMachineBehaviorTest.java'))
-        compile_classpath = str(args.classes) + ':' + args.compile_classpath.read_text().strip()
-        result = subprocess.run(['javac', '--release', '8', '-cp', compile_classpath, '-d', work, *sources])
+        sources.extend(str(ROOT / 'tools/tests' / name) for name in ['GregTechMachineBehaviorTest.java', 'VendingMachineBehaviorTest.java'])
+        compile_classpath = str(args.classes) + ':' + args.compile_classpath.read_text().strip() + ':' + args.runtime_classpath.read_text().strip()
+        result = subprocess.run(['javac', '--release', '8', '-proc:none', '-cp', compile_classpath, '-d', work, *sources])
         if result.returncode:
             raise SystemExit(result.returncode)
         runtime_classpath = work + ':' + str(args.classes) + ':' + args.runtime_classpath.read_text().strip()
-        result = subprocess.run(['java', '-cp', runtime_classpath, 'org.dynmap.hdmap.renderer.GregTechMachineBehaviorTest', str(ROOT)])
-        raise SystemExit(result.returncode)
+        for test in ['GregTechMachineBehaviorTest', 'VendingMachineBehaviorTest']:
+            result = subprocess.run(['java', '-cp', runtime_classpath, 'org.dynmap.hdmap.renderer.' + test, str(ROOT)])
+            if result.returncode:
+                raise SystemExit(result.returncode)
 
 
 if __name__ == '__main__':
