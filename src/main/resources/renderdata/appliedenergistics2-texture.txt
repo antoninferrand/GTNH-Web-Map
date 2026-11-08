@@ -316,7 +316,8 @@ specialModSupportLoader:org.dynmap.modsupport.loaders.AppliedEnergisticsModSuppo
 block:id=%tile.BlockCableBus,data=*,stdrot=true,colorMult=ff33cc,transparency=SEMITRANSPARENT,patch0=0:cable16,patch1=0:appliedenergistics2/PartMonitor_Bright,patch2=0:appliedenergistics2/PartMonitorBack,patch3-6=0:appliedenergistics2/PartMonitorSides,patch7=0:appliedenergistics2/QuartzFiber,patch8=0:appliedenergistics2/CableAnchor
 
 # %tile.BlockMatrixFrame:* (tile.BlockMatrixFrame), render=appeng.client.render.WorldRender(CUSTOM), opaque=false,cls=appeng.block.spatial.BlockMatrixFrame
-block:id=%tile.BlockMatrixFrame,data=*,stdrot=true,face0-5=0:appliedenergistics2/BlockMatrixFrame
+# AE2 BlockMatrixFrame uses RenderNull: spatial boundary is intentionally invisible.
+block:id=%tile.BlockMatrixFrame,data=*,transparency=TRANSPARENT,face0-5=-1
 
 # %tile.OreQuartz:* (tile.OreQuartz), render=appeng.client.render.WorldRender(CUSTOM), opaque=true,cls=appeng.block.solids.OreQuartz
 block:id=%tile.OreQuartz,data=*,stdrot=true,face0-5=0:appliedenergistics2/OreQuartz,patch6=0:minecraft/stone,layer0-5=6
