@@ -290,3 +290,14 @@ baked geometry; installed asset existence and patch-factory UV/bounds checks pas
 The exact node linker model extends .1597315block horizontally and .183729block
 below its owner. Retain these coordinates and flag the same owner-cell ray
 traversal limitation as the source terraformer.
+
+## ThaumicBases node manipulator and foci
+
+Replace its fake missing-icon image with the actual base/handle OBJ groups and
+64x64base atlas. Apply TESR translation(.5,1,.5),180-degree X rotation and .5scale.
+Metadata0 draws the base only; source ItemNodeFoci names map metadata1..10 to
+its ten32x32foci atlases and foci geometry. Unregistered/illegal11..15 retain
+only the base (the source draws its base then fails the out-of-range foci lookup).
+All actual atlas paths exist; native atlas splitting and real patch-factory
+geometry checks pass. The small .030673horizontal source overhang is retained
+and subject to owner-cell ray traversal limits.
