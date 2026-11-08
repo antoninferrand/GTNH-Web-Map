@@ -159,3 +159,11 @@ heat sensor glow, exist in the installed GregTech JAR.
 Append to the existing KubaTech support file, reuse its loader registration,
 and explicitly mark the GregTech resource owner. Local IV hull/iconset records
 avoid depending on other renderdata files' load order.
+
+### Acid generator duplicate-owner cleanup
+
+The source audit also found legacy dreamcraft MTE records for four already
+mapped acid generators. They could overwrite corrected GregTech records based
+on file load order. Remove those duplicate MTE records; GregTech now owns the
+whole family. Preserve unrelated legacy texture/icon definitions for separate
+reachability review. This prevents a corrected record from silently reverting.
