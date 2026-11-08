@@ -326,3 +326,18 @@ InfiniteItemHolder inherits LV TieredChest and QCHEST facing overlay; DOWN-facin
 GT5 5.09.54.265. All required images exist; optional missing images match
 explicit createOptional declarations. Animated frames use square source-image
 strips. Special metadata requires the shared renderer contract.
+
+## Large neutralization engine: 31088
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings12:5`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LNE`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
+
+LNE source saves `structureTier` as a byte. Its casing selector uses Precise
+Stationary for state 2, Ultimate Static for state 3 and Strengthened Inanimate
+for all other values. Declare the exact state override instead of fixing all
+structures to their tier-1 casing. Shared renderer clears the default base set
+when applying a selected state base texture.

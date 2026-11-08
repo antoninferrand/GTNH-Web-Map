@@ -8590,3 +8590,16 @@ moddata:mod=gtmte,type=mte,id=12071,baseset=remediation.modification_table,paint
 texture:id=remediation/infinite_chest/OVERLAY_QCHEST,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_QCHEST.png,ycount=4
 moddata:mod=gtmte,type=iconset,name=remediation.infinite_chest,output=0:remediation/infinite_chest/OVERLAY_QCHEST,downfacingextra=4
 moddata:mod=gtmte,type=mte,id=31010,baseset=hull.tier.01,iconset=remediation.infinite_chest
+
+# Large neutralization engine (GT 5.09.54.265).
+texture:id=remediation/controller/31088/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_STRENGTHENED_INANIMATE.png
+texture:id=remediation/controller/31088/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_STRENGTHENED_INANIMATE.png
+texture:id=remediation/controller/31088/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_STRENGTHENED_INANIMATE.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.31088,bottom=0:remediation/controller/31088/base_bottom,top=0:remediation/controller/31088/base_top,side=0:remediation/controller/31088/base_side
+texture:id=remediation/controller/31088/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LNE.png
+texture:id=remediation/controller/31088/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LNE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.31088,output=0:remediation/controller/31088/front,output2=23000:remediation/controller/31088/glow
+texture:id=remediation/controller/31088/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LNE_ACTIVE.png,ycount=10
+texture:id=remediation/controller/31088/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LNE_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.31088_active,output=0:remediation/controller/31088/front_ACTIVE,output2=23000:remediation/controller/31088/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=31088,mtetype=controller,baseset=remediation.controller.base.31088,iconset=remediation.controller.31088,activeset=remediation.controller.31088_active,statefield=structureTier,state2basetex=0:gregtech/iconsets/MACHINE_CASING_PRECISE_STATIONARY,state3basetex=0:gregtech/iconsets/MACHINE_CASING_ULTIMATELY_STATIC
