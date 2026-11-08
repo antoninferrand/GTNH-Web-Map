@@ -38,3 +38,9 @@ times all 64 masks pass 167,535 assertions covering surface bounds/area,
 outward normals, absence of internal faces, isolated/single/multiple-end
 selection, immutable mesh reuse and insulation-only paint modulation.
 This is geometry/state validation, not a live screenshot comparison.
+
+The isolated full-pack startup exposed an important loader-order constraint:
+wire/end texture IDs are resolved while processing each MTE line. Declare
+those textures before the cable MTE records; an unresolved forward reference
+throws a format error and aborts the remainder of that support file. The cable
+data regression check now enforces this ordering.
