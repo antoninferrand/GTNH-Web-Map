@@ -6,7 +6,13 @@ import java.util.Map;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.dynmap.hdmap.TexturePack;
 import org.dynmap.modsupport.GWM_Util;
-import org.dynmap.renderer.*;
+import org.dynmap.renderer.CustomColorMultiplier;
+import org.dynmap.renderer.CustomRenderer;
+import org.dynmap.renderer.CustomRendererData;
+import org.dynmap.renderer.CustomTextureMapper;
+import org.dynmap.renderer.MapDataContext;
+import org.dynmap.renderer.RenderPatch;
+import org.dynmap.renderer.RenderPatchFactory;
 
 /** Saved-state equivalent of VendingMachine's casing CTM and client RenderOverlay. */
 public class VendingMachineRenderer extends CustomRenderer {
