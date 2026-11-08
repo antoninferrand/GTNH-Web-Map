@@ -1,0 +1,14 @@
+file,mte_id,base_registry_name,metadata,source
+gregtech-texture.txt,812,miscutils:gtplusplus.blockcasings.2,7,MTEPowerSubStation.getTexture: TAE.GTPP_INDEX(23); front/back24 -> casing2meta8
+gregtech-texture.txt,836,miscutils:gtplusplus.blockcasings.2,15,"MTETreeFarmLegacy.getCasingTextureId:TAE(1,15); Casings.SterileFarmCasing"
+gregtech-texture.txt,997,miscutils:gtplusplus.blockcasings.2,15,"MTEAlgaePondBaseLegacy.getCasingTextureId:TAE(1,15); legacy sterile casing"
+gregtech-texture.txt,31050,miscutils:gtplusplus.blockcasings.5,3,"MTEElementalDuplicator.getCasingTextureId:TAE(0,3); Casings.ElementalConfinementShell"
+gregtech-texture.txt,31069,miscutils:gtplusplus.blockcasings.5,5,"MTEIndustrialChiselLegacy.getCasingTextureId:90; TAE(1,10) registered by casing5meta5"
+dreamcraft-texture.txt,812,miscutils:gtplusplus.blockcasings.2,7,MTEPowerSubStation.getTexture: TAE.GTPP_INDEX(23); front/back24 -> casing2meta8
+dreamcraft-texture.txt,836,miscutils:gtplusplus.blockcasings.2,15,"MTETreeFarmLegacy.getCasingTextureId:TAE(1,15); Casings.SterileFarmCasing"
+dreamcraft-texture.txt,997,miscutils:gtplusplus.blockcasings.2,15,"MTEAlgaePondBaseLegacy.getCasingTextureId:TAE(1,15); legacy sterile casing"
+dreamcraft-texture.txt,15541,miscutils:gtplusplus.blockcasings.2,15,MTETreeFarm.getCasingTexture:Casings.SterileFarmCasing
+dreamcraft-texture.txt,15545,gregtech:gt.blockcasings12,15,MTEAlgaePond.getCasingTexture:Casings.AlgaeCasing
+dreamcraft-texture.txt,15554,miscutils:gtplusplus.blockcasings.5,5,MTEIndustrialChisel.getCasingTexture:Casings.SturdyPrinterCasing
+dreamcraft-texture.txt,31050,miscutils:gtplusplus.blockcasings.5,3,"MTEElementalDuplicator.getCasingTextureId:TAE(0,3); Casings.ElementalConfinementShell"
+dreamcraft-texture.txt,31069,miscutils:gtplusplus.blockcasings.5,5,"MTEIndustrialChiselLegacy.getCasingTextureId:90; TAE(1,10) registered by casing5meta5"

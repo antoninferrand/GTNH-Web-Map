@@ -129,6 +129,14 @@ public class GregTechSupport {
             ent.baseFace = GWM_Util.objectToInt(data.get("baseface"), -1);
             if (ent.baseBlock <= 0 || ent.baseBlock >= 65536 || ent.baseMetadata < 0 || ent.baseMetadata >= 16) ent.baseBlock = -1;
         }
+        if (data.get("frontbaseblock") != null) {
+            ent.frontBaseBlock = GWM_Util.blockNameToId(data.get("frontbaseblock"));
+            ent.frontBaseMetadata = GWM_Util.objectToInt(data.get("frontbasemeta"), 0);
+        }
+        if (data.get("backbaseblock") != null) {
+            ent.backBaseBlock = GWM_Util.blockNameToId(data.get("backbaseblock"));
+            ent.backBaseMetadata = GWM_Util.objectToInt(data.get("backbasemeta"), 0);
+        }
         // A registered block source is authoritative. Do not mark obsolete PNG
         // aliases used when the effective block mapping supplies the actual image.
         ent.baseTexture = ent.baseBlock > 0 ? -1 : getTexture(data, "basetex", filetoidx);
@@ -328,6 +336,7 @@ public class GregTechSupport {
     public class MetaTileEntityEntry{
         public int baseTexture = -1;
         public int baseBlock = -1, baseMetadata, baseFace = -1;
+        public int frontBaseBlock = -1, frontBaseMetadata, backBaseBlock = -1, backBaseMetadata;
         public int baseTexture2 = -1;
         public int wireTexture = -1, endTexture = -1;
         public int wireColor = 0xFFFFFF;

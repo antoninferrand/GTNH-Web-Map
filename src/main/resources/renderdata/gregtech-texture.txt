@@ -4564,7 +4564,7 @@ moddata:mod=gtmte,type=mte,id=798,iconset=multimachine.industrialwiremill,mtetyp
 moddata:mod=gtmte,type=mte,id=799,iconset=multimachine.industrialmassfab,mtetype=controller,basetex=0:gregtech/iconsets/TEXTURE_METAL_PANEL_F
 moddata:mod=gtmte,type=mte,id=810,iconset=multimachine.industrialsalloyamelter,mtetype=controller,basetex=0:gregtech/iconsets/MACHINE_CASING_STABLE_ZIRCONIUM_CARBIDE
 moddata:mod=gtmte,type=mte,id=811,iconset=multimachine.industrialmixer,mtetype=controller,basetex=0:gregtech/iconsets/TEXTURE_METAL_PANEL_C
-moddata:mod=gtmte,type=mte,id=812,iconset=multimachine.substation.01.input.single,activeset=multimachine.substation.01.input.single_active,basetex=0:chrono/MetalSheet
+moddata:mod=gtmte,type=mte,id=812,iconset=multimachine.substation.01.input.single,activeset=multimachine.substation.01.input.single_active,basetex=0:chrono/MetalSheet,baseblock=miscutils:gtplusplus.blockcasings.2,basemeta=7,frontbaseblock=miscutils:gtplusplus.blockcasings.2,frontbasemeta=8,backbaseblock=miscutils:gtplusplus.blockcasings.2,backbasemeta=8
 moddata:mod=gtmte,type=mte,id=813,baseset=hull.tier.01,iconset=advancedmachine.dehydrator,activeset=advancedmachine.dehydrator_active
 moddata:mod=gtmte,type=mte,id=814,baseset=hull.tier.02,iconset=advancedmachine.dehydrator,activeset=advancedmachine.dehydrator_active
 moddata:mod=gtmte,type=mte,id=815,baseset=hull.tier.03,iconset=advancedmachine.dehydrator,activeset=advancedmachine.dehydrator_active
@@ -4581,7 +4581,7 @@ moddata:mod=gtmte,type=mte,id=832,baseset=hull.tier.03,iconset=advancedgenerator
 moddata:mod=gtmte,type=mte,id=833,iconset=tesseract.generator,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=834,iconset=tesseract.terminal,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=835,iconset=multimachine.industrialrefinery,mtetype=controller,basetex=0:gregtech/iconsets/MACHINE_CASING_STABLE_HASTELLOY_N
-moddata:mod=gtmte,type=mte,id=836,iconset=multimachine.treefarm,mtetype=controller,basetex=0:gregtech/iconsets/log_acacia_top
+moddata:mod=gtmte,type=mte,id=836,iconset=multimachine.treefarm,mtetype=controller,basetex=0:gregtech/iconsets/log_acacia_top,baseblock=miscutils:gtplusplus.blockcasings.2,basemeta=15
 moddata:mod=gtmte,type=mte,id=837,baseset=hull.tier.01,iconset=basicgenerator.semifluid,activeset=basicgenerator.semifluid_active
 moddata:mod=gtmte,type=mte,id=838,baseset=hull.tier.02,iconset=basicgenerator.semifluid,activeset=basicgenerator.semifluid_active
 moddata:mod=gtmte,type=mte,id=839,baseset=hull.tier.03,iconset=basicgenerator.semifluid,activeset=basicgenerator.semifluid_active
@@ -4647,7 +4647,7 @@ moddata:mod=gtmte,type=mte,id=993,baseset=hull.tier.04,iconset=basicgenerator.se
 moddata:mod=gtmte,type=mte,id=994,baseset=hull.tier.05,iconset=basicgenerator.semifluid,activeset=basicgenerator.semifluid_active
 moddata:mod=gtmte,type=mte,id=995,iconset=multimachine.multimachine.adv.vacuumfurnace,mtetype=controller,basetex=0:gregtech/iconsets/TEXTURE_STONE_RED_A
 moddata:mod=gtmte,type=mte,id=996,iconset=multimachine.gtpp.multimachine.rocketengine,activeset=multimachine.gtpp.multimachine.rocketengine_active,basetex=0:gregtech/iconsets/MACHINE_CASING_ROCKETDYNE
-moddata:mod=gtmte,type=mte,id=997,iconset=multimachine.algaefarm,mtetype=controller,basetex=0:gregtech/iconsets/log_acacia_top
+moddata:mod=gtmte,type=mte,id=997,iconset=multimachine.algaefarm,mtetype=controller,basetex=0:gregtech/iconsets/log_acacia_top,baseblock=miscutils:gtplusplus.blockcasings.2,basemeta=15
 moddata:mod=gtmte,type=mte,id=998,iconset=multimachine.chemicalplant,mtetype=controller,basetex=0:gregtech/iconsets/MACHINE_LV_TOP
 moddata:mod=gtmte,type=mte,id=1000,iconset=multimachine.blastfurnace,mtetype=controller,activeset=multimachine.blastfurnace_active,basetex=0:gregtech/iconsets/MACHINE_HEATPROOFCASING
 moddata:mod=gtmte,type=mte,id=1001,iconset=multimachine.implosioncompressor,mtetype=controller,activeset=multimachine.implosioncompressor_active,basetex=0:gregtech/iconsets/MACHINE_CASING_SOLID_STEEL
@@ -6963,13 +6963,13 @@ moddata:mod=gtmte,type=mte,id=31040,baseset=hull.tier.00,iconset=hatch.steam,ish
 moddata:mod=gtmte,type=mte,id=31041,iconset=multimachine.gtpp.multimachine.steam.macerator,activeset=multimachine.gtpp.multimachine.steam.macerator_active,basetex=0:gregtech/iconsets/MACHINE_BRONZEPLATEDBRICKS
 moddata:mod=gtmte,type=mte,id=31046,baseset=hull.tier.01,iconset=hatch.input_bus,ishatch=true
 moddata:mod=gtmte,type=mte,id=31047,baseset=hull.tier.01,iconset=hatch.output_bus,ishatch=true
-moddata:mod=gtmte,type=mte,id=31050,iconset=multimachine.gtpp.multimachine.replicator,activeset=multimachine.gtpp.multimachine.replicator_active,basetex=0:metro/TEXTURE_TECH_PANEL_D
+moddata:mod=gtmte,type=mte,id=31050,iconset=multimachine.gtpp.multimachine.replicator,activeset=multimachine.gtpp.multimachine.replicator_active,basetex=0:metro/TEXTURE_TECH_PANEL_D,baseblock=miscutils:gtplusplus.blockcasings.5,basemeta=3
 moddata:mod=gtmte,type=mte,id=31051,baseset=hull.tier.01,iconset=hatch.input_bus,ishatch=true
 moddata:mod=gtmte,type=mte,id=31065,iconset=multimachine.industrialrockcrusher,mtetype=controller,basetex=0:gregtech/iconsets/MACHINE_CASING_STABLE_RED_STEEL
 moddata:mod=gtmte,type=mte,id=31066,iconset=chisel.tier.01,activeset=chisel.tier.01_active,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=31067,iconset=chisel.tier.02,activeset=chisel.tier.02_active,baseset=hull.tier.01
 moddata:mod=gtmte,type=mte,id=31068,iconset=chisel.tier.03,activeset=chisel.tier.03_active,baseset=hull.tier.01
-moddata:mod=gtmte,type=mte,id=31069,iconset=multimachine.adv.chisel,mtetype=controller,basetex=0:chrono/MetalSheet9
+moddata:mod=gtmte,type=mte,id=31069,iconset=multimachine.adv.chisel,mtetype=controller,basetex=0:chrono/MetalSheet9,baseblock=miscutils:gtplusplus.blockcasings.5,basemeta=5
 moddata:mod=gtmte,type=mte,id=31070,baseset=hull.tier.01,iconset=hatch.air,ishatch=true
 moddata:mod=gtmte,type=mte,id=31071,baseset=hull.tier.00,iconset=hatch.water,ishatch=true
 moddata:mod=gtmte,type=mte,id=31072,iconset=multimachine.moleculartransformer,mtetype=controller,basetex=0:gregtech/iconsets/MACHINE_CASING_STABLE_GRISIUM

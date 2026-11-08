@@ -190,6 +190,18 @@ public class GregTechMachineBehaviorTest {
         face(renderer, context, 5, 405, 13);
         mte(64013, "basetex", "114", "statefield", "fixtureMode", "state2iconset", "fixture-absent");
         check(Arrays.equals(SUPPORT.getMTEEntre(64013).getUnresolvedIconSets(), new String[] { "fixture-absent" }), "missing state iconsets are auditable");
+        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 4, new int[] { 500, 501, 502, 503, 504, 505 }, null,
+                TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
+        mte(64014, "baseblock", "fixture:casing", "basemeta", "3", "frontbaseblock", "fixture:casing", "frontbasemeta", "4", "backbaseblock", "fixture:casing", "backbasemeta", "4");
+        context.fields.put("mID", 64014);
+        for (int facing = 0; facing < 6; facing++) {
+            context.fields.put("mFacing", facing);
+            face(renderer, context, facing, 500 + facing);
+            face(renderer, context, facing ^ 1, 500 + (facing ^ 1));
+            int side = (facing + 2) % 6;
+            if (side == (facing ^ 1)) side = (side + 1) % 6;
+            face(renderer, context, side, 400 + side);
+        }
         if (args.length > 0) {
             Path root = Paths.get(args[0]);
             List<String> mapping = Files.readAllLines(root.resolve("src/main/resources/renderdata/gregtech-texture.txt"));
