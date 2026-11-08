@@ -91,3 +91,19 @@ and the block-space TESR transform. With `--minecraft-jar` and
 (without rendering) and compares every exported position and UV for ordinary
 and mirrored cuboids. `tools/test-baked-models.py` exercises the real patch
 factory, atlas index/UV bounds and exported model bounds.
+
+## BloodArsenal life infuser
+
+Replace the scraped full bounding box and nonexistent block PNG with the real
+seven-part model and its64x32 `textures/models/LifeInfuser.png` atlas, exposed
+as a4x2 cell grid. ModelLifeInfuser and TileLifeInfuserRenderer in source tag
+1.5.12 define the cuboids and outer transform `(x+.5,y+1.5,z+.5)` with scale
+`(1,-1,-1)` after1/16 model units. The baked JSON records the versioned source
+URL and source hash. The model contains84 triangles and exact bounds
+`[0,0,0]..[1,.875,1]`; it no longer appears as an opaque placeholder cube.
+The optional floating inventory item remains an item-rendering effect outside
+this static base-model fix.
+
+Validation: installed atlas path and64x32 dimensions checked, actual ModelBox
+position/UV golden test passed, and real BakedMeshRenderer/PatchDefinitionFactory
+produces84 valid atlas patches at the expected bounds.

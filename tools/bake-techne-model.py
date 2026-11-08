@@ -4,6 +4,7 @@
 Input source is not vendored. Reject unsupported constructs instead of guessing geometry.
 """
 import argparse
+import hashlib
 import json
 import math
 import pathlib
@@ -117,8 +118,11 @@ if __name__ == '__main__':
     parser.add_argument('output',type=pathlib.Path)
     parser.add_argument('--offset',default='.5,1.5,.5')
     parser.add_argument('--scale',default='1,-1,-1')
+    parser.add_argument('--source-reference',help='Versioned source URL recorded with its SHA-256')
     args=parser.parse_args()
     model=bake(args.source.read_text(),numbers(args.offset),numbers(args.scale))
+    if args.source_reference:
+        model['source']={'url':args.source_reference,'sha256':hashlib.sha256(args.source.read_bytes()).hexdigest()}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(model,separators=(',',':'))+'\n')
     print(len(model['parts']),'parts;',sum(len(p['triangles']) for p in model['parts']),'triangles;',model['atlas'],'atlas')

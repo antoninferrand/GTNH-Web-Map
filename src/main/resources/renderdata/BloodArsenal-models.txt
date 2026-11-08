@@ -45,6 +45,6 @@ patchblock:id=%blood_torch,patch0=TorchSide1@270#0,patch1=TorchSide2@270#0,patch
 patchblock:id=%blood_torch,patch0=VertX04375#0,patch1=VertX04375@90#0,patch2=VertX04375@180#0,patch3=VertX04375@270#0,patch4=TorchTop#0,data=5,data=6,data=7,data=8,data=9,data=10,data=11,data=12,data=13,data=14,data=15
 
 # %life_infuser:* (life_infuser), render=(CUSTOM), opaque=false,cls=com.arc.bloodarsenal.common.block.BlockLifeInfuser
-boxblock:id=%life_infuser,xmin=0.0,xmax=1.0,ymin=0.0,ymax=0.875,zmin=0.0,zmax=1.0,data=*
+customblock:id=%life_infuser,data=*,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/life-infuser.json
 
 # %block_burned_string:* (block_burned_string), render=(TRIPWIRE), opaque=false,cls=com.arc.bloodarsenal.common.block.BlockBurnedString
