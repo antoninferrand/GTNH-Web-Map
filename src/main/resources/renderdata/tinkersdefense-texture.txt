@@ -9,7 +9,6 @@ cfgfile:config/tinkersdefense.cfg
 texturepath:assets/tinkersdefense/textures/blocks/
 texture:id=minecraft/MISSING_ICON_BLOCK_3558_CrestMount,filename=assets/minecraft/textures/blocks/MISSING_ICON_BLOCK_3558_CrestMount.png
 texture:id=minecraft/MISSING_ICON_BLOCK_3559_ArmorAnvil,filename=assets/minecraft/textures/blocks/MISSING_ICON_BLOCK_3559_ArmorAnvil.png
-texture:id=minecraft/MISSING_ICON_BLOCK_3560_JewelersBench,filename=assets/minecraft/textures/blocks/MISSING_ICON_BLOCK_3560_JewelersBench.png
 texture:id=tinkersdefense/AeonSteelBlock,filename=assets/tinkersdefense/textures/blocks/AeonSteelBlock.png
 texture:id=tinkersdefense/DogbeariumBlock,filename=assets/tinkersdefense/textures/blocks/DogbeariumBlock.png
 texture:id=tinkersdefense/QueensGoldBlock,filename=assets/tinkersdefense/textures/blocks/QueensGoldBlock.png
@@ -29,7 +28,6 @@ block:id=%Block_CrestMount,data=*,stdrot=true,face0-5=0:minecraft/MISSING_ICON_B
 block:id=%Block_ArmorAnvil,data=*,stdrot=true,face0-5=0:minecraft/MISSING_ICON_BLOCK_3559_ArmorAnvil
 
 # %Block_JewelersBench:* (Block_JewelersBench), render=(CUSTOM), opaque=false,cls=gmail.Lance5057.blocks.JewelersBench
-block:id=%Block_JewelersBench,data=*,stdrot=true,face0-5=0:minecraft/MISSING_ICON_BLOCK_3560_JewelersBench
 
 # %aeonsteelblock:* (aeonsteelblock), render=(STANDARD), opaque=true,cls=gmail.Lance5057.blocks.AeonSteelBlock
 block:id=%aeonsteelblock,data=*,stdrot=true,face0-5=0:tinkersdefense/AeonSteelBlock
@@ -48,3 +46,6 @@ block:id=%Dogbeariumblock,data=*,stdrot=true,face0-5=0:tinkersdefense/Dogbearium
 
 # %moltenDogbearium:* (moltenDogbearium), render=net.minecraftforge.fluids.RenderBlockFluid(FLUIDS), opaque=false,cls=gmail.Lance5057.liquids.moltenDogbeariumFluid
 block:id=%moltenDogbearium,data=*,stdrot=true,transparency=SEMITRANSPARENT,face0-1=12000:tinkersdefense/molten_Dogbearium,face2-5=12000:tinkersdefense/molten_Dogbearium_flow
+
+texture:id=tinkersdefense/JewelersBench,filename=assets/tinkersdefense/textures/blocks/JewelersBench.png,xcount=4,ycount=4
+block:id=%Block_JewelersBench,data=*,transparency=TRANSPARENT,patch0=0:tinkersdefense/JewelersBench,patch1=1:tinkersdefense/JewelersBench,patch2=2:tinkersdefense/JewelersBench,patch3=3:tinkersdefense/JewelersBench,patch4=4:tinkersdefense/JewelersBench,patch5=5:tinkersdefense/JewelersBench,patch6=6:tinkersdefense/JewelersBench,patch7=7:tinkersdefense/JewelersBench,patch8=8:tinkersdefense/JewelersBench,patch9=9:tinkersdefense/JewelersBench,patch10=10:tinkersdefense/JewelersBench,patch11=11:tinkersdefense/JewelersBench,patch12=12:tinkersdefense/JewelersBench,patch13=13:tinkersdefense/JewelersBench,patch14=14:tinkersdefense/JewelersBench,patch15=15:tinkersdefense/JewelersBench

@@ -200,3 +200,15 @@ the old flat `InfinityChest0.png` path to that actual64x64 entity atlas, retaini
 the CHEST atlas splitter and saved FacingSide renderer. All nine source frame
 paths are present in installed assets. Dynmap displays the first frame; animated
 lid/time interpolation is not persisted in the world.
+
+## TinkersDefense jewelers bench
+
+Installed1.3.4 `Renderer_JewelersBench` uses its64x64 JewelersBench atlas and
+14 ModelRenderer cuboids. Bake the exact180-degree Z transform and all168
+source triangles; no metadata rotation is performed by this TESR. Actualasset
+and dimensions checked; real patch-factory atlas/geometry test passes.
+
+The source saw protrudes .25block north of the owner's position. Geometry is
+retained rather than clipped; Dynmap's owner-cell ray traversal can omit the
+protruding section when the ray never enters that owner cell. Optional inventory
+item meshes are not present in this source TESR.
