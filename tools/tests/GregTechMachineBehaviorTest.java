@@ -243,6 +243,23 @@ public class GregTechMachineBehaviorTest {
                 }
             }
             check(Arrays.asList(renderer.getTileEntityFieldsNeeded()).contains("mIsOutputtingPower"), "substation mode requested from saved NBT");
+            for (String line : mapping) {
+                if (!line.startsWith("moddata:")) continue;
+                HashMap<String, String> chargerRecord = record(line);
+                if ("iconset".equals(chargerRecord.get("type")) && chargerRecord.get("name").startsWith("remediation.charger.")) SUPPORT.processIconSet(chargerRecord, FILES);
+                if (!"mte".equals(chargerRecord.get("type"))) continue;
+                int chargerId = Integer.parseInt(chargerRecord.get("id"));
+                if (!((chargerId >= 690 && chargerId <= 699) || (chargerId >= 11280 && chargerId <= 11283))) continue;
+                chargerRecord.remove("baseset"); chargerRecord.put("basetex", "117"); SUPPORT.processMte(chargerRecord, FILES);
+                check(SUPPORT.getMTEEntre(chargerId).getUnresolvedIconSets().length == 0, "charger iconset resolves " + chargerId);
+                Context charger = new Context(chargerId);
+                int tier = chargerId < 700 ? chargerId - 690 : chargerId - 11270;
+                for (int facing = 0; facing < 6; facing++) {
+                    charger.fields.put("mFacing", facing);
+                    face(renderer, charger, facing, 117, texture("0:remediation/charger/" + tier));
+                    face(renderer, charger, facing ^ 1, 117);
+                }
+            }
             boolean section = false;
             for (String line : mapping) {
                 if (line.startsWith("# Coke oven controller")) section = true;
