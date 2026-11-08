@@ -21,6 +21,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
 
     private static final int fullBlockPatchList[] = { 0, 1, 4, 5, 2, 3 };
     private RenderPatch[] fullBlock;
+    private GregTechCableRenderer cableRenderer;
     RenderPatch[][] pipes125;
     RenderPatch[][] pipes250;
     RenderPatch[][] pipes375;
@@ -36,6 +37,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
     public boolean initializeRenderer(RenderPatchFactory rpf, int blkid, int blockdatamask, Map<String, String> custparm) {
         if (!super.initializeRenderer(rpf, blkid, blockdatamask, custparm))
             return false;
+        cableRenderer = new GregTechCableRenderer(rpf);
 
         pipes125 = generateSingleSize(rpf, 0.125 /2, 0, 0, 0);
         pipes250 = generateSingleSize(rpf, 0.250 /2, 0, 0, 0);
@@ -70,6 +72,14 @@ public class GregTechMachineRenderer extends PipeRendererBase {
             int mColor = GWM_Util.objectToInt(mapDataCtx.getBlockTileEntityField("mColor"),0);
 
             if (entry != null) {
+                if (entry.type == GregTechSupport.MteType.Cable && entry.wireTexture >= 0
+                        && entry.endTexture >= 0 && cableRenderer != null) {
+                    int insulationColor = entry.colorMul;
+                    if (entry.paintable && mColor > 0 && mColor <= 16) insulationColor = dyeColors[mColor - 1];
+                    int connections = GWM_Util.objectToInt(mapDataCtx.getBlockTileEntityField("mConnections"), 0);
+                    return cableRenderer.getRenderData(entry.thickness, connections, entry.baseTexture,
+                            entry.wireTexture, entry.endTexture, insulationColor, entry.wireColor);
+                }
                 if (entry.type == GregTechSupport.MteType.Cable || entry.type == GregTechSupport.MteType.Wire || entry.type == GregTechSupport.MteType.Frame || entry.type == GregTechSupport.MteType.Pipe) {
                     Object connections = mapDataCtx.getBlockTileEntityField("mConnections");
                     RenderPatch[][] patchSetToUse = pipes375;
