@@ -8491,3 +8491,16 @@ texture:id=remediation/controller/15569/front_ACTIVE,filename=assets/gregtech/te
 texture:id=remediation/controller/15569/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_OIL_CRACKER_ACTIVE_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.controller.15569_active,output=0:remediation/controller/15569/front_ACTIVE,output2=23000:remediation/controller/15569/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=15569,mtetype=controller,baseset=remediation.controller.base.15569,iconset=remediation.controller.15569,activeset=remediation.controller.15569_active
+
+# Latex collector (GT 5.09.54.265).
+texture:id=remediation/controller/15752/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CHEMICALLY_INERT.png
+texture:id=remediation/controller/15752/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CHEMICALLY_INERT.png
+texture:id=remediation/controller/15752/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_CHEMICALLY_INERT.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15752,bottom=0:remediation/controller/15752/base_bottom,top=0:remediation/controller/15752/base_top,side=0:remediation/controller/15752/base_side
+texture:id=remediation/controller/15752/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATEX.png
+texture:id=remediation/controller/15752/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATEX_GLOW.png,optional=true
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15752,output=0:remediation/controller/15752/front,output2=23000:remediation/controller/15752/glow
+texture:id=remediation/controller/15752/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATEX_ACTIVE.png
+texture:id=remediation/controller/15752/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATEX_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15752_active,output=0:remediation/controller/15752/front_ACTIVE,output2=23000:remediation/controller/15752/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15752,mtetype=controller,baseset=remediation.controller.base.15752,iconset=remediation.controller.15752,activeset=remediation.controller.15752_active
