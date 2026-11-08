@@ -13,7 +13,6 @@ texture:id=thaumcraft/woodplain,filename=assets/thaumcraft/textures/blocks/woodp
 texture:id=witchinggadgets/blastFurnace,filename=assets/witchinggadgets/textures/blocks/blastFurnace.png
 texture:id=witchinggadgets/essentiaPump,filename=assets/witchinggadgets/textures/blocks/essentiaPump.png
 texture:id=witchinggadgets/etherealWall,filename=assets/witchinggadgets/textures/blocks/etherealWall.png
-texture:id=witchinggadgets/nil,filename=assets/witchinggadgets/textures/blocks/nil.png
 texture:id=witchinggadgets/roseVineBlock,filename=assets/witchinggadgets/textures/blocks/roseVineBlock.png
 texture:id=witchinggadgets/saunaStove_side,filename=assets/witchinggadgets/textures/blocks/saunaStove_side.png
 texture:id=witchinggadgets/saunaStove_top,filename=assets/witchinggadgets/textures/blocks/saunaStove_top.png
@@ -24,9 +23,10 @@ texture:id=witchinggadgets/voidWalkway,filename=assets/witchinggadgets/textures/
 
 # %WG_WallMirror:* (WG_WallMirror), render=(CUSTOM), opaque=false,cls=witchinggadgets.common.blocks.BlockWallMirror
 texture:id=witchinggadgets/terraformerModel,filename=assets/witchinggadgets/textures/models/terraformer.png,xcount=4,ycount=2
-block:id=%WG_WallMirror,data=*,stdrot=true,face0-5=0:witchinggadgets/nil
 
 # %WG_VoidWalkway:* (WG_VoidWalkway), render=(STANDARD), opaque=false,cls=witchinggadgets.common.blocks.BlockVoidWalkway
+texture:id=witchinggadgets/mirrorGlass,filename=assets/witchinggadgets/textures/models/glass.png,processor=org.dynmap.hdmap.textureprocessor.WitchingMirrorGlassTextureProcessor
+texture:id=witchinggadgets/white,filename=assets/witchinggadgets/textures/blocks/white.png
 block:id=%WG_VoidWalkway,data=*,stdrot=true,face0-5=12000:witchinggadgets/voidWalkway
 
 # %WG_StoneDevice:* (WG_StoneDevice), render=witchinggadgets.client.render.BlockRenderStoneDevice(CUSTOM), opaque=false,cls=witchinggadgets.common.blocks.BlockWGStoneDevice
@@ -51,3 +51,4 @@ block:id=%WG_RoseVine,data=*,stdrot=true,face0-5=0:witchinggadgets/roseVineBlock
 # %WG_CustomAir:* (WG_CustomAir), render=(CUSTOM), opaque=false,cls=witchinggadgets.common.blocks.BlockModifiedAiry
 block:id=%WG_CustomAir,data=*,stdrot=true,transparency=TRANSPARENT,face0-5=0:thaumcraft/blank
 block:id=%WG_MetalDevice,data=2,data=3,data=4,data=5,data=6,data=7,data=8,data=9,data=10,data=11,data=12,data=13,transparency=TRANSPARENT,patch0=0:witchinggadgets/terraformerModel,patch1=1:witchinggadgets/terraformerModel,patch2=2:witchinggadgets/terraformerModel,patch3=3:witchinggadgets/terraformerModel,patch4=4:witchinggadgets/terraformerModel,patch5=5:witchinggadgets/terraformerModel,patch6=6:witchinggadgets/terraformerModel,patch7=7:witchinggadgets/terraformerModel,patch8=0:witchinggadgets/terraformerModel,patch9=1:witchinggadgets/terraformerModel,patch10=2:witchinggadgets/terraformerModel,patch11=3:witchinggadgets/terraformerModel,patch12=4:witchinggadgets/terraformerModel,patch13=5:witchinggadgets/terraformerModel,patch14=6:witchinggadgets/terraformerModel,patch15=7:witchinggadgets/terraformerModel
+block:id=%WG_WallMirror,data=*,transparency=TRANSPARENT,patch0=0:witchinggadgets/mirrorGlass,patch1=1:witchinggadgets/mirrorGlass,patch2=2:witchinggadgets/mirrorGlass,patch3=3:witchinggadgets/mirrorGlass,patch4=4:witchinggadgets/mirrorGlass,patch5=5:witchinggadgets/mirrorGlass,patch6=6:witchinggadgets/mirrorGlass,patch7=7:witchinggadgets/mirrorGlass,patch8=8:witchinggadgets/mirrorGlass,patch9=9:witchinggadgets/mirrorGlass,patch10=10:witchinggadgets/mirrorGlass,patch11=11:witchinggadgets/mirrorGlass,patch12=12:witchinggadgets/mirrorGlass,patch13=13:witchinggadgets/mirrorGlass,patch14=14:witchinggadgets/mirrorGlass,patch15=15:witchinggadgets/mirrorGlass,patch16=16:witchinggadgets/mirrorGlass,patch17=17:witchinggadgets/mirrorGlass,patch18=18:witchinggadgets/mirrorGlass,patch19=19:witchinggadgets/mirrorGlass,patch20=20:witchinggadgets/mirrorGlass,patch21=21:witchinggadgets/mirrorGlass,patch22=22:witchinggadgets/mirrorGlass,patch23=23:witchinggadgets/mirrorGlass,patch24=24:witchinggadgets/mirrorGlass,patch25=25:witchinggadgets/mirrorGlass,patch26=26:witchinggadgets/mirrorGlass,patch27=27:witchinggadgets/mirrorGlass,patch28=28:witchinggadgets/mirrorGlass,patch29=29:witchinggadgets/mirrorGlass,patch30=30:witchinggadgets/mirrorGlass,patch31=31:witchinggadgets/mirrorGlass,patch32=0:witchinggadgets/white,patch33=0:witchinggadgets/white,patch34=0:witchinggadgets/white,patch35=0:witchinggadgets/white,patch36=0:witchinggadgets/white,patch37=0:witchinggadgets/white,patch38=0:witchinggadgets/white,patch39=0:witchinggadgets/white,patch40=0:witchinggadgets/white,patch41=0:witchinggadgets/white,patch42=0:witchinggadgets/white,patch43=0:witchinggadgets/white,patch44=0:witchinggadgets/white
