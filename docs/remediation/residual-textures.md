@@ -388,3 +388,20 @@ ranges. This preserves square16pixel cells for models combining64x64,16x16 and
 128x64 source images; forcing one grid would crop rectangular cells incorrectly.
 The per-part tint hook selects by the actual texture range, preserving existing
 shared-atlas models. Regression geometry/state/tint tests pass.
+
+## WitchingGadgets essentia pump, including all four bellows
+
+Execute the exact1.8.53-GTNH TileRenderEssentiaPump source against CPU GL/Tessellator
+boundaries, and execute actual installed Thaumcraft4.2.3.5 TileBellowsRenderer/
+ModelBellows bytecode for its four delegated bellows. Record source matrices,
+vertices, UVs and ModelBox parameters; use the verified vanilla ModelBox baker
+to produce270 triangles and the three real alembic/alchemyblock/bellows atlases.
+Each image keeps its own square16pixel grid, derived from its actual PNG header.
+Source/model JAR hashes and phase0 animation sample are recorded; no mod PNGs
+are vendored.
+
+Saved facing2/3/4/5 rotates the whole model exactly as the source does; vertical
+and unknown values follow its default North branch. The deterministic phase0
+sample freezes only the source bellows animation. Geometry/atlas bounds and all
+facing state selections pass through the real patch factory, with every part
+inside the owner block.

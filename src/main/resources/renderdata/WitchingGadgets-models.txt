@@ -36,3 +36,5 @@ boxblock:id=%WG_CustomAir,xmin=0.30000001192092896,xmax=0.699999988079071,ymin=0
 customblock:id=%WG_MetalDevice,data=2,class=org.dynmap.hdmap.renderer.WitchingTerraformRenderer,mesh=models/baked/witchinggadgets-terraformer.json
 customblock:id=%WG_MetalDevice,data=3,data=4,data=5,data=6,data=7,data=8,data=9,data=10,data=11,data=12,data=13,class=org.dynmap.hdmap.renderer.WitchingTerraformRenderer,mesh=models/baked/witchinggadgets-focus.json
 customblock:id=%WG_WallMirror,data=*,class=org.dynmap.hdmap.renderer.WitchingWallMirrorRenderer
+
+customblock:id=%WG_MetalDevice,data=0,class=org.dynmap.hdmap.renderer.BakedMeshRenderer,mesh=models/baked/witchinggadgets-essentia-pump.json
