@@ -8,8 +8,9 @@ root = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description="Exercise actual custom-model failure handling")
 parser.add_argument("--compile-classpath", type=Path, required=True)
 parser.add_argument("--runtime-classpath", type=Path, required=True)
+parser.add_argument("--classes", type=Path, default=root / "build/classes/java/main")
 args = parser.parse_args()
-classes = str(root / "build/classes/java/main")
+classes = str(args.classes)
 with tempfile.TemporaryDirectory(prefix="gwm-model-failure-") as out:
     subprocess.run(["javac", "--release", "8", "-cp", classes + ":" + args.compile_classpath.read_text().strip(),
                     "-d", out, str(root / "src/main/java/org/dynmap/hdmap/HDBlockModels.java"),

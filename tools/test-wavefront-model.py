@@ -10,8 +10,9 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--compile-classpath", type=Path, required=True)
 parser.add_argument("--runtime-classpath", type=Path, required=True)
 parser.add_argument("--model", type=Path, help="Optional installed/source ice_cream_machine.obj fixture")
+parser.add_argument("--classes", type=Path, default=ROOT / "build/classes/java/main")
 args = parser.parse_args()
-classes = str(ROOT / "build/classes/java/main")
+classes = str(args.classes)
 with tempfile.TemporaryDirectory(prefix="gwm-obj-test-") as work:
     subprocess.run(["javac", "--release", "8", "-cp", classes + ":" + args.compile_classpath.read_text().strip(),
                     "-d", work, str(ROOT / "src/main/java/org/dynmap/hdmap/renderer/WavefrontModel.java"),
