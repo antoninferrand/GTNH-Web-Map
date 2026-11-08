@@ -60,12 +60,14 @@
     {
       "map": "flat",
       "rendered": 400,
-      "preservedPngs": 101
+      "preservedPngs": 400,
+      "unchangedFiles": 300
     },
     {
       "map": "surface",
       "rendered": 776,
-      "preservedPngs": 198
+      "preservedPngs": 776,
+      "unchangedFiles": 578
     }
   ],
   "baselineMtesMapped": 157,
@@ -76,5 +78,6 @@
   "naturalVendingActive": true,
   "deformedVendingActive": false,
   "fullRawAuditPath": "/private/tmp/gwm-fixture/cycle8-render-audit.json",
-  "imageArchivePath": "/private/tmp/gwm-fixture/visual-scene/cycle8-hires-tiles"
+  "imageArchivePath": "/private/tmp/gwm-fixture/visual-scene/cycle8-hires-tiles",
+  "tileArchiveNote": "Renderer preserves unchanged tile mtimes. Final complete archive uses the unchanged radius/projection coordinate manifest, reading every current tile after final completed renders."
 }

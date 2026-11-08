@@ -60,3 +60,9 @@ outside owner-cell traversal retain their documented limits. Restrictive-pipe
 markings and connected end-cap design remain a follow-up; this release verifies
 the originally missing tin pipes' visibility and sizes. Every optional absence,
 retired helper base, and these visual limits remain explicit in the evidence.
+
+Unchanged map tiles retain their file modification times. The final archive
+therefore copies every coordinate from the original complete radius/projection
+manifest, reading each current tile after the final completed renders; it does
+not mistake unchanged files for missing output. The summary records changed
+versus unchanged file counts separately.
