@@ -13,3 +13,18 @@ not mark a missing required texture optional.
 Validation: decoded PNG signature, 16x16 RGBA dimensions, four 8x8 quadrants,
 CRC and deterministic regeneration. Live pixels remain subject to fixture
 render validation.
+
+## Process only fallback images
+
+Texture records may now declare `processoronlyfallback=true`. Resolution
+metadata from the existing loader is copied to each pack's decoded image after
+loading; no filename guessing or shared mutable mapping flag is used. A
+premade original image follows the ordinary GRID path unchanged. Only an
+actual fallback image runs the custom processor. The source grid and processor
+output counts must agree, so either route produces the same texture indices.
+This supports procedurally derived mod textures while honoring original
+resource-pack images. Required/optional errors retain their existing handling.
+
+Validation: reviewed original/fallback lookup identity and per-pack storage;
+`git diff --check` passes. The ExtraUtilities processor regression exercises
+the intended original/fallback behavior alongside the actual mod's algorithm.

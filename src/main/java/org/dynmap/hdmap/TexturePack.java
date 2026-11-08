@@ -317,6 +317,7 @@ public class TexturePack {
         String fallbackFilename;
         String fallbackModname;
         boolean optional;
+        boolean processorOnlyOnFallback;
         int tilecnt_x, tilecnt_y;   /* Number of tiles horizontally and vertically */
         int tile_to_dyntile[];      /* Mapping from tile index in tile file to dynamic ID in global tile table (terrain_argb): 0=unassigned */
         TileFileFormat format;
@@ -390,6 +391,7 @@ public class TexturePack {
         int width, height;
         int trivial_color;
         boolean isLoaded;
+        boolean fallbackSource;
     }
 
     private int[][]   tile_argb;
@@ -792,6 +794,16 @@ public class TexturePack {
                     }
                     else
                         loadImage(is, i+IMG_CNT); /* Load image file */
+                    // Capture this lookup now: another record can reuse the same resource
+                    // with a different fallback. State belongs to this pack's decoded image.
+                    if (dtf.processorOnlyOnFallback && imgs[i + IMG_CNT] != null) {
+                        for (TextureResourceResolver.Lookup lookup : tpl.getResourceLookups()) {
+                            if (dtf.filename.equals(lookup.resource)
+                                    && java.util.Objects.equals(dtf.modname, lookup.mod)) {
+                                imgs[i + IMG_CNT].fallbackSource = lookup.outcome == TextureResourceResolver.Outcome.FALLBACK;
+                            }
+                        }
+                    }
                 } finally {
                     tpl.closeResource(is);
                 }
@@ -1356,7 +1368,12 @@ public class TexturePack {
             return;
         }
 
-        switch(format) {
+        // Pre-generated originals (including pack overrides) must not be transformed twice.
+        TileFileFormat resolvedFormat = format;
+        if (format == TileFileFormat.CUSTOMPROC && dtf.processorOnlyOnFallback && !li.fallbackSource) {
+            resolvedFormat = TileFileFormat.GRID;
+        }
+        switch(resolvedFormat) {
             case GRID:  /* If grid format tile file */
                 int dim = li.width / dtf.tilecnt_x; /* Dimension of each tile */
                 int dim2 = li.height / dtf.tilecnt_y;
@@ -2531,6 +2548,9 @@ public class TexturePack {
                         if(customProcessor != null){
                             customProcessor.init(data);
                             int num = customProcessor.getTextureCount();
+                            if (addonfiles.get(fid).processorOnlyOnFallback && num != xdim * ydim) {
+                                throw new IllegalArgumentException("processoronlyfallback requires matching source-grid and processor tile counts");
+                            }
                             for(int i = 0; i < num; i++)
                                 TexturePack.parseTextureIndex(filetoidx, fid, String.format("%d:%s", i, id));
                         }
@@ -3271,6 +3291,7 @@ public class TexturePack {
             else if (parts[0].equals("fallback")) file.fallbackFilename = parts[1];
             else if (parts[0].equals("fallbackmod")) file.fallbackModname = parts[1];
             else if (parts[0].equals("optional")) file.optional = Boolean.parseBoolean(parts[1]);
+            else if (parts[0].equals("processoronlyfallback")) file.processorOnlyOnFallback = Boolean.parseBoolean(parts[1]);
         }
     }
 
