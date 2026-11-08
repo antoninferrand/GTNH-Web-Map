@@ -8636,3 +8636,10 @@ moddata:mod=gtmte,type=mte,id=16034,baseset=hull.tier.12,iconset=remediation.tt.
 texture:id=remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UXV,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_256A_UXV.png
 moddata:mod=gtmte,type=iconset,name=remediation.tt.dynamo256.UXV,output=0:remediation/tt/OVERLAY_ENERGY_OUT_MULTI_256A_UXV
 moddata:mod=gtmte,type=mte,id=16035,baseset=hull.tier.13,iconset=remediation.tt.dynamo256.UXV,ishatch=true
+
+# Creative uncertainty uses UIV hull and inherited active/inactive UC screen.
+texture:id=remediation/tt/UC,filename=assets/gregtech/textures/blocks/iconsets/UC.png,ycount=4
+texture:id=remediation/tt/UC_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/UC_ACTIVE.png,ycount=5
+moddata:mod=gtmte,type=iconset,name=remediation.tt.uncertainty,output=0:remediation/tt/UC
+moddata:mod=gtmte,type=iconset,name=remediation.tt.uncertainty.active,output=0:remediation/tt/UC_ACTIVE
+moddata:mod=gtmte,type=mte,id=15510,baseset=hull.tier.11,iconset=remediation.tt.uncertainty,activeset=remediation.tt.uncertainty.active,ishatch=true
