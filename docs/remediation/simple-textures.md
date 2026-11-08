@@ -51,3 +51,18 @@ Fork commit `e0cb1f30` already corrected `gingkoBark`, `gingkoTrunk` and
 `Gingko` planks to `ginkgoBark`, `ginkgoTrunk` and `Ginkgo`. All three corrected
 paths exist in the installed BinnieCore asset inventory. No duplicate fix is
 needed for those baseline resources.
+
+## Mass solidifier casing names
+
+Point the old `MACHINE_CASING_MS160` and `RADIATOR_MS160` texture IDs at
+`MASS_SOLIDIFIER_CASING.png` and `MASS_SOLIDIFIER_RADIATOR_CASING.png`.
+GregTech 5.09.54.265 `BlockCasings10.getIcon` explicitly selects those new
+icons for metadata 13 and 14, while the corresponding casing texture indices
+remain page 16, entries 61 and 62. `Textures.BlockIcons` declares both new
+filenames and the installed JAR contains them. Correct the matching
+dreamcraft declaration too, retaining support IDs and consumers.
+
+Validation: both new assets exist and both original names are absent in the
+installed asset inventory; the source block metadata/index correspondence was
+checked; `git diff --check` passes. This corrects casing images, not the
+separate missing machine-ID coverage.

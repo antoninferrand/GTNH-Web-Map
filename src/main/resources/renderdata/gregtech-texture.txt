@@ -381,7 +381,7 @@ texture:id=gregtech/iconsets/MACHINE_CASING_MINING_BLACKPLUTONIUM,filename=asset
 texture:id=gregtech/iconsets/MACHINE_CASING_MINING_NEUTRONIUM,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MINING_NEUTRONIUM.png
 texture:id=gregtech/iconsets/MACHINE_CASING_MINING_OSMIRIDIUM,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MINING_OSMIRIDIUM.png
 texture:id=gregtech/iconsets/MACHINE_CASING_MOTOR,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MOTOR.png
-texture:id=gregtech/iconsets/MACHINE_CASING_MS160,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MS160.png
+texture:id=gregtech/iconsets/MACHINE_CASING_MS160,filename=assets/gregtech/textures/blocks/iconsets/MASS_SOLIDIFIER_CASING.png
 texture:id=gregtech/iconsets/MACHINE_CASING_NAQUADAH_REINFORCED_DISTILLATION,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_NAQUADAH_REINFORCED_DISTILLATION.png
 texture:id=gregtech/iconsets/MACHINE_CASING_NAQUADAH_REINFORCED_WATER_PLANT,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_NAQUADAH_REINFORCED_WATER_PLANT.png
 texture:id=gregtech/iconsets/MACHINE_CASING_NOISEHAZARD,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_NOISEHAZARD.png
@@ -1822,8 +1822,8 @@ texture:id=mte/iconsets/COOLANT_DUCT_CASING,filename=assets/gregtech/textures/bl
 texture:id=mte/iconsets/HEATING_DUCT_CASING,filename=assets/gregtech/textures/blocks/iconsets/HEATING_DUCT_CASING.png
 texture:id=mte/iconsets/EXTREME_DENSITY_CASING,filename=assets/gregtech/textures/blocks/iconsets/EXTREME_DENSITY_CASING.png
 texture:id=mte/iconsets/RADIATION_ABSORBENT_CASING,filename=assets/gregtech/textures/blocks/iconsets/RADIATION_ABSORBENT_CASING.png
-texture:id=mte/iconsets/MACHINE_CASING_MS160,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MS160.png
-texture:id=mte/iconsets/RADIATOR_MS160,filename=assets/gregtech/textures/blocks/iconsets/RADIATOR_MS160.png
+texture:id=mte/iconsets/MACHINE_CASING_MS160,filename=assets/gregtech/textures/blocks/iconsets/MASS_SOLIDIFIER_CASING.png
+texture:id=mte/iconsets/RADIATOR_MS160,filename=assets/gregtech/textures/blocks/iconsets/MASS_SOLIDIFIER_RADIATOR_CASING.png
 texture:id=mte/iconsets/CASING_REINFORCED_WOOD,filename=assets/gregtech/textures/blocks/iconsets/CASING_REINFORCED_WOOD.png
 texture:id=mte/iconsets/MACHINE_CASING_ITEM_PIPE_TIN,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_ITEM_PIPE_TIN.png
 texture:id=mte/iconsets/MACHINE_CASING_ITEM_PIPE_BRASS,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_ITEM_PIPE_BRASS.png

@@ -1559,7 +1559,7 @@ texture:id=mte/iconsets/OVERLAY_FRONT_EMS_ACTIVE,filename=assets/gregtech/textur
 texture:id=gregtech/iconsets/MACHINE_CASING_EMS,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_EMS.png
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_CANNER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_CANNER.png
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_CANNER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_CANNER_ACTIVE.png
-texture:id=gregtech/iconsets/MACHINE_CASING_MS160,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_MS160.png
+texture:id=gregtech/iconsets/MACHINE_CASING_MS160,filename=assets/gregtech/textures/blocks/iconsets/MASS_SOLIDIFIER_CASING.png
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_LATHE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATHE.png
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_LATHE_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATHE_ACTIVE.png
 texture:id=mte/iconsets/OVERLAY_FRONT_MULTI_AUTOCLAVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_AUTOCLAVE.png
