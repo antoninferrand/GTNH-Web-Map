@@ -4,6 +4,7 @@ package org.dynmap.hdmap.renderer;
 import gregtech.api.enums.Dyes;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.dynmap.modsupport.GWM_Util;
+import org.dynmap.hdmap.TexturePack;
 import org.dynmap.modsupport.gregtech.GregTechSupport;
 import org.dynmap.renderer.CustomColorMultiplier;
 import org.dynmap.renderer.CustomRenderer;
@@ -169,6 +170,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
         int colorMul = 0xFFFFFF;
         GregTechSupport.IconSet baseSet;
         int baseTex, baseTex2;
+        int[] baseFaces;
         public BasicMachineTextureAndColor(int typeId, MapDataContext mapDataCtx, boolean active, int outputFacing, int mainFacing, int mColor){
             GregTechSupport.MetaTileEntityEntry entry = GregTechSupport.INSTANCE.getMTEEntre(typeId);
 
@@ -180,23 +182,32 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                 GregTechSupport.IconSet iconSet = entry.getIconSet(active, state);
                 baseTex = entry.baseTexture;
                 baseTex2 = entry.baseTexture2;
+                if (entry.baseBlock > 0) {
+                    baseFaces = new int[6];
+                    TexturePack.HDTextureMap block = TexturePack.HDTextureMap.getMap(entry.baseBlock, entry.baseMetadata, 0);
+                    for (int face = 0; face < 6; face++) baseFaces[face] = block.getIndexForFace(entry.baseFace >= 0 && entry.baseFace < 6 ? entry.baseFace : face);
+                    baseSet = null;
+                }
                 Integer stateBase = entry.stateBaseTextures.get(state);
                 if (stateBase != null) {
                     baseTex = stateBase;
                     baseSet = null;
+                    baseFaces = null;
                 }
                 if (entry.casingStateField != null) {
                     Integer casing = entry.casingStateBaseTextures.get(number(mapDataCtx.getBlockTileEntityField(entry.casingStateField), Integer.MIN_VALUE));
                     if (casing != null) {
                         baseTex = casing;
                         baseSet = null;
+                        baseFaces = null;
                     }
                 }
 
                 if (entry.isHatch && entry.inheritCasing) {
-                    int casing = getHatchBaseTexture(mapDataCtx);
-                    if (casing >= 0) {
-                        baseTex = casing;
+                    int[] casing = getHatchBaseTextures(mapDataCtx);
+                    if (casing != null) {
+                        baseFaces = casing;
+                        baseTex = casing[0];
                         baseSet = null;
                     } else if (mapDataCtx.getBlockTileEntityField("textureIndex") == null) {
                         // Current hatches explicitly persist their casing choice (0/0
@@ -211,7 +222,9 @@ public class GregTechMachineRenderer extends PipeRendererBase {
 
                 for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
                     ArrayList<Integer> layers = new ArrayList<>();
-                    if (baseSet != null) {
+                    if (baseFaces != null) {
+                        if (baseFaces[dir.ordinal()] >= 0) layers.add(baseFaces[dir.ordinal()]);
+                    } else if (baseSet != null) {
                         if (dir == ForgeDirection.DOWN) addLayers(layers, baseSet.bottomLayers, baseSet.bottom);
                         else if (dir == ForgeDirection.UP) addLayers(layers, baseSet.topLayers, baseSet.top);
                         else addLayers(layers, baseSet.sideLayers, baseSet.side);
@@ -238,11 +251,11 @@ public class GregTechMachineRenderer extends PipeRendererBase {
             }
         }
 
-        private int getHatchBaseTexture(MapDataContext context) {
+        private int[] getHatchBaseTextures(MapDataContext context) {
             Object indexValue = context.getBlockTileEntityField("textureIndex");
             boolean legacy = indexValue == null;
             if (legacy) indexValue = context.getBlockTileEntityField("mMachineBlock");
-            if (indexValue == null) return -1;
+            if (indexValue == null) return null;
             Object pageValue = context.getBlockTileEntityField(legacy ? "mTexturePage" : "texturePage");
             int page = number(pageValue, 0);
             int index = number(indexValue, -1);
@@ -251,8 +264,14 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                 page = index >>> 7;
                 index &= 127;
             }
-            if (!legacy && page == 0 && index == 0) return -1;
-            return GregTechSupport.INSTANCE.getHatchBaseTexture(page, index);
+            if (!legacy && page == 0 && index == 0) return null;
+            int[] faces = new int[6];
+            boolean any = false;
+            for (int face = 0; face < 6; face++) {
+                faces[face] = GregTechSupport.INSTANCE.getHatchBaseTexture(page, index, face);
+                any |= faces[face] >= 0;
+            }
+            return any ? faces : null;
         }
 
         private void tryStealBaseTexFromNeighbor(MapDataContext mapDataCtx, int outputFacing) {
@@ -272,6 +291,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                     int tex = baseTextures[blockDataAt];
                     if(tex > 64) {
                         baseSet = null;
+                        baseFaces = null;
                         baseTex = tex;
                         break;
                     }
@@ -284,6 +304,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                             GregTechSupport.MetaTileEntityEntry otherMtee = GregTechSupport.INSTANCE.getMTEEntre(otherId);
                             if(otherMtee !=null && otherMtee.baseTexture != -1 && otherMtee.type == GregTechSupport.MteType.Controller){
                                 baseSet = null;
+                                baseFaces = null;
                                 baseTex = otherMtee.baseTexture;
                                 break;
                             }

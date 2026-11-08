@@ -66,3 +66,22 @@ page-zero ULV texture. Explicit current casing data also no longer falls back
 to guessing an unrelated neighbor's casing when it cannot resolve. Neighbor
 inference remains available for legacy `mMachineBlock` NBT. The fixture checks
 current zero/zero versus a valid legacy zero index independently.
+
+## Deferred controller block casings and per-face hatch casings
+
+An MTE can declare `baseblock=<registry name>,basemeta=<metadata>` to use the
+registered block's effective texture mapping. `baseface=<0..5>` optionally fixes
+the copied icon to one side; by default each face uses its corresponding block
+face. Existing `basetex` is retained as a legacy fallback only if the source
+block is unavailable. When the source block exists, the old PNG alias is not
+parsed/marked used, and block texture resolution is deferred until rendering.
+This preserves current casing designs and top/side differences without calling
+client-only icon methods on a dedicated server.
+
+Registered copied-block hatch casings now likewise preserve six separate face
+textures instead of applying face zero's top/bottom image to every side.
+`MetaTileEntityEntry.hasBaseDefinition()` recognizes deferred definitions;
+`getUnresolvedIconSets()` exposes missing normal/active/state iconset names for
+the runtime audit. Fixtures cover deferred load ordering, all six block faces,
+fixed-side copies, unavailable-block fallback, state overrides, registered hatch
+faces and missing-state-icon diagnostics.

@@ -123,7 +123,15 @@ public class GregTechSupport {
         if(baseSet != null)
             ent.baseTextureSet = iconSets.get(baseSet);
 
-        ent.baseTexture = getTexture(data, "basetex", filetoidx);
+        if (data.get("baseblock") != null) {
+            ent.baseBlock = GWM_Util.blockNameToId(data.get("baseblock"));
+            ent.baseMetadata = GWM_Util.objectToInt(data.get("basemeta"), 0);
+            ent.baseFace = GWM_Util.objectToInt(data.get("baseface"), -1);
+            if (ent.baseBlock <= 0 || ent.baseBlock >= 65536 || ent.baseMetadata < 0 || ent.baseMetadata >= 16) ent.baseBlock = -1;
+        }
+        // A registered block source is authoritative. Do not mark obsolete PNG
+        // aliases used when the effective block mapping supplies the actual image.
+        ent.baseTexture = ent.baseBlock > 0 ? -1 : getTexture(data, "basetex", filetoidx);
         ent.baseTexture2 = getTexture(data, "basetex2", filetoidx);
         ent.wireTexture = getTexture(data, "wiretex", filetoidx);
         ent.endTexture = getTexture(data, "endtex", filetoidx);
@@ -230,12 +238,16 @@ public class GregTechSupport {
         }
     }
     public int getHatchBaseTexture(int page, int index) {
+        return getHatchBaseTexture(page, index, 0);
+    }
+
+    public int getHatchBaseTexture(int page, int index, int face) {
         if (page < 0 || page >= 128 || index < 0 || index >= 128) return -1;
         int[] block = registeredHatchBaseBlocks[page][index];
         if (block != null) {
             // Model/texture definitions can load after casing-page support data.
             // Resolve the block mapping now rather than capturing an early blank.
-            return TexturePack.HDTextureMap.getMap(block[0], block[1], 0).getIndexForFace(0);
+            return TexturePack.HDTextureMap.getMap(block[0], block[1], 0).getIndexForFace(face);
         }
         int[] textures = hatchBaseTextures2[page];
         return textures != null && index < textures.length && textures[index] > 0 ? textures[index] : -1;
@@ -315,6 +327,7 @@ public class GregTechSupport {
     }
     public class MetaTileEntityEntry{
         public int baseTexture = -1;
+        public int baseBlock = -1, baseMetadata, baseFace = -1;
         public int baseTexture2 = -1;
         public int wireTexture = -1, endTexture = -1;
         public int wireColor = 0xFFFFFF;
@@ -346,6 +359,18 @@ public class GregTechSupport {
                 if (selected != null) return selected;
             }
             return active && activeIcons != null ? activeIcons : icons;
+        }
+
+        public boolean hasBaseDefinition() {
+            return baseTexture >= 0 || baseTextureSet != null || baseBlock > 0 || !stateBaseTextures.isEmpty() || !casingStateBaseTextures.isEmpty();
+        }
+
+        public String[] getUnresolvedIconSets() {
+            java.util.TreeSet<String> missing = new java.util.TreeSet<>();
+            for (String name : new String[] { baseTextureSetName, iconsName, activeIconsName }) if (name != null && !iconSets.containsKey(name)) missing.add(name);
+            for (String name : stateIconNames.values()) if (!iconSets.containsKey(name)) missing.add(name);
+            for (String name : stateActiveIconNames.values()) if (!iconSets.containsKey(name)) missing.add(name);
+            return missing.toArray(new String[0]);
         }
 
         public boolean isHatch;
