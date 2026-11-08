@@ -411,3 +411,10 @@ Nanochip redstone9515 registers UEV10 and adds an independent glow layer only wh
 
 All required PNGs were checked in the installed GregTech JAR inventory.
 Matching source PNG dimensions determine animated-strip frame counts.
+
+## Nanochip pipe
+
+Vacuum conveyor pipe9503 runtime registry reports visual thickness0.375 (the separate collision thickness is0.5). Source saves mConnections in the standard mask; use the common pipe renderer with untinted CC_PIPE and painted CC_BAR_OVERLAY. CC_BAR_OVERLAY_ACTIVE is a transient client UI selection highlight, not a persisted mActive state; render its normal fresh-client appearance deterministically.
+
+All required PNGs were checked in the installed GregTech JAR inventory.
+Matching source PNG dimensions determine animated-strip frame counts.

@@ -8808,3 +8808,8 @@ moddata:mod=gtmte,type=iconset,name=remediation.nano.redstone,output=0:remediati
 texture:id=remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_SPLITTER_REDSTONE_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.nano.redstone_active,output=0:remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE,output2=23000:remediation/nano/OVERLAY_HATCH_SPLITTER_REDSTONE_GLOW
 moddata:mod=gtmte,type=mte,id=9515,baseset=hull.tier.10,iconset=remediation.nano.redstone,activeset=remediation.nano.redstone_active,ishatch=true
+
+# Nanochip pipe (GT5 5.09.54.265).
+texture:id=remediation/nano/CC_PIPE,filename=assets/gregtech/textures/blocks/iconsets/CC_PIPE.png
+texture:id=remediation/nano/CC_BAR_OVERLAY,filename=assets/gregtech/textures/blocks/iconsets/CC_BAR_OVERLAY.png
+moddata:mod=gtmte,type=mte,id=9503,mtetype=pipe,size=375,basetex=0:remediation/nano/CC_PIPE,basetex2=17000:remediation/nano/CC_BAR_OVERLAY
