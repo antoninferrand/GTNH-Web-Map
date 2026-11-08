@@ -8310,3 +8310,11 @@ texture:id=remediation/pipe_color/MAGENTA,filename=assets/gregtech/textures/bloc
 texture:id=remediation/pipe_color/ORANGE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_ORANGE.png
 texture:id=remediation/pipe_color/WHITE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_PIPE_COLOR_WHITE.png
 moddata:mod=gtmte,type=iconset,name=hatch.input_bus.painted,output=0:mte/iconsets/OVERLAY_PIPE_IN,outputpaint1=0:remediation/pipe_color/BLACK,outputpaint2=0:remediation/pipe_color/RED,outputpaint3=0:remediation/pipe_color/GREEN,outputpaint4=0:remediation/pipe_color/BROWN,outputpaint5=0:remediation/pipe_color/BLUE,outputpaint6=0:remediation/pipe_color/PURPLE,outputpaint7=0:remediation/pipe_color/CYAN,outputpaint8=0:remediation/pipe_color/LIGHTGRAY,outputpaint9=0:remediation/pipe_color/GRAY,outputpaint10=0:remediation/pipe_color/PINK,outputpaint11=0:remediation/pipe_color/LIME,outputpaint12=0:remediation/pipe_color/YELLOW,outputpaint13=0:remediation/pipe_color/LIGHTBLUE,outputpaint14=0:remediation/pipe_color/MAGENTA,outputpaint15=0:remediation/pipe_color/ORANGE,outputpaint16=0:remediation/pipe_color/WHITE
+
+# Black-plutonium insulated cables: installed registry IDs and thicknesses.
+moddata:mod=gtmte,type=mte,id=11396,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=250
+moddata:mod=gtmte,type=mte,id=11397,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=375
+moddata:mod=gtmte,type=mte,id=11398,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=500
+moddata:mod=gtmte,type=mte,id=11399,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=625
+moddata:mod=gtmte,type=mte,id=11400,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=750
+moddata:mod=gtmte,type=mte,id=11401,mtetype=cable,basetex=17000:gt_cable,colormul=404040,size=875
