@@ -8585,3 +8585,8 @@ texture:id=remediation/modification_table/MODIFICATIONTABLE_TOP,filename=assets/
 texture:id=remediation/modification_table/MODIFICATIONTABLE_BOTTOM,filename=assets/gregtech/textures/blocks/iconsets/MODIFICATIONTABLE_BOTTOM.png
 moddata:mod=gtmte,type=iconset,name=remediation.modification_table,side=0:remediation/modification_table/MODIFICATIONTABLE_SIDE,top=0:remediation/modification_table/MODIFICATIONTABLE_TOP,bottom=0:remediation/modification_table/MODIFICATIONTABLE_BOTTOM
 moddata:mod=gtmte,type=mte,id=12071,baseset=remediation.modification_table,paint=false
+
+# InfiniteItemHolder inherits LV TieredChest and QCHEST facing overlay; DOWN-facing chest also puts QCHEST on WEST, via downfacingextra=4.
+texture:id=remediation/infinite_chest/OVERLAY_QCHEST,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_QCHEST.png,ycount=4
+moddata:mod=gtmte,type=iconset,name=remediation.infinite_chest,output=0:remediation/infinite_chest/OVERLAY_QCHEST,downfacingextra=4
+moddata:mod=gtmte,type=mte,id=31010,baseset=hull.tier.01,iconset=remediation.infinite_chest

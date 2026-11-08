@@ -319,3 +319,10 @@ ModificationTable ignores facing/state/tier and uses bare side/top/bottom, with 
 GT5 5.09.54.265. All required images exist; optional missing images match
 explicit createOptional declarations. Animated frames use square source-image
 strips. Special metadata requires the shared renderer contract.
+
+## infinite_chest: 31010
+
+InfiniteItemHolder inherits LV TieredChest and QCHEST facing overlay; DOWN-facing chest also puts QCHEST on WEST, via downfacingextra=4. Source constructor registrations and texture methods were checked in
+GT5 5.09.54.265. All required images exist; optional missing images match
+explicit createOptional declarations. Animated frames use square source-image
+strips. Special metadata requires the shared renderer contract.
