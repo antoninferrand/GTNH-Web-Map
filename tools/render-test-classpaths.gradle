@@ -1,0 +1,18 @@
+// Run with --no-configuration-cache -I tools/render-test-classpaths.gradle.
+allprojects { projectRef ->
+    afterEvaluate {
+        def sourceSets = projectRef.extensions.getByName('sourceSets')
+        def compileFiles = sourceSets.main.compileClasspath
+        def runtimeFiles = sourceSets.main.runtimeClasspath
+        def output = new File(projectRef.layout.buildDirectory.get().asFile, 'render-tests')
+        tasks.register('writeRenderTestClasspaths') {
+            dependsOn 'classes'
+            outputs.dir(output)
+            doLast {
+                output.mkdirs()
+                new File(output, 'compile-classpath.txt').text = compileFiles.asPath
+                new File(output, 'runtime-classpath.txt').text = runtimeFiles.asPath
+            }
+        }
+    }
+}
