@@ -271,3 +271,21 @@ Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATE
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Ore washing plant: 15550
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM.png|assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM_TOP.png`.
+Front source: `assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlant`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Industrial chemical bath: 15551
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM.png|assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM_TOP.png`.
+Front source: `assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlant`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.

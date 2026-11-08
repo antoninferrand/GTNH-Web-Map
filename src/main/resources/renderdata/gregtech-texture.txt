@@ -8504,3 +8504,29 @@ texture:id=remediation/controller/15752/front_ACTIVE,filename=assets/gregtech/te
 texture:id=remediation/controller/15752/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MULTI_LATEX_ACTIVE_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.controller.15752_active,output=0:remediation/controller/15752/front_ACTIVE,output2=23000:remediation/controller/15752/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=15752,mtetype=controller,baseset=remediation.controller.base.15752,iconset=remediation.controller.15752,activeset=remediation.controller.15752_active
+
+# Ore washing plant (GT 5.09.54.265).
+texture:id=remediation/controller/15550/base_side,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM.png,resourcemod=miscutils
+texture:id=remediation/controller/15550/base_top,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM_TOP.png,resourcemod=miscutils
+texture:id=remediation/controller/15550/base_bottom,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM_TOP.png,resourcemod=miscutils
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15550,side=0:remediation/controller/15550/base_side,top=0:remediation/controller/15550/base_top,bottom=0:remediation/controller/15550/base_bottom
+texture:id=remediation/controller/15550/front,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlant.png,resourcemod=miscutils,ycount=10
+texture:id=remediation/controller/15550/glow,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlantGlow.png,resourcemod=miscutils,ycount=10
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15550,output=0:remediation/controller/15550/front,output2=23000:remediation/controller/15550/glow
+texture:id=remediation/controller/15550/front_ACTIVE,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlantActive.png,resourcemod=miscutils,ycount=8
+texture:id=remediation/controller/15550/glow_ACTIVE,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlantActiveGlow.png,resourcemod=miscutils,ycount=8
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15550_active,output=0:remediation/controller/15550/front_ACTIVE,output2=23000:remediation/controller/15550/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15550,mtetype=controller,baseset=remediation.controller.base.15550,iconset=remediation.controller.15550,activeset=remediation.controller.15550_active
+
+# Industrial chemical bath (GT 5.09.54.265).
+texture:id=remediation/controller/15551/base_side,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM.png,resourcemod=miscutils
+texture:id=remediation/controller/15551/base_top,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM_TOP.png,resourcemod=miscutils
+texture:id=remediation/controller/15551/base_bottom,filename=assets/miscutils/textures/blocks/TileEntities/MACHINE_CASING_STABLE_GRISIUM_TOP.png,resourcemod=miscutils
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15551,side=0:remediation/controller/15551/base_side,top=0:remediation/controller/15551/base_top,bottom=0:remediation/controller/15551/base_bottom
+texture:id=remediation/controller/15551/front,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlant.png,resourcemod=miscutils,ycount=10
+texture:id=remediation/controller/15551/glow,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlantGlow.png,resourcemod=miscutils,ycount=10
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15551,output=0:remediation/controller/15551/front,output2=23000:remediation/controller/15551/glow
+texture:id=remediation/controller/15551/front_ACTIVE,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlantActive.png,resourcemod=miscutils,ycount=8
+texture:id=remediation/controller/15551/glow_ACTIVE,filename=assets/miscutils/textures/blocks/iconsets/controllerFaces/industrialWashPlantActiveGlow.png,resourcemod=miscutils,ycount=8
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15551_active,output=0:remediation/controller/15551/front_ACTIVE,output2=23000:remediation/controller/15551/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15551,mtetype=controller,baseset=remediation.controller.base.15551,iconset=remediation.controller.15551,activeset=remediation.controller.15551_active
