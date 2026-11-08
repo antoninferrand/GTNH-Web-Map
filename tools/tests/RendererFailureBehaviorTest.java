@@ -10,6 +10,14 @@ public class RendererFailureBehaviorTest {
         public String[] getTileEntityFieldsNeeded() { return new String[] { "fixtureField" }; }
     }
 
+    public static class MissingClientDependency extends RequestedFields {
+        @Override
+        public boolean initializeRenderer(org.dynmap.renderer.RenderPatchFactory factory, int id, int mask,
+                java.util.Map<String, String> parameters) {
+            throw new NoClassDefFoundError("net/minecraft/client/renderer/texture/IIconRegister");
+        }
+    }
+
     public static void main(String[] args) {
         new HDBlockModels.CustomBlockModel(62000, 1, RequestedFields.class.getName(),
                 new HashMap<String, String>(), "fixture");
@@ -23,6 +31,12 @@ public class RendererFailureBehaviorTest {
             throw new AssertionError("stale requested-fields flag must not dereference a missing renderer");
         if (!HDBlockModels.getFailedCustomModels().containsKey(62000))
             throw new AssertionError("failed custom model must stay visible to the audit");
-        System.out.println("Failed custom renderer keeps initialization/chunk-field checks usable");
+        HDBlockModels.CustomBlockModel linkage = new HDBlockModels.CustomBlockModel(62001, 1,
+                MissingClientDependency.class.getName(), new HashMap<String, String>(), "fixture");
+        if (linkage.getTextureCount() != 0 || linkage.getMeshForBlock(null).getCustomMesh().length != 0)
+            throw new AssertionError("Linkage failure must retain an explicit failed empty model");
+        if (!HDBlockModels.getFailedCustomModels().containsKey(62001))
+            throw new AssertionError("Client dependency failure must remain visible in the audit");
+        System.out.println("Failed custom renderer and missing client dependency preserve initialization and audit evidence");
     }
 }

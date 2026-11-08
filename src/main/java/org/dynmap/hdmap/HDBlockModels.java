@@ -240,7 +240,7 @@ public class HDBlockModels {
                         }
                     }
                 }
-            } catch (Exception x) {
+            } catch (Exception | LinkageError x) {
                 Log.severe("Error loading custom renderer - " + classname, x);
                 render = null;
             }
