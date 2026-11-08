@@ -8767,3 +8767,10 @@ moddata:mod=gtmte,type=iconset,name=remediation.beam.outputhatch,output=17000:re
 texture:id=remediation/beam/OVERLAY_BO_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_BO_ACTIVE.png,ycount=2
 moddata:mod=gtmte,type=iconset,name=remediation.beam.outputhatch_active,output=17000:remediation/beam/OVERLAY_BO_ACTIVE,output2=0:remediation/beam/BO_CONN
 moddata:mod=gtmte,type=mte,id=3014,baseset=hull.tier.08,iconset=remediation.beam.outputhatch,activeset=remediation.beam.outputhatch_active,ishatch=true
+
+# Beamcraft sensor (GT5 5.09.54.265).
+texture:id=remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.toxic_sensor,output=0:remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR
+texture:id=remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.toxic_sensor_active,output=0:remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR,output2=23000:remediation/beam/OVERLAY_HATCH_TOXIC_RESIDUE_SENSOR_GLOW
+moddata:mod=gtmte,type=mte,id=3019,baseset=hull.tier.07,iconset=remediation.beam.toxic_sensor,activeset=remediation.beam.toxic_sensor_active,ishatch=true

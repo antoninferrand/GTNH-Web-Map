@@ -380,3 +380,11 @@ Advanced beam output3014 inherits MTEHatchOutputBeamline and is registered UV8. 
 Every referenced image is present in the installed JAR inventory; image frame
 counts come from the matching source assets. Shader/TESR effects outside the
 controller block are not inferred from texture records.
+
+## Beamcraft sensor
+
+Toxic residue sensor3019 is registered ZPM7. Its output-facing icon gains a separate emissive layer while active; base casing remains generic hatch selection.
+
+Every referenced image is present in the installed JAR inventory; image frame
+counts come from the matching source assets. Shader/TESR effects outside the
+controller block are not inferred from texture records.
