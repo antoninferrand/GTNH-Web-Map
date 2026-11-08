@@ -425,3 +425,31 @@ have no own variants and intentionally return missingno.
 
 The reproducible checker and per-consumer evidence CSV are committed; no valid
 registered Chisel variant has been changed to a checker.
+
+## AE2FluidCraft walrus: exact source model, owner traversal limitation
+
+Replace the fake missing icon and truncated bounding box with the actual5000
+OBJ triangles, source metadata2/3/4/5 transforms and saved float scale. The
+source70x32atlas is padded transparently to80x32, then split into5x2 square
+16pixel cells. Multiply native U coordinates by70/80; all2240 original pixels
+and original image aspect are preserved. Integer-scaled resource packs(e.g.
+140x64 padded to160x64) follow the same exact padding. The image remains required.
+
+The renderer opts in to finite model-triangle coordinates, applies facing/scale
+transforms directly before creating patches, and preserves all6164 atlas-clipped
+triangles at source scales.03,1,3.5,256 for all four facings. No clipping, scale
+substitution or silent disappearance of large valid scales is used. A bounded
+four-entry cache covers default scale1; other scales rely on the per-render
+owner-position cache. Invalid placement metadata0/1/6..15 is not assigned an
+invented orientation(the source omits its world translation for these values).
+
+Default North bounds are x[-.030718,1.030718], y[-.028822,.929365],
+z[-1.06773,1.046007]; source scale256 reaches about529blocks in length.
+Geometry is preserved, but Dynmap only visits geometry from a ray's owning cell:
+a tail/large portion can be absent when the ray never visits the owner. Full
+large-model visual coverage still needs multi-block owner lookup; this resource
+closure must not be presented as complete large-scale visibility support.
+
+Executable tests compare every original and padded PNG pixel, including native
+HD padding, every source model bound/facing, UV/index bounds, immutable default
+cache reuse and exact patch counts across all sixteen facing/scale cases.
