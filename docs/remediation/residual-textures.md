@@ -191,3 +191,12 @@ are not visible door panels. Remove the two invented CARRIAGE/MEDIEVAL PNGs
 and render both helpers with an empty mesh and explicit transparent blank mapping.
 The main BigDoor retains its existing model. Source contract and all32 metadata
 mappings checked; no missing required texture is made optional.
+
+## Avaritiaddons infinity chest frame path
+
+`ClientConstants.INFINITY_CHEST_FRAMES` in installed 1.9.6-GTNH selects
+`textures/entity/InfinityChest/0.png` as its first animation frame. Correct
+the old flat `InfinityChest0.png` path to that actual64x64 entity atlas, retaining
+the CHEST atlas splitter and saved FacingSide renderer. All nine source frame
+paths are present in installed assets. Dynmap displays the first frame; animated
+lid/time interpolation is not persisted in the world.
