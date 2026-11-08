@@ -364,3 +364,11 @@ Beam controllers3015–3018 use ShieldedAcceleratorCasing. Crafter active adds a
 Every referenced image is present in the installed JAR inventory; image frame
 counts come from the matching source assets. Shader/TESR effects outside the
 controller block are not inferred from texture records.
+
+## Beamcraft lhc
+
+LHC3013 uses collider casing. Its saved machineMode selects accelerator0/collider1 front and glow ONLY while active; inactive state always uses LHC normal without glow. State-specific active sets preserve that condition.
+
+Every referenced image is present in the installed JAR inventory; image frame
+counts come from the matching source assets. Shader/TESR effects outside the
+controller block are not inferred from texture records.

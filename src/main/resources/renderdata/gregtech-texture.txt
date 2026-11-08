@@ -8747,3 +8747,15 @@ moddata:mod=gtmte,type=iconset,name=remediation.beam.stabilizer,output=0:remedia
 texture:id=remediation/beam/OVERLAY_FRONT_BEAM_STABILIZER_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_BEAM_STABILIZER_ACTIVE.png
 moddata:mod=gtmte,type=iconset,name=remediation.beam.stabilizer_active,output=0:remediation/beam/OVERLAY_FRONT_BEAM_STABILIZER_ACTIVE
 moddata:mod=gtmte,type=mte,id=3018,mtetype=controller,basetex=0:remediation/beam/shielded_casing,iconset=remediation.beam.stabilizer,activeset=remediation.beam.stabilizer_active
+
+# Beamcraft lhc (GT5 5.09.54.265).
+texture:id=remediation/beam/collider_casing,filename=assets/gregtech/textures/blocks/iconsets/COLLIDER_CASING.png
+texture:id=remediation/beam/OVERLAY_FRONT_LHC,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LHC.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.lhc,output=0:remediation/beam/OVERLAY_FRONT_LHC
+texture:id=remediation/beam/OVERLAY_FRONT_LHC_ACCELERATOR,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LHC_ACCELERATOR.png,ycount=9
+texture:id=remediation/beam/OVERLAY_FRONT_LHC_ACCELERATOR_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LHC_ACCELERATOR_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.lhc_accelerator,output=0:remediation/beam/OVERLAY_FRONT_LHC_ACCELERATOR,output2=23000:remediation/beam/OVERLAY_FRONT_LHC_ACCELERATOR_GLOW
+texture:id=remediation/beam/OVERLAY_FRONT_LHC_COLLIDER,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LHC_COLLIDER.png,ycount=15
+texture:id=remediation/beam/OVERLAY_FRONT_LHC_COLLIDER_GLOW,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_LHC_COLLIDER_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.beam.lhc_collider,output=0:remediation/beam/OVERLAY_FRONT_LHC_COLLIDER,output2=23000:remediation/beam/OVERLAY_FRONT_LHC_COLLIDER_GLOW
+moddata:mod=gtmte,type=mte,id=3013,mtetype=controller,basetex=0:remediation/beam/collider_casing,iconset=remediation.beam.lhc,statefield=machineMode,state0activeset=remediation.beam.lhc_accelerator,state1activeset=remediation.beam.lhc_collider
