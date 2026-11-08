@@ -50,3 +50,16 @@ of the sixteen real stripe PNGs exists. This uses the shared renderer's new
 painted output-layer contract and resolves the paint limitation recorded above.
 Client-configurable ITEM_IN/OUT_SIGN indicators follow the map's existing
 non-indicator default and are not added unconditionally.
+
+## CropsNH crop managers: 28001–28012
+
+`MTECropManager.getTexture()` ignores facing and active state: both vertical
+faces use the BOXES overlay and all four horizontal faces use CROP. Its
+`getTextureSet()` supplies tier-colored MACHINE_CASINGS. Register all tiers
+1–12 with a local hull namespace and explicit `resourcemod=gregtech` for hull
+assets, since CropsNH's renderdata has a separate file-local texture table.
+This requires the shared resource-owner metadata change.
+
+The existing cropsnh file receives its own GregTech support loader registration
+(the loader registry is file-local). All new asset paths were checked against
+installed JAR entries and all 12 IDs against the runtime registry.
