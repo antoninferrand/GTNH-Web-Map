@@ -107,3 +107,28 @@ was injected. This is an explicitly labelled natural formation/display test,
 separate from the cold grid. The four scale-1 walrus samples are at X=-639,
 -636, -633, -630, Y=80, Z=909. Their owner-cell overhang limitation remains
 separate from their source geometry and texture verification.
+
+## Fresh candidate 7 and naturally formed vending display
+
+Candidate 7 (`39fbdaf3`) confirmed the stale-snapshot diagnosis. Its fresh
+surface render shows mirror 4, linker 5, manipulators 6/7, spell modifier 17,
+effect 18, calcinator 19 and belljar 20 at the locations that appeared empty in
+cycle 6. Their common chunk now contributes the expected source geometry.
+Pump 3 still awaited the separately diagnosed Witching Gadgets texture-layout
+parser collision; no speculative model rewrite was made for the cached chunk.
+
+![Fresh candidate native models](runtime-fixture/cycle7-native-annotated.png)
+
+The separate SOUTH-facing vending panel naturally displays its saved active
+2×3 graphics in the actual surface output. The tin examples show increasing
+isolated center-cube sizes above their stone pedestals. This exported image
+was also supplied to the user's loopback browser preview; its pixels come from
+the real map render, without a generated mock-up or forced active state.
+
+![Actual vending display and tin examples](runtime-fixture/cycle7-vending-and-pipes.png)
+
+Cycle 7 again completed 400 flat and 776 surface tiles; originals, SHA-256 lists
+and logs are retained under `visual-scene/cycle7-*`. This image is intermediate:
+one TecTech helper-resource lookup and one Witching Gadgets parser issue still
+required the subsequent artifact, even though every frozen baseline texture
+row had source/consumer reconciliation evidence.
