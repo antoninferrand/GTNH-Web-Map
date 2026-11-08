@@ -42,7 +42,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
             return;
         }
         Map<String, Object> report = new LinkedHashMap<>();
-        report.put("schemaVersion", 1);
+        report.put("schemaVersion", 2);
         report.put("scope", "Effective loaded mappings and resource outcomes; visual correctness requires fixture comparison");
         Map<String, String> versions = new LinkedHashMap<>();
         for (ModContainer mod : Loader.instance().getActiveModList()) {
@@ -76,7 +76,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         report.put("failedCustomModels", HDBlockModels.getFailedCustomModels());
 
         List<Map<String, Object>> machines = new ArrayList<>();
-        int unsupported = 0;
+        int unsupported = 0, missingBase = 0, unresolvedIcons = 0;
         if (core.getServer().isModLoaded("gregtech")) {
             for (int id = 0; id < GregTechAPI.METATILEENTITIES.length; id++) {
                 IMetaTileEntity prototype = GregTechAPI.METATILEENTITIES[id];
@@ -92,8 +92,11 @@ final class RenderAuditSubCommand extends GwmSubCommand {
                     unsupported++;
                 } else {
                     machine.put("type", support.type.toString());
-                    machine.put("hasBase", support.baseTexture >= 0 || support.baseTextureSet != null
-                            || !support.stateBaseTextures.isEmpty() || !support.casingStateBaseTextures.isEmpty());
+                    machine.put("hasBase", support.hasBaseDefinition());
+                    if (!support.hasBaseDefinition()) missingBase++;
+                    String[] missingIcons = support.getUnresolvedIconSets();
+                    machine.put("unresolvedIconSets", missingIcons);
+                    unresolvedIcons += missingIcons.length;
                     machine.put("stateField", support.stateField);
                     machine.put("casingStateField", support.casingStateField);
                 }
@@ -103,7 +106,7 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         report.put("mtes", machines);
 
         Map<String, Object> resources = new LinkedHashMap<>();
-        int requiredMissing = 0, optionalAbsent = 0, fallbacks = 0;
+        int requiredMissing = 0, optionalAbsent = 0, fallbacks = 0, inactiveVariants = 0;
         Map<String, Collection<TextureResourceResolver.Lookup>> loaded = TexturePack.getLoadedResourceLookups();
         report.put("resourceCoverage", loaded.isEmpty() ? "NOT_LOADED_RENDER_FIRST" : "LOADED_PACKS_ONLY");
         for (Map.Entry<String, Collection<TextureResourceResolver.Lookup>> pack : loaded.entrySet()) {
@@ -114,8 +117,14 @@ final class RenderAuditSubCommand extends GwmSubCommand {
                 row.put("mod", lookup.mod);
                 row.put("resolvedResource", lookup.resolvedResource);
                 row.put("resolvedMod", lookup.resolvedMod);
-                row.put("outcome", lookup.outcome.toString());
-                if (lookup.outcome == TextureResourceResolver.Outcome.REQUIRED_MISSING) requiredMissing++;
+                String role = TexturePack.getResourceRole(pack.getKey(), lookup.resource);
+                boolean inactiveMissing = lookup.outcome == TextureResourceResolver.Outcome.REQUIRED_MISSING
+                        && "INACTIVE_TERRAIN_VARIANT".equals(role);
+                row.put("role", role);
+                row.put("rawOutcome", lookup.outcome.toString());
+                row.put("outcome", inactiveMissing ? role : lookup.outcome.toString());
+                if (inactiveMissing) inactiveVariants++;
+                else if (lookup.outcome == TextureResourceResolver.Outcome.REQUIRED_MISSING) requiredMissing++;
                 if (lookup.outcome == TextureResourceResolver.Outcome.OPTIONAL_ABSENT) optionalAbsent++;
                 if (lookup.outcome == TextureResourceResolver.Outcome.FALLBACK) fallbacks++;
                 lookups.add(row);
@@ -129,6 +138,9 @@ final class RenderAuditSubCommand extends GwmSubCommand {
         summary.put("blankMetadataCandidates", blankMetadata);
         summary.put("registeredMtes", machines.size());
         summary.put("unmappedMtes", unsupported);
+        summary.put("mappedMtesWithoutBase", missingBase);
+        summary.put("unresolvedMteIconSets", unresolvedIcons);
+        summary.put("inactiveMissingTerrainVariants", inactiveVariants);
         summary.put("requiredMissingResources", requiredMissing);
         summary.put("optionalAbsentResources", optionalAbsent);
         summary.put("fallbackResources", fallbacks);
