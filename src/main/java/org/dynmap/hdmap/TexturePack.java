@@ -407,6 +407,50 @@ public class TexturePack {
     }
     private static ArrayList<DynamicTileFile> addonfiles = new ArrayList<DynamicTileFile>();
     private static Map<String, DynamicTileFile> addonfilesbyname = new HashMap<String, DynamicTileFile>();
+    private static final Map<DynamicTileFileKey, DynamicTileFile> addonfilesbylayout = new HashMap<>();
+
+    /** Decoding identity is separate from the canonical filename lookup used by vanilla terrain. */
+    private static final class DynamicTileFileKey {
+        private final String filename;
+        private final int columns, rows, processorTiles;
+        private final TileFileFormat format;
+        private final CustomTextureProcessor processor;
+        private final Map<String, String> customTiles;
+
+        private DynamicTileFileKey(String filename, int columns, int rows, TileFileFormat format,
+                String[] args, CustomTextureProcessor processor) {
+            this.filename = filename;
+            this.columns = columns;
+            this.rows = rows;
+            this.format = format;
+            this.processor = processor;
+            this.processorTiles = processor == null ? 0 : processor.getTextureCount();
+            Map<String, String> tiles = new java.util.TreeMap<>();
+            if (format == TileFileFormat.CUSTOM) {
+                for (String arg : args) {
+                    String[] parts = arg.split("=", 2);
+                    if (parts.length == 2 && parts[0].startsWith("tile")) tiles.put(parts[0], parts[1]);
+                }
+            }
+            customTiles = Collections.unmodifiableMap(tiles);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (!(other instanceof DynamicTileFileKey)) return false;
+            DynamicTileFileKey key = (DynamicTileFileKey) other;
+            return columns == key.columns && rows == key.rows && processorTiles == key.processorTiles
+                    && format == key.format && processor == key.processor
+                    && java.util.Objects.equals(filename, key.filename) && customTiles.equals(key.customTiles);
+        }
+
+        @Override
+        public int hashCode() {
+            return 31 * java.util.Objects.hash(filename, columns, rows, format, processorTiles, customTiles)
+                    + System.identityHashCode(processor);
+        }
+    }
+
     private Map<Integer, MaterialType> materialbytileid = new HashMap<Integer, MaterialType>();
     private Map<Integer, String> matIDByTileID = new HashMap<Integer, String>();
     private Map<String, Integer> tileIDByMatID = new HashMap<String, Integer>();
@@ -435,6 +479,7 @@ public class TexturePack {
         }
         addonfiles.clear();
         addonfilesbyname.clear();
+        addonfilesbylayout.clear();
         loadedmods.clear();
         next_dynamic_tile = MAX_TILEINDEX+1;
 
@@ -3364,6 +3409,7 @@ public class TexturePack {
         if (f != null) {
             if ((idx >= 0) && (idx < f.tile_to_dyntile.length) && (f.tile_to_dyntile[idx] >= 0)) {
                 f.used = true;
+                f.explicitlyUsed = true;
                 return f.tile_to_dyntile[idx];
             }
         }
@@ -3393,10 +3439,10 @@ public class TexturePack {
      * @return dynamic file index
      */
     public static int findOrAddDynamicTileFile(String fname, String modname, int xdim, int ydim, TileFileFormat fmt, String[] args, CustomTextureProcessor customProcessor) {
-        DynamicTileFile f;
-        /* Find existing, if already there */
-        f = addonfilesbyname.get(fname);
-        if (f != null && customProcessor == f.customProcessor) {
+        DynamicTileFileKey key = new DynamicTileFileKey(fname, xdim, ydim, fmt, args, customProcessor);
+        DynamicTileFile f = addonfilesbylayout.get(key);
+        if (f != null) {
+            // Retain the existing explicit owner/fallback/optional update policy for the same layout.
             applyTextureResourceOptions(f, args);
             return f.idx;
         }
@@ -3491,8 +3537,8 @@ public class TexturePack {
         f.idx = addonfiles.size();
         addonfiles.add(f);
 
-        if(customProcessor == null)
-            addonfilesbyname.put(f.filename, f);
+        addonfilesbylayout.put(key, f);
+        if (customProcessor == null) addonfilesbyname.putIfAbsent(f.filename, f);
 
         return f.idx;
     }
