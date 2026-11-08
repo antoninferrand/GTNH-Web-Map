@@ -316,6 +316,7 @@ public class TexturePack {
         String modname;             /* Modname associated with file, if any */
         String fallbackFilename;
         String fallbackModname;
+        boolean optional;
         int tilecnt_x, tilecnt_y;   /* Number of tiles horizontally and vertically */
         int tile_to_dyntile[];      /* Mapping from tile index in tile file to dynamic ID in global tile table (terrain_argb): 0=unassigned */
         TileFileFormat format;
@@ -784,7 +785,7 @@ public class TexturePack {
                 if (dtf.used == false) {    // Not used, skip it - save memory and avoid errors for downlevel mods and such
                     continue;
                 }
-                is = tpl.openModTPResource(dtf.filename, dtf.modname, dtf.fallbackFilename, dtf.fallbackModname, false);
+                is = tpl.openModTPResource(dtf.filename, dtf.modname, dtf.fallbackFilename, dtf.fallbackModname, dtf.optional);
                 try {
                     if(dtf.format == TileFileFormat.BIOME) {
                       loadBiomeShadingImage(is, i+IMG_CNT); /* Load image file */
@@ -1344,6 +1345,16 @@ public class TexturePack {
         DynamicTileFile dtf = addonfiles.get(idx);  /* Get tile file definition */
         LoadedImage li = imgs[idx+IMG_CNT];
         if (li == null) return;
+        if (dtf.optional && !li.isLoaded) {
+            // An absent optional layer is a transparent no-op, including custom processors
+            // and atlases whose nominal dimensions do not match the padding image.
+            if (dtf.tile_to_dyntile != null) {
+                for (int tile : dtf.tile_to_dyntile) {
+                    if (tile >= 0) setTileARGB(tile, new int[native_scale * native_scale]);
+                }
+            }
+            return;
+        }
 
         switch(format) {
             case GRID:  /* If grid format tile file */
@@ -3259,6 +3270,7 @@ public class TexturePack {
             if (parts[0].equals("resourcemod")) file.modname = parts[1];
             else if (parts[0].equals("fallback")) file.fallbackFilename = parts[1];
             else if (parts[0].equals("fallbackmod")) file.fallbackModname = parts[1];
+            else if (parts[0].equals("optional")) file.optional = Boolean.parseBoolean(parts[1]);
         }
     }
 
