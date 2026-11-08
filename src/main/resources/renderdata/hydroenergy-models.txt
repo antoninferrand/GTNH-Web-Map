@@ -1,0 +1,19 @@
+# HydroEnergy1.4.26 flat water surface with immutable main-thread dam levels.
+version:1.7
+modname:hydroenergy
+customblock:id=%tile.water0,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=0
+customblock:id=%tile.water1,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=1
+customblock:id=%tile.water2,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=2
+customblock:id=%tile.water3,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=3
+customblock:id=%tile.water4,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=4
+customblock:id=%tile.water5,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=5
+customblock:id=%tile.water6,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=6
+customblock:id=%tile.water7,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=7
+customblock:id=%tile.water8,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=8
+customblock:id=%tile.water9,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=9
+customblock:id=%tile.water10,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=10
+customblock:id=%tile.water11,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=11
+customblock:id=%tile.water12,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=12
+customblock:id=%tile.water13,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=13
+customblock:id=%tile.water14,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=14
+customblock:id=%tile.water15,data=*,class=org.dynmap.hdmap.renderer.HydroEnergyWaterRenderer,waterid=15

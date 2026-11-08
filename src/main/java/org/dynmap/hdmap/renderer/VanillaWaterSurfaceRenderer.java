@@ -98,7 +98,7 @@ public class VanillaWaterSurfaceRenderer extends CustomRenderer {
         return patches.toArray(new RenderPatch[patches.size()]);
     }
 
-    private static void quad(RenderPatchFactory factory,List<RenderPatch> patches,double[][] q,int texture,boolean both) {
+    protected static void quad(RenderPatchFactory factory,List<RenderPatch> patches,double[][] q,int texture,boolean both) {
         for(int[] order:new int[][]{{0,1,2},{0,2,3}}) {
             double[] a=q[order[0]],b=q[order[1]],c=q[order[2]];
             RenderPatch patch=factory.getTriangleExplTexCoords(a[0],a[1],a[2],a[3],a[4],b[0],b[1],b[2],b[3],b[4],

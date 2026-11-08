@@ -316,3 +316,25 @@ The actual RenderBlocks.getLiquidHeight source method is compiled as the golden
 and compared bit-for-bit for4000 corners. Another1000 randomized snapshot cases
 exercise genuine patch-factory UV/index bounds, including stacked water. Bubble
 particles are client effects and are not part of the map surface.
+
+## HydroEnergy global dam water levels
+
+Installed1.4.26 HEWaterRenderer uses Minecraft water textures and its dam's
+global fractional water level; its GUI registration string is not a block PNG.
+Remove that malformed GUI reference and model all sixteen configured water IDs
+with their actual flat still/flowing water surfaces and biome water tint.
+
+A server END-tick listener serializes HEServer's WorldSavedData once per second
+on the server thread, extracts the source HETags water level/dimension/limits,
+and publishes one immutable snapshot. The renderer requires the snapshot's
+Dynmap world name to match the map context. No live world or HEServer access
+occurs on render threads. MC writeToNBT is invoked through the typed base class
+so production reobfuscation remaps it correctly. Changed old/new dam volumes
+are invalidated through the existing Dynmap API after snapshot publication;
+worlds are never force-loaded. Optional-mod linkage is initialized only by
+HydroEnergy's registered renderer. A missing/unloaded snapshot renders no water
+until the next successful server tick, rather than inventing a water level.
+
+Executable tests verify immutable publication, cross-world rejection, fractional
+height, dry cells and submerged cells through the actual patch factory. Fullpack
+fixture boot/tick and changed-volume invalidation remain integration validation.
