@@ -418,3 +418,11 @@ Vacuum conveyor pipe9503 runtime registry reports visual thickness0.375 (the sep
 
 All required PNGs were checked in the installed GregTech JAR inventory.
 Matching source PNG dimensions determine animated-strip frame counts.
+
+## Nanochip modules
+
+Nanochip modules9504–9514 inherit a fixed MeshInterface casing. createNanochipModuleTextures keeps the normal front while active, then layers the active front and its glow over it. Inactive uses normal plus inactive glow. Therefore active output has three overlay layers, not merely an active replacement.
+
+Missing optional images are allowed only when the exact source declaration
+uses createOptional. All required PNGs were checked in the installed GregTech JAR inventory.
+Matching source PNG dimensions determine animated-strip frame counts.
