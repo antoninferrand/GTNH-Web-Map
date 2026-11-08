@@ -226,3 +226,12 @@ Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_CHEMI
 inventory; frame counts are taken from matching source PNG dimensions.
 Base faces are preserved individually, rather than flattening top/bottom
 casing textures. Absent source-optional glows remain optional for resource packs.
+
+## Mega distillation tower: 15516
+
+Source class texture method selects the declared casing and normal/active
+front plus independent glow layer on `mFacing`. Casing source: `gt.blockcasings14:5`.
+Front source: `assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_DISTILLATION_TOWER`. All required PNGs exist in the installed JAR
+inventory; frame counts are taken from matching source PNG dimensions.
+Base faces are preserved individually, rather than flattening top/bottom
+casing textures. Absent source-optional glows remain optional for resource packs.

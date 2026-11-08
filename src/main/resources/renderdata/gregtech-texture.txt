@@ -8439,3 +8439,16 @@ texture:id=remediation/controller/15515/front_ACTIVE,filename=assets/gregtech/te
 texture:id=remediation/controller/15515/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE_GLOW.png
 moddata:mod=gtmte,type=iconset,name=remediation.controller.15515_active,output=0:remediation/controller/15515/front_ACTIVE,output2=23000:remediation/controller/15515/glow_ACTIVE
 moddata:mod=gtmte,type=mte,id=15515,mtetype=controller,baseset=remediation.controller.base.15515,iconset=remediation.controller.15515,activeset=remediation.controller.15515_active
+
+# Mega distillation tower (GT 5.09.54.265).
+texture:id=remediation/controller/15516/base_bottom,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_NAQUADAH_REINFORCED_DISTILLATION.png
+texture:id=remediation/controller/15516/base_top,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_NAQUADAH_REINFORCED_DISTILLATION.png
+texture:id=remediation/controller/15516/base_side,filename=assets/gregtech/textures/blocks/iconsets/MACHINE_CASING_NAQUADAH_REINFORCED_DISTILLATION.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.base.15516,bottom=0:remediation/controller/15516/base_bottom,top=0:remediation/controller/15516/base_top,side=0:remediation/controller/15516/base_side
+texture:id=remediation/controller/15516/front,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_DISTILLATION_TOWER.png
+texture:id=remediation/controller/15516/glow,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_DISTILLATION_TOWER_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15516,output=0:remediation/controller/15516/front,output2=23000:remediation/controller/15516/glow
+texture:id=remediation/controller/15516/front_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_DISTILLATION_TOWER_ACTIVE.png
+texture:id=remediation/controller/15516/glow_ACTIVE,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_FRONT_MEGA_DISTILLATION_TOWER_ACTIVE_GLOW.png
+moddata:mod=gtmte,type=iconset,name=remediation.controller.15516_active,output=0:remediation/controller/15516/front_ACTIVE,output2=23000:remediation/controller/15516/glow_ACTIVE
+moddata:mod=gtmte,type=mte,id=15516,mtetype=controller,baseset=remediation.controller.base.15516,iconset=remediation.controller.15516,activeset=remediation.controller.15516_active
