@@ -111,8 +111,11 @@ def bake(source, offset=(.5,1.5,.5), scale=(1,-1,-1), orientable=False):
         depth += (source[end]=='{')-(source[end]=='}');end+=1
     constructor=source[start:end-1]
     poses=orientation_poses(source,scale) if orientable else {}
-    if '.addChild(' in constructor:
-        raise ValueError('Child transforms need explicit baking support')
+    parents={}
+    for parent,child in re.findall(r'(?:this\.)?(\w+)\.addChild\(\s*(?:this\.)?(\w+)\s*\)',constructor):
+        if child in parents:raise ValueError('Multiple parents for '+child)
+        parents[child]=parent
+    transforms={}
     width=re.search(r'(?:this\.)?textureWidth\s*=\s*('+NUMBER+r')',constructor)
     height=re.search(r'(?:this\.)?textureHeight\s*=\s*('+NUMBER+r')',constructor)
     atlas=(int(numbers(width[1])[0]) if width else 64,int(numbers(height[1])[0]) if height else 32)
@@ -133,21 +136,38 @@ def bake(source, offset=(.5,1.5,.5), scale=(1,-1,-1), orientable=False):
         mirrored=bool(re.search(re.escape(name)+r'\.mirror\s*=\s*true',before))
         pivot=re.search(re.escape(name)+r'\.setRotationPoint\(([^)]*)\)',body)
         pivot=numbers(pivot[1]) if pivot else [0,0,0]
-        rotation=re.search(r'setRotation\(\s*(?:this\.)?'+name+r'\s*,([^)]*)\)',body)
+        rotation=re.search(r'(?:setRotation|setRotateAngle)\(\s*(?:this\.)?'+name+r'\s*,([^)]*)\)',body)
         rotation=numbers(rotation[1]) if rotation else [0,0,0]
         if len(rotation)!=3 or len(pivot)!=3:
             raise ValueError('Invalid part transform for '+name)
         if name in poses:rotation=[0,0,0]
+        transforms[name]=(pivot,rotation)
         triangles=cuboid(box_values,uv,atlas,mirrored)
         for tri in triangles:
             for index in [0,5,10]:
-                point=rotate(tri[index:index+3],rotation)
-                tri[index:index+3]=[offset[j]+scale[j]*(point[j]+pivot[j])/16 for j in range(3)]
+                point=tri[index:index+3]
+                tri[index:index+3]=point
         part={'name':name,'triangles':triangles}
         if name in poses:
             part['pose']=poses[name]
             part['pivot']=[offset[j]+scale[j]*pivot[j]/16 for j in range(3)]
         parts.append(part)
+    for part in parts:
+        chain=[];current=part['name']
+        while current is not None:
+            if current in chain:raise ValueError('Cycle in model hierarchy')
+            if current not in transforms:raise ValueError('Unknown child/parent '+current)
+            chain.append(current);current=parents.get(current)
+        if len(chain)>1 and any(name in poses for name in chain):
+            raise ValueError('Dynamic nested model hierarchy requires explicit poses')
+        for tri in part['triangles']:
+            for index in [0,5,10]:
+                point=tri[index:index+3]
+                for name in chain:
+                    pivot,rotation=transforms[name]
+                    point=rotate(point,rotation)
+                    point=[point[j]+pivot[j] for j in range(3)]
+                tri[index:index+3]=[offset[j]+scale[j]*point[j]/16 for j in range(3)]
     if not parts:
         raise ValueError('No ModelRenderer parts found')
     return {'atlas':[atlas[0]//16,atlas[1]//16],'parts':parts}

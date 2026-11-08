@@ -212,3 +212,11 @@ The source saw protrudes .25block north of the owner's position. Geometry is
 retained rather than clipped; Dynmap's owner-cell ray traversal can omit the
 protruding section when the ray never enters that owner cell. Optional inventory
 item meshes are not present in this source TESR.
+
+## Static ModelRenderer hierarchy import
+
+The source baker now composes parent/child pivots and rotations as the vanilla
+ModelRenderer.render matrix stack does, and recognizes Tabula's setRotateAngle
+helper. It rejects cycles, multiple parents, missing parents and dynamic nested
+poses. A hand-derived90-degree parent rotation fixture validates child pivot
+composition; actual ModelBox UV goldens and existing models remain valid.

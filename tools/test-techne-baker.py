@@ -23,7 +23,7 @@ for axis in range(3):
     values=[tri[i+axis] for tri in baked['parts'][0]['triangles'] for i in [0,5,10]]
     assert min(values)==0 and max(values)==1
 for unsupported in [model.replace('Base.addBox(0,0,0,16,16,16);','Base.addBox(0,0,0,16,16,16); Base.addBox(0,0,0,1,1,1);'),
-                    model.replace('Base.addBox(0,0,0,16,16,16);','Base.addChild(other); Base.addBox(0,0,0,16,16,16);'),
+                    model.replace('Base.addBox(0,0,0,16,16,16);','Base.addChild(Base); Base.addBox(0,0,0,16,16,16);'),
                     model.replace('16,16,16','size,16,16')]:
     try:baker['bake'](unsupported)
     except ValueError:pass
@@ -60,3 +60,15 @@ for model_path in (root/'src/main/resources/models/baked').glob('bloodmagic-spel
             largest=max(range(3),key=lambda i:abs(actual[i]))
             assert actual[largest]*direction[largest]>0,(model_path,field,key,actual)
         print(model_path.name,field,'all6 source connection directions validated')
+
+# Child pivots are relative to their parent, and the parent's rotation affects
+# both the child's pivot and cuboid. A 90-degree Z rotation maps(2,3,0) to(-3,2,0).
+hierarchy="""class Nested { public Nested() {textureWidth=64;textureHeight=32;
+Parent=new ModelRenderer(this,0,0);Parent.addBox(0,0,0,1,1,1);Parent.setRotationPoint(10,0,0);
+setRotateAngle(Parent,0,0,1.5707963267948966);
+Child=new ModelRenderer(this,0,0);Child.addBox(0,0,0,1,1,1);Child.setRotationPoint(2,3,0);
+Parent.addChild(Child);}}"""
+h=baker['bake'](hierarchy,offset=(0,0,0),scale=(16,16,16))
+points=[t[i:i+3] for t in h['parts'][1]['triangles'] for i in [0,5,10]]
+assert all(6-1e-8<=p[0]<=7+1e-8 and 2-1e-8<=p[1]<=3+1e-8 and 0<=p[2]<=1 for p in points)
+print('Nested ModelRenderer rotation/pivot composition passed')
