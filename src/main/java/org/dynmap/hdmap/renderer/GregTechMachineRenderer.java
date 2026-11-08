@@ -184,14 +184,13 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                 baseTex2 = entry.baseTexture2;
                 if (entry.baseBlock > 0) {
                     baseFaces = new int[6];
-                    TexturePack.HDTextureMap block = TexturePack.HDTextureMap.getMap(entry.baseBlock, entry.baseMetadata, 0);
-                    for (int face = 0; face < 6; face++) baseFaces[face] = block.getIndexForFace(entry.baseFace >= 0 && entry.baseFace < 6 ? entry.baseFace : face);
+                    for (int face = 0; face < 6; face++) baseFaces[face] = GregTechSupport.getBlockFaceTexture(entry.baseBlock, entry.baseMetadata, entry.baseFace >= 0 && entry.baseFace < 6 ? entry.baseFace : face);
                     if (outputFacing >= 0 && outputFacing < 6) {
                         if (entry.frontBaseBlock > 0 && entry.frontBaseMetadata >= 0 && entry.frontBaseMetadata < 16)
-                            baseFaces[outputFacing] = TexturePack.HDTextureMap.getMap(entry.frontBaseBlock, entry.frontBaseMetadata, 0).getIndexForFace(outputFacing);
+                            baseFaces[outputFacing] = GregTechSupport.getBlockFaceTexture(entry.frontBaseBlock, entry.frontBaseMetadata, outputFacing);
                         int back = ForgeDirection.getOrientation(outputFacing).getOpposite().ordinal();
                         if (entry.backBaseBlock > 0 && entry.backBaseMetadata >= 0 && entry.backBaseMetadata < 16)
-                            baseFaces[back] = TexturePack.HDTextureMap.getMap(entry.backBaseBlock, entry.backBaseMetadata, 0).getIndexForFace(back);
+                            baseFaces[back] = GregTechSupport.getBlockFaceTexture(entry.backBaseBlock, entry.backBaseMetadata, back);
                     }
                     baseSet = null;
                 }

@@ -251,13 +251,22 @@ public class GregTechSupport {
         return getHatchBaseTexture(page, index, 0);
     }
 
+    // Block maps store the face entered by a ray; custom cube patches use
+    // Minecraft/Forge outward-facing side ordinals instead.
+    private static final int[] BLOCK_MAP_FACE = { 1, 4, 2, 5, 0, 3 };
+
+    public static int getBlockFaceTexture(int blockId, int metadata, int forgeFace) {
+        if (forgeFace < 0 || forgeFace >= 6) return -1;
+        return TexturePack.HDTextureMap.getMap(blockId, metadata, 0).getIndexForFace(BLOCK_MAP_FACE[forgeFace]);
+    }
+
     public int getHatchBaseTexture(int page, int index, int face) {
         if (page < 0 || page >= 128 || index < 0 || index >= 128) return -1;
         int[] block = registeredHatchBaseBlocks[page][index];
         if (block != null) {
             // Model/texture definitions can load after casing-page support data.
             // Resolve the block mapping now rather than capturing an early blank.
-            return TexturePack.HDTextureMap.getMap(block[0], block[1], 0).getIndexForFace(face);
+            return getBlockFaceTexture(block[0], block[1], face);
         }
         int[] textures = hatchBaseTextures2[page];
         return textures != null && index < textures.length && textures[index] > 0 ? textures[index] : -1;

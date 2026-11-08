@@ -78,3 +78,12 @@ front continues following active state. Resource declarations retain their
 source `createOptional` semantics, and both actual PNGs exist in the installed
 JAR. Fixtures cover absent/byte/Boolean mode, both active states, all facings,
 and layered back glow (257 shared/coke/substation assertions; 6,760 vending).
+
+Deferred block faces convert Minecraft outward side ordinals to the ray-entered
+`BlockStep` indexing used by `HDTextureMap`: `{1,4,2,5,0,3}`. This conversion
+applies to controller bases, their front/back sources, and registered hatch
+casings. The production fixture now invokes the actual private
+`TexturePack.loadTextureFile` parser with six differently labelled `face0`
+through `face5` images, then checks every controller orientation and hatch
+selection. The original synthetic array fixture would not have caught this
+convention mismatch; the corrected parser-based checks pass all 257 assertions.

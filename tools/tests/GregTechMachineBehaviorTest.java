@@ -144,15 +144,14 @@ public class GregTechMachineBehaviorTest {
         SUPPORT.hatchBaseTextures2[2] = new int[128];
         SUPPORT.hatchBaseTextures2[2][7] = 300;
         check(SUPPORT.getHatchBaseTexture(2, 7) == -1, "unmapped authoritative casing does not select obsolete explicit texture");
-        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 3, new int[] { 400 }, null,
+        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 3, new int[] { 400, 400, 400, 400, 400, 400 }, null,
                 TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
         check(SUPPORT.getHatchBaseTexture(2, 7) == 400, "authoritative casing resolved after mapping loads");
-        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 3, new int[] { 401 }, null,
+        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 3, new int[] { 401, 401, 401, 401, 401, 401 }, null,
                 TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
         check(SUPPORT.getHatchBaseTexture(2, 7) == 401, "authoritative casing follows effective mapping override");
         check(SUPPORT.getHatchBaseTexture(-1, 7) == -1 && SUPPORT.getHatchBaseTexture(128, 7) == -1, "authoritative casing bounds safe");
-        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 3, new int[] { 400, 401, 402, 403, 404, 405 }, null,
-                TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
+        loadBlockDefinition("block:id=200,data=3,stdrot=true,face0=400,face1=401,face2=402,face3=403,face4=404,face5=405");
         java.lang.reflect.Field blockIds = org.dynmap.modsupport.GWM_Util.class.getDeclaredField("blockIdMap");
         blockIds.setAccessible(true);
         HashMap<String, Integer> registry = new HashMap<String, Integer>();
@@ -190,8 +189,7 @@ public class GregTechMachineBehaviorTest {
         face(renderer, context, 5, 405, 13);
         mte(64013, "basetex", "114", "statefield", "fixtureMode", "state2iconset", "fixture-absent");
         check(Arrays.equals(SUPPORT.getMTEEntre(64013).getUnresolvedIconSets(), new String[] { "fixture-absent" }), "missing state iconsets are auditable");
-        new TexturePack.HDTextureMap(Collections.singletonList(200), 1 << 4, new int[] { 500, 501, 502, 503, 504, 505 }, null,
-                TexturePack.BlockTransparency.OPAQUE, false, 0xFFFFFF, null, null, true).addToTable();
+        loadBlockDefinition("block:id=200,data=4,stdrot=true,face0=500,face1=501,face2=502,face3=503,face4=504,face5=505");
         mte(64014, "baseblock", "fixture:casing", "basemeta", "3", "frontbaseblock", "fixture:casing", "frontbasemeta", "4", "backbaseblock", "fixture:casing", "backbasemeta", "4");
         context.fields.put("mID", 64014);
         for (int facing = 0; facing < 6; facing++) {
@@ -280,6 +278,14 @@ public class GregTechMachineBehaviorTest {
             face(renderer, coke, 2, casing, texture("0:remediation/coke/controller_on"), texture("23000:remediation/coke/controller_on_glow"));
         }
         System.out.println("GregTech saved-state rendering: " + assertions + " assertions passed");
+    }
+
+    private static void loadBlockDefinition(String definition) throws Exception {
+        java.lang.reflect.Method loader = TexturePack.class.getDeclaredMethod("loadTextureFile", java.io.InputStream.class,
+                String.class, org.dynmap.ConfigurationNode.class, org.dynmap.DynmapCore.class, String.class);
+        loader.setAccessible(true);
+        loader.invoke(null, new java.io.ByteArrayInputStream((definition + "\n").getBytes(java.nio.charset.StandardCharsets.UTF_8)),
+                "fixture-texture.txt", new org.dynmap.ConfigurationNode(), new org.dynmap.DynmapCore(), "fixture");
     }
 
     private static int texture(String reference) {
