@@ -4,10 +4,44 @@ import argparse
 import concurrent.futures
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
 import time
+
+
+def declared_baked_models(root):
+    """Use real renderer consumers; custom walrus/mirror models have dedicated harnesses."""
+    baked = {'org.dynmap.hdmap.renderer.BakedMeshRenderer'}
+    parents = {}
+    for path in (root / 'src/main/java/org/dynmap/hdmap/renderer').glob('*.java'):
+        source = path.read_text()
+        package = re.search(r'package\s+([\w.]+);', source)
+        declaration = re.search(r'class\s+(\w+)\s+extends\s+([\w.]+)', source)
+        if package and declaration:
+            prefix = package.group(1) + '.'
+            parent = declaration.group(2)
+            parents[prefix + declaration.group(1)] = parent if '.' in parent else prefix + parent
+    while True:
+        children = {name for name, parent in parents.items() if parent in baked}
+        if children <= baked:
+            break
+        baked.update(children)
+    models = set()
+    for path in (root / 'src/main/resources/renderdata').glob('*-models.txt'):
+        for line in path.read_text().splitlines():
+            if not line.startswith('customblock:'):
+                continue
+            fields = dict(field.split('=', 1) for field in line[len('customblock:'):].split(',') if '=' in field)
+            if fields.get('class') in baked and fields.get('mesh', '').startswith('models/baked/'):
+                resource = fields['mesh']
+                if not (root / 'src/main/resources' / resource).is_file():
+                    raise ValueError('Declared baked model does not exist: ' + resource)
+                models.add(resource)
+    if not models:
+        raise ValueError('No declared BakedMeshRenderer resources found')
+    return sorted(models)
 
 
 def main():
@@ -44,8 +78,7 @@ def main():
     common = ['--compile-classpath', str(args.compile_classpath.resolve()),
               '--runtime-classpath', str(args.runtime_classpath.resolve())]
     compiled = ['--classes', str(classes)]
-    models = ['models/baked/' + path.name for path in sorted((root / 'src/main/resources/models/baked').glob('*.json'))
-              if 'atlas' in json.loads(path.read_text())]
+    models = declared_baked_models(root)
     tasks = {
         'gregtech': ['tools/test-gregtech-renderer.py'] + common + compiled,
         'wavefront': ['tools/test-wavefront-model.py'] + common + compiled,
