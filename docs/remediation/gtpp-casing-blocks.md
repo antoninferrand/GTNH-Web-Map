@@ -33,8 +33,8 @@ records covering 29 IDs across the two historical mapping files). This
 preserves face-specific tree-farm/algae/chisel/duplicator casing designs and
 avoids forcing their obsolete standalone PNG aliases. The power substation
 uses casing-2 metadata 7 on its sides and metadata 8 on its front/back, matching
-`MTEPowerSubStation.getTexture`. Its existing energy-mode back overlay remains
-a separate parity concern; these records correct the underlying casing.
+`MTEPowerSubStation.getTexture`. Its energy-mode back overlay is handled by the separate saved-state correction
+described below.
 
 The shared renderer supports deferred `baseblock`/`basemeta`, with optional
 `frontbaseblock`/`frontbasemeta` and `backbaseblock`/`backbasemeta`. It resolves
@@ -66,3 +66,15 @@ records are retired together; `retired-unregistered-iconsets.csv` preserves each
 removed record. An all-renderdata consumer scan verified that no registered MTE
 references the retired names. This is installed-version retirement, rather than
 turning a missing required image into a transparent optional layer.
+
+Substation back-side overlay parity follows saved `mIsOutputtingPower`: input
+and output select `OVERLAY_ENERGY_IN_MULTI_2A_IV` and
+`OVERLAY_ENERGY_OUT_MULTI_2A_IV`. Both maximum voltage methods return 32768, so
+`getInputTier`/`getOutputTier` select the IV entries in the source arrays. The
+boolean is explicitly saved and loaded by `MTEPowerSubStation`; absent state
+uses the source default input mode. The generic iconset `back` through `back4`
+layers apply opposite `mFacing` on all six orientations while the disassembler
+front continues following active state. Resource declarations retain their
+source `createOptional` semantics, and both actual PNGs exist in the installed
+JAR. Fixtures cover absent/byte/Boolean mode, both active states, all facings,
+and layered back glow (257 shared/coke/substation assertions; 6,760 vending).

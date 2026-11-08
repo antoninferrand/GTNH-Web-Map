@@ -245,7 +245,8 @@ public class GregTechMachineRenderer extends PipeRendererBase {
                         if ((outputFacing == dir.ordinal() || (outputFacing == ForgeDirection.DOWN.ordinal() && iconSet.downFacingExtra == dir.ordinal())) && (iconSet.output >= 0 || iconSet.outputLayers.length > 0 || paint >= 0)) {
                             addLayers(layers, iconSet.outputLayers, iconSet.output);
                             if (paint >= 0) layers.add(paint);
-                        } else if (dir == ForgeDirection.DOWN) addLayers(layers, iconSet.bottomLayers, iconSet.bottom);
+                        } else if (dir.ordinal() == (outputFacing ^ 1) && (iconSet.back >= 0 || iconSet.backLayers.length > 0)) addLayers(layers, iconSet.backLayers, iconSet.back);
+                        else if (dir == ForgeDirection.DOWN) addLayers(layers, iconSet.bottomLayers, iconSet.bottom);
                         else if (dir == ForgeDirection.UP) addLayers(layers, iconSet.topLayers, iconSet.top);
                         else if (front == dir.ordinal() && (iconSet.front >= 0 || iconSet.frontLayers.length > 0)) addLayers(layers, iconSet.frontLayers, iconSet.front);
                         else addLayers(layers, iconSet.sideLayers, iconSet.side);
@@ -334,7 +335,7 @@ public class GregTechMachineRenderer extends PipeRendererBase {
 
 
     private static int number(Object value, int fallback) {
-        return value instanceof Number ? ((Number) value).intValue() : GWM_Util.objectToInt(value, fallback);
+        return value instanceof Boolean ? ((Boolean) value ? 1 : 0) : value instanceof Number ? ((Number) value).intValue() : GWM_Util.objectToInt(value, fallback);
     }
 
     private static int validFacing(int direction, int fallback) {

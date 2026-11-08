@@ -3693,6 +3693,13 @@ moddata:mod=gtmte,type=iconset,name=multimachine.multimachine.adv.distillationto
 moddata:mod=gtmte,type=iconset,name=multimachine.multimachine.adv.distillationtower_active,output=0:mte/iconsets/OVERLAY_FRONT_DISTILLATION_TOWER_ACTIVE
 moddata:mod=gtmte,type=iconset,name=multimachine.multimachine.adv.industrialfreezer,output=0:mte/iconsets/OVERLAY_FRONT_ADVANCED_MULTIBLOCK_ANIMATED
 moddata:mod=gtmte,type=iconset,name=multimachine.multimachine.adv.industrialfreezer_active,output=0:mte/iconsets/OVERLAY_FRONT_ADVANCED_MULTIBLOCK_ANIMATED_ACTIVE
+# Substation back-side power-mode overlays; source optional icons, fixed IV transfer rating.
+texture:id=remediation/substation/IN,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_IN_MULTI_2A_IV.png,resourcemod=gregtech,optional=true
+texture:id=remediation/substation/OUT,filename=assets/gregtech/textures/blocks/iconsets/OVERLAY_ENERGY_OUT_MULTI_2A_IV.png,resourcemod=gregtech,optional=true
+moddata:mod=gtmte,type=iconset,name=remediation.substation.0,output=0:mte/iconsets/OVERLAY_FRONT_DISASSEMBLER,back=0:remediation/substation/IN
+moddata:mod=gtmte,type=iconset,name=remediation.substation.0_active,output=0:mte/iconsets/OVERLAY_FRONT_DISASSEMBLER_ACTIVE,back=0:remediation/substation/IN
+moddata:mod=gtmte,type=iconset,name=remediation.substation.1,output=0:mte/iconsets/OVERLAY_FRONT_DISASSEMBLER,back=0:remediation/substation/OUT
+moddata:mod=gtmte,type=iconset,name=remediation.substation.1_active,output=0:mte/iconsets/OVERLAY_FRONT_DISASSEMBLER_ACTIVE,back=0:remediation/substation/OUT
 moddata:mod=gtmte,type=iconset,name=multimachine.substation.01.input.single,output=0:mte/iconsets/OVERLAY_FRONT_DISASSEMBLER
 moddata:mod=gtmte,type=iconset,name=multimachine.substation.01.input.single_active,output=0:mte/iconsets/OVERLAY_FRONT_DISASSEMBLER_ACTIVE
 moddata:mod=gtmte,type=iconset,name=multimachine.lftr.controller.single,output=0:mte/replicator/OVERLAY_FRONT_REPLICATOR
@@ -4535,7 +4542,7 @@ moddata:mod=gtmte,type=mte,id=798,iconset=multimachine.industrialwiremill,mtetyp
 moddata:mod=gtmte,type=mte,id=799,iconset=multimachine.industrialmassfab,mtetype=controller,basetex=0:gregtech/iconsets/TEXTURE_METAL_PANEL_F,baseblock=miscutils:miscutils.blockcasings,basemeta=9
 moddata:mod=gtmte,type=mte,id=810,iconset=multimachine.industrialsalloyamelter,mtetype=controller,basetex=0:gregtech/iconsets/MACHINE_CASING_STABLE_ZIRCONIUM_CARBIDE
 moddata:mod=gtmte,type=mte,id=811,iconset=multimachine.industrialmixer,mtetype=controller,basetex=0:gregtech/iconsets/TEXTURE_METAL_PANEL_C,baseblock=miscutils:gtplusplus.blockcasings.3,basemeta=2
-moddata:mod=gtmte,type=mte,id=812,iconset=multimachine.substation.01.input.single,activeset=multimachine.substation.01.input.single_active,basetex=0:chrono/MetalSheet,baseblock=miscutils:gtplusplus.blockcasings.2,basemeta=7,frontbaseblock=miscutils:gtplusplus.blockcasings.2,frontbasemeta=8,backbaseblock=miscutils:gtplusplus.blockcasings.2,backbasemeta=8
+moddata:mod=gtmte,type=mte,id=812,iconset=remediation.substation.0,activeset=remediation.substation.0_active,basetex=0:chrono/MetalSheet,baseblock=miscutils:gtplusplus.blockcasings.2,basemeta=7,frontbaseblock=miscutils:gtplusplus.blockcasings.2,frontbasemeta=8,backbaseblock=miscutils:gtplusplus.blockcasings.2,backbasemeta=8,statefield=mIsOutputtingPower,state0iconset=remediation.substation.0,state0activeset=remediation.substation.0_active,state1iconset=remediation.substation.1,state1activeset=remediation.substation.1_active
 moddata:mod=gtmte,type=mte,id=813,baseset=hull.tier.01,iconset=advancedmachine.dehydrator,activeset=advancedmachine.dehydrator_active
 moddata:mod=gtmte,type=mte,id=814,baseset=hull.tier.02,iconset=advancedmachine.dehydrator,activeset=advancedmachine.dehydrator_active
 moddata:mod=gtmte,type=mte,id=815,baseset=hull.tier.03,iconset=advancedmachine.dehydrator,activeset=advancedmachine.dehydrator_active

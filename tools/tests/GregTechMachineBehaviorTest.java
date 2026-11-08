@@ -202,6 +202,14 @@ public class GregTechMachineBehaviorTest {
             if (side == (facing ^ 1)) side = (side + 1) % 6;
             face(renderer, context, side, 400 + side);
         }
+        icon("fixture-back", "output", "60", "back", "61", "back2", "23062", "back3", "63", "back4", "64", "side", "65");
+        mte(64015, "basetex", "115", "iconset", "fixture-back");
+        Context backside = new Context(64015);
+        for (int facing = 0; facing < 6; facing++) {
+            backside.fields.put("mFacing", facing);
+            face(renderer, backside, facing, 115, 60);
+            face(renderer, backside, facing ^ 1, 115, 61, 23000062, 63, 64);
+        }
         if (args.length > 0) {
             Path root = Paths.get(args[0]);
             List<String> mapping = Files.readAllLines(root.resolve("src/main/resources/renderdata/gregtech-texture.txt"));
@@ -212,6 +220,31 @@ public class GregTechMachineBehaviorTest {
                 FILES.put(record.get("id"), TexturePack.findOrAddDynamicTileFile(record.get("filename"), "gregtech", 1, 1,
                         TexturePack.TileFileFormat.GRID, new String[0], null));
             }
+            // Load the real substation records; replace source casing block with a fixture
+            // base only, since its PNG-backed per-face maps need full game bootstrap.
+            for (String line : mapping) {
+                if (!line.startsWith("moddata:")) continue;
+                HashMap<String, String> data = record(line);
+                if ("iconset".equals(data.get("type")) && data.get("name").startsWith("remediation.substation.")) SUPPORT.processIconSet(data, FILES);
+                if ("mte".equals(data.get("type")) && "812".equals(data.get("id"))) {
+                    data.remove("baseblock"); data.remove("frontbaseblock"); data.remove("backbaseblock");
+                    data.put("basetex", "116"); SUPPORT.processMte(data, FILES);
+                }
+            }
+            Context station = new Context(812);
+            for (Object mode : new Object[] { null, (byte) 0, (byte) 1, Boolean.FALSE, Boolean.TRUE }) {
+                if (mode == null) station.fields.remove("mIsOutputtingPower"); else station.fields.put("mIsOutputtingPower", mode);
+                boolean output = Boolean.TRUE.equals(mode) || (mode instanceof Number && ((Number) mode).intValue() == 1);
+                for (int active = 0; active <= 1; active++) {
+                    station.fields.put("mActive", (byte) active);
+                    for (int facing = 0; facing < 6; facing++) {
+                        station.fields.put("mFacing", facing);
+                        face(renderer, station, facing, 116, texture("0:mte/iconsets/OVERLAY_FRONT_DISASSEMBLER" + (active == 1 ? "_ACTIVE" : "")));
+                        face(renderer, station, facing ^ 1, 116, texture("0:remediation/substation/" + (output ? "OUT" : "IN")));
+                    }
+                }
+            }
+            check(Arrays.asList(renderer.getTileEntityFieldsNeeded()).contains("mIsOutputtingPower"), "substation mode requested from saved NBT");
             boolean section = false;
             for (String line : mapping) {
                 if (line.startsWith("# Coke oven controller")) section = true;

@@ -60,12 +60,14 @@ public class GregTechSupport {
         IconSet is = new IconSet();
 
         is.front = getTexture(data, "front", filetoidx);
+        is.back = getTexture(data, "back", filetoidx);
         is.bottom = getTexture(data, "bottom", filetoidx);
         is.side = getTexture(data, "side", filetoidx);
         is.top = getTexture(data, "top", filetoidx);
         is.output = getTexture(data, "output", filetoidx);
         is.downFacingExtra = GWM_Util.objectToInt(data.get("downfacingextra"), -1);
         is.frontLayers = getTextureLayers(data, "front", filetoidx);
+        is.backLayers = getTextureLayers(data, "back", filetoidx);
         is.bottomLayers = getTextureLayers(data, "bottom", filetoidx);
         is.sideLayers = getTextureLayers(data, "side", filetoidx);
         is.topLayers = getTextureLayers(data, "top", filetoidx);
@@ -328,8 +330,8 @@ public class GregTechSupport {
     }
 
     public class IconSet {
-        public int front = -1, bottom = -1, side = -1, top = -1, output = -1;
-        public int[] frontLayers = new int[0], bottomLayers = new int[0], sideLayers = new int[0], topLayers = new int[0], outputLayers = new int[0];
+        public int front = -1, back = -1, bottom = -1, side = -1, top = -1, output = -1;
+        public int[] frontLayers = new int[0], backLayers = new int[0], bottomLayers = new int[0], sideLayers = new int[0], topLayers = new int[0], outputLayers = new int[0];
         public int downFacingExtra = -1;
         public int[] outputPaint = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
     }
