@@ -55,3 +55,14 @@ uses the explicit flotation block metadata 9, as its source intentionally avoids
 the misleading casing registry slot. That block face map has been added using
 the installed `MACHINE_CASING_FLOTATION` image. The production JVM fixtures
 remain green (124 shared/coke assertions and 6,760 vending assertions).
+
+Seven additional baseline paths belonged exclusively to 22 obsolete iconsets:
+legacy structural tree-farm, GT++ crop-harvester, and GT4 redstone panel/display
+sets. The structural/display-strength sets had no MTE consumers anywhere in
+renderdata. The others were referenced only by IDs 31111–31118, 31800, 31801, and
+31805, all absent from the exact installed 3,412-MTE registry dump. Those eleven
+unregistered MTE records, 44 duplicate iconset declarations, and seven texture
+records are retired together; `retired-unregistered-iconsets.csv` preserves each
+removed record. An all-renderdata consumer scan verified that no registered MTE
+references the retired names. This is installed-version retirement, rather than
+turning a missing required image into a transparent optional layer.
