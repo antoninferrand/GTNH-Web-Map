@@ -235,3 +235,13 @@ Baked meshes support explicit source inventory-slot predicates for parts and a
 bounded metadata-to-yaw table. Cache keys include only the resulting visibility
 bits and known yaw/pose states, so inventory contents do not grow geometry caches.
 These parameters model conditional source draw calls without client linkage.
+
+## TinkersDefense crest mount
+
+Replace its invented PNG with its32x32atlas and four actual model cuboids.
+Match source translation,180-degree Z and90-degree X transforms and metadata
+facing1..4. The shield and sword supports only appear when source slots3,1,0
+respectively are occupied in saved `Items`; the base remains visible. Tests run
+all32 facing/slot-presence states through the real patch factory and cache.
+The source additionally displays equipped item meshes; those item renderers
+are not baked into this structural model and remain an explicit limitation.

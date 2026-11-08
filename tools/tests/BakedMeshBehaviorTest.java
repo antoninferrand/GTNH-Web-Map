@@ -15,7 +15,7 @@ public class BakedMeshBehaviorTest {
             check(renderer.initializeRenderer(new PatchDefinitionFactory(),1,0xffff,settings),"Baked model failed: "+resource);
             RenderPatch[] patches=renderer.getRenderPatchList(null);
             check(patches.length>0,"No model geometry");
-            if(renderer.getTileEntityFieldsNeeded().length>0) {
+            if(renderer.getTileEntityFieldsNeeded().length>0 && !Arrays.asList(renderer.getTileEntityFieldsNeeded()).contains("Items")) {
                 Set<RenderPatch[]> observed=Collections.newSetFromMap(new IdentityHashMap<RenderPatch[],Boolean>());
                 for(int input=0;input<6;input++)for(int output=0;output<6;output++) {
                     final int in=input,out=output;
@@ -31,6 +31,30 @@ public class BakedMeshBehaviorTest {
                 }
                 check(observed.size()>=6,"Source direction poses are not being selected");
                 System.out.println(resource+": all36 input/output combinations and pose-cache identity passed");
+            }
+            if(Arrays.asList(renderer.getTileEntityFieldsNeeded()).contains("Items")) {
+                Set<RenderPatch[]> states=Collections.newSetFromMap(new IdentityHashMap<RenderPatch[],Boolean>());
+                int baseCount=patches.length;
+                for(int meta=1;meta<=4;meta++) for(int bits=0;bits<8;bits++) {
+                    final int data=meta, selected=bits;
+                    MapDataContext ctx=(MapDataContext)Proxy.newProxyInstance(MapDataContext.class.getClassLoader(),new Class<?>[]{MapDataContext.class},(proxy,method,values)->{
+                        if(method.getName().equals("getBlockData"))return data;
+                        if(method.getName().equals("getBlockTileEntityField")) {
+                            List<Map<String,Object>> inventory=new ArrayList<>();
+                            for(int index=0;index<3;index++)if((selected&(1<<index))!=0) {
+                                Map<String,Object> item=new HashMap<>();item.put("Slot",new int[]{0,1,3}[index]);inventory.add(item);
+                            }
+                            return inventory;
+                        }
+                        throw new AssertionError("Unexpected crest context dependency");
+                    });
+                    RenderPatch[] pose=renderer.getRenderPatchList(ctx);
+                    check(pose.length>=baseCount,"Conditional parts removed permanent base");
+                    if(bits>0)check(pose.length>baseCount,"Occupied mount failed to appear");
+                    check(pose==renderer.getRenderPatchList(ctx),"Conditional pose cache missed");states.add(pose);
+                }
+                check(states.size()==32,"Crest facing and all8 slot combinations did not select distinct cached models");
+                System.out.println(resource+": all32 facing/inventory states passed");
             }
             double[] low={100,100,100},high={-100,-100,-100};
             for(RenderPatch patch:patches) {

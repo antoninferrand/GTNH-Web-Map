@@ -7,7 +7,6 @@ cfgfile:config/tinkersdefense.cfg
 
 
 texturepath:assets/tinkersdefense/textures/blocks/
-texture:id=minecraft/MISSING_ICON_BLOCK_3558_CrestMount,filename=assets/minecraft/textures/blocks/MISSING_ICON_BLOCK_3558_CrestMount.png
 texture:id=tinkersdefense/AeonSteelBlock,filename=assets/tinkersdefense/textures/blocks/AeonSteelBlock.png
 texture:id=tinkersdefense/DogbeariumBlock,filename=assets/tinkersdefense/textures/blocks/DogbeariumBlock.png
 texture:id=tinkersdefense/QueensGoldBlock,filename=assets/tinkersdefense/textures/blocks/QueensGoldBlock.png
@@ -21,7 +20,6 @@ texture:id=tinkersdefense/molten_QueensGold_flow,filename=assets/tinkersdefense/
 
 
 # %Block_CrestMount:* (Block_CrestMount), render=(CUSTOM), opaque=false,cls=gmail.Lance5057.blocks.CrestMount
-block:id=%Block_CrestMount,data=*,stdrot=true,face0-5=0:minecraft/MISSING_ICON_BLOCK_3558_CrestMount
 
 # %Block_ArmorAnvil:* (Block_ArmorAnvil), render=(CUSTOM), opaque=false,cls=gmail.Lance5057.blocks.ArmorAnvil
 
@@ -50,3 +48,6 @@ block:id=%Block_JewelersBench,data=*,transparency=TRANSPARENT,patch0=0:tinkersde
 
 texture:id=tinkersdefense/ArmorAnvil,filename=assets/tinkersdefense/textures/blocks/ArmorAnvil.png,xcount=4,ycount=4
 block:id=%Block_ArmorAnvil,data=*,transparency=TRANSPARENT,patch0=0:tinkersdefense/ArmorAnvil,patch1=1:tinkersdefense/ArmorAnvil,patch2=2:tinkersdefense/ArmorAnvil,patch3=3:tinkersdefense/ArmorAnvil,patch4=4:tinkersdefense/ArmorAnvil,patch5=5:tinkersdefense/ArmorAnvil,patch6=6:tinkersdefense/ArmorAnvil,patch7=7:tinkersdefense/ArmorAnvil,patch8=8:tinkersdefense/ArmorAnvil,patch9=9:tinkersdefense/ArmorAnvil,patch10=10:tinkersdefense/ArmorAnvil,patch11=11:tinkersdefense/ArmorAnvil,patch12=12:tinkersdefense/ArmorAnvil,patch13=13:tinkersdefense/ArmorAnvil,patch14=14:tinkersdefense/ArmorAnvil,patch15=15:tinkersdefense/ArmorAnvil
+
+texture:id=tinkersdefense/CrestMount,filename=assets/tinkersdefense/textures/blocks/CrestMount.png,xcount=2,ycount=2
+block:id=%Block_CrestMount,data=*,transparency=TRANSPARENT,patch0=0:tinkersdefense/CrestMount,patch1=1:tinkersdefense/CrestMount,patch2=2:tinkersdefense/CrestMount,patch3=3:tinkersdefense/CrestMount
