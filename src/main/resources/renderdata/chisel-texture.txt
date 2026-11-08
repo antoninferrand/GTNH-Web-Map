@@ -2844,7 +2844,7 @@ texture:id=chisel/woolenClay/yellow,filename=assets/chisel/textures/blocks/woole
 texture:id=minecraft/beacon,filename=assets/minecraft/textures/blocks/beacon.png
 texture:id=minecraft/ice,filename=assets/minecraft/textures/blocks/ice.png
 texture:id=minecraft/ice_packed,filename=assets/minecraft/textures/blocks/ice_packed.png
-texture:id=minecraft/missingno,filename=assets/minecraft/textures/blocks/missingno.png
+texture:id=minecraft/missingno,filename=assets/gtnhwebmap/textures/blocks/missing.png
 texture:id=minecraft/planks_oak,filename=assets/minecraft/textures/blocks/planks_oak.png
 
 
