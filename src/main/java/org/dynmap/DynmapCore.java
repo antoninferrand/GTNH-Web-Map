@@ -489,6 +489,7 @@ public class DynmapCore implements DynmapCommonAPI {
             authmgr = new WebAuthManager(this);
             defaultStorage.setLoginEnabled(this);
         }
+        ImageIOManager.core = this;
         // Check for webp support
         cwebpPath = configuration.getString("cwebpPath", null);
         dwebpPath = configuration.getString("dwebpPath", null);
